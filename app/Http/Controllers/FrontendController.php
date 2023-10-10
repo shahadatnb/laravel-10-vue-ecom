@@ -10,7 +10,7 @@ use App\Models\Product;
 use App\Models\ProCat;
 use App\Models\Post;
 use App\Http\Resources\ProductCollection;
-use App\Http\Resources\Product as ProductResource;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\Category as CategoryResource;
 use Session;
@@ -113,7 +113,10 @@ class FrontendController extends Controller
             if($request->has('skip')){
                 $products = $products->skip($request->skip);
             }
+        }else{
+            $products = $products->take(8);
         }
+
         if($request->has('search')){
             $products = $products->where('title','like','%'.$request->search.'%');
         }
@@ -122,7 +125,11 @@ class FrontendController extends Controller
                 $q->where('slug',$request->cat);
             });
         }
-        
+
+        if($request->has('featured')){
+            $products = $products->where('featured',1);
+        }
+
         $products = $products->get();
         //return response()->json($products);
         return new ProductCollection($products);

@@ -5,16 +5,15 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Product extends JsonResource
+class ProductResource extends JsonResource
 {
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
-     * @return array<int|string, mixed>
+     * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
-        //return parent::toArray($request);
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -29,15 +28,8 @@ class Product extends JsonResource
             'quantity' => $this->quantity,
             'photo' => asset('storage/'.$this->photo),
             'categories' => $this->categories->pluck('title'),
-            'galleries' => $this->galleries? $this->getGalleries($this->galleries) : [],
+            'galleries' => GalleryResource::collection($this->whenLoaded('galleries')),
+            //'galleries' => $this->galleries? $this->getGalleries($this->galleries) : [],
         ];
-    }
-
-    protected function getGalleries($galleries){
-        $galleryWithFullPath = [];
-        foreach ($galleries as $gallery) {
-            $galleryWithFullPath[$gallery->id] = asset('storage/'.$gallery->image);
-        }
-        return $galleryWithFullPath;
     }
 }

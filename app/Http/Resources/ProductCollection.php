@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductCollection extends ResourceCollection
 {
+    public $collects = 'App\Http\Resources\ProductResource';
     /**
      * Transform the resource collection into an array.
      *
@@ -17,9 +18,10 @@ class ProductCollection extends ResourceCollection
         //return parent::toArray($request);
         return [
             'data' => $this->collection,
-            // 'links' => [
-            //     'self' => 'link-value',
-            // ],
+            'links' => [
+                'self' => 'link-value',
+            ],
         ];
+
     }
 }

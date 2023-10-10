@@ -20,25 +20,21 @@
                         <div class="row align-items-center">
                             <div class="col-md-5">
                                 <div class="product-slider-single normal-slider">
-                                    <img src="img/product-1.jpg" alt="Product Image">
-                                    <img src="img/product-3.jpg" alt="Product Image">
-                                    <img src="img/product-5.jpg" alt="Product Image">
-                                    <img src="img/product-7.jpg" alt="Product Image">
-                                    <img src="img/product-9.jpg" alt="Product Image">
-                                    <img src="img/product-10.jpg" alt="Product Image">
+                                    <img :src="product.photo" alt="Product Image">
+                                    <template v-for="gallery in product.galleries">
+                                        <img :src="gallery.photo" alt="Product Image">
+                                    </template>
                                 </div>
                                 <div class="product-slider-single-nav normal-slider">
-                                    <div class="slider-nav-img"><img src="img/product-1.jpg" alt="Product Image"></div>
-                                    <div class="slider-nav-img"><img src="img/product-3.jpg" alt="Product Image"></div>
-                                    <div class="slider-nav-img"><img src="img/product-5.jpg" alt="Product Image"></div>
-                                    <div class="slider-nav-img"><img src="img/product-7.jpg" alt="Product Image"></div>
-                                    <div class="slider-nav-img"><img src="img/product-9.jpg" alt="Product Image"></div>
-                                    <div class="slider-nav-img"><img src="img/product-10.jpg" alt="Product Image"></div>
+                                    <div class="slider-nav-img"><img :src="product.photo" alt="Product Image"></div>
+                                    <template v-for="gallery in product.galleries">
+                                        <div class="slider-nav-img"><img :src="gallery.photo" alt="Product Image"></div>
+                                    </template>
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="product-content">
-                                    <div class="title"><h2>Reetha, Amla, Shikakai Combo Pack (300 Grams)</h2></div>
+                                    <div class="title"><h2>{{ product.title }}</h2></div>
                                     <div class="ratting">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -49,7 +45,7 @@
                                     </div>
                                     <div class="price">
                                         <h4>Price:</h4>
-                                        <p>$99 <span>$149</span></p>
+                                        <p>${{ product.price }} <span>${{ product.reduced_price }}</span></p>
                                     </div>
                                     <div class="quantity">
                                         <h4>Quantity:</h4>
@@ -59,15 +55,15 @@
                                             <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
-                                    <div class="p-size">
-                                        <h4>Weight:</h4>
-                                        <div class="btn-group btn-group-sm">
-                                            <button type="button" class="btn">500  grams</button>
-                                            <button type="button" class="btn">1000 grams</button>
-                                            <button type="button" class="btn">2000  grams</button>
+<!--                                    <div class="p-size">-->
+<!--                                        <h4>Weight:</h4>-->
+<!--                                        <div class="btn-group btn-group-sm">-->
+<!--                                            <button type="button" class="btn">500  grams</button>-->
+<!--                                            <button type="button" class="btn">1000 grams</button>-->
+<!--                                            <button type="button" class="btn">2000  grams</button>-->
 
-                                        </div>
-                                    </div>
+<!--                                        </div>-->
+<!--                                    </div>-->
 
                                     <div class="action">
                                         <a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
@@ -95,9 +91,7 @@
                             <div class="tab-content">
                                 <div id="description" class="container tab-pane active">
                                     <h4>Product description</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque. Suspendisse sit amet neque neque. Praesent suscipit et magna eu iaculis. Donec arcu libero, commodo ac est a, malesuada finibus dolor. Aenean in ex eu velit semper fermentum. In leo dui, aliquet sit amet eleifend sit amet, varius in turpis. Maecenas fermentum ut ligula at consectetur. Nullam et tortor leo.
-                                    </p>
+                                    <p>{{ product.description }}</p>
                                 </div>
                                 <div id="specification" class="container tab-pane fade">
                                     <h4>Product specification</h4>
@@ -158,6 +152,52 @@
 </template>
 
 <script setup>
+import { reactive, onBeforeMount, onMounted } from 'vue'
+import axios from 'axios'
+import { useRoute } from 'vue-router';
+const route = useRoute()
+const slug = route.params.slug
+const product = reactive({})
+onBeforeMount(() => {
+    axios.get(`http://127.0.0.1:8000/api/single-product/${slug}`)
+        .then(res => {
+            console.log(res.data)
+            product.id = res.data.data.id
+            product.title = res.data.data.title
+            product.price = res.data.data.price
+            product.reduced_price = res.data.data.reduced_price
+            product.quantity = res.data.data.quantity
+            product.short_description = res.data.data.short_description
+            product.description = res.data.data.description
+            product.photo = res.data.data.photo
+            product.galleries = res.data.data.galleries
+            product.categories = res.data.data.categories
+        })
+})
+
+onMounted(()=>{
+    $(function () {
+        // Product Detail Slider
+        $('.product-slider-single').slick({
+            infinite: true,
+            autoplay: true,
+            dots: false,
+            fade: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            asNavFor: '.product-slider-single-nav'
+        });
+        $('.product-slider-single-nav').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            dots: false,
+            centerMode: true,
+            focusOnSelect: true,
+            asNavFor: '.product-slider-single'
+        });
+    });
+})
+
 </script>
 
 <style scoped>

@@ -14,7 +14,6 @@
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
-    "vue-slick-carousel": "^1.0.6",
     "vue3-toastify": "^0.1.13"
   },
   "devDependencies": {
