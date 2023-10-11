@@ -39,13 +39,13 @@
         <div class="col-md-3">
           <div class="header-img">
             <div class="img-item">
-              <img src="img/diaetic-care-compressor.jpg" />
+              <img src="/img/diaetic-care-compressor.jpg" />
               <a class="img-text" href="">
                 <p>Some text goes here that describes the image</p>
               </a>
             </div>
             <div class="img-item">
-              <img src="img/improve-memory-compressor-1.jpg" />
+              <img src="/img/improve-memory-compressor-1.jpg" />
               <a class="img-text" href="">
                 <p>Some text goes here that describes the image</p>
               </a>
@@ -145,7 +145,7 @@
   <!-- sexaul wellness end-->
 
   <!-- Review Start -->
-    <Review></Review>
+<!--    <Review></Review>-->
   <!-- Review End -->
 <!--    <div>-->
 <!--        <button @click="notify">Notify !</button>-->

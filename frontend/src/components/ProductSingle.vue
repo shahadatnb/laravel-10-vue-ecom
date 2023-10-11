@@ -21,13 +21,13 @@
                             <div class="col-md-5">
                                 <div class="product-slider-single normal-slider">
                                     <img :src="product.photo" alt="Product Image">
-                                    <template v-for="gallery in product.galleries">
+                                    <template v-for="gallery in product.galleries" :key="gallery.id + '1'">
                                         <img :src="gallery.photo" alt="Product Image">
                                     </template>
                                 </div>
                                 <div class="product-slider-single-nav normal-slider">
                                     <div class="slider-nav-img"><img :src="product.photo" alt="Product Image"></div>
-                                    <template v-for="gallery in product.galleries">
+                                    <template v-for="gallery in product.galleries" :key="gallery.id">
                                         <div class="slider-nav-img"><img :src="gallery.photo" alt="Product Image"></div>
                                     </template>
                                 </div>
@@ -174,28 +174,32 @@ onBeforeMount(() => {
             product.categories = res.data.data.categories
         })
 })
-
 onMounted(()=>{
-    $(function () {
-        // Product Detail Slider
-        $('.product-slider-single').slick({
-            infinite: true,
-            autoplay: true,
-            dots: false,
-            fade: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            asNavFor: '.product-slider-single-nav'
-        });
-        $('.product-slider-single-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            dots: false,
-            centerMode: true,
-            focusOnSelect: true,
-            asNavFor: '.product-slider-single'
-        });
+$(function () {
+    // Product Detail Slider
+
+    $('.product-slider-single').slick({
+        infinite: true,
+        autoplay: true,
+        dots: false,
+        fade: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        asNavFor: '.product-slider-single-nav'
     });
+
+    $('.product-slider-single-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: false,
+        centerMode: true,
+        focusOnSelect: true,
+        //asNavFor: '.product-slider-single'
+    });
+});
+
+
+
 })
 
 </script>

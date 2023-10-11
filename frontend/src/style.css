@@ -1,1 +1,3 @@
-@import '../public/css/style.css';
+@import './assets/css/style.css';
+@import './assets/lib/slick/slick.css';
+@import './assets/lib/slick/slick-theme.css';

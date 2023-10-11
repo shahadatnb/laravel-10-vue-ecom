@@ -7,10 +7,10 @@ import ProductSingle from "../components/ProductSingle.vue";
 
 const routes = [
     {
-        path: '/', component: Home, 'name': 'home'
+        path: '/', component: Home, name: 'home'
     },
     {
-        path: '/product/:slug', component: ProductSingle, 'name': 'product-single'
+        path: '/product/:slug', component: ProductSingle, name: 'product-single'
     },
     /*
     {
