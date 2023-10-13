@@ -17,19 +17,22 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="product-detail-top">
-                        <div class="row align-items-center">
+                        <div class="row">
+<!--                            <Gallery></Gallery>-->
                             <div class="col-md-5">
                                 <div class="product-slider-single normal-slider">
                                     <img :src="product.photo" alt="Product Image">
-                                    <template v-for="gallery in product.galleries" :key="gallery.id + '1'">
-                                        <img :src="gallery.photo" alt="Product Image">
-                                    </template>
+<!--                                    <template v-for="gallery in product.galleries" :key="gallery.id + '1'">-->
+                                        <img v-for="gallery in product.galleries" :key="gallery.id + '1'" :src="gallery.photo" alt="Product Image">
+<!--                                    </template>-->
                                 </div>
                                 <div class="product-slider-single-nav normal-slider">
                                     <div class="slider-nav-img"><img :src="product.photo" alt="Product Image"></div>
-                                    <template v-for="gallery in product.galleries" :key="gallery.id">
-                                        <div class="slider-nav-img"><img :src="gallery.photo" alt="Product Image"></div>
-                                    </template>
+<!--                                    <template v-for="gallery in product.galleries" :key="gallery.id">-->
+                                        <div v-for="gallery in product.galleries" :key="gallery.id" class="slider-nav-img">
+                                            <img :src="gallery.photo" alt="Product Image">
+                                        </div>
+<!--                                    </template>-->
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -152,7 +155,8 @@
 </template>
 
 <script setup>
-import { reactive, onBeforeMount, onMounted } from 'vue'
+import { reactive, onBeforeMount, onMounted,onUpdated } from 'vue'
+import Gallery from "./product/Gallery.vue";
 import axios from 'axios'
 import { useRoute } from 'vue-router';
 const route = useRoute()
@@ -172,32 +176,33 @@ onBeforeMount(() => {
             product.photo = res.data.data.photo
             product.galleries = res.data.data.galleries
             product.categories = res.data.data.categories
-        })
+        });
 })
-onMounted(()=>{
-$(function () {
-    // Product Detail Slider
 
-    $('.product-slider-single').slick({
-        infinite: true,
-        autoplay: true,
-        dots: false,
-        fade: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        asNavFor: '.product-slider-single-nav'
-    });
+onUpdated(()=>{
+    $(function () {
+        // Product Detail Slider
 
-    $('.product-slider-single-nav').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        dots: false,
-        centerMode: true,
-        focusOnSelect: true,
-        //asNavFor: '.product-slider-single'
-    });
-});
+        $('.product-slider-single').slick({
+            infinite: true,
+            autoplay: true,
+            dots: false,
+            fade: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            asNavFor: '.product-slider-single-nav'
+        })
 
+        $('.product-slider-single-nav').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: false,
+            centerMode: true,
+            focusOnSelect: true,
+            asNavFor: '.product-slider-single'
+        });
+    })
 
 
 })

@@ -5,7 +5,7 @@
                 <h1>New Hot Products</h1>
             </div>
             <div class="row align-items-center product-slider product-slider-4">
-                <div class="col-lg-3" v-for="product in products" :key="product.id">
+                <div class="col-lg-6" v-for="product in products" :key="product.id">
                 <Product :product="product"></Product>
                 </div>
             </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import {onBeforeMount,ref,onMounted} from "vue";
+import {onBeforeMount, ref, onMounted, onUpdated} from "vue";
 import Product from "./Product.vue";
 import axios from "axios";
 const products = ref([])
@@ -24,7 +24,7 @@ onBeforeMount(()=>{
             products.value = res.data.data
         });
 })
-onMounted(() => {
+onUpdated(() => {
     $(function () {
         // Product Slider 4 Column
         $('.product-slider-4').slick({

@@ -31,7 +31,7 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
+              <router-link to="/"  class="nav-item nav-link active">Home</router-link>
             <a href="" class="nav-item nav-link">Hot Products</a>
             <a href="" class="nav-item nav-link">Personal Care</a>
             <a href="" class="nav-item nav-link"> Hair care</a>
@@ -68,9 +68,9 @@
       <div class="row align-items-center">
         <div class="col-md-3">
           <div class="logo">
-            <a href="index.html">
+          <router-link to="/" >
               <img src="/img/attar2-compressor-2.png" alt="Logo">
-            </a>
+          </router-link>
           </div>
         </div>
         <div class="col-md-6">
