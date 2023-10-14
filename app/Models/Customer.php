@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable; // for auth
 use Illuminate\Foundation\Auth\User as Authenticatable; // for auth
 use App\Notifications\CustomerResetPasswordNotification;
+use Laravel\Sanctum\HasApiTokens;
 
 class Customer extends Authenticatable
 {
-    use Notifiable; // for auth
+    use Notifiable, HasApiTokens; // for auth
     protected $guard = 'customer'; // for auth
 
     protected $fillable = [

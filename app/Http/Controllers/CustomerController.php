@@ -103,4 +103,26 @@ class CustomerController extends Controller
         session()->flash('success','Customer Deleted Successfully');
         return redirect()->back();
     }
+
+    public function login(Request $request) {
+        $creds = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $customer = Customer::where('email', $creds['email'])->first();
+        if (! $customer || ! Hash::check($request->password, $customer->password)) {
+            return response(['error' => 1, 'message' => 'invalid credentials'], 401);
+        }
+
+        if (config('hydra.delete_previous_access_tokens_on_login', false)) {
+            $customer->tokens()->delete();
+        }
+
+        //$roles = $customer->roles->pluck('slug')->all();
+
+        $plainTextToken = $customer->createToken('authToken')->plainTextToken;
+
+        return response(['error' => 0, 'id' => $customer->id, 'token' => $plainTextToken, 'email'=>$customer->email, 'name'=>$customer->name],  200);
+    }
 }
