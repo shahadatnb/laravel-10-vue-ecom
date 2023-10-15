@@ -145,7 +145,7 @@
   <!-- sexaul wellness end-->
 
   <!-- Review Start -->
-<!--    <Review></Review>-->
+   <Review></Review>
   <!-- Review End -->
 <!--    <div>-->
 <!--        <button @click="notify">Notify !</button>-->

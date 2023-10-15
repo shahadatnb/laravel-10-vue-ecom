@@ -2,17 +2,17 @@
 
 namespace App\Helpers;
 
-use App\Post;
-use App\Product;
-use App\ProCat;
+use App\Models\Post;
+use App\Models\Product;
+use App\Models\ProCat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Setting;
-use App\ShippingRole;
-use App\OrderStatus;
-use App\Menu;
-use App\MenuItem;
-use App\User;
+use App\Models\Setting;
+use App\Models\ShippingRole;
+use App\Models\OrderStatus;
+use App\Models\Menu;
+use App\Models\MenuItem;
+use App\Models\User;
 use Carbon\Carbon;
 
 class CustomHelper

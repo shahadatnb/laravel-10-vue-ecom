@@ -27,6 +27,10 @@ Route::patch('users/{user}', [UserController::class, 'update'])->middleware(['au
 Route::get('me', [UserController::class, 'me'])->middleware('auth:sanctum');
 Route::post('login', [CustomerController::class, 'login']);
 
+Route::get( '/posts', [FrontendController::class, 'getPosts'] );
+Route::get( '/menu', [FrontendController::class, 'menuApi'] );
+Route::get( '/config', [FrontendController::class, 'getConfig'] );
+
 Route::post(
     '/orders',
     [OrderController::class, 'createOrder']

@@ -189,7 +189,16 @@
   <!-- Back to Top -->
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 </template>
+<script setup>
+import { onBeforeMount } from "vue";
+import { basicStore } from "./store/basic";
+const basic = basicStore;
+
+console.log(basic.settings);
+
+</script>
 
 <style scoped>
+
 
 </style>
