@@ -104,6 +104,26 @@ class CustomerController extends Controller
         return redirect()->back();
     }
 
+    public function registerApi(Request $request){
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'email' => 'required|email|max:100|unique:customers',
+            'password' => 'required|min:6|max:16',
+        ]);
+
+        $customer = Customer::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        if($customer){
+            return response(['error' => 0],  200);
+        }else{
+            return response(['error' => 1],  200);
+        }
+    }
+
     public function login(Request $request) {
         $creds = $request->validate([
             'email' => 'required|email',
@@ -123,6 +143,22 @@ class CustomerController extends Controller
 
         $plainTextToken = $customer->createToken('authToken')->plainTextToken;
 
-        return response(['error' => 0, 'id' => $customer->id, 'token' => $plainTextToken, 'email'=>$customer->email, 'name'=>$customer->name],  200);
+        return response(['error' => 0, 'token' => $plainTextToken, 'user'=>$customer],  200);
+    }
+
+    public function updateProfileApi(Request $request){
+        $customer = $request->user();
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->date_of_birth = $request->date_of_birth;
+        $customer->save();        
+        return response(['error' => 0, 'user'=>$customer],  200);
+    }
+
+    public function getProfile(Request $request){
+        $customer = $request->user();
+        return response(['error' => 0, 'user'=>$customer],  200);        
     }
 }
