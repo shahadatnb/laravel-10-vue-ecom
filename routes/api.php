@@ -29,6 +29,10 @@ Route::post('updateProfile', [CustomerController::class, 'updateProfileApi'])->m
 Route::post('register', [CustomerController::class, 'registerApi']);
 Route::post('login', [CustomerController::class, 'login']);
 
+Route::get( '/posts', [FrontendController::class, 'getPosts'] );
+Route::get( '/menu', [FrontendController::class, 'menuApi'] );
+Route::get( '/config', [FrontendController::class, 'getConfig'] );
+
 Route::post(
     '/orders',
     [OrderController::class, 'createOrder']

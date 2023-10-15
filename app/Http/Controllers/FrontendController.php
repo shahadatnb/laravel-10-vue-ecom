@@ -9,12 +9,13 @@ use App\Models\Taxonomy;
 use App\Models\Product;
 use App\Models\ProCat;
 use App\Models\Post;
+use App\Models\MenuItem;
+use App\Http\Resources\PostCollection;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\Category as CategoryResource;
-use Session;
-use CustomHelper;
+use App\Facades\CustomHelperFacade as CustomHelper;
 
 class FrontendController extends Controller
 {
@@ -106,6 +107,18 @@ class FrontendController extends Controller
         return $this->notFound();
     }
 
+    public function menuApi(Request $request){
+        $menu = MenuItem::whewHas('menu', function($q) use($request){
+            $q->where('menu_id',$request->menu_id);
+        })->with('subMenu')->withCount('subMenu')->where('parent_id',null)->orderBy('sl')->orderBy('sl','ASC')->get()->toArray();
+        return response()->json($menu);
+    }
+
+    public function getConfig(){
+        $config = CustomHelper::settings();
+        return response()->json($config);
+    }
+
     public function latestProducts(Request $request){
         $products = Product::latest()->where('status',1);
         if($request->has('take')){
@@ -153,5 +166,38 @@ class FrontendController extends Controller
     
     public function notFound(){
         return view('frontend.pages.404');
+    }
+
+    public function getPosts(Request $request){
+
+        $posts = Post::where('status',1);
+
+        if($request->has('cat')){
+            $posts->whereHas('taxonomy', function($q) use ($request){
+                $q->where('slug', $request->cat);
+            });
+        }        
+        
+        $posts = $posts->where('post_type',$request->post_type);
+
+        if($request->has('orderBy') && $request->has('orderType')){
+            $posts = $posts->orderBy($request->orderBy,$request->orderType);
+        }
+        
+        if($request->has('single')){
+            $posts = $posts->first();
+        }else{
+            if($request->has('take')){
+                $posts = $posts->take($request->take);
+            }
+            if($request->has('skip')){
+                $posts = $posts->skip($request->skip);
+            }
+            $posts = $posts->get();
+        }
+
+        return new PostCollection($posts);
+
+        //return response()->json($posts);
     }
 }

@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Traits;
 use Illuminate\Support\Arr;
-use App\Taxonomy;
+use App\Models\Taxonomy;
+use App\Facades\CustomHelperFacade as CustomHelper;
 
 trait PostTrait {
 
@@ -48,18 +49,18 @@ trait PostTrait {
                 array('name'=>'link','title'=>'Link','fildType'=>'text','required'=>true),
             )
         ),
-        /*
-        'services' => array(
-            'title'     => 'Our Services',
-            'postType'  => 'services',
+        
+        'review' => array(
+            'title'     => 'Customer review',
+            'postType'  => 'review',
             'icon'      => 'fa-thumbtack',
-            'taxonomy'  => true,
+            'taxonomy'  => false,
             'support'   => array('title','body','image'),//,'postMeta'
             'postMeta'  => array(
-                array('name'=>'price','title'=>'Price','fildType'=>'text','required'=>true),
-                array('name'=>'reduced_price','title'=>'Reduced Price','fildType'=>'text','required'=>false),
+                array('name'=>'profession','title'=>'Profession','fildType'=>'text','required'=>true),
+                array('name'=>'ratting','title'=>'Ratting','fildType'=>'number','required'=>false),
             )
-        ),*/
+        ),
     );
 
     public function postTypeCheck($request){

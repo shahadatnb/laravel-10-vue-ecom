@@ -71,30 +71,39 @@
 </template>
 
 <script setup>
-import {onMounted} from "vue";
+import {ref, onBeforeMount, onUpdated } from "vue";
+import { basicStore } from "../../store/basic";
+import axios from "axios";
+const basic = basicStore;
+const reviews = ref({})
+onBeforeMount(() => {
+    axios.get(`${basic.serverUrl}/api/posts?post_type=review`)
+        .then(res => {
+            console.log(res.data)
+            reviews.value = res.data.data
+        });
+})
 
-$(function () {
-    // Review slider
-    $('.review-slider').slick({
-        autoplay: true,
-        dots: false,
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
+onUpdated(() => {
+    $(function () {
+        // Review slider
+        $('.review-slider').slick({
+            autoplay: true,
+            dots: false,
+            infinite: true,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                    }
                 }
-            }
-        ]
+            ]
+        });
+
     });
-
-});
-
-onMounted(() => {
-
 });
 </script>
 

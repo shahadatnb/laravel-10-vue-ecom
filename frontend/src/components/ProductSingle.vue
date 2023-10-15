@@ -18,7 +18,6 @@
                 <div class="col-lg-12">
                     <div class="product-detail-top">
                         <div class="row">
-<!--                            <Gallery></Gallery>-->
                             <div class="col-md-5">
                                 <div class="product-slider-single normal-slider">
                                     <img :src="product.photo" alt="Product Image">
@@ -155,15 +154,16 @@
 </template>
 
 <script setup>
-import { reactive, onBeforeMount, onMounted,onUpdated } from 'vue'
-import Gallery from "./product/Gallery.vue";
+import { reactive, onBeforeMount, onUpdated } from 'vue'
 import axios from 'axios'
+import { basicStore } from "../store/basic.js";
+const basic = basicStore;
 import { useRoute } from 'vue-router';
 const route = useRoute()
 const slug = route.params.slug
 const product = reactive({})
 onBeforeMount(() => {
-    axios.get(`http://127.0.0.1:8000/api/single-product/${slug}`)
+    axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
         .then(res => {
             console.log(res.data)
             product.id = res.data.data.id

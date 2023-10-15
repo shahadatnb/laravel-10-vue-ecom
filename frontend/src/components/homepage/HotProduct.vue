@@ -15,11 +15,13 @@
 
 <script setup>
 import {onBeforeMount, ref, onMounted, onUpdated} from "vue";
+import { basicStore } from "../../store/basic";
+const basic = basicStore;
 import Product from "./Product.vue";
 import axios from "axios";
 const products = ref([])
 onBeforeMount(()=>{
-    axios.get('http://127.0.0.1:8000/api/latest-products?featured=1')
+    axios.get(`${basic.serverUrl}/api/latest-products?featured=1`)
         .then(res => {
             products.value = res.data.data
         });
