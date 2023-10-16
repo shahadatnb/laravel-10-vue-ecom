@@ -79,7 +79,7 @@ const reviews = ref({})
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/posts?post_type=review`)
         .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             reviews.value = res.data.data
         });
 })

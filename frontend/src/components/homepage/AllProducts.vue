@@ -25,7 +25,7 @@ onBeforeMount(()=>{
         .then(res => {
             products.value = res.data.data
         });
-    console.log(products)
+    //console.log(products)
 })
 </script>
 

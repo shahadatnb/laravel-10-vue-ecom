@@ -194,7 +194,10 @@ import { onBeforeMount } from "vue";
 import { basicStore } from "./store/basic";
 const basic = basicStore;
 
-console.log(basic.settings);
+onBeforeMount(() => {
+  console.log("onBeforeMount");
+    console.log(basic.getSettings());
+})
 
 </script>
 
