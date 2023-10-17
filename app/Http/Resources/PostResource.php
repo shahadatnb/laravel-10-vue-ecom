@@ -21,6 +21,11 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'body' => $this->body,
             'image' => asset('storage/'.$this->image),
+            'postMeta' => $this->postMeta->pluck('meta_value','meta_key')->toArray(), //$this->postMetas($this->postMeta),
         ];
+
+    }
+    protected function postMetas($metas){
+        return $metas->pluck('meta_value','meta_key')->toArray();
     }
 }

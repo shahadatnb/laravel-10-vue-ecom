@@ -4,50 +4,17 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
-          <nav class="navbar bg-light">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-home"></i>   Personal Care </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-shopping-bag"></i>Sexual wellness</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-plus-square"></i>Hair care</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-female"></i>Fashion & Beauty</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-child"></i>Kids & Babies Clothes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-tshirt"></i>Men & Women Clothes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics Accessories</a>
-              </li>
-            </ul>
-          </nav>
+          <LeftSidebar></LeftSidebar>
         </div>
         <div class="col-md-6">
             <Slider></Slider>
         </div>
         <div class="col-md-3">
           <div class="header-img">
-            <div class="img-item">
-              <img src="/img/diaetic-care-compressor.jpg" />
-              <a class="img-text" href="">
-                <p>Some text goes here that describes the image</p>
-              </a>
-            </div>
-            <div class="img-item">
-              <img src="/img/improve-memory-compressor-1.jpg" />
-              <a class="img-text" href="">
-                <p>Some text goes here that describes the image</p>
+            <div v-for="slide in slides" :key="slide.id" class="img-item">
+              <img :src="slide.image" />
+              <a class="img-text" :href="slide.postMeta.link">
+                <p>{{ slide.title }}</p>
               </a>
             </div>
           </div>
@@ -71,45 +38,17 @@
       </div>
   </div> -->
   <!-- Brand End -->
-
   <!-- Feature Start-->
   <div class="feature">
     <div class="container-fluid">
       <div class="row align-items-center">
-        <div class="col-lg-3 col-md-6 feature-col">
+        <div v-for="feature in lebels" :key="feature.id" class="col-lg-3 col-md-6 feature-col">          
           <div class="feature-content">
-            <i class="fab fa-cc-mastercard"></i>
-            <h2>Cash on Delivery</h2>
-            <p>
+            <i :class="feature.menu_class"></i>
+            <h2>{{ feature.lebel }}</h2>
+            <!-- <p>
               Lorem ipsum dolor sit amet consectetur elit
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 feature-col">
-          <div class="feature-content">
-            <i class="fa fa-truck"></i>
-            <h2>First  Delivery</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur elit
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 feature-col">
-          <div class="feature-content">
-            <i class="fa fa-sync-alt"></i>
-            <h2>10 Days Return</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur elit
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 feature-col">
-          <div class="feature-content">
-            <i class="fa fa-comments"></i>
-            <h2>24/7 Support</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur elit
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -129,7 +68,7 @@
           <h1>call us for any queries</h1>
         </div>
         <div class="col-md-6">
-          <a href="tel:0123456789">+012-345-6789</a>
+          <a :href="'tel:' + basic.settings.sitePhone">{{ basic.settings.sitePhone }}</a>
         </div>
       </div>
     </div>
@@ -154,12 +93,27 @@
 </template>
 
 <script setup>
+import LeftSidebar from "./homepage/LeftSidebar.vue";
 import Slider from "./homepage/Slider.vue";
 import HotProduct from "./homepage/HotProduct.vue";
 import AllProducts from "./homepage/AllProducts.vue";
 import Categories from "./homepage/Categories.vue";
 import Review from "./homepage/Review.vue";
-import {onMounted} from "vue";
+import {onMounted,onBeforeMount,ref,computed, onUpdated} from "vue";
+import axios from "axios";
+import { basicStore } from "../store/basic";
+const basic = basicStore;
+const lebels = ref([])
+const slides = ref([])
+
+//lebels.value = basic.settings.menus.lebel
+onBeforeMount(() => {
+    axios.get(`${basic.serverUrl}/api/posts?post_type=offer&take=2`)
+      .then(res => {
+          //console.log(res.data)
+          slides.value = res.data.data
+      });
+})
 
 onMounted(()=>{
 $(function () {
@@ -197,6 +151,10 @@ $(function () {
     });
 });
 });
+
+onUpdated(()=>{
+  lebels.value = basic.settings.menus.lebel
+})
 
 //import { toast } from 'vue3-toastify';
 //import 'vue3-toastify/dist/index.css';

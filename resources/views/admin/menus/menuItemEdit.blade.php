@@ -6,7 +6,7 @@
     <div class="card-header">
         <h3 class="card-title">Edit</h3>
         <div class="card-tools">
-            
+            <a href="{{route('menus.show',$menu->menu_id)}}" class="btn btn-primary btn-sm"> <i class="fas fa-arrow-left"></i> Back</a>
         </div>
     </div>
     <div class="card-body">

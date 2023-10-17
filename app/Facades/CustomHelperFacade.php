@@ -9,6 +9,6 @@ class CustomHelperFacade extends Facade
 {
     public static function getFacadeAccessor()
     {
-        return 'customerHelper';
+        return 'custom-helper';
     }
 }

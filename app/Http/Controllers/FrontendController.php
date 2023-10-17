@@ -143,7 +143,7 @@ class FrontendController extends Controller
             $products = $products->where('featured',1);
         }
 
-        $products = $products->get();
+        $products = $products->paginate(24);
         //return response()->json($products);
         return new ProductCollection($products);
     }
@@ -170,7 +170,7 @@ class FrontendController extends Controller
 
     public function getPosts(Request $request){
 
-        $posts = Post::where('status',1);
+        $posts = Post::where('status',1)->with('postMeta');
 
         if($request->has('cat')){
             $posts->whereHas('taxonomy', function($q) use ($request){

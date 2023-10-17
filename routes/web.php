@@ -108,6 +108,7 @@ Route::group(['middleware'=> ['auth','roles'],'roles'=>['Admin','SuperAdmin']], 
     Route::post('/menuItemUpdate/{id}', [MenuController::class, 'menuItemUpdate'])->name('menuItem.update');
     Route::get('/menuItemEdit/{id}', [MenuController::class,'menuItemEdit'])->name('menuItem.edit');
     Route::get('/menuItemDelete/{id}', [MenuController::class,'menuItemDelete'])->name('menuItem.delete');
+    Route::post('menu_sl', [MenuController::class, 'menuSl'])->name('menu_sl');
 
     Route::resource('posts',PostController::class);
     Route::get('PostDelete/{id}',[PostController::class,'PostDelete'])->name('PostDelete');

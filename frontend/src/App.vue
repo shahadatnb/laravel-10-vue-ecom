@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
   <!-- Top bar Start -->
   <div class="top-bar">
@@ -9,11 +5,11 @@
       <div class="row">
         <div class="col-sm-6">
           <i class="fa fa-envelope"></i>
-          support@email.com
+          {{ basic.settings.siteEmail }}
         </div>
         <div class="col-sm-6">
           <i class="fa fa-phone-alt"></i>
-          +012-345-6789
+          {{ basic.settings.sitePhone }}
         </div>
       </div>
     </div>
@@ -31,23 +27,18 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto">
-              <router-link to="/"  class="nav-item nav-link active">Home</router-link>
-            <a href="" class="nav-item nav-link">Hot Products</a>
-            <a href="" class="nav-item nav-link">Personal Care</a>
-            <a href="" class="nav-item nav-link"> Hair care</a>
-            <a href="" class="nav-item nav-link">Exotic Spices    </a>
-            <a href="" class="nav-item nav-link">Super Food</a>
-            <a href="" class="nav-item nav-link">Combos</a>
-            <div class="nav-item dropdown">
+              <router-link v-for="menu in basic.settings.menus.main" :key="menu.id" :to="menu.menu_url" class="nav-item nav-link">{{menu.lebel}}</router-link>
+              <!-- <router-link :to="'/contact'" class="nav-item nav-link">Contact</router-link> -->
+            <!-- <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dry Fruits  </a>
               <div class="dropdown-menu">
                 <a href="wishlist.html" class="dropdown-item">Wishlist</a>
                 <a href="login.html" class="dropdown-item">Login & Register</a>
                 <a href="contact.html" class="dropdown-item">Contact Us</a>
               </div>
-            </div>
+            </div> -->
           </div>
-          <div class="navbar-nav ml-auto">
+          <!-- <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
               <div class="dropdown-menu">
@@ -55,7 +46,7 @@
                 <a href="#" class="dropdown-item">Register</a>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </nav>
     </div>
@@ -69,7 +60,7 @@
         <div class="col-md-3">
           <div class="logo">
           <router-link to="/" >
-              <img src="/img/attar2-compressor-2.png" alt="Logo">
+              <img :src="basic.serverUrl + '/upload/site_file/' + basic.settings.siteLogo" alt="Logo">
           </router-link>
           </div>
         </div>
@@ -193,11 +184,6 @@
 import { onBeforeMount } from "vue";
 import { basicStore } from "./store/basic";
 const basic = basicStore;
-
-onBeforeMount(() => {
-  console.log("onBeforeMount");
-    console.log(basic.getSettings());
-})
 
 </script>
 

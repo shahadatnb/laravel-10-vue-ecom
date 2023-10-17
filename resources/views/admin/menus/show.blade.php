@@ -96,7 +96,7 @@
                   //$("#sortable-9").text (productOrder);
                 $.ajax({
                     type:'POST',
-                    url:'{{---route('menu_sl')--}}',
+                    url:'{{ route('menu_sl') }}',
                     
                     data: {
                        _token: '{{ csrf_token() }}',
