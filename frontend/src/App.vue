@@ -185,6 +185,8 @@ import { basicStore } from "./store/basic";
 import { cart } from "./store/cart";
 const basic = basicStore;
 
+console.log(settings);
+
 </script>
 
 <style scoped>

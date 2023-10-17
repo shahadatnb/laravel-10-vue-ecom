@@ -79,6 +79,6 @@
         </div>
 </template>
 <script setup>
-import { cart } from "./store/cart";
+import { cart } from "../store/cart";
 const cartStore = cart;
 </script>
