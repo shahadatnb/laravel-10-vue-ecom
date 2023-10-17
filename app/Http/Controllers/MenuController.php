@@ -123,7 +123,8 @@ class MenuController extends Controller
 
         \Artisan::call('config:cache');
         Session::flash('success', "Saved.");
-        return redirect()->route('menus.show',$data->menu_id);
+        return redirect()->back();
+        //return redirect()->route('menus.show',$data->menu_id);
     }
         
     public function menuItemDelete($id)

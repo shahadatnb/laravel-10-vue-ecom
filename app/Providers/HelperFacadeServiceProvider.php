@@ -14,7 +14,7 @@ class HelperFacadeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind('customerHelper',function() {
+        App::bind('custom-helper',function() {
             return new \App\Helpers\CustomHelper;
         });
     }

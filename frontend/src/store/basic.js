@@ -2,19 +2,17 @@ import { ref, reactive, onBeforeMount } from 'vue'
 import axios from 'axios'
 const basicStore = reactive({
     serverUrl: 'http://127.0.0.1:8000',
+    baseUrl: 'http://127.0.0.1:5173',
     settings: [],
-    getSettings () {
-        axios.get(`${this.serverUrl}/api/posts?post_type=slide`)
+    init() {
+        axios.get(`${basicStore.serverUrl}/api/config`)
         .then(res => {
-            console.log(res.data)
-            this.settings = res.data
+            basicStore.settings = res.data
         });
     }
 })
 
-onBeforeMount(() => {
-    basicStore.getSettings();
-  });
+basicStore.init()
 
 export {
     basicStore

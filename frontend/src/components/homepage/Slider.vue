@@ -15,7 +15,7 @@ const slides = ref({})
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/posts?post_type=slide`)
         .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             slides.value = res.data.data
         });
 })

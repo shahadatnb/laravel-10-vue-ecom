@@ -12,23 +12,21 @@
         </div>
     </div>
 </template>
-
 <script setup>
 import {onBeforeMount,ref} from "vue";
-import { basicStore } from "../../store/basic";
+import { basicStore } from "../store/basic";
 const basic = basicStore;
-import Product from "./Product.vue";
+import Product from "./homepage/Product.vue";
 import axios from "axios";
+import { useRoute } from 'vue-router';
+const route = useRoute()
+const slug = route.params.slug
 const products = ref([])
 onBeforeMount(()=>{
-    axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
+    axios.get(`${basic.serverUrl}/api/latest-products?cat=${slug}`)
         .then(res => {
             products.value = res.data.data
         });
     //console.log(products)
 })
 </script>
-
-<style scoped>
-
-</style>
