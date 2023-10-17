@@ -11,13 +11,14 @@
         </div>
         <div class="product-price">
             <h3><span>৳</span>{{ product.price }}</h3>
-            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Order Now</a>
+            <button type="button" @click="cart.addItem(product)" class="btn" href=""><i class="fa fa-shopping-cart"></i>Order Now</button>
         </div>
     </div>
 </template>
 
 <script setup>
 const props  = defineProps(['product']);
+import {cart} from '../../store/cart'
 //console.log(product)
 </script>
 

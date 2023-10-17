@@ -72,14 +72,14 @@
         </div>
         <div class="col-md-3">
           <div class="user">
-            <a href="wishlist.html" class="btn wishlist">
+            <!-- <router-link :to="/" class="btn wishlist">
               <i class="fa fa-heart"></i>
               <span>(0)</span>
-            </a>
-            <a href="cart.html" class="btn cart">
+            </router-link> -->
+            <router-link :to="'/cart'" class="btn cart">
               <i class="fa fa-shopping-cart"></i>
-              <span>(0)</span>
-            </a>
+              <span>({{ cart.totalCartItems }})</span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -181,8 +181,8 @@
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 </template>
 <script setup>
-import { onBeforeMount } from "vue";
 import { basicStore } from "./store/basic";
+import { cart } from "./store/cart";
 const basic = basicStore;
 
 </script>
