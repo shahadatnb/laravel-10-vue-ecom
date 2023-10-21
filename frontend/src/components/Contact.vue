@@ -1,4 +1,5 @@
 <template>
+    <div>
     <!-- Breadcrumb Start -->
     <div class="breadcrumb-wrap">
             <div class="container-fluid">
@@ -75,4 +76,5 @@
             </div>
         </div>
         <!-- Contact End -->
+    </div>
 </template>

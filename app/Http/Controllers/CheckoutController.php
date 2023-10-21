@@ -233,4 +233,42 @@ class CheckoutController extends Controller
         
         return redirect()->route('wishlist');
     }
+
+    public function placeOrderNonAuth(Request $request){
+        $this->validate($request, array(
+            //'amount'=>'required',
+            'name'=>'required|max:50',
+            'address'=>'required|max:255',
+            'address2'=>'nullable|max:255',
+            'shipping_method'=>'required',
+            //'email'=>'required|email|max:100',
+            'phone'=>'required|digits:11',
+            ));
+
+            $data = new Order;
+            $data->name = $request->name;
+            $data->address = $request->address;
+            //$data->email = $request->email;
+            $data->phone = $request->phone;
+            $data->shipping_method = $request->shipping_method; //ShippingRole::find($request->shipping_method)->title;
+            $data->sub_total = $request->totalPrice;
+            $data->shipping_amount = $request->shippingCost;//session()->get('shipingAmount');
+            $data->amount = $request->totalPrice+$request->shippingCost; //session()->get('shipingAmount');//$request->amount;
+            $data->status_id = 1;          
+            $data->save();
+            //return $request->products[0]['price'];//cart[9]['product']['reduced_price'];
+            foreach($request->products as $product){
+                OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
+                $product = Product::find($product['id']);
+                $product->decrement('quantity',$product['quantity']); 
+            }
+           
+            $data->save();
+
+            
+            return response()->json([
+                'success' => $data,
+            ]);
+
+    }
 }

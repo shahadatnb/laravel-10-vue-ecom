@@ -1,7 +1,10 @@
 import {reactive, computed} from 'vue'
-
+import { basicStore } from './basic'
+const basic = basicStore
+import router from '../router/router'
 const cart = reactive({
     items:{},
+    shippingCost:0,
     totalCartItems:computed(()=>{
         let total = 0
         for(let id in cart.items){
@@ -12,9 +15,12 @@ const cart = reactive({
     totalPrice:computed(()=>{
         let total = 0
         for(let id in cart.items){
-            total += cart.items[id].product.price * cart.items[id].quantity
+            total += cart.items[id].product.reduced_price * cart.items[id].quantity
         }
         return parseFloat(total.toFixed(2))
+    }),
+    grandTotal:computed(()=>{
+        return cart.totalPrice + cart.shippingCost*1
     }),
     addItem(product){
         if(this.items[product.id]){
@@ -27,16 +33,66 @@ const cart = reactive({
         }
         this.saveCartInLocalStorage()
     },
-    removeItem(product){},
+    increaseQuantity(item){
+        //console.log(product)
+        this.items[item.product.id].quantity++
+        this.saveCartInLocalStorage()
+    },
+    decreaseQuantity(item){
+        this.items[item.product.id].quantity--
+        this.saveCartInLocalStorage()
+    },
+    removeItem(product){
+        delete this.items[product.id]
+        this.saveCartInLocalStorage()
+    },
     emptyCart(){
         this.items = {}
         this.saveCartInLocalStorage()
     },
     saveCartInLocalStorage(){
         localStorage.setItem('cart', JSON.stringify(this.items))
+        localStorage.setItem('shippingCost', this.shippingCost)
     },
     getCartFromLocalStorage(){
         this.items = JSON.parse(localStorage.getItem('cart')) || {}
+        this.shippingCost = localStorage.getItem('shippingCost')
+    },
+    checkout(){
+        router.push('/checkout')
+    },
+    placeOrder(name, phone, address, shipping_method){
+        const products = Object.values(this.items).map(item => ({
+            product_id: item.product.id,
+            quantity: item.quantity,
+            price: item.product.reduced_price
+        }));
+
+        fetch(`${basic.serverUrl}/api/placeOrderNonAuth`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, phone, address, shipping_method, products, shippingCost:this.shippingCost, totalPrice: this.totalPrice })
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        
+    },
+    shippingMethod(shipping_method){
+        if(shipping_method == 'ঢাকার বাহিরে'){
+            this.shippingCost = basic.settings.shipping_outside__dhaka
+        }else if(shipping_method == 'ঢাকার ভিতরে'){
+            this.shippingCost = basic.settings.shipping_inside_dhaka
+        }else{
+            this.shippingCost = 0
+        }
+        console.log(this.shippingCost)
+        this.saveCartInLocalStorage()
     }
 })
 cart.getCartFromLocalStorage()

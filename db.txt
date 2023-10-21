@@ -1,0 +1,2 @@
+INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, `field`, `status`, `created_at`, `updated_at`) VALUES (22, 1, 'shipping_inside_dhaka', 'ঢাকার ভিতরে', '60', 'basic', '{"required":"1","label":"Value","type":"text"}', 1, NULL, NULL);
+INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, `field`, `status`, `created_at`, `updated_at`) VALUES (23, 1, 'shipping_outside__dhaka', 'ঢাকার বাহিরে', '120', 'basic', '{"required":"1","label":"Value","type":"text"}', 1, NULL, NULL);

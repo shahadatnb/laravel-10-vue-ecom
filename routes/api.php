@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CheckoutController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,6 +31,8 @@ Route::post('login', [CustomerController::class, 'login']);
 Route::get( '/posts', [FrontendController::class, 'getPosts'] );
 Route::get( '/menu', [FrontendController::class, 'menuApi'] );
 Route::get( '/config', [FrontendController::class, 'getConfig'] );
+
+Route::post('/placeOrderNonAuth', [CheckoutController::class, 'placeOrderNonAuth']);
 
 Route::post(
     '/orders',
