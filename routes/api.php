@@ -25,7 +25,9 @@ Route::post('users', [UserController::class, 'store']);
 Route::put('users/{user}', [UserController::class, 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin,user']);
 Route::post('users/{user}', [UserController::class, 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin,user']);
 Route::patch('users/{user}', [UserController::class, 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin,user']);
-Route::get('me', [UserController::class, 'me'])->middleware('auth:sanctum');
+Route::get('getProfile', [CustomerController::class, 'getProfile'])->middleware('auth:sanctum');
+Route::post('updateProfile', [CustomerController::class, 'updateProfileApi'])->middleware('auth:sanctum');
+Route::post('register', [CustomerController::class, 'registerApi']);
 Route::post('login', [CustomerController::class, 'login']);
 
 Route::get( '/posts', [FrontendController::class, 'getPosts'] );
