@@ -25,7 +25,7 @@
             {{ $order->phone }}            
           </div>
           <div class="col-4 text-right">
-            Invoice Date: <b>{{ prettyDate($order->created_at) }}</b> <br>
+            Invoice Date: <b>{{ CustomHelper::prettyDate($order->created_at) }}</b> <br>
             Invoice No: <b>#{{ $order->id }}</b><br>
             {{-- Order No: <b>#{{ $order->id }}</b><br>
             Order Date: <b>{{ prettyDate($order->created_at) }}</b> --}}

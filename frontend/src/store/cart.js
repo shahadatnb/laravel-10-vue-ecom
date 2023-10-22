@@ -4,6 +4,7 @@ const basic = basicStore
 import router from '../router/router'
 const cart = reactive({
     items:{},
+    errorMessage: {},
     shippingCost:0,
     totalCartItems:computed(()=>{
         let total = 0
@@ -61,26 +62,35 @@ const cart = reactive({
     checkout(){
         router.push('/checkout')
     },
-    placeOrder(name, phone, address, shipping_method){
+    async placeOrder(name, phone, address, shipping_method){
         const products = Object.values(this.items).map(item => ({
             product_id: item.product.id,
             quantity: item.quantity,
             price: item.product.reduced_price
         }));
-
-        fetch(`${basic.serverUrl}/api/placeOrderNonAuth`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, phone, address, shipping_method, products, shippingCost:this.shippingCost, totalPrice: this.totalPrice })
-        }).then(res => res.json())
-            .then(res => {
-                console.log(res)
+        try {
+            const response = await fetch(`${basic.serverUrl}/api/placeOrderNonAuth`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, phone, address, shipping_method, products, shippingCost:this.shippingCost, totalPrice: this.totalPrice })
             })
-            .catch(err => {
-                console.log(err)
-            })
+            const data = await response.json()
+            //console.log(response)
+            if(data.success===true){
+                this.errorMessage = {}
+                this.emptyCart()
+                $(function () {
+                    $('#checkoutModal').modal('show')
+                });
+            }else{
+                //console.log(data)
+                this.errorMessage = data.data
+            }
+        } catch (error) {
+            console.error('Error placing order:', error);
+        }
         
     },
     shippingMethod(shipping_method){

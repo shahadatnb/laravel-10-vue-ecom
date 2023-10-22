@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
 use CustomHelper;
+use App\Http\Requests\PlaceOrderRequest;
 
 class CheckoutController extends Controller
 {
@@ -234,16 +235,9 @@ class CheckoutController extends Controller
         return redirect()->route('wishlist');
     }
 
-    public function placeOrderNonAuth(Request $request){
-        $this->validate($request, array(
-            //'amount'=>'required',
-            'name'=>'required|max:50',
-            'address'=>'required|max:255',
-            'address2'=>'nullable|max:255',
-            'shipping_method'=>'required',
-            //'email'=>'required|email|max:100',
-            'phone'=>'required|digits:11',
-            ));
+    public function placeOrderNonAuth(PlaceOrderRequest $request){//PlaceOrderRequest
+
+            $validated = $request->validated();            
 
             $data = new Order;
             $data->name = $request->name;
@@ -258,16 +252,13 @@ class CheckoutController extends Controller
             $data->save();
             //return $request->products[0]['price'];//cart[9]['product']['reduced_price'];
             foreach($request->products as $product){
-                OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
-                $product = Product::find($product['id']);
-                $product->decrement('quantity',$product['quantity']); 
+                OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['product_id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
+                $productItem = Product::find($product['product_id']);
+                $productItem->decrement('quantity',$product['quantity']); 
             }
-           
-            $data->save();
-
             
             return response()->json([
-                'success' => $data,
+                'success' => true, 'message' => 'Order placed successfully!', 'order' =>  $data,
             ]);
 
     }

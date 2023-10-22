@@ -109,14 +109,14 @@
               <tr>
                 <td class="not-exported"><input class="order_list" name="order[]" type="checkbox" value="{{$order->id}}"></td>
                 <td>{{ $order->id }}</td>
-                <td>{{ prettyDate($order->created_at) }}</td>
+                <td>{{ CustomHelper::prettyDate($order->created_at) }}</td>
                 <td>{{ $order->name }}</td>
                 <td>
                   {{-- {!! $order->address !!},  {{ $order->city }}, @if($order->state>0){{ $order->ostate->name }}@endif-{{ $order->postcode }}<br> --}}
                   {!! $order->address !!}
                   {{-- {{ $order->email }} --}}
                 </td>
-                <td>{{ $order->shipping? $order->shipping->title:''}}</td>
+                <td>{{ $order->shipping? $order->shipping->title:$order->shipping_method}}</td>
                 <td>{{ $order->phone }}</td>
                 <td>{{ $order->amount }}</td>
                 <td>{{ $order->status? $order->status->name : '' }}</td>

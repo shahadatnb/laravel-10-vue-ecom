@@ -27,7 +27,7 @@
             <table class="table">
               <tbody>
                 <tr> <td>Order No:</td> <td>#{{ $order->id }}</td> </tr>
-                <tr> <td>Date:</td> <td>{{ prettyDate($order->created_at) }}</td> </tr>
+                <tr> <td>Date:</td> <td>{{ CustomHelper::prettyDate($order->created_at) }}</td> </tr>
               </tbody>
             </table>
               <br>

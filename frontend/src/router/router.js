@@ -15,22 +15,26 @@ const routes = [
         path: '/', component: Home, name: 'home'
     },
     {
-        path: '/product/:slug', component: ProductSingle, name: 'product-single'
+        path: '/product/:slug', component: ProductSingle, name: 'product-single', meta: { title: 'Product' }
     },
     {
-        path: '/category/:slug', component: Category, name: 'category-product'
+        path: '/category/:slug', component: Category, name: 'category-product', meta: { title: 'Category' }
     },
     {
-        path: '/page/:slug', component: Page, name: 'page'
+        path: '/page/:slug', component: Page, name: 'page', meta: { title: 'Page' }
     },
     {
-        path: '/contact', component: Contact, name: 'contact'
+        path: '/contact', component: Contact, name: 'contact', meta: { title: 'Contact' }
     },
     {
-        path: '/cart', component: Cart, name: 'cart'
+        path: '/cart', component: Cart, name: 'cart', meta: {
+            title: 'Cart'
+        }
     },
     {
-        path: '/checkout', component: Checkout, name: 'checkout'
+        path: '/checkout', component: Checkout, name: 'checkout', meta: {
+            title: 'Checkout'
+        }
     },
     /*
     {
@@ -51,6 +55,14 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 });
+
+const DEFAULT_TITLE = 'Ecommerce';
+router.afterEach((to, from) => {
+    Vue.nextTick(() => {
+        document.title = to.meta.title || DEFAULT_TITLE;
+    });
+});
+
 /*
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && !autoStore.isAuthenticated) {

@@ -42,7 +42,7 @@ All {{ Str::plural($posttype['title']) }}
          					@endforeach
 						</th>
 					@endif
-					<td>{{ $post->created_at }}</td>
+					<td>{{ CustomHelper::prettyDate($post->created_at) }}</td>
 					<td>
 						<div class="btn-group">
 							<a href="{{ route('posts.edit', $post->id).'?type='.$posttype['postType'] }}" class="btn btn-warning btn-sm">Edit</a>
