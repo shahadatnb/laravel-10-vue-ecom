@@ -1,8 +1,8 @@
 import { ref, reactive, onBeforeMount } from 'vue'
 import axios from 'axios'
 const basicStore = reactive({
-    serverUrl: 'http://127.0.0.1:8000',
-    baseUrl: 'http://127.0.0.1:5173',
+    serverUrl: 'https://ecom.asiancoder.com',
+    baseUrl: 'https://vueshop.asiancoder.com',
     settings: [],
     init() {
         axios.get(`${basicStore.serverUrl}/api/config`)

@@ -27,7 +27,9 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto">
+            <template v-if="basic.settings.menus">
               <router-link v-for="menu in basic.settings.menus.main" :key="menu.id" :to="menu.menu_url" class="nav-item nav-link">{{menu.lebel}}</router-link>
+            </template>
               <!-- <router-link :to="'/contact'" class="nav-item nav-link">Contact</router-link> -->
             <!-- <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dry Fruits  </a>
@@ -144,15 +146,15 @@
         <div class="col-md-6">
           <div class="payment-method">
             <h2>We Accept:</h2>
-            <img src="/img/payment-method.png" alt="Payment Method" />
+            <img src="./assets/img/payment-method.png" alt="Payment Method" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="payment-security">
             <h2>Secured By:</h2>
-            <img src="/img/godaddy.svg" alt="Payment Security" />
-            <img src="/img/norton.svg" alt="Payment Security" />
-            <img src="/img/ssl.svg" alt="Payment Security" />
+            <img src="./assets/img/godaddy.svg" alt="Payment Security" />
+            <img src="./assets/img/norton.svg" alt="Payment Security" />
+            <img src="./assets/img/ssl.svg" alt="Payment Security" />
           </div>
         </div>
       </div>

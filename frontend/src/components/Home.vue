@@ -42,7 +42,8 @@
   <div class="feature">
     <div class="container-fluid">
       <div class="row align-items-center">
-        <div v-for="feature in lebels" :key="feature.id" class="col-lg-3 col-md-6 feature-col">          
+        <template v-if="basic.settings.menus">
+        <div v-for="feature in basic.settings.menus.lebel" :key="feature.id" class="col-lg-3 col-md-6 feature-col">          
           <div class="feature-content">
             <i :class="feature.menu_class"></i>
             <h2>{{ feature.lebel }}</h2>
@@ -51,13 +52,14 @@
             </p> -->
           </div>
         </div>
+      </template>
       </div>
     </div>
   </div>
   <!-- Feature End-->
 
   <!-- Category Start-->
-    <Categories></Categories>
+    <!-- <Categories></Categories> -->
   <!-- Category End-->
 
   <!-- Call to Action Start -->
@@ -103,7 +105,6 @@ import {onMounted,onBeforeMount,ref,computed, onUpdated} from "vue";
 import axios from "axios";
 import { basicStore } from "../store/basic";
 const basic = basicStore;
-const lebels = ref([])
 const slides = ref([])
 
 //lebels.value = basic.settings.menus.lebel
@@ -151,10 +152,6 @@ $(function () {
     });
 });
 });
-
-onUpdated(()=>{
-  lebels.value = basic.settings.menus.lebel
-})
 
 //import { toast } from 'vue3-toastify';
 //import 'vue3-toastify/dist/index.css';

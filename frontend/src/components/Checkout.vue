@@ -103,5 +103,18 @@ const name = ref('')
 const phone = ref('')
 const address = ref('')
 const shipping_method = ref('')
-
+/*
+function metaInfo() {
+        return {
+            title: "Checkout",
+            meta: [
+                { name: 'description', content:  'Checkout' },
+                { property: 'og:title', content: "Checkout"},
+                { property: 'og:site_name', content: 'Laravel-10-Vue-Ecommerce'},
+                {property: 'og:type', content: 'website'},    
+                {name: 'robots', content: 'index,follow'} 
+            ]
+        }
+    }
+*/
 </script>
