@@ -275,7 +275,7 @@ class OrderController extends Controller
         $user = auth()->user();
         $orders = $user->orders()->with('items')->get();
         $orders->map(function($order){
-            $order->products->map(function($product){
+            $order->items->map(function($product){
                 unset($product->description);
                 unset($product->category);
                 unset($product->image);
@@ -283,8 +283,8 @@ class OrderController extends Controller
                 unset($product->rating_count);
                 // unset($product->created_at);
                 // unset($product->updated_at);
-                unset($product->pivot->order_id);
-                unset($product->pivot->product_id);
+                //unset($product->pivot->order_id);
+                //unset($product->pivot->product_id);
                 return $product;
             });
         });
