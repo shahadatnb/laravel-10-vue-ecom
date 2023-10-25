@@ -9,6 +9,8 @@ use App\Models\WishList;
 use App\Models\Product;
 use App\Http\Traits\locTrait;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Auth\CustomerRegisterRequest;
+use App\Http\Requests\Auth\CustomerLoginRequest;
 
 class CustomerController extends Controller
 {  use locTrait;
@@ -104,12 +106,8 @@ class CustomerController extends Controller
         return redirect()->back();
     }
 
-    public function registerApi(Request $request){
-        $this->validate($request, [
-            'name' => 'required|max:50',
-            'email' => 'required|email|max:100|unique:customers',
-            'password' => 'required|min:6|max:16',
-        ]);
+    public function registerApi(CustomerRegisterRequest $request){
+        $validated = $request->validated();
 
         $customer = Customer::create([
             'name' => $request->name,
@@ -124,13 +122,10 @@ class CustomerController extends Controller
         }
     }
 
-    public function login(Request $request) {
-        $creds = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+    public function login(CustomerLoginRequest $request) {
+        $validated = $request->validated();
 
-        $customer = Customer::where('email', $creds['email'])->first();
+        $customer = Customer::where('email', $request->email)->first();
         if (! $customer || ! Hash::check($request->password, $customer->password)) {
             return response(['error' => 1, 'message' => 'invalid credentials'], 401);
         }

@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use CustomHelper;
 use App\Http\Requests\PlaceOrderRequest;
+use App\Http\Requests\CheckoutRequest;
 
 class CheckoutController extends Controller
 {
@@ -106,8 +107,53 @@ class CheckoutController extends Controller
     }
 
 
-    public function checkout()
+    public function checkout(CheckoutRequest $request)
     {
+        $validated = $request->validated();
+        $customer = auth()->user();
+        $data = new Order;
+
+        $data->name = $request->name;
+        $data->address = $request->address;
+        //$data->address2 = $request->address2;
+        $data->state = $request->state;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->city = $request->city;
+        //$data->state = $request->state;
+        $data->country = $request->country;
+        //$data->zip_code = $request->zip_code;            
+        //$data->shipping_method = $request->shipping_method; //ShippingRole::find($request->shipping_method)->title;
+        $data->sub_total = $request->totalPrice;
+        $data->shipping_amount = 0; // $request->shipping_amount;
+        $data->amount = $data->sub_total+$data->shipping_amount;
+        $data->status_id = 1;
+        //$data->payment_method = $request->payment_method;
+        $data->customer_id = $customer->id;        
+        $data->save();
+
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        //$customer->address2 = $request->address2;
+        //$customer->state = $request->state;
+        $customer->city = $request->city;
+        $customer->country = $request->country;
+        //$customer->zip_code = $request->zip_code;
+        $customer->save();
+
+        foreach($request->products as $product){
+            OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['product_id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
+            $productItem = Product::find($product['product_id']);
+            $productItem->decrement('quantity',$product['quantity']); 
+        }
+        
+        return response()->json([
+            'success' => true, 'message' => 'Order placed successfully!', 'order' =>  $data,
+        ]);
+
+        /*
         $countries=$this->countryArray();
         $shipping_method = CustomHelper::shippingMmethod();
         $customer = auth('customer')->user();
@@ -118,6 +164,7 @@ class CheckoutController extends Controller
         }
         
         return view('frontend.products.checkout',compact('countries','states','shipping_method'));
+        */
     }
 
     public function checkoutPost(Request $request)

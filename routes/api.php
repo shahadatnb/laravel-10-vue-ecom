@@ -35,11 +35,7 @@ Route::get( '/menu', [FrontendController::class, 'menuApi'] );
 Route::get( '/config', [FrontendController::class, 'getConfig'] );
 
 Route::post('/placeOrderNonAuth', [CheckoutController::class, 'placeOrderNonAuth']);
-
-Route::post(
-    '/orders',
-    [OrderController::class, 'createOrder']
-)->middleware('auth:sanctum');
+Route::post('/checkout', [CheckoutController::class, 'checkout'])->middleware('auth:sanctum');
 
 Route::get(
     '/orders',
