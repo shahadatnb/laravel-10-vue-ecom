@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -63,6 +65,7 @@ Route::delete(
 )->middleware('auth:sanctum');
 
 
+Route::get('/wish-listed-products', [FrontendController::class, 'getWishlistedProduct'])->middleware('auth:sanctum');
 Route::get('/latest-products', [FrontendController::class, 'latestProducts']);
 Route::get('/single-product/{slug}', [FrontendController::class, 'getProduct']);
 

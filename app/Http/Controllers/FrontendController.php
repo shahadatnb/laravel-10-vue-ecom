@@ -119,6 +119,13 @@ class FrontendController extends Controller
         return response()->json($config);
     }
 
+    public function getWishlistedProduct(Request $request){
+        $user = $request->user();
+        $wishlists = $user->wishlist->pluck('product_id')->toArray();
+        $products = Product::whereIn('id',$wishlists)->where('status',1)->get();
+        return new ProductCollection($products);
+    }
+
     public function latestProducts(Request $request){
         $products = Product::latest()->where('status',1);
         if($request->has('take')){

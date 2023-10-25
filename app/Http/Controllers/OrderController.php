@@ -271,5 +271,41 @@ class OrderController extends Controller
         return redirect()->back();
     }
     
+    function getUserOrders(){
+        $user = auth()->user();
+        $orders = $user->orders()->with('items')->get();
+        $orders->map(function($order){
+            $order->products->map(function($product){
+                unset($product->description);
+                unset($product->category);
+                unset($product->image);
+                unset($product->rating);
+                unset($product->rating_count);
+                // unset($product->created_at);
+                // unset($product->updated_at);
+                unset($product->pivot->order_id);
+                unset($product->pivot->product_id);
+                return $product;
+            });
+        });
+        return $orders;
+    }
+
+    function getOrderDetails($id, Request $request){
+        $order = Order::findOrFail($id);
+        $order->items->map(function($product){
+            unset($product->description);
+            unset($product->category);
+            unset($product->image);
+            unset($product->rating);
+            unset($product->rating_count);
+            // unset($product->created_at);
+            // unset($product->updated_at);
+            unset($product->pivot->order_id);
+            unset($product->pivot->product_id);
+            return $product;
+        });
+        return $order;
+    }
 
 }
