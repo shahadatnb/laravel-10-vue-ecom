@@ -36,7 +36,7 @@ Route::get( '/posts', [FrontendController::class, 'getPosts'] );
 Route::get( '/menu', [FrontendController::class, 'menuApi'] );
 Route::get( '/config', [FrontendController::class, 'getConfig'] );
 
-Route::post('/placeOrderNonAuth', [CheckoutController::class, 'placeOrderNonAuth']);
+Route::post('/placeOrderNonAuth', [CheckoutController::class, 'placeOrderNonAuth']);//->middleware('cors');
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->middleware('auth:sanctum');
 
 Route::get(
@@ -66,7 +66,7 @@ Route::delete(
 
 
 Route::get('/wish-listed-products', [FrontendController::class, 'getWishlistedProduct'])->middleware('auth:sanctum');
-Route::get('/latest-products', [FrontendController::class, 'latestProducts']);
-Route::get('/single-product/{slug}', [FrontendController::class, 'getProduct']);
+Route::get('/latest-products', [FrontendController::class, 'latestProducts']);//->middleware('cors');
+Route::get('/single-product/{slug}', [FrontendController::class, 'getProduct']);//->middleware('cors');
 
-Route::get('/categories', [FrontendController::class, 'getCategories']);
+Route::get('/categories', [FrontendController::class, 'getCategories']);//->middleware('cors');
