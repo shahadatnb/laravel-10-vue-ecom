@@ -140,9 +140,9 @@ class FrontendController extends Controller
         if($request->has('search')){
             $products = $products->where('title','like','%'.$request->search.'%');
         }
-        if($request->has('cat')){
+        if($request->has('categories')){
             $products = $products->whereHas('categories', function($q) use($request){
-                $q->where('slug',$request->cat);
+                $q->whereIn('slug',$request->categories);
             });
         }
 
@@ -166,7 +166,7 @@ class FrontendController extends Controller
     }
 
     public function getCategories(){
-        $categories = ProCat::where('status',1)->get();
+        $categories = ProCat::where('status',1)->withCount('products')->get();
         return new CategoryCollection($categories);
         //return response()->json($categories);
     }
