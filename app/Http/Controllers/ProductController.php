@@ -8,6 +8,9 @@ use App\Models\Product;
 use App\Models\ProCat;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Size;
+use App\Models\Color;
+use App\Models\ProductStock;
 use Storage;
 use Str;
 use Image;
@@ -91,12 +94,15 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $sizes = Size::pluck('name','id');
+        $colors = Color::pluck('name','id');
         $cat = ProCat::all();
+        $stocks = ProductStock::where('product_id',$id)->orderBy('color_id')->orderBy('size_id')->get();
         $cats=array();
         foreach ($cat as $value) {
             $cats[$value->id] = $value->title;
         }
-        return view('admin.products.edit',compact('product','cats'));
+        return view('admin.products.edit',compact('product','cats','sizes','colors','stocks'));
     }
 
 
@@ -104,6 +110,9 @@ class ProductController extends Controller
     {
         $this->validate($request, array(
             'title'=>'required|max:255',
+            'product_type'=>'required',
+            'colors'=>'required_if:product_type,==,variant',
+            'sizes'=>'required_if:product_type,==,variant',
             'price'=>'numeric|required',
             'weight'=>'numeric|nullable',
             'categories'=>'required',
@@ -123,10 +132,26 @@ class ProductController extends Controller
         $data->description = $request->description;
         $data->featured = $request->featured??0;
         $data->free_shipping = $request->free_shipping??0;
+        $data->product_type = $request->product_type;
         $data->status = $request->status;
         $data->save();
 
         $data->categories()->sync($request->categories);
+        if($data->product_type=='variant'){
+            $data->sizes()->sync($request->sizes);
+            $data->colors()->sync($request->colors);
+            foreach($request->colors as $color){
+                foreach($request->sizes as $size){
+                    ProductStock::firstOrCreate(['product_id'=>$data->id,'color_id'=>$color,'size_id'=>$size]);
+                }
+            }
+        }else{
+            $stock = ProductStock::firstOrCreate(['product_id'=>$data->id]);
+            $stock->quantity = $request->quantity;
+            $stock->price = $request->price;
+            $stock->reduced_price = $request->reduced_price;
+            $stock->save();
+        }
 
         $image = $request->file('photo');
         if ($image) {

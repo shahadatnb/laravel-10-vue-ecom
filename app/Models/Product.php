@@ -18,6 +18,14 @@ class Product extends Model
     public function categories(){
     	return $this->belongsToMany(ProCat::class,'product_category','product_id','category_id');
     }
+    
+    public function colors(){
+        return $this->belongsToMany(Color::class,'product_colors','product_id','color_id');
+    }
+
+    public function sizes(){
+        return $this->belongsToMany(Size::class,'product_sizes','product_id','size_id');
+    }
 
     public function price(){
         $old_price = $this->price;

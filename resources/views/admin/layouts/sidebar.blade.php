@@ -124,9 +124,12 @@
               <li class="nav-item"><a href="{{ route('shippingRole.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> Shipping Role</a>
               </li>
-              {{-- <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i> Register</a>
-              </li> --}}
+              <li class="nav-item"><a href="{{ route('size.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i> Size</a>
+              </li>
+              <li class="nav-item"><a href="{{ route('color.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i> Color</a>
+              </li>
               <li class="nav-item"><a href="{{ route('userRole') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> User Role</a>
               </li>

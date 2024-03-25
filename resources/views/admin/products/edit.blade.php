@@ -63,11 +63,27 @@
               @endif 
             </div>
             <div class="col-md-4">
+              {{ Form::label('product_type','Product Type') }}
+              {{ Form::select('product_type',['simple'=>'Simple','variant'=>'Variant'],null,['class'=>'form-control','required'=>true,'placeholder'=>'Product Type']) }}
+            </div>
+            <div class="col-md-12">
               {{ Form::label('categories','Product Category') }}
               {{ Form::select('categories[]',$cats,null,['class'=>'form-control select2','multiple'=>'multiple']) }} 
               @if($errors->has('categories'))
                   <span class="help-block">{{ $errors->first('categories') }}</span>
               @endif 
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+              {{ Form::label('colors','Colors') }}
+              {{ Form::select('colors[]',$colors,null,['class'=>'form-control select2','multiple'=>true]) }}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+              {{ Form::label('sizes','Sizes') }}
+              {{ Form::select('sizes[]',$sizes,null,['class'=>'form-control select2','multiple'=>true]) }}
+              </div>
             </div>
           </div>
           <div class="row">
@@ -88,6 +104,36 @@
               @endif
             </div>
           </div>
+          @if($product->product_type == 'variant')
+          <div class="row">
+            <div class="col-md-12">
+              {{ Form::label('variants','Variants') }}
+              <table class="table table-bordered table-striped table-sm" id="variants">
+                <thead>
+                  <tr>
+                    <th>Variant</th>
+                    <th>Price</th>
+                    <th>S Price</th>
+                    <th class="not-exported">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($stocks as $variant)
+                  <tr>
+                    <td>{{ $variant->color?$variant->color->name:'' }} - {{ $variant->size?$variant->size->name:'' }}</td>
+                    <td>{{ $variant->price }}</td>
+                    <td>{{ $variant->reduced_price }}</td>
+                    <td>
+                      <a href="{{ route('product.stock.edit',$variant->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                      <a href="{{ route('product.stock.destroy',$variant->id) }}" class="btn btn-danger btn-xs delete-variant" data-id="{{ $variant->id }}"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+          @endif
         </div>
         
         <!-- /.card-body -->

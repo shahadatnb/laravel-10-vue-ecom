@@ -6,8 +6,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\TaxonomyController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +76,8 @@ Route::prefix('/product')->as('product.')->group(function() {
 		Route::get('/catEdit/{id}', [ProductController::class, 'catEdit'])->name('cat.edit');
 		Route::post('/catEdit/{id}', [ProductController::class, 'catEditPost'])->name('cat.edit');
 
+        Route::get('/variant/edit/{productStock}', [StockController::class, 'edit'])->name('stock.edit');
+        Route::get('/variant/destroy/{productStock}', [StockController::class, 'destroy'])->name('stock.destroy');
 		//Route::get('/admin/productDelevery', 'ProductController@productDelevery')->name('productDelevery');
 		//Route::get('/admin/productDeleveryConfirm/{id}', 'ProductController@productDeleveryConfirm')->name('productDeleveryConfirm');
 	});
@@ -88,7 +93,9 @@ Route::group(['middleware'=> ['auth','roles'],'roles'=>['Admin','SuperAdmin']], 
         return 'OK';
     });
     
-		Route::resource('shippingRole',ShippingRoleController::class);
+    Route::resource('shippingRole',ShippingRoleController::class);
+    Route::resource('color',ColorController::class);
+    Route::resource('size',SizeController::class);
 
     // User Role ###################
     Route::post('admin-assign', [ RoleController::class, 'postAssignRole'])->name('admin-assign');
