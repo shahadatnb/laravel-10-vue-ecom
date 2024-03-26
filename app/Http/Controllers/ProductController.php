@@ -142,7 +142,12 @@ class ProductController extends Controller
             $data->colors()->sync($request->colors);
             foreach($request->colors as $color){
                 foreach($request->sizes as $size){
-                    ProductStock::firstOrCreate(['product_id'=>$data->id,'color_id'=>$color,'size_id'=>$size]);
+                  $stock =  ProductStock::firstOrCreate(['product_id'=>$data->id,'color_id'=>$color,'size_id'=>$size]);
+                  if($stock->price == ''){
+                    $stock->price = $request->price;
+                    $stock->reduced_price = $request->reduced_price;
+                    $stock->save();
+                  }
                 }
             }
         }else{

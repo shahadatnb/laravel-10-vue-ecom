@@ -39,7 +39,7 @@ class Product extends Model
     }
 
     public function galleries(){
-        return $this->hasMany(Attachment::class,'product_id','id');
+        return $this->hasMany(Attachment::class,'product_id','id')->whereNull('color_id');
     }
     
 }

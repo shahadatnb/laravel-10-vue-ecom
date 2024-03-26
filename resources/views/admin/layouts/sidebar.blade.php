@@ -57,6 +57,9 @@
               <li class="nav-item"><a href="{{ route('product.products.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> Products</a>
               </li>
+              <li class="nav-item"><a href="{{ route('product.stock.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i> Product Stock</a>
+              </li>
               <li class="nav-item"><a href="{{ route('product.productsCat') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> Category</a>
               </li>

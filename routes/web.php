@@ -76,8 +76,13 @@ Route::prefix('/product')->as('product.')->group(function() {
 		Route::get('/catEdit/{id}', [ProductController::class, 'catEdit'])->name('cat.edit');
 		Route::post('/catEdit/{id}', [ProductController::class, 'catEditPost'])->name('cat.edit');
 
-        Route::get('/variant/edit/{productStock}', [StockController::class, 'edit'])->name('stock.edit');
-        Route::get('/variant/destroy/{productStock}', [StockController::class, 'destroy'])->name('stock.destroy');
+        Route::get('/stock', [StockController::class, 'index'])->name('stock.index');
+        Route::post('/stock/update', [StockController::class, 'stockUpdate'])->name('stock.update');
+        Route::post('/variant/gallery/store', [StockController::class, 'galleryStore'])->name('variant.gallery.store');
+        Route::post('/variant/gallery/delete', [StockController::class, 'galleryDelete'])->name('variant.gallery.delete');
+        Route::get('/variant/edit/{productStock}', [StockController::class, 'edit'])->name('variant.edit');
+        Route::post('/variant/update/{productStock}', [StockController::class, 'update'])->name('variant.update');
+        Route::get('/variant/destroy/{productStock}', [StockController::class, 'destroy'])->name('variant.destroy');
 		//Route::get('/admin/productDelevery', 'ProductController@productDelevery')->name('productDelevery');
 		//Route::get('/admin/productDeleveryConfirm/{id}', 'ProductController@productDeleveryConfirm')->name('productDeleveryConfirm');
 	});

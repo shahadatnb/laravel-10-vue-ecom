@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attachment extends Model
 {
-    protected $fillable = ['product_id', 'image'];
+    protected $fillable = ['product_id','color_id', 'image'];
     
 }

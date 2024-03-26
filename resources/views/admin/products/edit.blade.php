@@ -124,8 +124,8 @@
                     <td>{{ $variant->price }}</td>
                     <td>{{ $variant->reduced_price }}</td>
                     <td>
-                      <a href="{{ route('product.stock.edit',$variant->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                      <a href="{{ route('product.stock.destroy',$variant->id) }}" class="btn btn-danger btn-xs delete-variant" data-id="{{ $variant->id }}"><i class="fa fa-trash"></i></a>
+                      <a href="{{ route('product.variant.edit',$variant->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                      <a href="{{ route('product.variant.destroy',$variant->id) }}" class="btn btn-danger btn-xs delete-variant" data-id="{{ $variant->id }}"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach
