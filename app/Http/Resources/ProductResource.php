@@ -27,6 +27,7 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'product_type' => $this->product_type,
             'quantity' => $this->quantity,
+            'variant_id' => $this->variant_id,
             'photo' => asset('storage/'.$this->photo),
             'categories' => $this->categories->pluck('title'),
             'galleries' => GalleryResource::collection($this->whenLoaded('galleries')),

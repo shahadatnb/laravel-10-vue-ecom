@@ -24,10 +24,10 @@ const cart = reactive({
         return cart.totalPrice + cart.shippingCost*1
     }),
     addItem(product){
-        if(this.items[product.id]){
-            this.items[product.id].quantity++
+        if(this.items[product.variant_id]){
+            this.items[product.variant_id].quantity++
         }else{
-            this.items[product.id] = {
+            this.items[product.variant_id] = {
                 product,
                 quantity:1
             }
@@ -36,15 +36,15 @@ const cart = reactive({
     },
     increaseQuantity(item){
         //console.log(product)
-        this.items[item.product.id].quantity++
+        this.items[item.product.variant_id].quantity++
         this.saveCartInLocalStorage()
     },
     decreaseQuantity(item){
-        this.items[item.product.id].quantity--
+        this.items[item.product.variant_id].quantity--
         this.saveCartInLocalStorage()
     },
     removeItem(product){
-        delete this.items[product.id]
+        delete this.items[product.variant_id]
         this.saveCartInLocalStorage()
     },
     emptyCart(){

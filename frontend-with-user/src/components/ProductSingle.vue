@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onBeforeMount, ref } from 'vue'
+import { reactive, onBeforeMount, onMounted, ref } from 'vue'
 import axios from 'axios'
 import LoopProduct from './LoopProduct.vue';
 import { basicStore } from "../store/basic.js";
@@ -33,13 +33,16 @@ onBeforeMount(() => {
             product.galleries = res.data.data.galleries
             product.categories = res.data.data.categories
             if(product.product_type == 'variant') {
-                selectedColor.value = product.variants[0].color_id
-                selectedSize.value = product.variants[0].size_id
-                let selectedVariant = product.variants.find((variant) => variant.color_id == selectedColor.value && variant.size_id == selectedSize.value)
+                product.selectedColor = product.variants[0].color_id
+                product.selectedSize = product.variants[0].size_id
+                let selectedVariant = product.variants.find((variant) => variant.color_id == product.selectedColor && variant.size_id == product.selectedSize)
                 if(selectedVariant) {
+                    //console.log(selectedVariant)
                     product.quantity = selectedVariant.quantity
+                    product.variant_id = selectedVariant.id
                 }
             }else{
+                //console.log(product.variants)
                 product.quantity = product.variants[0].quantity
             }
         });
@@ -50,28 +53,34 @@ onBeforeMount(() => {
         });
 })
 
+onMounted(() => {
+  window.scrollTo(0, 0)
+})
+
 function selectColor(color) {
-    selectedColor.value = color
-    let selectedVariant = product.variants.find((variant) => variant.color_id == color && variant.size_id == selectedSize.value)
+    product.selectedColor = color
+    let selectedVariant = product.variants.find((variant) => variant.color_id == color && variant.size_id == product.selectedSize)
     if(selectedVariant) {
         //console.log(selectedVariant)
         product.title = product_title_original.value + ' - ' + selectedVariant.color + ' - ' + selectedVariant.size
         product.price = selectedVariant.price
         product.reduced_price = selectedVariant.reduced_price
         product.quantity = selectedVariant.quantity
+        product.variant_id = selectedVariant.id
         //console.log(product)
     };
 }
 
 function selectSize(size) {
-    selectedSize.value = size
-    let selectedVariant = product.variants.find((variant) => variant.color_id == selectedColor.value && variant.size_id == size)
+    product.selectedSize = size
+    let selectedVariant = product.variants.find((variant) => variant.color_id == product.selectedColor && variant.size_id == size)
     if(selectedVariant) {
         //console.log(selectedVariant)
         product.title = product_title_original.value + ' - ' + selectedVariant.color + ' - ' + selectedVariant.size
         product.price = selectedVariant.price
         product.reduced_price = selectedVariant.reduced_price
         product.quantity = selectedVariant.quantity
+        product.variant_id = selectedVariant.id
     }
 }
 
@@ -116,6 +125,7 @@ function selectSize(size) {
                     <span>Availability: </span>
                     <span class="text-green-600">{{ product.quantity > 0 ? 'In Stock' : 'Out of Stock' }}</span>
                 </p>
+                {{ product.variant_id }}
                 <!-- <p class="space-x-2">
                     <span class="text-gray-800 font-semibold">Brand: </span>
                     <span class="text-gray-600">Apex</span>
@@ -141,7 +151,7 @@ function selectSize(size) {
 
             <p class="mt-4 text-gray-600">{{ product.short_description }}</p>
  
-            <div class="pt-4" v-if="product.sizes">
+            <div class="pt-4" v-if="product.sizes != ''">
                 <h3 class="text-xl text-gray-800 uppercase mb-1">Size</h3>
                 <div class="flex items-center gap-2">
                     <div class="size-selector" v-for="(size, index) in product.sizes" :key="index">
@@ -151,7 +161,7 @@ function selectSize(size) {
                     </div>                    
                 </div>
             </div>
-            <div class="pt-4" v-if="product.colors">
+            <div class="pt-4" v-if="product.colors != ''">
                 <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Color</h3>
                 <div class="flex items-center gap-2">
                     <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
