@@ -113,7 +113,8 @@
                   <tr>
                     <th>Variant</th>
                     <th>Price</th>
-                    <th>S Price</th>
+                    <th>RPrice</th>
+                    <th>Qnty</th>
                     <th class="not-exported">Action</th>
                   </tr>
                 </thead>
@@ -123,6 +124,7 @@
                     <td>{{ $variant->color?$variant->color->name:'' }} - {{ $variant->size?$variant->size->name:'' }}</td>
                     <td>{{ $variant->price }}</td>
                     <td>{{ $variant->reduced_price }}</td>
+                    <td>{{ $variant->quantity }}</td>
                     <td>
                       <a href="{{ route('product.variant.edit',$variant->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                       <a href="{{ route('product.variant.destroy',$variant->id) }}" class="btn btn-danger btn-xs delete-variant" data-id="{{ $variant->id }}"><i class="fa fa-trash"></i></a>

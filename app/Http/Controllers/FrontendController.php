@@ -156,7 +156,7 @@ class FrontendController extends Controller
     }
 
     public function getProduct($slug){
-        $product = Product::where('slug',$slug)->where('status',1)->with('galleries')->first();
+        $product = Product::where('slug',$slug)->where('status',1)->with('galleries','colors','sizes','categories','variants')->first();
         if($product){
             //return response()->json($product);
             return new ProductResource($product);

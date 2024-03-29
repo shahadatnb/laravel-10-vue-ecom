@@ -27,6 +27,10 @@ class Product extends Model
         return $this->belongsToMany(Size::class,'product_sizes','product_id','size_id');
     }
 
+    public function variants(){
+        return $this->hasMany(ProductStock::class,'product_id','id');
+    }
+
     public function price(){
         $old_price = $this->price;
         $reduced_price = $this->reduced_price;
