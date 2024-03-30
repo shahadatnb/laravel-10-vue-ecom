@@ -110,6 +110,11 @@ Route::group(['middleware'=> ['auth','roles'],'roles'=>['Admin','SuperAdmin']], 
     Route::resource('roles', ProfileController::class);
 
     // Setting  #####################
+    Route::get('/userCreate', [ProfileController::class,'userCreate'])->name('userCreate');
+	Route::post('/userStore', [ProfileController::class,'userStore'])->name('userStore');
+	Route::get('/userEdit/{id}', [ProfileController::class,'userEdit'])->name('userEdit');
+	Route::post('/userUpdate', [ProfileController::class,'userUpdate'])->name('userUpdate');
+	Route::get('/userDelete/{id}', [ProfileController::class,'userDelete'])->name('userDelete');
 	Route::post('/chengePasswordFource', [ProfileController::class,'chengePasswordFource'])->name('chengePasswordFource');
 
     Route::get('/basic-settings', [AdminController::class,'settings'])->name('settings');
