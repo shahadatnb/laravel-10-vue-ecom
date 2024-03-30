@@ -1,83 +1,69 @@
 <template>
-    <!-- footer -->
-    <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
-        <div class="container grid grid-cols-1 ">
-            <div class="col-span-1 space-y-4">
-                <img src="../assets/images/logo.svg" alt="logo" class="w-30">
-                <div class="mr-2">
-                    <p class="text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, hic?
-                    </p>
-                </div>
-                <div class="flex space-x-5">
-                    <a href="#" class="text-gray-400 hover:text-gray-500"><i
-                            class="fa-brands fa-facebook-square"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500"><i
-                            class="fa-brands fa-instagram-square"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500"><i
-                            class="fa-brands fa-twitter-square"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500">
-                        <i class="fa-brands fa-github-square"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-span-2 grid grid-cols-2 gap-4">
-                <div class="grid grid-cols-2 gap-4 md:gap-8">
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Solutions</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Marketing</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Analitycs</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Commerce</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Insights</a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Support</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Pricing</a>
-                            <!-- <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Documentation</a> -->
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Guides</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">API Status</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Solutions</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Marketing</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Analitycs</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Commerce</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Insights</a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Support</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Pricing</a>
-                            <!-- <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Documentation</a> -->
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Guides</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">API Status</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ./footer -->
-
-    <!-- copyright -->
-    <div class="bg-gray-800 py-4">
-        <div class="container flex items-center justify-between">
-            <p class="text-white">&copy; TailCommerce - All Right Reserved</p>
+    <section class="footer__bg text-white py-12">
+        <div class="container-fluid mx-auto px-5">
+          <div
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10 lg:gap-5"
+          >
             <div>
-                <img src="../assets/images/methods.png" alt="methods" class="h-5">
+              <h2 class="text-2xl mb-4 uppercase">About our priority.</h2>
+              <p>
+                Some representative placeholder content for the first slide
+                content for the.Some representative placeholder content for the
+                first slide content for the.
+              </p>
             </div>
+            <div>
+              <h2 class="text-2xl mb-4 uppercase">QUICk SHOP</h2>
+              <a href="#" class="mb-4 inline-block">Membership offers</a>
+              <h2 class="text-xl mb-1 uppercase">USEFUL LINKS</h2>
+              <ul>
+                <li><a href="#">About Us</a></li>
+              </ul>
+            </div>
+            <div>
+              <div>
+                <h2>CONTACT US</h2>
+                <p>info@ladiumbd.com</p>
+                <p>01300 573 220</p>
+                <p>Uttara, Dhaka</p>
+              </div>
+              <div>
+                <h3 class="text-2xl mb-4 uppercase">FOLLOW US</h3>
+                <ul class="flex flex-wrap gap-5">
+                  <li>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i> </a>
+                  </li>
+                  <li>
+                    <a href="#"> <i class="fa-brands fa-instagram"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-brands fa-youtube"></i> </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-2xl mb-4 uppercase">PAYMENT METHODS</h3>
+              <div class="">
+                <img src="../assets/images/SSLCommerz-Pay.png" alt="" />
+              </div>
+              <div class="mt-4 relative">
+                <input
+                  type="search"
+                  name="serch"
+                  placeholder="Search"
+                  class="bg-[#f6f6f6] text-primary h-10 px-5 pr-10 rounded-full text-sm focus:outline-none news__letter w-full"
+                />
+                <button
+                  type="submit"
+                  class="absolute right-[20px] -top-1 mt-3 mr-4 text-primary"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <!-- ./copyright -->
+      </section>
+    <!-- footer -->    
 </template>

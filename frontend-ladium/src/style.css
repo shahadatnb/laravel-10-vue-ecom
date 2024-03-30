@@ -2,38 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer base {
-  body {
-    @apply font-poppins;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-roboto;
-  }
+body {
+  font-family: "Kanit", sans-serif;
+}
+.sidebar {
+  transition: transform 0.3s ease;
 }
 
-@layer components {
-  .size-selector input:checked + label {
-    @apply bg-primary text-white;
-  }
-  .color-selector input:checked + label {
-    @apply ring-2 ring-primary;
-  }
-
-  .input-box {
-    @apply block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded placeholder-gray-400 focus:border-primary focus:ring-0;
-  }
+.overlay {
+  transition: opacity 0.3s ease;
 }
 
-@layer utilities {
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-  }
+th {
+  font-weight: 400 !important;
+}
+header {
+  box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px inset;
+  background: rgb(245, 245, 245);
+  transition: all 0.5s ease 0s;
+}
+
+.container-fluid {
+  width: 100%;
+  padding-right: 2.5% !important;
+  padding-left: 2.5% !important;
+}
+
+.menu__drop__shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.btn__BuyNow {
+  box-shadow: inset 0 -190px 40px 9px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  padding: 3px 14px;
+  transition: all 0.5s cubic-bezier(0.21, 0.96, 0.66, 0.99);
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+.btn__gradient,
+.btn__BuyNow {
+  background-image: linear-gradient(
+    to right top,
+    #06080b,
+    #0d1416,
+    #121c1b,
+    #1a231e,
+    #272a1f
+  );
+}
+
+/* products */
+.product__section {
+  background-image: linear-gradient(
+    to right top,
+    #e1e4e8,
+    #e2e9ec,
+    #e4efee,
+    #eaf3ee,
+    #f3f7ed
+  );
+  position: relative;
+}
+
+/* details page */
+.zoom-box {
+  position: relative;
+}
+.zoom-box img {
+  vertical-align: bottom;
+}
+.zoom-box .zoom-selector {
+  position: absolute;
+  background-image: url("../image/shared/selector.png");
+  background-repeat: repeat;
+  display: none;
+  cursor: crosshair;
+}
+.zoom-box .viewer-box {
+  position: absolute;
+  border: 1px solid rgb(239, 237, 240);
+  display: none;
+  overflow: hidden;
+}
+.zoom-box .viewer-box > img {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.footer__bg {
+  background-image: linear-gradient(
+    to right top,
+    #03070e,
+    #05050a,
+    #050306,
+    #030102,
+    #000
+  );
 }

@@ -5,53 +5,52 @@ import {cart} from '../store/cart'
 </script>
 
 <template>
-    <div class="bg-white shadow rounded overflow-hidden group">
-        <div class="relative">
-            <img :src="product.photo" :alt="product.title" class="w-full">
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-            justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                <!-- <a href="#"
-                    class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                    title="view product">
-                    <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-                </a> -->
-                <a href="#" @click="wishlist.toggleWishlist(product)"
-                    class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                    title="add to wishlist">
+
+<figure class="p-2 border border-[#c4c8cb] bg-white">
+    
+    <div class="relative group">
+        <router-link :to="{ name: 'product-single', params: { slug: product.slug }}">
+            <img class="w-full h-full" :src="product.photo" :alt="product.title" />
+        </router-link>
+        <div class="group-hover:block hidden absolute left-0 top-[75%] w-full h-full"        >
+            <div class="flex flex-wrap justify-center gap-2">
+                <span @click="wishlist.toggleWishlist(product)"
+                class="px-[.625rem] py-[.3125rem] bg-black text-white rounded-[.3125rem] text-2xl"
+                >
                     <font-awesome-icon v-if="wishlist.isWishListed(product)" :icon="['fas', 'heart']" />
                     <font-awesome-icon v-else :icon="['far', 'heart']" />
-                </a>
+                </span>
+                <span
+                class="px-[.625rem] py-[.3125rem] bg-black text-white rounded-[.3125rem] text-2xl"
+                ><i class="fa-solid fa-eye"></i
+                ></span>
+                <span
+                class="px-[.625rem] py-[.3125rem] bg-black text-white rounded-[.3125rem] text-2xl"
+                ><i class="fa-solid fa-magnifying-glass-plus"></i
+                ></span>
             </div>
         </div>
-        <div class="pt-4 pb-3 px-4">
-            <router-link :to="{ name: 'product-single', params: { slug: product.slug }}">
-                <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{ product.title }}</h4>
-            </router-link>
-            <div class="flex items-baseline mb-1 space-x-2">
+    </div>
+    <div>
+        <router-link :to="{ name: 'product-single', params: { slug: product.slug }}" class="py-[.625rem] mb-4">
+        SEAMLESS HIGH WAIST SPORTS LEGGINGS -BLUE
+        </router-link>
+        <div class="flex justify-between">
+            <div>
                 <template v-if="product.reduced_price != null">
-                    <p class="text-xl text-primary font-semibold">$ {{ product.reduced_price }}</p>
-                    <p class="text-sm text-gray-400 line-through">$ {{ product.price }}</p>
+                    <span>৳ {{ product.reduced_price }}</span>
+                    <span class="text-gray-400 line-through">৳ {{ product.price }}</span>
                 </template>
                 <template v-else>
-                    <p class="text-xl text-primary font-semibold">$ {{ product.price }}</p>
+                    <span>৳ {{ product.price }}</span>
                 </template>
             </div>
-            <div class="flex items-center">
-                <div class="flex gap-1 text-sm text-yellow-400">
-                    <font-awesome-icon :icon="['fas', 'star']" />
-                    <font-awesome-icon :icon="['fas', 'star']" />
-                    <font-awesome-icon :icon="['fas', 'star']" />
-                    <font-awesome-icon :icon="['far', 'star-half-stroke']" />
-                    <font-awesome-icon :icon="['far', 'star']" />
-                </div>
-                <div class="text-xs text-gray-500 ml-3">(150)</div>
-            </div>
+            <a v-if="product.product_type === 'simple'" href="#" @click="cart.addItem(product)"
+            class="btn__BuyNow">Buy Now</a>
+            <router-link v-if="product.product_type === 'variant'" :to="{ name: 'product-single', params: { slug: product.slug }}"
+            class="btn__BuyNow">
+            Options</router-link>
         </div>
-        <a v-if="product.product_type === 'simple'" href="#" @click="cart.addItem(product)"
-            class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
-            to cart</a>
-        <router-link v-if="product.product_type === 'variant'" :to="{ name: 'product-single', params: { slug: product.slug }}"
-            class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">
-            Select options</router-link>
     </div>
+</figure>
 </template>

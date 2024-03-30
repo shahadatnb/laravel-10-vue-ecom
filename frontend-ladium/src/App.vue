@@ -11,10 +11,6 @@ const router = useRouter()
   <Header />
   <!-- ./header -->
 
-    <!-- navbar -->
-    <Navbar />
-    <!-- ./navbar -->
-
     <router-view />
 
     <Footer />

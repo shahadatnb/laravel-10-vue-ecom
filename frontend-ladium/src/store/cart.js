@@ -23,13 +23,13 @@ const cart = reactive({
     grandTotal:computed(()=>{
         return cart.totalPrice + cart.shippingCost*1
     }),
-    addItem(product){
+    addItem(product, quantity=1){
         if(this.items[product.variant_id]){
             this.items[product.variant_id].quantity++
         }else{
             this.items[product.variant_id] = {
                 product,
-                quantity:1
+                quantity: quantity
             }
         }
         this.saveCartInLocalStorage()

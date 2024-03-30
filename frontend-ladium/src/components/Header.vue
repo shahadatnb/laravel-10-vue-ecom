@@ -3,53 +3,107 @@ import { cart } from "../store/cart";
 import { wishlist } from "../store/wishlist";
 </script>
 <template>
-    <header class="py-4 shadow-sm bg-white">
-        <div class="container flex items-center justify-between">
-            <router-link to="/">
-                <img src="../assets/images/logo.svg" alt="Logo" class="w-32">
-            </router-link>
-
-            <div class="w-full max-w-xl relative flex">
-                <span class="absolute left-4 top-3 text-lg text-gray-400">
-                    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-                    <!-- <font-awesome-icon icon="magnifying-glass" /> -->
-                    <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-                </span>
-                <input type="text" name="search" id="search"
-                    class="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none hidden md:flex"
-                    placeholder="search">
-                <button
-                    class="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition hidden md:flex">Search</button>
+      <header class="bg-[#f5f5f5] py-3 sticky top-0 left-0 z-50 px-5 md:px-0">
+        <div class="container-fluid mx-auto px-5">
+          <div
+            class="flex sm:flex-none sm:grid sm:grid-cols-3 xl:grid-cols-12 items-center xl:gap-20 gap-5 justify-between relative"
+          >
+            <!-- logo -->
+            <div class="xl:col-span-2">
+              <div class="w-[5.625rem] md:w-full">
+                <router-link to="/">
+                <img
+                  class="w-full h-full"
+                  src="../assets/images/logo.png"
+                  alt="logo"
+                />
+                </router-link>
+              </div>
             </div>
+            <!-- desktop nav -->
+            <nav
+              class="hidden xl:block col-span-6 text-primary font-medium text-sm"
+            >
+              <ul class="flex gap-5 justify-center">
+                <li>
+                  <a href="/index.html">Home</a>
+                </li>
+                <li class="">
+                  <a href="#">Woman </a>
+                </li>
+                <li><a href="/category.html">Plus Size</a></li>
+                <li><a href="#">Sports Top</a></li>
+                <li><a href="#">Sports Leggings</a></li>
+                <li><a href="#">GYM Yoga</a> Set</li>
+                <li><a href="#">Sports Bra</a></li>
+              </ul>
+            </nav>
+            <!-- mobile nav -->
+            <nav
+              class="hidden text-primary font-semibold sm:text-xs bg-white absolute -right-0 top-[150%] w-full p-5 rounded z-50 MobielMenuItem"
+            >
+              <ul class="flex flex-col gap-5 justify-center">
+                <li>
+                  <a href="/index.html">Home</a>
+                </li>
+                <li class="">
+                  <a href="#">Woman </a>
+                </li>
+                <li><a href="/category.html">Plus Size</a></li>
+                <li><a href="#">Sports Top</a></li>
+                <li><a href="#">Sports Leggings</a></li>
+                <li><a href="#">GYM Yoga</a> Set</li>
+                <li><a href="#">Sports Bra</a></li>
+              </ul>
+            </nav>
 
-            <div class="flex items-center space-x-4">
-                <router-link to="/dashboard/wishlist" class="text-center text-gray-700 hover:text-primary transition relative">
-                    <div class="text-2xl">
-                        <!-- <i class="fa-regular fa-heart"></i> -->
-                        <font-awesome-icon :icon="['fas', 'heart']" />
-                    </div>
-                    <div class="text-xs leading-3">Wishlist</div>
-                    <div
-                        class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                        {{ wishlist.totalWishlistItems }}</div>
+            <div class="xl:col-span-4 flex items-center gap-5 justify-between">
+              <!-- search -->
+              <div class="hidden md:block">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  class="border border-[#ced9d9] text-primary px-3 py-[.375rem] rounded-md inline-block w-24 lg:w-full"
+                />
+              </div>
+              <div class="flex items-center justify-between gap-5">
+                <!-- shop -->
+                <router-link to="/dashboard/account" class="flex gap-2 items-start">
+                  <div>
+                    <i class="fa-regular fa-circle-user"></i>
+                  </div>
+                  <div class="-mt-1">
+                    <i class="fa-solid fa-sort-down"></i>
+                  </div>
                 </router-link>
-                <router-link to="/cart" class="text-center text-gray-700 hover:text-primary transition relative">
-                    <div class="text-2xl">
-                        <!-- <i class="fa-solid fa-bag-shopping"></i> -->
-                        <font-awesome-icon :icon="['fas', 'cart-shopping']" />
-                    </div>
-                    <div class="text-xs leading-3">Cart</div>
-                    <div
-                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                        {{ cart.totalCartItems }}</div>
-                </router-link>
-                <router-link to="/dashboard/account" class="text-center text-gray-700 hover:text-primary transition relative">
-                    <div class="text-2xl">
-                        <font-awesome-icon icon="fa-solid fa-user" />
-                    </div>
-                    <div class="text-xs leading-3">Account</div>
-                </router-link>
+                <!-- cart -->
+                <div class="flex items-center gap-2">
+                    <router-link to="/dashboard/wishlist" class="text-[#212529] opacity-75 relative">
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="absolute -right-2 -top-3">{{ wishlist.totalWishlistItems }}</span>                        
+                    </router-link>
+                    <router-link to="/cart" class="relative">
+                    <span><font-awesome-icon :icon="['fas', 'cart-shopping']" /></span>
+                    <span class="absolute -right-2 -top-3">{{ cart.totalCartItems }}</span>
+                  </router-link>
+                </div>
+              </div>
+              <div>
+                <!-- font awsome humbarger menu -->
+                <div
+                  class="block xl:hidden text-primary font-semibold text-[.5rem] sm:text-xs"
+                >
+                  <button
+                    class="focus:outline-none text-xl"
+                    onclick="document.querySelector('.MobielMenuItem').classList.toggle('!block')"
+                  >
+                    <i class="fa-solid fa-bars"></i>
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </header>
+        <!-- sidebar -->
+      </header>
 </template>

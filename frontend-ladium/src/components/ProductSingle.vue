@@ -12,7 +12,7 @@ const slug = route.params.slug
 const product = reactive({})
 const product_title_original = ref('')
 const relatedProducts = ref([])
-const selectedColor = ref('')
+const quantity = ref(1)
 const selectedSize = ref('')
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
@@ -84,151 +84,371 @@ function selectSize(size) {
     }
 }
 
+function increaseQuantity() {
+    quantity.value++
+}
+function decreaseQuantity() {
+    if(quantity.value > 1) {
+        quantity.value--
+    }
+}
+
 </script>
 <template>
-    <!-- breadcrumb -->
-    <div class="container py-4 flex items-center gap-3">
-        <router-link to="/" class="text-primary text-base">
-            <font-awesome-icon icon="fa-solid fa-house" />
-        </router-link>
-        <span class="text-sm text-gray-400">
-            <font-awesome-icon icon="fa-solid fa-chevron-right" />
-        </span>
-        <p class="text-gray-600 font-medium">Product</p>
-    </div>
-    <!-- ./breadcrumb -->
-
-    <!-- product-detail -->
-    <div class="container grid grid-cols-2 gap-6">
-        <div>
-            <img :src="product.photo" alt="product" class="w-full">
-            <div class="grid grid-cols-5 gap-4 mt-4">
-                <!-- <img src="../assets/images/products/product2.jpg" alt="product2" class="w-full cursor-pointer border border-primary"> -->
-                <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo" alt="product2" class="w-full cursor-pointer border">
-            </div>
-        </div>
-
-        <div>
-            <h2 class="text-3xl font-medium uppercase mb-2">{{ product.title }}</h2>
-            <div class="flex items-center mb-4">
-                <div class="flex gap-1 text-sm text-yellow-400">
-                    <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
+<section class="bg-[#f6f6f6]">
+        <div class="max-w-[1320px] mx-auto pt-5 pb-10">
+          <div class="px-10 xl:px-0">
+            <ul class="py-4 flex gap-2 flex-wrap">
+                <li class="text-[#0d6efd] underline">
+                    <router-link to="/" class="text-primary text-base">
+                        <font-awesome-icon icon="fa-solid fa-house" /> Home
+                    </router-link>
+                    <span class="text-sm text-gray-400">
+                        <font-awesome-icon icon="fa-solid fa-chevron-right" />
+                    </span>
+                </li>
+              <li class="text-[#212529bf]">
+                {{ product.title }}
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col lg:flex-row gap-10 lg:gap-0 px-10 xl:px-0">
+            <div class="w-[100%] lg:w-[50%]">
+              <div class="flex lg:gap-6 justify-between">
+                <div class="w-[30%] lg:w-[20%]">
+                  <div class="flex flex-col gap-3">                    
+                    <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo" alt="product2" class="thumbnail w-full cursor-pointer border">
+                  </div>
                 </div>
-                <div class="text-xs text-gray-500 ml-3">(150 Reviews)</div>
-            </div>
-            <div class="space-y-2">
-                <p class="text-gray-800 font-semibold space-x-2">
-                    <span>Availability: </span>
-                    <span class="text-green-600">{{ product.quantity > 0 ? 'In Stock' : 'Out of Stock' }}</span>
-                </p>
-                {{ product.variant_id }}
-                <!-- <p class="space-x-2">
-                    <span class="text-gray-800 font-semibold">Brand: </span>
-                    <span class="text-gray-600">Apex</span>
-                </p>
-                <p class="space-x-2">
-                    <span class="text-gray-800 font-semibold">Category: </span>
-                    <span class="text-gray-600">Sofa</span>
-                </p>
-                <p class="space-x-2">
-                    <span class="text-gray-800 font-semibold">SKU: </span>
-                    <span class="text-gray-600">BE45VGRT</span>
-                </p> -->
-            </div>
-            <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
-                <template v-if="product.reduced_price != null">
-                    <p class="text-xl text-primary font-semibold">$ {{ product.reduced_price }}</p>
-                    <p class="text-sm text-gray-400 line-through">$ {{ product.price }}</p>
-                </template>
-                <template v-else>
-                    <p class="text-xl text-primary font-semibold">$ {{ product.price }}</p>
-                </template>
+                <div class="w-[65%] lg:w-[80%]">
+                  <div class="" id="img-container" style="max-width: 600px">
+                    <img :src="product.photo" alt="product" class="w-full h-full">
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <p class="mt-4 text-gray-600">{{ product.short_description }}</p>
- 
-            <div class="pt-4" v-if="product.sizes != ''">
-                <h3 class="text-xl text-gray-800 uppercase mb-1">Size</h3>
-                <div class="flex items-center gap-2">
+            <div class="w-[100%] lg:w-[50%]">
+              <!-- <div class="flex gap-12">
+                <h4 class="text-[#0d6efd] underline">Review 0</h4>
+                <p>Sold 0</p>
+              </div> -->
+              <div>
+                <h2 class="my-4 text-primary pb-2 text-xl font-medium">
+                    {{ product.title }}
+                </h2>
+                <!-- <p class="mb-2 text-primary">SKU: PSSL</p> -->
+                <p class="text-primary text-xl mb-4">Price: 
+                    <template v-if="product.reduced_price != null">
+                        ৳ {{ product.reduced_price }}
+                        <span class="text-gray-400 line-through">৳ {{ product.price }}</span>
+                    </template>
+                    <template v-else>
+                        ৳ {{ product.price }}
+                    </template>
+                </p>
+                <div class="flex gap-3 flex-wrap mb-4" v-if="product.sizes != ''">
+                  <span class="mr-2 font-medium">Size:</span>
                     <div class="size-selector" v-for="(size, index) in product.sizes" :key="index">
                         <input type="radio" name="size" :id="'size-'+index" class="hidden">
                         <label :for="'size-'+index" v-on:click="selectSize(index)"
                             class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">{{ size }}</label>
-                    </div>                    
+                    </div> 
                 </div>
-            </div>
-            <div class="pt-4" v-if="product.colors != ''">
-                <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Color</h3>
-                <div class="flex items-center gap-2">
-                    <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
+                <div class="flex items-center gap-2" v-if="product.colors != ''">
+                  <h4>color:</h4>
+                  <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
                         <input type="radio" name="color" :id="'color-'+index" class="hidden">
                         <label :for="'color-'+index" v-on:click="selectColor(index)"
                             class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
                             :style="{ backgroundColor: color }"></label>
                     </div>
-
                 </div>
-            </div>
-<!-- 
-            <div class="mt-4">
-                <h3 class="text-sm text-gray-800 uppercase mb-1">Quantity</h3>
-                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
-                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
-                    <div class="h-8 w-8 text-base flex items-center justify-center">4</div>
-                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                <div class="my-4 text-primary flex justify-between">
+                  <form class="w-full">
+                    <div
+                      class="flex items-center max-w-[261px] border border-[#5a53538f] rounded-md"
+                    >
+                      <button
+                        @click="decreaseQuantity()"
+                        type="button"
+                        id="decrement-button"
+                        data-input-counter-decrement="quantity-input"
+                        class="w-[25%] flex items-center justify-center border-r-[#5a53538f] border-r py-2"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        id="quantity-input"
+                        data-input-counter
+                        aria-describedby="helper-text-explanation"
+                        class="bg-white border-x-0 border-gray-300 h-11 text-center text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
+                        v-model="quantity"
+                        required
+                      />
+                      <button @click="increaseQuantity()"
+                        type="button"
+                        id="increment-button"
+                        data-input-counter-increment="quantity-input"
+                        class="w-[25%] flex items-center justify-center border-l-[#5a53538f] border-l py-2"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </form>
+                  <p class="w-[25%] font-bold text-primary">{{ product.quantity > 0 ? 'In Stock' : 'Out of Stock' }}</p>
                 </div>
-            </div> -->
-
-            <div class="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
-                <a href="#" @click="cart.addItem(product)"
-                    class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
-                    <i class="fa-solid fa-bag-shopping"></i> Add to cart
-                </a>
-                <a href="#"  @click="wishlist.toggleWishlist(product)"
-                    class="border border-gray-300 text-gray-600 px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition">
-                    <font-awesome-icon v-if="wishlist.isWishListed(product)" :icon="['fas', 'heart']" />
-                    <font-awesome-icon v-else :icon="['far', 'heart']" />
-                    Wishlist
-                </a>
+                <div class="flex gap-5 mt-10 flex-wrap">
+                  <button @click="cart.addItem(product, quantity)"
+                    class="border border-black font-semibold rounded-lg capitalize text-black bg-white px-5 py-1 lg:px-8 lg:py-3"
+                  >
+                    Add To Cart
+                  </button>
+                  <!-- <button
+                    class="border border-black font-semibold rounded-lg capitalize text-black bg-white px-5 py-1 lg:px-8 lg:py-3"
+                  >
+                    Buy it Now
+                  </button> -->
+                  <button
+                    class="border border-black font-semibold rounded-lg capitalize text-[#0d6efd] bg-white px-5 py-1 lg:px-8 lg:py-3"
+                  >
+                    <a href="#"  @click="wishlist.toggleWishlist(product)"
+                        class="text-gray-600 px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition">
+                        <font-awesome-icon v-if="wishlist.isWishListed(product)" :icon="['fas', 'heart']" />
+                        <font-awesome-icon v-else :icon="['far', 'heart']" />
+                        Wishlist
+                    </a>
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="flex gap-2 p-5 md:py-20 flex-wrap px-10 xl:px-0">
+            <h5 class="uppercase text-[#de5531]">share:</h5>
+            <ul class="flex text-[#008bd1] gap-3 text-xl flex-wrap">
+              <li>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i> </a>
+              </li>
+              <li>
+                <a href="#"> <i class="fa-brands fa-instagram"></i></a>
+              </li>
 
-            <div class="flex gap-3 mt-4">
-                <a href="#"
-                    class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="#"
-                    class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                    <i class="fa-brands fa-twitter"></i>
-                </a>
-                <a href="#"
-                    class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
+              <li>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-youtube"></i> </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#f6f6f6]">
+        <div class="max-w-[1320px] mx-auto px-5 xl:px-0">
+          <div class="py-5 md:py-14 border-t border-b-[#212529bf]">
+            <div
+              class="uppercase md:text-3xl px-4 py-2 font-bold flex gap-4 justify-center flex-wrap"
+            >
+              <h4 class="text-primary">description</h4>
+              <p class="text-[#0d6efd]">reviews (0)</p>
             </div>
-        </div>
-    </div>
-    <!-- ./product-detail -->
+          </div>
 
-    <!-- description -->
-    <div class="container pb-16">
-        <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">Product details</h3>
-        <div class="w-3/5 pt-6">
-            {{ product.description }}
+          <div class="flex justify-center mb-10">
+            <div class="w-full">
+              <div class="flex items-center mb-2">
+                <svg
+                  class="w-4 h-4 text-yellow-300 me-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
+                  />
+                </svg>
+                <svg
+                  class="w-4 h-4 text-yellow-300 me-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
+                  />
+                </svg>
+                <svg
+                  class="w-4 h-4 text-yellow-300 me-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
+                  />
+                </svg>
+                <svg
+                  class="w-4 h-4 text-yellow-300 me-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
+                  />
+                </svg>
+                <svg
+                  class="w-4 h-4 text-gray-300 me-1 dark:text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
+                  />
+                </svg>
+                <p
+                  class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"
+                >
+                  4.95
+                </p>
+                <p
+                  class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"
+                >
+                  out of
+                </p>
+                <p
+                  class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"
+                >
+                  5
+                </p>
+              </div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                1,745 global ratings
+              </p>
+              <div class="flex items-center mt-4">
+                <a
+                  href="#"
+                  class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >5 star</a
+                >
+                <div
+                  class="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700"
+                >
+                  <div
+                    class="h-5 bg-yellow-300 rounded"
+                    style="width: 70%"
+                  ></div>
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >70%</span
+                >
+              </div>
+              <div class="flex items-center mt-4">
+                <a
+                  href="#"
+                  class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >4 star</a
+                >
+                <div
+                  class="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700"
+                >
+                  <div
+                    class="h-5 bg-yellow-300 rounded"
+                    style="width: 17%"
+                  ></div>
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >17%</span
+                >
+              </div>
+              <div class="flex items-center mt-4">
+                <a
+                  href="#"
+                  class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >3 star</a
+                >
+                <div
+                  class="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700"
+                >
+                  <div
+                    class="h-5 bg-yellow-300 rounded"
+                    style="width: 8%"
+                  ></div>
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >8%</span
+                >
+              </div>
+              <div class="flex items-center mt-4">
+                <a
+                  href="#"
+                  class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >2 star</a
+                >
+                <div
+                  class="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700"
+                >
+                  <div
+                    class="h-5 bg-yellow-300 rounded"
+                    style="width: 4%"
+                  ></div>
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >4%</span
+                >
+              </div>
+              <div class="flex items-center mt-4">
+                <a
+                  href="#"
+                  class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >1 star</a
+                >
+                <div
+                  class="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700"
+                >
+                  <div
+                    class="h-5 bg-yellow-300 rounded"
+                    style="width: 1%"
+                  ></div>
+                </div>
+                <span
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >1%</span
+                >
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="flex flex-col text-[#000000cf] tracking-[0.15008px]">
+              <span>-Seamless style </span>
+              <span>Ultra Premium Quality</span>
+              <span>-High waist Sports Leggings</span>
+              <span>-Breathable Nylon and Spandex and polyester fabric </span>
+              <span>-Size:S,M,L</span>
+            </p>
+            <p
+              class="flex flex-col text-[#000000cf] tracking-[0.15008px] my-10"
+            >
+              <span>Medium suitable for 30-34 High waist</span>
+            </p>
+            <p
+              class="flex flex-col text-[#000000cf] tracking-[0.15008px] bg-white"
+            >
+              <span>Large suitable for 32-36 High waist</span>
+            </p>
+          </div>
         </div>
-    </div>
-    <!-- ./description -->
-
-    <!-- related product -->
-    <div class="container pb-16">
-        <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">Related products</h2>
-        <div class="grid grid-cols-4 gap-6">
-            <loop-product v-for="relatedProduct in relatedProducts" :key="relatedProduct.id" :product="relatedProduct"></loop-product>
-        </div>
-    </div>
-    <!-- ./related product -->
+      </section>
 </template>
