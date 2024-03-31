@@ -1,6 +1,6 @@
 <script setup>
 import Banner from './homepage/Banner.vue'
-import Feature from './homepage/Feature.vue'
+import Testimonial from './homepage/Testimonial.vue'
 import Categories from './homepage/Categories.vue'
 import LoopProduct from './LoopProduct.vue';
 import {onBeforeMount,ref} from "vue";
@@ -10,12 +10,12 @@ import axios from "axios";
 const newArarival = ref([])
 const recomendedProducts = ref([])
 onBeforeMount(()=>{
-    axios.get(`${basic.serverUrl}/api/latest-products?take=4`)
+    axios.get(`${basic.serverUrl}/api/latest-products?take=10`)
         .then(res => {
             newArarival.value = res.data.data
         });
 
-    axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
+    axios.get(`${basic.serverUrl}/api/latest-products?featured=1&take=10`)
         .then(res => {
             recomendedProducts.value = res.data.data
         });
@@ -56,4 +56,8 @@ onBeforeMount(()=>{
         </div>
     </section>
     <!-- ./product -->
+
+    <!-- TOP CATEGORIES -->
+    <Categories />
+    <Testimonial />      
 </template>

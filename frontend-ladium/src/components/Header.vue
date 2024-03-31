@@ -70,16 +70,16 @@ import { wishlist } from "../store/wishlist";
                 <!-- shop -->
                 <router-link to="/dashboard/account" class="flex gap-2 items-start">
                   <div>
-                    <i class="fa-regular fa-circle-user"></i>
+                    <font-awesome-icon :icon="['fas', 'user']" />
                   </div>
-                  <div class="-mt-1">
+                  <!-- <div class="-mt-1">
                     <i class="fa-solid fa-sort-down"></i>
-                  </div>
+                  </div> -->
                 </router-link>
                 <!-- cart -->
                 <div class="flex items-center gap-2">
-                    <router-link to="/dashboard/wishlist" class="text-[#212529] opacity-75 relative">
-                        <i class="fa-solid fa-heart"></i>
+                    <router-link to="/dashboard/wishlist" class="text-[#212529] opacity-75 relative mr-3">
+                        <font-awesome-icon :icon="['fas', 'heart']" />
                         <span class="absolute -right-2 -top-3">{{ wishlist.totalWishlistItems }}</span>                        
                     </router-link>
                     <router-link to="/cart" class="relative">

@@ -51,7 +51,7 @@ trait PostTrait {
         ),
         
         'review' => array(
-            'title'     => 'Customer review',
+            'title'     => 'Testimonial',
             'postType'  => 'review',
             'icon'      => 'fa-thumbtack',
             'taxonomy'  => false,
