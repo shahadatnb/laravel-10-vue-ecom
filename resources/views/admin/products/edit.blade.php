@@ -66,7 +66,11 @@
               {{ Form::label('product_type','Product Type') }}
               {{ Form::select('product_type',['simple'=>'Simple','variant'=>'Variant'],null,['class'=>'form-control','required'=>true,'placeholder'=>'Product Type']) }}
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
+              {{ Form::label('sku','Sku') }}
+              {{ Form::text('sku',null,['class'=>'form-control']) }}            
+            </div>
+            <div class="col-md-6">
               {{ Form::label('categories','Product Category') }}
               {{ Form::select('categories[]',$cats,null,['class'=>'form-control select2','multiple'=>'multiple']) }} 
               @if($errors->has('categories'))

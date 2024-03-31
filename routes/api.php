@@ -68,5 +68,6 @@ Route::delete(
 Route::get('/wish-listed-products', [FrontendController::class, 'getWishlistedProduct'])->middleware('auth:sanctum');
 Route::get('/latest-products', [FrontendController::class, 'latestProducts']);//->middleware('cors');
 Route::get('/single-product/{slug}', [FrontendController::class, 'getProduct']);//->middleware('cors');
+Route::get('/product-variant-gallery/{product_id}/{color_id}', [FrontendController::class, 'getProductVariantGallery']);//->middleware('cors');
 
 Route::get('/categories', [FrontendController::class, 'getCategories']);//->middleware('cors');

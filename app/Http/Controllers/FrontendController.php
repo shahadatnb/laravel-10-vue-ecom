@@ -9,10 +9,12 @@ use App\Models\Taxonomy;
 use App\Models\Product;
 use App\Models\ProCat;
 use App\Models\Post;
+use App\Models\Attachment;
 use App\Models\MenuItem;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\GalleryCollection;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\Category as CategoryResource;
 use App\Facades\CustomHelperFacade as CustomHelper;
@@ -206,5 +208,10 @@ class FrontendController extends Controller
         return new PostCollection($posts);
 
         //return response()->json($posts);
+    }
+
+    public function getProductVariantGallery($product_id,$color_id){
+        $gallerys = Attachment::where('product_id',$product_id)->where('color_id',$color_id)->get();
+        return new GalleryCollection($gallerys);
     }
 }

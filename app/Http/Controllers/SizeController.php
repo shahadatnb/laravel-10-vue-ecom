@@ -20,6 +20,10 @@ class SizeController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|unique:sizes',
+        ]);
+
         $size = new Size;
         $size->name = $request->name;
         $size->save();
@@ -39,6 +43,10 @@ class SizeController extends Controller
 
     public function update(Request $request, Size $size)
     {
+        $this->validate($request, [
+            'name' => 'required|unique:sizes,name,' . $size->id
+        ]);
+        
         $size->name = $request->name;
         $size->save();
         session()->flash('success', 'Size updated successfully');

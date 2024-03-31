@@ -20,6 +20,11 @@ class ColorController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:colors',
+            'code' => 'required',
+        ]);
+
         $color = new Color;
         $color->name = $request->name;
         $color->code = $request->code;
@@ -40,6 +45,11 @@ class ColorController extends Controller
 
     public function update(Request $request, Color $color)
     {
+        $request->validate([
+            'name' => 'required|unique:colors,name,' . $color->id,
+            'code' => 'required',
+        ]);
+        
         $color->name = $request->name;
         $color->code = $request->code;
         $color->save();

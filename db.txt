@@ -2,3 +2,4 @@ INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, 
 INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, `field`, `status`, `created_at`, `updated_at`) VALUES (23, 1, 'shipping_outside__dhaka', 'ঢাকার বাহিরে', '120', 'basic', '{"required":"1","label":"Value","type":"text"}', 1, NULL, NULL);
 ALTER TABLE `products` ADD `variant_id` BIGINT NULL DEFAULT NULL AFTER `photo`; 
 
+ALTER TABLE `products` ADD `sku` VARCHAR(100) NULL DEFAULT NULL AFTER `title`; 

@@ -110,6 +110,7 @@ class ProductController extends Controller
     {
         $this->validate($request, array(
             'title'=>'required|max:255',
+            'sku'=>'nullable|max:80|unique:products,sku,'.$id,
             'product_type'=>'required',
             'colors'=>'required_if:product_type,==,variant',
             'sizes'=>'required_if:product_type,==,variant',
@@ -123,6 +124,7 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         $product->title = $request->title;
+        $product->sku = $request->sku;
         $product->price = $request->price;
         $product->weight = $request->weight;
         $product->quantity = $request->quantity;

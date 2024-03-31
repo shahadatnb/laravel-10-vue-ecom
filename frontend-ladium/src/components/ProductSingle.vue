@@ -13,7 +13,7 @@ const product = reactive({})
 const product_title_original = ref('')
 const relatedProducts = ref([])
 const quantity = ref(1)
-const selectedSize = ref('')
+const galleries = ref('')
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
         .then(res => {
@@ -68,6 +68,12 @@ function selectColor(color) {
         product.quantity = selectedVariant.quantity
         product.variant_id = selectedVariant.id
         //console.log(product)
+        axios.get(`${basic.serverUrl}/api/product-variant-gallery/${product.id}/${color}`)
+        .then(res => {
+          product.galleries = res.data.data
+          product.photo = res.data.data[0].photo
+          //console.log(res.data.data)
+        });
     };
 }
 

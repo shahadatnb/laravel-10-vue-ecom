@@ -45,7 +45,7 @@
           </li>
           @endif --}}
           @if(Auth::user()->hasAnyRole(['Manager','Admin','SuperAdmin']))
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview {{ (request()->routeIs('product.stock.*','product.orderStatus.*','product.productsCat','product.products.*')) ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>

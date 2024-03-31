@@ -35,6 +35,9 @@
       .nav-sidebar .nav-item a {
         background-color: #494f43;
       }
+      .nav-sidebar .has-treeview .nav-item a {
+        background-color: #222d18;
+      }
     </style>
     <!-- Styles -->
 </head>
