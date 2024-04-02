@@ -143,9 +143,29 @@ class FrontendController extends Controller
             $products = $products->where('title','like','%'.$request->search.'%');
         }
         if($request->has('categories')){
-            $products = $products->whereHas('categories', function($q) use($request){
-                $q->whereIn('slug',$request->categories);
-            });
+            if($request->categories != ''){
+                $myArray = explode(',', $request->categories);
+                $products = $products->whereHas('categories', function($q) use($myArray){
+                    $q->whereIn('category_id',$myArray);
+                });
+            }
+        }
+        if($request->has('colors')){
+            if($request->colors != ''){
+                $myArray = explode(',', $request->colors);
+                $products = $products->whereHas('colors', function($q) use($myArray){
+                    $q->whereIn('color_id',$myArray);
+                });
+            }
+        }
+
+        if($request->has('sizes')){
+            if($request->sizes != ''){
+                $myArray = explode(',', $request->sizes);
+                $products = $products->whereHas('sizes', function($q) use($myArray){
+                    $q->whereIn('size_id',$myArray);
+                });
+            }
         }
 
         if($request->has('featured')){
@@ -168,7 +188,7 @@ class FrontendController extends Controller
     }
 
     public function getCategories(){
-        $categories = ProCat::where('status',1)->withCount('products')->get();
+        $categories = ProCat::where('status',1)->whereNull('parent_id')->withCount('products')->get();
         return new CategoryCollection($categories);
         //return response()->json($categories);
     }

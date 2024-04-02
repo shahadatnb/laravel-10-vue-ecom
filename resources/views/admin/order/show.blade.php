@@ -52,7 +52,7 @@
             @foreach ($order->items as $item)
             <tr>
               <td>{{ $sl++ }}</td>
-              <td>{{ $item->product->title }}</td>
+              <td>{{ $item->product->title }} {{ $item->variant? $item->variant->size? ' - '.$item->variant->size->name:'':''}} {{ $item->variant? $item->variant->color? ' - '.$item->variant->color->name:'':''}}</td>
               <td>{{ $item->price }}</td>
               <td>{{ $item->qty_ordered }}</td>
               <td>{{ $item->total }}</td>

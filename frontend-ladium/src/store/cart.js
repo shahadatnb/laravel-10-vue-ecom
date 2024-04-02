@@ -8,15 +8,15 @@ const cart = reactive({
     shippingCost:0,
     totalCartItems:computed(()=>{
         let total = 0
-        for(let id in cart.items){
-            total += cart.items[id].quantity
+        for(let item in cart.items){
+            total += cart.items[item].quantity
         }
         return total
     }),
     totalPrice:computed(()=>{
         let total = 0
-        for(let id in cart.items){
-            total += cart.items[id].product.reduced_price * cart.items[id].quantity
+        for(let item in cart.items){
+            total += (cart.items[item].product.reduced_price??cart.items[item].product.price) * cart.items[item].quantity
         }
         return parseFloat(total.toFixed(2))
     }),

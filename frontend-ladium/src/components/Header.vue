@@ -1,6 +1,8 @@
 <script setup>
 import { cart } from "../store/cart";
 import { wishlist } from "../store/wishlist";
+import { basicStore } from "../store/basic";
+const basic = basicStore;
 </script>
 <template>
       <header class="bg-[#f5f5f5] py-3 sticky top-0 left-0 z-50 px-5 md:px-0">
@@ -24,36 +26,20 @@ import { wishlist } from "../store/wishlist";
             <nav
               class="hidden xl:block col-span-6 text-primary font-medium text-sm"
             >
-              <ul class="flex gap-5 justify-center">
-                <li>
-                  <a href="/index.html">Home</a>
+              <ul class="flex gap-5 justify-center" v-if="basic.settings.menus">
+                <li v-for="menu in basic.settings.menus.main" :key="menu.id">
+                  <router-link :to="menu.menu_url">{{menu.lebel}}</router-link>
                 </li>
-                <li class="">
-                  <a href="#">Woman </a>
-                </li>
-                <li><a href="/category.html">Plus Size</a></li>
-                <li><a href="#">Sports Top</a></li>
-                <li><a href="#">Sports Leggings</a></li>
-                <li><a href="#">GYM Yoga</a> Set</li>
-                <li><a href="#">Sports Bra</a></li>
               </ul>
             </nav>
             <!-- mobile nav -->
             <nav
-              class="hidden text-primary font-semibold sm:text-xs bg-white absolute -right-0 top-[150%] w-full p-5 rounded z-50 MobielMenuItem"
+             class="hidden text-primary font-semibold sm:text-xs bg-white absolute -right-0 top-[150%] w-full p-5 rounded z-50 MobielMenuItem"
             >
-              <ul class="flex flex-col gap-5 justify-center">
-                <li>
-                  <a href="/index.html">Home</a>
+              <ul class="flex flex-col gap-5 justify-center" v-if="basic.settings.menus">
+                <li @onClick="document.querySelector('.MobielMenuItem').classList.remove('!block');" v-for="menu in basic.settings.menus.main" :key="menu.id">
+                  <router-link :to="menu.menu_url" class="">{{menu.lebel}}</router-link>
                 </li>
-                <li class="">
-                  <a href="#">Woman </a>
-                </li>
-                <li><a href="/category.html">Plus Size</a></li>
-                <li><a href="#">Sports Top</a></li>
-                <li><a href="#">Sports Leggings</a></li>
-                <li><a href="#">GYM Yoga</a> Set</li>
-                <li><a href="#">Sports Bra</a></li>
               </ul>
             </nav>
 
@@ -97,7 +83,7 @@ import { wishlist } from "../store/wishlist";
                     class="focus:outline-none text-xl"
                     onclick="document.querySelector('.MobielMenuItem').classList.toggle('!block')"
                   >
-                    <i class="fa-solid fa-bars"></i>
+                    <font-awesome-icon :icon="['fas', 'bars']" />
                   </button>
                 </div>
               </div>

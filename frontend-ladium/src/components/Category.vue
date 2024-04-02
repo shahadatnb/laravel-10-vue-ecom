@@ -12,8 +12,10 @@ const categories = ref([])
 const colors = ref([])
 const sizes = ref([])
 const selectedCategory = ref([])
-const selectedColor = ref([])
-const selectedSize = ref([])
+const selectedColors = ref([])
+const selectedSizes = ref([])
+const minPrice = ref(0)
+const maxPrice = ref(2000)
 
 //selectedCategory.value = slug
 console.log(slug)
@@ -22,11 +24,15 @@ const testProducts = reactive({
     categories: [],
 })
 
+
 function fetchProducts(){
-    axios.get(`${basic.serverUrl}/api/latest-products?take=8&categories=${selectedCategory.value}`)
+  setTimeout(function() {
+    //your code to be executed after 1 second
+    axios.get(`${basic.serverUrl}/api/latest-products?colors=${selectedColors.value}&sizes=${selectedSizes.value}&min=${minPrice.value}&max=${maxPrice.value}&categories=${selectedCategory.value}`)
         .then(res => {
             products.value = res.data.data
         });
+  }, 100);
 }
 
 onBeforeMount(()=>{
@@ -40,7 +46,7 @@ onBeforeMount(()=>{
         .then(res => {
             categories.value = res.data.data
             
-            //console.log(categories)
+            console.log(categories)
         });
 
     axios.get(`${basic.serverUrl}/api/sizes`)
@@ -88,13 +94,14 @@ onBeforeMount(()=>{
           <div class="flex flex-col lg:flex-row">
             <div class="w-full lg:w-[30%] xl:w-[17%] px-5 py-[10px]">
               <div class="hidden lg:block menu">
-                <h3 class="mb-2">Price Range</h3>
+                      <!--
+              <h3 class="mb-2">Price Range</h3>
                 <div class="flex justify-between range-slider">
                   <div class="w-1/2">
                     <input
-                      value="0"
+                      v-model="minPrice"
                       min="0"
-                      max="2600"
+                      max="19500"
                       step="0"
                       type="number"
                       class="w-[75%] bg-white px-[10px] py-[6px] rounded-[5px] border border-[#d7dbde] text-primary"
@@ -102,9 +109,9 @@ onBeforeMount(()=>{
                   </div>
                   <div class="w-1/2 text-end">
                     <input
-                      value="2600"
+                      v-model="maxPrice"
                       min="0"
-                      max="2600"
+                      max="2000"
                       step="500"
                       type="number"
                       class="w-[75%] bg-white px-[10px] py-[6px] rounded-[5px] border border-[#d7dbde] text-primary"
@@ -112,39 +119,42 @@ onBeforeMount(()=>{
                   </div>
                 </div>
                 <div class="my-4">
-                  <input type="range" class="w-full" />
+                  <input type="range" name="min" class="w-full" />
+                  <input type="range" name="max" class="w-full" />
                 </div>
+                -->
                 <div class="">
                   <div class="border-t border-t-[#dddddd] py-2">
                     <h4 class="text-xl font-semibold uppercase mb-2">
                       Category
                     </h4>
-                    <div class="">
-                      <div class="flex justify-between text-primary mt-2">
+                    <div v-for="category in categories" class="">
+                      <div  class="flex justify-between text-primary mt-2">
                         <div class="flex gap-2">
                           <input
-                            wire:model="cats.31"
+                            @click="fetchProducts()"
+                            v-model="selectedCategory"
                             type="checkbox"
-                            id="women"
+                            :id="'cat-' + category.id"
                             class="form-check-input"
-                            value="31"
-                          /><label
-                            title="Women"
-                            for="women"
+                            :value="category.id"
+                          />
+                          <label @click="fetchProducts()"
+                            title="{{category.title}}"
+                            :for="'cat-' + category.id"
                             class="form-check-label"
-                            >Women</label
-                          >
+                            >{{ category.title }}</label>
                         </div>
                         <div>
-                          <span class="">103</span>
+                          <span class="">{{ category.prodcuctCount }}</span>
                         </div>
                       </div>
                     </div>
+                    <!-- subcategories
                     <div class="pl-4">
                       <div class="flex justify-between text-primary">
                         <div class="flex gap-2">
                           <input
-                            wire:model="cats.31"
                             type="checkbox"
                             id="size"
                             class="form-check-input"
@@ -157,85 +167,22 @@ onBeforeMount(()=>{
                           >
                         </div>
                       </div>
-                      <div class="flex justify-between text-primary">
-                        <div class="flex gap-2">
-                          <input
-                            wire:model="cats.31"
-                            type="checkbox"
-                            id="sports"
-                            class="form-check-input"
-                            value="31"
-                          /><label
-                            title="sports"
-                            for="sports"
-                            class="form-check-label"
-                            >Sports Top</label
-                          >
-                        </div>
-                      </div>
-                      <div class="flex justify-between text-primary">
-                        <div class="flex gap-2">
-                          <input
-                            wire:model="cats.31"
-                            type="checkbox"
-                            id="leggings"
-                            class="form-check-input"
-                            value="31"
-                          /><label
-                            title="leggings"
-                            for="leggings"
-                            class="form-check-label"
-                            >Sports Leggings</label
-                          >
-                        </div>
-                      </div>
-                      <div class="flex justify-between text-primary">
-                        <div class="flex gap-2">
-                          <input
-                            wire:model="cats.31"
-                            type="checkbox"
-                            id="yoga"
-                            class="form-check-input"
-                            value="31"
-                          /><label
-                            title="yoga"
-                            for="yoga"
-                            class="form-check-label"
-                            >Gym yoga set</label
-                          >
-                        </div>
-                      </div>
-                      <div class="flex justify-between text-primary">
-                        <div class="flex gap-2">
-                          <input
-                            wire:model="cats.31"
-                            type="checkbox"
-                            id="sports-bra"
-                            class="form-check-input"
-                            value="31"
-                          /><label
-                            title="sports-bra"
-                            for="sports-bra"
-                            class="form-check-label"
-                            >Sports bra</label
-                          >
-                        </div>
-                      </div>
                     </div>
+                     -->
                   </div>
                   <div class="border-t border-t-[#dddddd] py-2">
                     <h4 class="text-xl font-semibold uppercase mb-2">size</h4>
 
-                    <div v-for="size in sizes" :key="size.id" class="">
-                      <div class="flex justify-between text-primary mt-2">
+                    <div class="">
+                      <div v-for="size in sizes" :key="size.id" class="flex justify-between text-primary mt-2">
                         <div class="flex gap-2">
-                          <input
-                            wire:model="cats.31"
+                          <input @click="fetchProducts()"
+                           v-model="selectedSizes"
                             type="checkbox"
-                            id="S"
+                            :id="'size-'+size.id"
                             class="form-check-input"
-                            value="31"/>
-                            <label title="S" for="S" class="form-check-label">S</label>
+                            :value="size.id"/>
+                            <label @click="fetchProducts()" title="{{size.name}}" :for="'size-'+size.id" class="form-check-label">{{size.name}}</label>
                         </div>
                       </div>
                       
@@ -245,49 +192,25 @@ onBeforeMount(()=>{
                     <h4 class="text-xl font-semibold uppercase mb-2">color</h4>
 
                     <div class="">
-                      <div
-                        class="flex justify-between text-primary items-center"
-                      >
+                      <div v-for="color in colors" :key="color.id" class="flex justify-between text-primary items-center">
                         <div class="flex gap-2">
                           <input
-                            wire:model="cats.31"
+                            @click="fetchProducts()"
+                            v-model="selectedColors"
                             type="checkbox"
-                            id="Red"
+                            :id="'color-'+color.id"
                             class="form-check-input"
-                            value="31"
-                          /><label
-                            title="Red"
-                            for="Red"
+                            :value="color.id"/>
+                            <label @click="fetchProducts()"
+                            title="{{color.name}}"
+                            :for="'color-'+color.id"
                             class="form-check-label"
-                            >Red</label
-                          >
+                            >{{color.name}}</label>
                         </div>
-                        <div class="w-[32px] h-5 bg-[#ff0000]">
+                        <div class="w-[32px] h-5" :style="{backgroundColor: color.code}">
                           <span class="inline-block"></span>
                         </div>
-                      </div>
-                      
-                      <div
-                        class="flex justify-between text-primary items-center"
-                      >
-                        <div class="flex gap-2">
-                          <input
-                            wire:model="cats.31"
-                            type="checkbox"
-                            id="Black"
-                            class="form-check-input"
-                            value="31"
-                          /><label
-                            title="Black"
-                            for="Black"
-                            class="form-check-label"
-                            >Same as Picture</label
-                          >
-                        </div>
-                        <div class="w-[32px] h-5 bg-black">
-                          <span class="inline-block"></span>
-                        </div>
-                      </div>
+                      </div>                      
                     </div>
                   </div>
                 </div>

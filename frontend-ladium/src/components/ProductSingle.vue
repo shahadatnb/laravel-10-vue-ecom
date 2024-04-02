@@ -70,8 +70,10 @@ function selectColor(color) {
         //console.log(product)
         axios.get(`${basic.serverUrl}/api/product-variant-gallery/${product.id}/${color}`)
         .then(res => {
-          product.galleries = res.data.data
-          product.photo = res.data.data[0].photo
+          if(res.data.data.length > 0) {
+            product.galleries = res.data.data
+            product.photo = res.data.data[0].photo
+          }          
           //console.log(res.data.data)
         });
     };

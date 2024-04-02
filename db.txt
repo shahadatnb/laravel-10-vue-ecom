@@ -5,3 +5,5 @@ ALTER TABLE `products` ADD `sku` VARCHAR(100) NULL DEFAULT NULL AFTER `title`;
 
 ALTER TABLE `products` CHANGE `price` `price` DECIMAL(7) UNSIGNED NOT NULL DEFAULT '0.00', CHANGE `reduced_price` `reduced_price` DECIMAL(7) UNSIGNED NULL DEFAULT NULL; 
 
+ALTER TABLE `pro_cats` ADD `parent_id` INT UNSIGNED NULL DEFAULT NULL AFTER `description`; 
+ALTER TABLE `order_items` ADD `product_stock_id` BIGINT UNSIGNED NULL DEFAULT NULL AFTER `product_id`; 

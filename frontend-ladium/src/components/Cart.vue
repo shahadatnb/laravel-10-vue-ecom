@@ -36,7 +36,7 @@ const cartStore = cart;
                             <span @click="cart.increaseQuantity(item)" class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <p class="text-sm">${{ item.product.price }}</p>
+                            <p class="text-sm">৳{{ item.product.reduced_price ?? item.product.price }}</p>
                             <svg @click="cart.removeItem(item.product)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -52,22 +52,22 @@ const cartStore = cart;
             
             <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>Subtotal</p>
-                <p>${{ cart.totalPrice }}</p>
+                <p>৳{{ cart.totalPrice }}</p>
             </div>
 
-            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+            <!-- <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>Shipping</p>
                 <p>Free</p>
-            </div>
+            </div> -->
 
             <div class="flex justify-between text-gray-800 font-medium py-3 uppercas">
                 <p class="font-semibold">Total</p>
-                <p>${{ cart.totalPrice }}</p>
+                <p>৳{{ cart.totalPrice }}</p>
             </div>
             <div class="flex justify-between">
-            <a href="#" @click="cart.emptyCart()"
+            <!-- <a href="#" @click="cart.emptyCart()"
                 class="block w-1/3 py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
-                order</a>
+                order</a> -->
             <router-link to="/checkout"
                 class="block w-1/3 py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">
                 Checkout</router-link>

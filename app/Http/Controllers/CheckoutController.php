@@ -144,7 +144,7 @@ class CheckoutController extends Controller
         $customer->save();
 
         foreach($request->products as $product){
-            OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['product_id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
+            OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['product_id'],'product_stock_id'=>$product['variant_id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
             $productItem = Product::find($product['product_id']);
             $productItem->decrement('quantity',$product['quantity']); 
         }
