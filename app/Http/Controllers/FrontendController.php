@@ -136,7 +136,7 @@ class FrontendController extends Controller
                 $products = $products->skip($request->skip);
             }
         }else{
-            $products = $products->take(8);
+            //$products = $products->take(8);
         }
 
         if($request->has('search')){

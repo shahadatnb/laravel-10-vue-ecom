@@ -13,6 +13,11 @@ class ColorController extends Controller
         return view('admin.colors.index', compact('colors'));
     }
 
+    public function getColors(){
+        $colors = Color::all();
+        return response()->json($colors);
+    }
+
     public function create()
     {
         return view('admin.colors.createOrEdit');

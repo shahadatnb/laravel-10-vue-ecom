@@ -38,11 +38,11 @@ import {cart} from '../store/cart'
         <div class="flex justify-between">
             <div>
                 <template v-if="product.reduced_price != null">
-                    <span>৳ {{ product.reduced_price }}</span>
-                    <span class="text-gray-400 line-through">৳ {{ product.price }}</span>
+                    <span>৳{{ product.reduced_price }}</span>
+                    <span class="text-gray-400 line-through">৳{{ product.price }}</span>
                 </template>
                 <template v-else>
-                    <span>৳ {{ product.price }}</span>
+                    <span>৳{{ product.price }}</span>
                 </template>
             </div>
             <a v-if="product.product_type === 'simple'" href="#" @click="cart.addItem(product)"

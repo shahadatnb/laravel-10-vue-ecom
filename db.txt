@@ -1,5 +1,7 @@
 INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, `field`, `status`, `created_at`, `updated_at`) VALUES (22, 1, 'shipping_inside_dhaka', 'ঢাকার ভিতরে', '60', 'basic', '{"required":"1","label":"Value","type":"text"}', 1, NULL, NULL);
 INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, `field`, `status`, `created_at`, `updated_at`) VALUES (23, 1, 'shipping_outside__dhaka', 'ঢাকার বাহিরে', '120', 'basic', '{"required":"1","label":"Value","type":"text"}', 1, NULL, NULL);
 ALTER TABLE `products` ADD `variant_id` BIGINT NULL DEFAULT NULL AFTER `photo`; 
-
 ALTER TABLE `products` ADD `sku` VARCHAR(100) NULL DEFAULT NULL AFTER `title`; 
+
+ALTER TABLE `products` CHANGE `price` `price` DECIMAL(7) UNSIGNED NOT NULL DEFAULT '0.00', CHANGE `reduced_price` `reduced_price` DECIMAL(7) UNSIGNED NULL DEFAULT NULL; 
+

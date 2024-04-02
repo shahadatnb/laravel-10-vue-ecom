@@ -96,12 +96,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         $sizes = Size::pluck('name','id');
         $colors = Color::pluck('name','id');
-        $cat = ProCat::all();
+        $cats = ProCat::where('status',1)->pluck('title','id');
         $stocks = ProductStock::where('product_id',$id)->orderBy('color_id')->orderBy('size_id')->get();
-        $cats=array();
-        foreach ($cat as $value) {
-            $cats[$value->id] = $value->title;
-        }
         return view('admin.products.edit',compact('product','cats','sizes','colors','stocks'));
     }
 

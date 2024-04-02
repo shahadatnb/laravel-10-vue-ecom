@@ -13,6 +13,11 @@ class SizeController extends Controller
         return view('admin.sizes.index', compact('sizes'));
     }
 
+    public function getSizes(){
+        $sizes = Size::all();
+        return response()->json($sizes);
+    }
+
     public function create()
     {
         return view('admin.sizes.createOrEdit');

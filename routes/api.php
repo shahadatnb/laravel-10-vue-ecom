@@ -7,6 +7,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SizeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -49,6 +51,7 @@ Route::get(
     [OrderController::class, 'getOrderDetails']
 )->middleware('auth:sanctum');
 
+// Wishlist
 Route::post(
     '/wishlist',
     [WishlistController::class, 'addToWishList']
@@ -63,7 +66,7 @@ Route::delete(
     '/wishlist/{product_id}',
     [WishlistController::class, 'removeFromWishList']
 )->middleware('auth:sanctum');
-
+//end
 
 Route::get('/wish-listed-products', [FrontendController::class, 'getWishlistedProduct'])->middleware('auth:sanctum');
 Route::get('/latest-products', [FrontendController::class, 'latestProducts']);//->middleware('cors');
@@ -71,3 +74,5 @@ Route::get('/single-product/{slug}', [FrontendController::class, 'getProduct']);
 Route::get('/product-variant-gallery/{product_id}/{color_id}', [FrontendController::class, 'getProductVariantGallery']);//->middleware('cors');
 
 Route::get('/categories', [FrontendController::class, 'getCategories']);//->middleware('cors');
+Route::get('/sizes', [SizeController::class, 'getSizes']);//->middleware('cors');
+Route::get('/colors', [ColorController::class, 'getColors']);//->middleware('cors');

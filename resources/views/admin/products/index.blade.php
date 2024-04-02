@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title','Product')
+@section('title','Product List')
 @section('stylesheet')
   <style>
     form.delete {
@@ -12,7 +12,10 @@
       <!-- Default card -->
       <div class="card">
         <div class="card-header with-border">
-          <a href="{{ route('product.products.create')}}" class="btn btn-primary">New Product</a>
+          <h3 class="card-title">Product List</h3>
+          <div class="card-tools">
+            <a href="{{ route('product.products.create')}}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> New Product</a>
+          </div>
         </div>
         <div class="card-body">
           @include('admin.layouts._message')

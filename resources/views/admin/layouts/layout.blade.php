@@ -8,7 +8,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="{{url('/')}}" name="sitelink">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+      @if(View::hasSection('title'))
+        @yield('title')
+      @else
+      {{ config('app.name', 'Laravel') }}
+      @endif
+    </title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE+5cnGmlw8JT03QB2+oxL100UeB6RlzZLUxCGSS4/++mNZdxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}"> --}}

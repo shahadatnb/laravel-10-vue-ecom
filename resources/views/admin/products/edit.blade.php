@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title','Product')
+@section('title','Product Edit')
 @section('css')
   <link href="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
   <style>
@@ -10,12 +10,18 @@
 @section('content')
   <section class="content">
     <!-- Main content -->    
-      {!! Form::model($product,['route'=>['product.products.update',$product->id],'method'=>'PUT', 'files' => true ]) !!}
+      {!! Form::model($product,['route'=>['product.products.update',$product->id],'method'=>'PUT','class'=>'row', 'files' => true ]) !!}
       <!-- Default card -->
-      <div class="row">
       <div class="col-lg-9 col-sm-12">
       <div class="card">
         <div class="card-header with-border">
+          <h3 class="card-title">Product Details</h3>
+          <div class="card-tools">
+            <a href="{{route('product.products.index')}}" class="btn btn-primary btn-sm"> <i class="fas fa-arrow-left"></i> Back</a>
+            <a href="{{route('product.products.create')}}" class="btn btn-success btn-sm"> <i class="fas fa-plus"></i> New</a>
+          </div>
+        </div>
+        <div class="card-body">
           @include('admin.layouts._message')
           <div class="row">
             <div class="col-md-9">
@@ -165,12 +171,19 @@
               {{ Form::select('status',['1'=>'Active','0'=>'Inactive'],null,['class'=>'form-control']) }}
             </div>
             <div class="form-group">
-              {!! Form::checkbox('featured', 1, null, ['class' => 'form-check-input form-control', 'id' => 'featured']) !!}
-              {!! Form::label('featured', 'Featured', ['class' => 'form-check-label']) !!}
+              <label class="control-sidebar-subheading">
+                Featured
+                {{-- <input type="checkbox" class="pull-right" checked> --}}
+                {!! Form::checkbox('featured', 1, null, ['class' => '', 'id' => 'featured']) !!}
+              </label>
+              {{-- {!! Form::checkbox('featured', 1, null, ['class' => 'form-check-input', 'id' => 'featured']) !!} --}}
+              {{-- {!! Form::label('featured', 'Featured', ['class' => 'form-check-label']) !!} --}}
             </div>
             <div class="form-group">
-              {!! Form::checkbox('free_shipping', 1, null, ['class' => 'form-check-input form-control', 'id' => 'free_shipping']) !!}
-              {!! Form::label('free_shipping', 'Free Shipping', ['class' => 'form-check-label']) !!}
+              <label class="control-sidebar-subheading">
+                Free Shipping
+                {!! Form::checkbox('free_shipping', 1, null, ['class' => 'pull-right', 'id' => 'free_shipping']) !!}
+              </label>
             </div>
           </div>
         </div>
@@ -189,8 +202,7 @@
           </div>
         </div>
       </div>
-      </div>
-        {!! Form::close() !!}
+      {!! Form::close() !!}
     </section>
  @endsection
     @section('js')
