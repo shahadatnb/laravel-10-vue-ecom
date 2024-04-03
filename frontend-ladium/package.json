@@ -16,6 +16,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "axios": "^1.5.1",
     "vue": "^3.3.4",
+    "vue-image-zoomer": "^2.2.3",
+    "vue-inner-image-zoom": "^2.0.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

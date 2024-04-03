@@ -1,5 +1,7 @@
 <script setup>
 import { reactive, onBeforeMount, onMounted, ref } from 'vue'
+import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
+import InnerImageZoom from 'vue-inner-image-zoom';
 import axios from 'axios'
 import LoopProduct from './LoopProduct.vue';
 import { basicStore } from "../store/basic.js";
@@ -13,7 +15,9 @@ const product = reactive({})
 const product_title_original = ref('')
 const relatedProducts = ref([])
 const quantity = ref(1)
+const currentPhoto = ref(0)
 const galleries = ref('')
+const tabItem = ref('description')
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
         .then(res => {
@@ -32,6 +36,7 @@ onBeforeMount(() => {
             product.photo = res.data.data.photo
             product.galleries = res.data.data.galleries
             product.categories = res.data.data.categories
+            currentPhoto.value = product.galleries[0].id
             if(product.product_type == 'variant') {
                 product.selectedColor = product.variants[0].color_id
                 product.selectedSize = product.variants[0].size_id
@@ -45,6 +50,7 @@ onBeforeMount(() => {
                 //console.log(product.variants)
                 product.quantity = product.variants[0].quantity
             }
+            console.log(product.galleries)
         });
 
     axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
@@ -71,8 +77,8 @@ function selectColor(color) {
         axios.get(`${basic.serverUrl}/api/product-variant-gallery/${product.id}/${color}`)
         .then(res => {
           if(res.data.data.length > 0) {
+            currentPhoto.value = res.data.data[0].id
             product.galleries = res.data.data
-            product.photo = res.data.data[0].photo
           }          
           //console.log(res.data.data)
         });
@@ -102,6 +108,7 @@ function decreaseQuantity() {
 }
 
 </script>
+
 <template>
 <section class="bg-[#f6f6f6]">
         <div class="max-w-[1320px] mx-auto pt-5 pb-10">
@@ -120,17 +127,20 @@ function decreaseQuantity() {
               </li>
             </ul>
           </div>
-          <div class="flex flex-col lg:flex-row gap-10 lg:gap-0 px-10 xl:px-0">
+          <div class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0">
             <div class="w-[100%] lg:w-[50%]">
-              <div class="flex lg:gap-6 justify-between">
+              <div class="flex lg:gap-5 justify-between">
                 <div class="w-[30%] lg:w-[20%]">
-                  <div class="flex flex-col gap-3">                    
-                    <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo" alt="product2" class="thumbnail w-full cursor-pointer border">
+                  <div class="flex flex-col gap-3">                  
+                    <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo" @click="currentPhoto = photo.id" alt="product2" class="thumbnail w-full cursor-pointer border">
                   </div>
                 </div>
                 <div class="w-[65%] lg:w-[80%]">
-                  <div class="" id="img-container" style="max-width: 600px">
-                    <img :src="product.photo" alt="product" class="w-full h-full">
+                  <div class="position-relative">
+                    <template v-for="photo in product.galleries" :key="'full'+photo.id">
+                      <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo" :zoomSrc="photo.photoOriginal" zoomType="hover" />
+                      <!-- :zoomSrc="photo.photoOriginal" -->
+                    </template>
                   </div>
                 </div>
               </div>
@@ -142,7 +152,7 @@ function decreaseQuantity() {
                 <p>Sold 0</p>
               </div> -->
               <div>
-                <h2 class="my-4 text-primary pb-2 text-xl font-medium">
+                <h2 class="mb-4 text-primary pb-2 text-xl font-medium">
                     {{ product.title }}
                 </h2>
                 <!-- <p class="mb-2 text-primary">SKU: PSSL</p> -->
@@ -236,35 +246,36 @@ function decreaseQuantity() {
             <h5 class="uppercase text-[#de5531]">share:</h5>
             <ul class="flex text-[#008bd1] gap-3 text-xl flex-wrap">
               <li>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i> </a>
+                <a :href="'https://www.facebook.com/sharer/sharer.php?u=ladiumbd.com' + route.path"><font-awesome-icon :icon="['fab', 'facebook']" /> </a>
               </li>
-              <li>
-                <a href="#"> <i class="fa-brands fa-instagram"></i></a>
-              </li>
+              <!-- <li>
+                <a href=""> <i class="fa-brands fa-instagram"></i></a>
+              </li> -->
 
               <li>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://twitter.com/intent/tweet?url=ladiumbd.com"><i class="fa-brands fa-twitter"></i></a>
               </li>
-              <li>
+              <!-- <li>
                 <a href="#"><i class="fa-brands fa-youtube"></i> </a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
       </section>
 
       <section class="bg-[#f6f6f6]">
-        <div class="max-w-[1320px] mx-auto px-5 xl:px-0">
+        <div class="max-w-[1320px] mx-auto px-5 xl:px-0 pb-10">
           <div class="py-5 md:py-14 border-t border-b-[#212529bf]">
             <div
-              class="uppercase md:text-3xl px-4 py-2 font-bold flex gap-4 justify-center flex-wrap"
+              class="uppercase md:text-3xl px-4 py-2 font-bold flex gap-0 justify-center flex-wrap"
             >
-              <h4 class="text-primary">description</h4>
-              <p class="text-[#0d6efd]">reviews (0)</p>
+              <h4 @click="tabItem='description'" class="text-primary cursor-pointer border-2 p-2">Description</h4>
+              <h4 @click="tabItem='short_description'" class="text-primary cursor-pointer border-2 p-2">Size</h4>
+              <!-- <p class="text-[#0d6efd]">reviews (0)</p> -->
             </div>
           </div>
 
-          <div class="flex justify-center mb-10">
+          <!-- <div class="flex justify-center mb-10">
             <div class="w-full">
               <div class="flex items-center mb-2">
                 <svg
@@ -437,25 +448,10 @@ function decreaseQuantity() {
                 >
               </div>
             </div>
+          </div> -->
+          <div v-show="tabItem=='description'" id="description" v-html="product.description">
           </div>
-          <div>
-            <p class="flex flex-col text-[#000000cf] tracking-[0.15008px]">
-              <span>-Seamless style </span>
-              <span>Ultra Premium Quality</span>
-              <span>-High waist Sports Leggings</span>
-              <span>-Breathable Nylon and Spandex and polyester fabric </span>
-              <span>-Size:S,M,L</span>
-            </p>
-            <p
-              class="flex flex-col text-[#000000cf] tracking-[0.15008px] my-10"
-            >
-              <span>Medium suitable for 30-34 High waist</span>
-            </p>
-            <p
-              class="flex flex-col text-[#000000cf] tracking-[0.15008px] bg-white"
-            >
-              <span>Large suitable for 32-36 High waist</span>
-            </p>
+          <div v-show="tabItem=='short_description'" id="short_description" class="d-none" v-html="product.short_description">
           </div>
         </div>
       </section>

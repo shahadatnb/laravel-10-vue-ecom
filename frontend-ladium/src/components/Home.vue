@@ -1,6 +1,6 @@
 <script setup>
 import Banner from './homepage/Banner.vue'
-import Testimonial from './homepage/Testimonial.vue'
+//import Testimonial from './homepage/Testimonial.vue'
 import Categories from './homepage/Categories.vue'
 import LoopProduct from './LoopProduct.vue';
 import {onBeforeMount,ref} from "vue";
@@ -59,5 +59,5 @@ onBeforeMount(()=>{
 
     <!-- TOP CATEGORIES -->
     <Categories />
-    <Testimonial />      
+         
 </template>

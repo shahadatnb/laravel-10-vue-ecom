@@ -12,22 +12,22 @@ import {cart} from '../store/cart'
         <router-link :to="{ name: 'product-single', params: { slug: product.slug }}">
             <img class="w-full h-full" :src="product.photo" :alt="product.title" />
         </router-link>
-        <div class="group-hover:block hidden absolute left-0 top-[75%] w-full h-full"        >
+        <div class="group-hover:block hidden absolute left-0 top-[75%] w-full "        >
             <div class="flex flex-wrap justify-center gap-2">
                 <span @click="wishlist.toggleWishlist(product)"
-                class="px-[.625rem] py-[.3125rem] bg-black text-white rounded-[.3125rem] text-2xl"
+                class="px-[.625rem] py-[.3125rem] bg-black text-white rounded-[.3125rem] text-2xl cursor-pointer"
                 >
                     <font-awesome-icon v-if="wishlist.isWishListed(product)" :icon="['fas', 'heart']" />
                     <font-awesome-icon v-else :icon="['far', 'heart']" />
                 </span>
-                <span
+                <!-- <span
                 class="px-[.625rem] py-[.3125rem] bg-black text-white rounded-[.3125rem] text-2xl"
                 ><i class="fa-solid fa-eye"></i
                 ></span>
                 <span
                 class="px-[.625rem] py-[.3125rem] bg-black text-white rounded-[.3125rem] text-2xl"
                 ><i class="fa-solid fa-magnifying-glass-plus"></i
-                ></span>
+                ></span> -->
             </div>
         </div>
     </div>

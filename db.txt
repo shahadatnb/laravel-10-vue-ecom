@@ -7,3 +7,4 @@ ALTER TABLE `products` CHANGE `price` `price` DECIMAL(7) UNSIGNED NOT NULL DEFAU
 
 ALTER TABLE `pro_cats` ADD `parent_id` INT UNSIGNED NULL DEFAULT NULL AFTER `description`; 
 ALTER TABLE `order_items` ADD `product_stock_id` BIGINT UNSIGNED NULL DEFAULT NULL AFTER `product_id`; 
+ALTER TABLE `attachments` ADD `imageOriginal` VARCHAR(250) NULL DEFAULT NULL AFTER `image`; 

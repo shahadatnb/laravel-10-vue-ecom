@@ -40,8 +40,10 @@ const cart = reactive({
         this.saveCartInLocalStorage()
     },
     decreaseQuantity(item){
-        this.items[item.product.variant_id].quantity--
-        this.saveCartInLocalStorage()
+        if(this.items[item.product.variant_id].quantity > 1){
+            this.items[item.product.variant_id].quantity--
+            this.saveCartInLocalStorage()
+        }
     },
     removeItem(product){
         delete this.items[product.variant_id]

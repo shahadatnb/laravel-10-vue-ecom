@@ -33,16 +33,22 @@ class StockController extends Controller
             'color_id'=>'required',
             'image'=>'required|image|max:3072',
         ));
+        $imgOriginal  = Image::make($request->image)->resize(1000, 1000, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('jpg',100);
 
         $imgFile  = Image::make($request->image)->resize(500, 500, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg',80);
         $file_name = 'products/'.time() .'.jpg';
+        $file_name_original = 'productsOriginal/'.time() .'.jpg';
         Storage::disk('public')->put($file_name, $imgFile);
+        Storage::disk('public')->put($file_name_original, $imgOriginal);
         $attachment = Attachment::create([
             'product_id'=>$request->product_id,
             'color_id'=>$request->color_id,
-            'image'=>$file_name
+            'image'=>$file_name,
+            'imageOriginal'=>$file_name_original
         ]);
 
         return response()->json([
@@ -54,6 +60,7 @@ class StockController extends Controller
     {
         $data = Attachment::find($request->id);
         Storage::delete('public/'.$data->image);
+        Storage::delete('public/'.$data->imageOriginal);
         $data->delete();
         return response()->json('success');
     }

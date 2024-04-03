@@ -13,8 +13,8 @@ import { authStore } from "../../store/authStore";
                 <h4 class="text-gray-800 font-medium">{{ authStore.user.user.name }}</h4>
             </div>
         </div>
-<!--
         <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
+<!--
             <div class="space-y-1 pl-8">
                 <a href="#" class="block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
@@ -71,9 +71,10 @@ import { authStore } from "../../store/authStore";
                     My wishlist
                 </a>
             </div>
+        -->
 
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
+                <a @click="authStore.logout" href="#" class="relative hover:text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </span>
@@ -81,6 +82,5 @@ import { authStore } from "../../store/authStore";
                 </a>
             </div>
         </div>
-        -->
     </div>
 </template>

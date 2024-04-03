@@ -164,7 +164,7 @@ class ProductController extends Controller
                 $constraint->aspectRatio();
             })->encode('jpg',80);
             $file_name = 'products/'.time() .'.jpg';
-            Storage::disk('public')->put($file_name, $imgFile);            
+            Storage::disk('public')->put($file_name, $imgFile);
             //$filename = time().'.'.$image->extension();
             //$full_path = 'products/'.$filename;
             //$image->storeAs('public/products/', $filename);
@@ -207,11 +207,18 @@ class ProductController extends Controller
         $imgFile  = Image::make($request->image)->resize(500, 500, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg',80);
+
+        $imgOriginal  = Image::make($request->image)->resize(1000, 1000, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('jpg',100);
         $file_name = 'products/'.time() .'.jpg';
+        $file_name_original = 'productsOriginal/'.time() .'.jpg';
         Storage::disk('public')->put($file_name, $imgFile);
+        Storage::disk('public')->put($file_name_original, $imgOriginal);
         $attachment = Attachment::create([
             'product_id'=>$request->product_id,
-            'image'=>$file_name
+            'image'=>$file_name,
+            'imageOriginal'=>$file_name_original
         ]);
 
         return response()->json([
@@ -221,7 +228,8 @@ class ProductController extends Controller
 
     public function product_gallery_delete(Request $request){
         $product = Attachment::find($request->id);
-        Storage::delete('public/'.$product->image);
+        Storage::delete('public/'.$product->image);        
+        Storage::delete('public/'.$product->imageOriginal);
         $product->delete();
         return response()->json('success');
     }
