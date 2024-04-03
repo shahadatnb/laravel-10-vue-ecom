@@ -1,5 +1,6 @@
 import {reactive, computed} from 'vue'
 import { basicStore } from './basic'
+import { toast } from 'vue3-toastify';
 const basic = basicStore
 import router from '../router/router'
 const cart = reactive({
@@ -32,6 +33,12 @@ const cart = reactive({
                 quantity: quantity
             }
         }
+        toast("Cart added", {
+            "theme": "auto",
+            "type": "success",
+            "autoClose": 1000,
+            "dangerouslyHTMLString": true
+          })
         this.saveCartInLocalStorage()
     },
     increaseQuantity(item){
@@ -47,6 +54,12 @@ const cart = reactive({
     },
     removeItem(product){
         delete this.items[product.variant_id]
+        toast("Cart removed", {
+            "theme": "auto",
+            "type": "info",
+            "autoClose": 1000,
+            "dangerouslyHTMLString": true
+          })
         this.saveCartInLocalStorage()
     },
     emptyCart(){
@@ -66,5 +79,6 @@ const cart = reactive({
     },
 
 })
+    
 cart.getCartFromLocalStorage()
 export {cart}

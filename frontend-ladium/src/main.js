@@ -3,6 +3,9 @@ import router from './router/router.js'
 import './style.css'
 import App from './App.vue'
 
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -18,6 +21,7 @@ library.add(faHeart,farHeart, faShoppingCart, faBars, faMagnifyingGlass, faHouse
 
 
 createApp(App)
+    .use(Vue3Toasity)
     .use(router)
     .component('font-awesome-icon', FontAwesomeIcon)
     .mount('#app')

@@ -41,7 +41,11 @@ onBeforeMount(()=>{
                     <img :src="item.photo" alt="product 6" class="w-full">
                 </div>
                 <div class="w-1/3">
-                    <h2 class="text-gray-800 text-xl font-medium uppercase">{{ item.title }}</h2>
+                    <h2 class="text-gray-800 text-xl font-medium uppercase">
+                        <router-link :to="{ name: 'product-single', params: { slug: item.slug }}">
+                        {{ item.title }}
+                        </router-link>
+                    </h2>
                     <!-- <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p> -->
                 </div>
                 <div class="text-primary text-lg font-semibold">{{ item.price }}</div>

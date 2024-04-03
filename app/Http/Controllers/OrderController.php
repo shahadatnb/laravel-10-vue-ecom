@@ -273,7 +273,7 @@ class OrderController extends Controller
     
     function getUserOrders(){
         $user = auth()->user();
-        $orders = $user->orders()->with('items')->get();
+        $orders = $user->orders()->with('items','status')->orderBy('id','desc')->get();
         $orders->map(function($order){
             $order->items->map(function($product){
                 unset($product->description);

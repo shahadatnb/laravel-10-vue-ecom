@@ -3,6 +3,7 @@ import {authStore} from '../store/authStore';
 import Login from '../components/Login.vue';
 import Register from '../components/Register.vue';
 import Home from '../components/Home.vue';
+import Page from '../components/Page.vue';
 import ProductSingle from "../components/ProductSingle.vue";
 import Category from "../components/Category.vue";
 import Shop from "../components/Shop.vue";
@@ -11,10 +12,14 @@ import Checkout from "../components/Checkout.vue";
 import Account from "../components/dashboard/Account.vue";
 import Profile from "../components/dashboard/Profile.vue";
 import Wishlist from "../components/dashboard/Wishlist.vue";
+import Orders from "../components/dashboard/Orders.vue";
 
 const routes = [
     {
         path: '/', component: Home, name: 'home'
+    },
+    {
+        path: '/page/:slug', component: Page, name: 'page', meta: { title: 'Page' }
     },
     {
         path: '/product/:slug', component: ProductSingle, name: 'product-single', meta: { title: 'Product' }
@@ -37,6 +42,12 @@ const routes = [
         path: '/checkout', component: Checkout, name: 'checkout', meta: {
             requiresAuth: true,
             title: 'Checkout'
+        }
+    },    
+    {
+        path: '/dashboard/orders', component: Orders, name: 'orders', meta: {
+            requiresAuth: true,
+            title: 'Orders'
         }
     },    
     {

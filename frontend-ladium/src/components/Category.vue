@@ -18,7 +18,7 @@ const minPrice = ref(0)
 const maxPrice = ref(2000)
 
 //selectedCategory.value = slug
-console.log(slug)
+//console.log(slug)
 const testProducts = reactive({
     product: [],
     categories: [],
@@ -36,7 +36,7 @@ function fetchProducts(){
 }
 
 onBeforeMount(()=>{
-    axios.get(`${basic.serverUrl}/api/latest-products`)//?categories='health-beauty'
+    axios.get(`${basic.serverUrl}/api/latest-products?category_slug=${slug}`)//
         .then(res => {
             products.value = res.data.data
             testProducts.data = res.data.data

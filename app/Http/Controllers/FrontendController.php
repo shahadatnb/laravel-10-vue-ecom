@@ -74,6 +74,13 @@ class FrontendController extends Controller
         return $this->notFound();
     }
 
+    public function getPage($slug){
+        $page = Post::where('slug',$slug)->first();
+        if($page){
+            return response()->json($page);
+        }
+    }
+
     public function photogallery(){
         $datas = Taxonomy::where('post_type','photogallery')->orderBy('id','desc')->paginate(20);
         if($datas){
@@ -143,11 +150,21 @@ class FrontendController extends Controller
             $products = $products->where('title','like','%'.$request->search.'%');
         }
         if($request->has('categories')){
-            if($request->categories != ''){
+            if($request->categories != ''){                
                 $myArray = explode(',', $request->categories);
                 $products = $products->whereHas('categories', function($q) use($myArray){
                     $q->whereIn('category_id',$myArray);
                 });
+            }
+        }
+        if($request->has('category_slug')){
+            if($request->category_slug != ''){
+                $category = ProCat::where('slug',$request->category_slug)->first();
+                if($category){                    
+                    $products = $products->whereHas('categories', function($q) use($category){
+                        $q->where('category_id',$category->id);
+                    });
+                }
             }
         }
         if($request->has('colors')){

@@ -21,7 +21,7 @@ const tabItem = ref('description')
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
         .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             product_title_original.value = res.data.data.title
             product.id = res.data.data.id
             product.title = res.data.data.title
@@ -50,7 +50,9 @@ onBeforeMount(() => {
                 //console.log(product.variants)
                 product.quantity = product.variants[0].quantity
             }
-            console.log(product.galleries)
+            document.title = product.title
+            document.querySelector("meta[property='og:image']").setAttribute("content", product.photo);
+            document.querySelector("meta[property='og:title']").setAttribute("content", product.title);
         });
 
     axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
@@ -152,10 +154,10 @@ function decreaseQuantity() {
                 <p>Sold 0</p>
               </div> -->
               <div>
-                <h2 class="mb-4 text-primary pb-2 text-xl font-medium">
+                <h2 class="mb-0 text-primary pb-2 text-xl font-medium">
                     {{ product.title }}
                 </h2>
-                <!-- <p class="mb-2 text-primary">SKU: PSSL</p> -->
+                <p class="mb-2 text-primary">SKU: {{ product.sku }}</p>
                 <p class="text-primary text-xl mb-4">Price: 
                     <template v-if="product.reduced_price != null">
                         ৳ {{ product.reduced_price }}

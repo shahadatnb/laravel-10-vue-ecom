@@ -35,6 +35,7 @@ Route::post('register', [CustomerController::class, 'registerApi']);
 Route::post('login', [CustomerController::class, 'login']);
 
 Route::get( '/posts', [FrontendController::class, 'getPosts'] );
+Route::get( '/page/{slug}', [FrontendController::class, 'getPage'] );
 Route::get( '/menu', [FrontendController::class, 'menuApi'] );
 Route::get( '/config', [FrontendController::class, 'getConfig'] );
 

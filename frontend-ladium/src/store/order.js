@@ -68,7 +68,7 @@ const order = reactive({
             email,
             address,
             city,
-            country,
+            postalCode,
             totalPrice: cart.totalPrice,
             products: products
         }

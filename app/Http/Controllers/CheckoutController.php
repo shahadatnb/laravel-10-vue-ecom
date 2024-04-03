@@ -121,8 +121,8 @@ class CheckoutController extends Controller
         $data->phone = $request->phone;
         $data->city = $request->city;
         //$data->state = $request->state;
-        $data->country = $request->country;
-        //$data->zip_code = $request->zip_code;            
+        //$data->country = $request->country;
+        $data->zip_code = $request->postalCode;            
         //$data->shipping_method = $request->shipping_method; //ShippingRole::find($request->shipping_method)->title;
         $data->sub_total = $request->totalPrice;
         $data->shipping_amount = 0; // $request->shipping_amount;
@@ -139,8 +139,8 @@ class CheckoutController extends Controller
         //$customer->address2 = $request->address2;
         //$customer->state = $request->state;
         $customer->city = $request->city;
-        $customer->country = $request->country;
-        //$customer->zip_code = $request->zip_code;
+        //$customer->country = $request->country;
+        $customer->zip_code = $request->postalCode;
         $customer->save();
 
         foreach($request->products as $product){

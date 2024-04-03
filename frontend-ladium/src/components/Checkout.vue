@@ -10,7 +10,7 @@ const phone = ref(user.phone)
 const address = ref(user.address)
 const email = ref(user.email)
 const city = ref(user.city)
-const country = ref(user.country)
+const postalCode = ref(user.postalCode)
 </script>
 <template>
     <!-- breadcrumb -->
@@ -30,9 +30,10 @@ const country = ref(user.country)
     <!-- wrapper -->
     <div class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
 
-        <div class="col-span-8 border border-gray-200 p-4 rounded">
-            <h3 class="text-lg font-medium capitalize mb-4">Checkout</h3>
-            <div class="space-y-4">
+        <div class="col-span-8 border border-gray-200 p-4 rounded ">
+            <h3 class="text-lg font-medium capitalize mb-4">Shipping Address</h3>
+            <div class="space-y-4 flex gap-5 flex-wrap justify-between">
+
                 <!-- <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="first-name" class="text-gray-600">First Name <span
@@ -45,42 +46,82 @@ const country = ref(user.country)
                         <input type="text" name="last-name" id="last-name" class="input-box">
                     </div>
                 </div> -->
-                <div>
-                    <label for="name" class="text-gray-600">Name</label>
-                    <input type="text" name="name" id="name" v-model="name" class="input-box"
-                            :class="order.errorMessage.name ? 'border-red-500' : ''">
+                <div class="w-full md:w-[100%]">
+                    <input
+                    class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white"
+                    required=""
+                    :class="order.errorMessage.name ? 'border-red-500' : ''"
+                    placeholder="Name"
+                    v-model="name"
+                    name="first_name"
+                    type="text"
+                    />
                     <span v-if="order.errorMessage.name" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.name[0] }}</span>
                 </div>
-                <div>
-                    <label for="phone" class="text-gray-600">Phone number</label>
-                    <input type="text" name="phone" id="phone" v-model="phone" class="input-box"
-                            :class="order.errorMessage.name ? 'border-red-500' : ''">
-                            <span v-if="order.errorMessage.name" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.name[0] }}</span>
+                <div class="w-full md:w-[48%]">
+                    <input
+                    class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white"
+                    required=""
+                    placeholder="Email"
+                    v-model="email"
+                    name="email"
+                    type="email"
+                    :class="order.errorMessage.email ? 'border-red-500' : ''"
+                    />
+                    <span v-if="order.errorMessage.email" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.email[0] }}</span>
                 </div>
-                <div>
-                    <label for="email" class="text-gray-600">Email address</label>
-                    <input type="email" name="email" id="email" v-model="email" class="input-box"
-                            :class="order.errorMessage.email ? 'border-red-500' : ''">
-                            <span v-if="order.errorMessage.email" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.email[0] }}</span>
+                <div class="w-full md:w-[48%]">
+                    <input
+                    class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white"
+                    required=""
+                    placeholder="Phone"
+                    v-model="phone"
+                    name="phone"
+                    type="text"
+                    :class="order.errorMessage.phone ? 'border-red-500' : ''"
+                    />
+                    <span v-if="order.errorMessage.phone" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.phone[0] }}</span>
                 </div>
-                <div>
-                    <label for="address" class="text-gray-600">Street address</label>
-                    <input type="text" name="address" id="address" v-model="address" class="input-box"
-                            :class="order.errorMessage.address ? 'border-red-500' : ''">
-                            <span v-if="order.errorMessage.address" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.address[0] }}</span>
+                <div class="w-full col-span-2">
+                    <input
+                    class="border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white w-full"
+                    required=""
+                    v-model="address"
+                    placeholder="Address"
+                    name="address1"
+                    type="text"
+                    :class="order.errorMessage.address ? 'border-red-500' : ''"
+                    />
+                    <span v-if="order.errorMessage.address" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.address[0] }}</span>
                 </div>
-                <div>
-                    <label for="city" class="text-gray-600">City</label>
-                    <input type="text" name="city" id="city" v-model="city" class="input-box"
-                            :class="order.errorMessage.city ? 'border-red-500' : ''">
-                            <span v-if="order.errorMessage.city" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.city[0] }}</span>
-                </div>
-                <div>
+                <div class="w-full md:w-[48%]">
+                        <input
+                        class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white"
+                        required=""
+                        placeholder="City"
+                        name="city"
+                        type="text"
+                        v-model="city"
+                        />
+                        <span v-if="order.errorMessage.city" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.city[0] }}</span>
+                    </div>
+                    <div class="w-full md:w-[48%]">
+                        <input
+                        class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white"
+                        placeholder="Postal Code"
+                        name="postcode"
+                        v-model="postalCode"
+                        type="text"
+                        :class="order.errorMessage.postalCode ? 'border-red-500' : ''"
+                        />
+                        <span v-if="order.errorMessage.postalCode" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.postalCode[0] }}</span>
+                    </div>
+                <!-- <div>
                     <label for="country" class="text-gray-600">Country/Region</label>
                     <input type="text" name="country" id="country" v-model="country" class="input-box"
                             :class="order.errorMessage.country ? 'border-red-500' : ''">
                             <span v-if="order.errorMessage.country" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.country[0] }}</span>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -122,7 +163,7 @@ const country = ref(user.country)
                         class="text-primary">terms & conditions</a></label>
             </div>
 
-            <a href="#" @click="order.placeOrder(name, phone, email, address, city, country)"
+            <a href="#" @click="order.placeOrder(name, phone, email, address, city, postalCode)"
                 class="block w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
                 order</a>
         </div>

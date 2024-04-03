@@ -63,15 +63,39 @@ import { authStore } from "../../store/authStore";
                 </a>
             </div>
 
+        -->
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative text-primary block font-medium capitalize transition">
+                <RouterLink to="/dashboard/orders" class="relative text-primary block font-medium capitalize transition">
+                    <span class="absolute -left-8 top-0 text-base">
+                        <i class="fa-regular fa-heart"></i>
+                    </span>
+                    My orders
+                </RouterLink>
+            </div>
+            <div class="space-y-1 pl-8 pt-4">
+                <RouterLink to="/dashboard/account" class="relative text-primary block font-medium capitalize transition">
+                    <span class="absolute -left-8 top-0 text-base">
+                        <i class="fa-regular fa-heart"></i>
+                    </span>
+                    My account
+                </RouterLink>
+            </div>
+            <div class="space-y-1 pl-8 pt-4">
+                <RouterLink to="/dashboard/profile" class="relative text-primary block font-medium capitalize transition">
+                    <span class="absolute -left-8 top-0 text-base">
+                        <i class="fa-regular fa-heart"></i>
+                    </span>
+                    My profile
+                </RouterLink>
+            </div>
+            <div class="space-y-1 pl-8 pt-4">
+                <RouterLink to="/dashboard/wishlist" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-heart"></i>
                     </span>
                     My wishlist
-                </a>
+                </RouterLink>
             </div>
-        -->
 
             <div class="space-y-1 pl-8 pt-4">
                 <a @click="authStore.logout" href="#" class="relative hover:text-primary block font-medium capitalize transition">
