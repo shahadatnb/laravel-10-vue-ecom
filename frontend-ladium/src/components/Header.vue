@@ -1,8 +1,18 @@
 <script setup>
+import { ref } from "vue";
 import { cart } from "../store/cart";
 import { wishlist } from "../store/wishlist";
 import { basicStore } from "../store/basic";
 const basic = basicStore;
+const MobielMenuItem = ref(false);
+const SearchBox = ref(false);
+function mobileMenuToggle() {
+  MobielMenuItem.value = !MobielMenuItem.value
+}
+function searchToggle() {
+  SearchBox.value = !SearchBox.value
+}
+
 </script>
 <template>
       <header class="bg-[#f5f5f5] py-3 sticky top-0 left-0 z-50 px-5 md:px-0">
@@ -33,11 +43,11 @@ const basic = basicStore;
               </ul>
             </nav>
             <!-- mobile nav -->
-            <nav
-             class="hidden text-primary font-semibold sm:text-xs bg-white absolute -right-0 top-[150%] w-full p-5 rounded z-50 MobielMenuItem"
+            <nav v-show="MobielMenuItem"
+             class="text-primary font-semibold sm:text-xs bg-white absolute -right-0 top-[150%] w-full p-5 rounded z-50 MobielMenuItem"
             >
               <ul class="flex flex-col gap-5 justify-center" v-if="basic.settings.menus">
-                <li @onClick="document.querySelector('.MobielMenuItem').classList.remove('!block');" v-for="menu in basic.settings.menus.main" :key="menu.id">
+                <li @click="mobileMenuToggle" v-for="menu in basic.settings.menus.main" :key="menu.id">
                   <router-link :to="menu.menu_url" class="">{{menu.lebel}}</router-link>
                 </li>
               </ul>
@@ -80,8 +90,7 @@ const basic = basicStore;
                   class="block xl:hidden text-primary font-semibold text-[.5rem] sm:text-xs"
                 >
                   <button
-                    class="focus:outline-none text-xl"
-                    onclick="document.querySelector('.MobielMenuItem').classList.toggle('!block')"
+                    class="focus:outline-none text-xl" @click="mobileMenuToggle"
                   >
                     <font-awesome-icon :icon="['fas', 'bars']" />
                   </button>
@@ -92,4 +101,20 @@ const basic = basicStore;
         </div>
         <!-- sidebar -->
       </header>
+      <transition name="fade">
+      <div v-if="SearchBox">
+        <div
+          @click="searchToggle"
+          class="absolute bg-black opacity-70 inset-0 z-0"
+        ></div>
+        <div
+          class="w-full max-w-lg p-3 relative mx-auto my-auto rounded-xl shadow-lg bg-white"
+        >
+          <div>
+            <div class="text-center p-3 flex-auto justify-center leading-6">
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
 </template>

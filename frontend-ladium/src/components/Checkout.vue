@@ -28,9 +28,9 @@ const postalCode = ref(user.postalCode)
     <!-- ./breadcrumb -->
 
     <!-- wrapper -->
-    <div class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
-
-        <div class="col-span-8 border border-gray-200 p-4 rounded ">
+    <div class="container">
+        <div class="flex flex-col lg:flex-row">
+            <div class="w-full lg:w-[66%] p-5 lg:px-[50px] py-10 rounded">
             <h3 class="text-lg font-medium capitalize mb-4">Shipping Address</h3>
             <div class="space-y-4 flex gap-5 flex-wrap justify-between">
 
@@ -125,8 +125,7 @@ const postalCode = ref(user.postalCode)
             </div>
 
         </div>
-
-        <div class="col-span-4 border border-gray-200 p-4 rounded">
+        <div class="w-full lg:w-[33%] border-l-[#dee2e6] border-l pl-6 py-10 rounded" >
             <h4 class="text-gray-800 text-lg mb-4 font-medium uppercase">order summary</h4>
             <div class="space-y-2">
                 <div v-for="item in cart.items" :key="item.id" class="flex justify-between">
@@ -168,6 +167,7 @@ const postalCode = ref(user.postalCode)
                 order</a>
         </div>
 
+    </div>
     </div>
     <!-- ./wrapper -->
 </template>

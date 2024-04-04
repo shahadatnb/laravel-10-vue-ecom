@@ -264,11 +264,12 @@ class ProductController extends Controller
 
         $image = $request->file('photo');
         if ($image) {
-            $full_path = '';
-            $filename = $category->id.'.'.$image->extension();
-            $full_path = 'productCat/'.$filename;
-            $image->storeAs('public/productCat/', $filename);
-            $category->update(['photo'=> $full_path]);
+            $imgFile  = Image::make($request->photo)->resize(500, 500, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg',80);
+            $file_name = 'product_cat/'.time() .'.jpg';
+            Storage::disk('public')->put($file_name, $imgFile);
+            $category->update(['photo'=> $file_name]);
         }
 
         session()->flash('success','Successfully Save');
@@ -291,15 +292,18 @@ class ProductController extends Controller
 
         $category = ProCat::find($id);
         $category->title = $request->title;
+        $category->slug = $request->slug;
         $category->save();
 
         $image = $request->file('photo');
         if ($image) {
-            $full_path = '';
-            $filename = $category->id.'.'.$image->extension();
-            $full_path = 'productCat/'.$filename;
-            $image->storeAs('public/productCat/', $filename);
-            $category->update(['photo'=> $full_path]);
+            Storage::delete('public/'.$category->photo);
+            $imgFile  = Image::make($request->photo)->resize(500, 500, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg',80);
+            $file_name = 'product_cat/'.time() .'.jpg';
+            Storage::disk('public')->put($file_name, $imgFile);
+            $category->update(['photo'=> $file_name]);
         }
 
         session()->flash('success','Successfully Save');

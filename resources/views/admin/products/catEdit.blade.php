@@ -6,8 +6,12 @@
       
       <!-- Default card -->
       <div class="card">
-        {{-- <div class="card-header with-border">
-        </div> --}}
+        <div class="card-header with-border">
+          <h3 class="card-title">Edit</h3>
+          <div class="card-tools">
+            <a href="{{route('product.productsCat')}}" class="btn btn-primary btn-sm"> <i class="fas fa-arrow-left"></i> Back</a>
+          </div>
+        </div>
           @include('admin.layouts._message')          
         <div class="card-body">
           <div class="row">

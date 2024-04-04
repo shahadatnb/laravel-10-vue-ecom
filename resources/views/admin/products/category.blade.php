@@ -37,6 +37,7 @@
               <table class="table">
             <tr>
               <th>ID</th>
+              <th>Photo</th>
               <th>Title</th>
               <th>Slug</th>
               <th>Action</th>
@@ -44,6 +45,7 @@
             @foreach ($cats as $product)
             <tr>
               <td>{{ $product->id }}</td>
+              <td><img src="{{ asset('storage/'.$product->photo) }}" width="50" alt=""></td>
               <td>{{ $product->title }}</td>              
               <td>{{ $product->slug }}</td>              
               <td>
