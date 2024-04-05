@@ -49,7 +49,7 @@ import {cart} from '../store/cart'
             class="btn__BuyNow">Buy Now</a>
             <router-link v-if="product.product_type === 'variant'" :to="{ name: 'product-single', params: { slug: product.slug }}"
             class="btn__BuyNow">
-            Options</router-link>
+            Details</router-link>
         </div>
     </div>
 </figure>

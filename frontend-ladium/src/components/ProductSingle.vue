@@ -17,6 +17,7 @@ const relatedProducts = ref([])
 const quantity = ref(1)
 const currentPhoto = ref(0)
 const galleries = ref('')
+const currentUrl = window.location.origin + window.location.pathname;
 const tabItem = ref('description')
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
@@ -25,6 +26,8 @@ onBeforeMount(() => {
             product_title_original.value = res.data.data.title
             product.id = res.data.data.id
             product.title = res.data.data.title
+            product.sku = res.data.data.sku
+            product.slug = res.data.data.slug
             product.price = res.data.data.price
             product.reduced_price = res.data.data.reduced_price            
             product.short_description = res.data.data.short_description
@@ -248,14 +251,25 @@ function decreaseQuantity() {
             <h5 class="uppercase text-[#de5531]">share:</h5>
             <ul class="flex text-[#008bd1] gap-3 text-xl flex-wrap">
               <li>
-                <a :href="'https://www.facebook.com/sharer/sharer.php?u=ladiumbd.com' + route.path"><font-awesome-icon :icon="['fab', 'facebook']" /> </a>
+                <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + currentUrl">
+                  <font-awesome-icon :icon="['fab', 'facebook']" /> 
+                </a>
               </li>
               <!-- <li>
-                <a href=""> <i class="fa-brands fa-instagram"></i></a>
+                <a href=""> 
+                  <font-awesome-icon :icon="['fab', 'instagram']" />
+                </a>
               </li> -->
+              <li>
+                <a :href="'https://api.whatsapp.com/send?text=' + currentUrl "> 
+                  <font-awesome-icon :icon="['fab', 'whatsapp']" />
+                </a>
+              </li>
 
               <li>
-                <a href="https://twitter.com/intent/tweet?url=ladiumbd.com"><i class="fa-brands fa-twitter"></i></a>
+                <a :href="'https://twitter.com/intent/tweet?url=' + currentUrl ">
+                  <font-awesome-icon :icon="['fab', 'x-twitter']" />
+                </a>
               </li>
               <!-- <li>
                 <a href="#"><i class="fa-brands fa-youtube"></i> </a>

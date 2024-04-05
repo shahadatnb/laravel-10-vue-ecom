@@ -47,7 +47,7 @@ const order = reactive({
             console.error('Error fetching orders:', error);
         }
     },
-    async placeOrder(name, phone, email, address, city, country) {
+    async placeOrder(name, phone, email, address, city, postalCode) {
 
         const apiUrl = `${basic.serverUrl}/api/checkout`
         const token = authStore.getUserToken()
@@ -86,7 +86,7 @@ const order = reactive({
             if(data.success==true){
                 this.errorMessage = {}
                 cart.emptyCart()
-                router.push('/dashboard/account')
+                router.push('/dashboard/orders')
             }else{
                 this.errorMessage = data.data
             }

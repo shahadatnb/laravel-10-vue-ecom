@@ -29,9 +29,10 @@ class CheckoutRequest extends FormRequest
             'address'=>'required|max:150',
             'email'=>'required|email|max:50',
             'city'=>'required|max:50',
-            'country'=>'required|max:50',
+            'country'=>'nullable|max:50',
             'phone'=>'required|digits:11',
             'products' => 'required',
+            'postalCode' => 'nullable|max:5',
         ];
     }
 
