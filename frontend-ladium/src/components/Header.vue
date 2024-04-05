@@ -56,13 +56,16 @@ function searchToggle() {
             <div class="xl:col-span-4 flex items-center gap-5 justify-between">
               <!-- search -->
               <div class="hidden md:block">
-                <input
+                <input @click="searchToggle"
                   type="text"
                   placeholder="Search"
                   class="border border-[#ced9d9] text-primary px-3 py-[.375rem] rounded-md inline-block w-24 lg:w-full"
                 />
               </div>
               <div class="flex items-center justify-between gap-5">
+                <div @click="searchToggle" class="cursor-pointer">
+                  <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+                </div>
                 <!-- shop -->
                 <router-link to="/dashboard/account" class="flex gap-2 items-start">
                   <div>
@@ -92,7 +95,8 @@ function searchToggle() {
                   <button
                     class="focus:outline-none text-xl" @click="mobileMenuToggle"
                   >
-                    <font-awesome-icon :icon="['fas', 'bars']" />
+                    <font-awesome-icon v-if="!MobielMenuItem" :icon="['fas', 'bars']" />
+                    <font-awesome-icon v-else :icon="['fas', 'xmark']" />
                   </button>
                 </div>
               </div>
@@ -102,7 +106,7 @@ function searchToggle() {
         <!-- sidebar -->
       </header>
       <transition name="fade">
-      <div v-if="SearchBox">
+      <div v-if="SearchBox" class="fixed inset-0 z-50">
         <div
           @click="searchToggle"
           class="absolute bg-black opacity-70 inset-0 z-0"
@@ -112,6 +116,8 @@ function searchToggle() {
         >
           <div>
             <div class="text-center p-3 flex-auto justify-center leading-6">
+              <input type="text" placeholder="Search" class="border border-[#ced9d9] text-primary px-3 py-[.375rem] rounded-md inline-block w-full" />
+
             </div>
           </div>
         </div>

@@ -1,5 +1,7 @@
 <script setup>
 import { reactive, onBeforeMount, onMounted, ref } from 'vue'
+import { VueImageZoomer } from 'vue-image-zoomer'
+import 'vue-image-zoomer/dist/style.css';
 import axios from 'axios'
 import LoopProduct from './LoopProduct.vue';
 import { basicStore } from "../store/basic.js";
@@ -21,6 +23,8 @@ onBeforeMount(() => {
             product_title_original.value = res.data.data.title
             product.id = res.data.data.id
             product.title = res.data.data.title
+            product.slug = res.data.data.slug
+            product.sku = res.data.data.sku
             product.price = res.data.data.price
             product.reduced_price = res.data.data.reduced_price            
             product.short_description = res.data.data.short_description
@@ -101,7 +105,8 @@ function selectSize(size) {
     <!-- product-detail -->
     <div class="container grid grid-cols-2 gap-6">
         <div>
-            <img :src="product.photo" alt="product" class="w-full">
+            <vue-image-zoomer :regular="product.photo" zoom-amount="5" touch-zoom-pos="[2, 2]" />
+            <!-- <img :src="product.photo" alt="product" class="w-full"> -->
             <div class="grid grid-cols-5 gap-4 mt-4">
                 <!-- <img src="../assets/images/products/product2.jpg" alt="product2" class="w-full cursor-pointer border border-primary"> -->
                 <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo" alt="product2" class="w-full cursor-pointer border">
