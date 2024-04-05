@@ -1,6 +1,8 @@
 <script setup>
 import { authStore } from '../store/authStore';
 const auth = authStore 
+import { basicStore } from "../store/basic";
+const basic = basicStore;
 </script>
 <template>
     <nav class="bg-gray-800">
@@ -38,13 +40,11 @@ const auth = authStore
                     </a>
                 </div>
             </div> -->
-
             <div class="flex items-center justify-between flex-grow md:pl-12 py-5">
-                <div class="flex items-center space-x-6 capitalize">
-                    <router-link to="/" class="text-gray-200 hover:text-white transition">Home</router-link>
-                    <router-link to="/shop" class="text-gray-200 hover:text-white transition">Shop</router-link>
-                    <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
-                    <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
+                <div class="flex items-center space-x-6 capitalize" v-if="basic.settings.menus">
+                    <template v-for="menu in basic.settings.menus.main" :key="menu.id">
+                        <router-link :to="menu.menu_url" class="text-gray-200 hover:text-white transition">{{menu.lebel}}</router-link>
+                    </template>
                 </div>
                 <div v-if="!auth.isAuthenticated">
                 <router-link to="/login" class="text-gray-200 hover:text-white transition mr-2">Login</router-link>

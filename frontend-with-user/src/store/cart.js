@@ -1,5 +1,6 @@
 import {reactive, computed} from 'vue'
 import { basicStore } from './basic'
+import { toast } from 'vue3-toastify';
 const basic = basicStore
 import router from '../router/router'
 const cart = reactive({
@@ -8,30 +9,36 @@ const cart = reactive({
     shippingCost:0,
     totalCartItems:computed(()=>{
         let total = 0
-        for(let id in cart.items){
-            total += cart.items[id].quantity
+        for(let item in cart.items){
+            total += cart.items[item].quantity
         }
         return total
     }),
     totalPrice:computed(()=>{
         let total = 0
-        for(let id in cart.items){
-            total += cart.items[id].product.reduced_price * cart.items[id].quantity
+        for(let item in cart.items){
+            total += (cart.items[item].product.reduced_price??cart.items[item].product.price) * cart.items[item].quantity
         }
         return parseFloat(total.toFixed(2))
     }),
     grandTotal:computed(()=>{
         return cart.totalPrice + cart.shippingCost*1
     }),
-    addItem(product){
+    addItem(product, quantity=1){
         if(this.items[product.variant_id]){
             this.items[product.variant_id].quantity++
         }else{
             this.items[product.variant_id] = {
                 product,
-                quantity:1
+                quantity: quantity
             }
         }
+        toast("Cart added", {
+            "theme": "auto",
+            "type": "success",
+            "autoClose": 1000,
+            "dangerouslyHTMLString": true
+          })
         this.saveCartInLocalStorage()
     },
     increaseQuantity(item){
@@ -47,6 +54,12 @@ const cart = reactive({
     },
     removeItem(product){
         delete this.items[product.variant_id]
+        toast("Cart removed", {
+            "theme": "auto",
+            "type": "info",
+            "autoClose": 1000,
+            "dangerouslyHTMLString": true
+          })
         this.saveCartInLocalStorage()
     },
     emptyCart(){
@@ -66,5 +79,6 @@ const cart = reactive({
     },
 
 })
+    
 cart.getCartFromLocalStorage()
 export {cart}

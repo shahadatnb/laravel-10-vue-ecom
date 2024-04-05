@@ -38,6 +38,7 @@ const order = reactive({
                     id: productInfo.id,
                     title: productInfo.title,
                     price: productInfo.price,
+                    variant_id: productInfo.variant_id,
                     quantity: productInfo.pivot.quantity,
                     totalPrice: productInfo.pivot.price
                 }))
@@ -46,7 +47,7 @@ const order = reactive({
             console.error('Error fetching orders:', error);
         }
     },
-    async placeOrder(name, phone, email, address, city, country) {
+    async placeOrder(name, phone, email, address, city, postalCode) {
 
         const apiUrl = `${basic.serverUrl}/api/checkout`
         const token = authStore.getUserToken()
@@ -57,7 +58,8 @@ const order = reactive({
         const products = Object.values(cart.items).map(item => ({
             product_id: item.product.id,
             quantity: item.quantity,
-            price: item.product.price
+            variant_id: item.product.variant_id,
+            price: item.product.reduced_price ?? item.product.price 
         }));
 
         const payload = {
@@ -66,7 +68,7 @@ const order = reactive({
             email,
             address,
             city,
-            country,
+            postalCode,
             totalPrice: cart.totalPrice,
             products: products
         }
@@ -84,7 +86,7 @@ const order = reactive({
             if(data.success==true){
                 this.errorMessage = {}
                 cart.emptyCart()
-                router.push('/dashboard/account')
+                router.push('/dashboard/orders')
             }else{
                 this.errorMessage = data.data
             }

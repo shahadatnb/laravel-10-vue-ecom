@@ -32,55 +32,48 @@ import { authStore } from "../../store/authStore";
                     Change password
                 </a>
             </div>
+        -->
 
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
+                <RouterLink to="/dashboard/orders" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
-                        <i class="fa-solid fa-box-archive"></i>
+                        <i class="fa-regular fa-heart"></i>
                     </span>
-                    My order history
-                </a>
-                <a href="#" class="relative hover:text-primary block capitalize transition">
-                    My returns
-                </a>
-                <a href="#" class="relative hover:text-primary block capitalize transition">
-                    My Cancellations
-                </a>
-                <a href="#" class="relative hover:text-primary block capitalize transition">
-                    My reviews
-                </a>
+                    My orders
+                </RouterLink>
             </div>
-
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
+                <RouterLink to="/dashboard/account" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
-                        <i class="fa-regular fa-credit-card"></i>
+                        <i class="fa-regular fa-heart"></i>
                     </span>
-                    Payment methods
-                </a>
-                <a href="#" class="relative hover:text-primary block capitalize transition">
-                    voucher
-                </a>
+                    My account
+                </RouterLink>
             </div>
-
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative text-primary block font-medium capitalize transition">
+                <RouterLink to="/dashboard/profile" class="relative text-primary block font-medium capitalize transition">
+                    <span class="absolute -left-8 top-0 text-base">
+                        <i class="fa-regular fa-heart"></i>
+                    </span>
+                    My profile
+                </RouterLink>
+            </div>
+            <div class="space-y-1 pl-8 pt-4">
+                <RouterLink to="/dashboard/wishlist" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-heart"></i>
                     </span>
                     My wishlist
-                </a>
+                </RouterLink>
             </div>
 
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
+                <a @click="authStore.logout" href="#" class="relative hover:text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </span>
                     Logout
                 </a>
             </div>
-        </div>
-        -->
     </div>
 </template>

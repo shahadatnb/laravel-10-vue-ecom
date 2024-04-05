@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onBeforeMount, onMounted, ref } from 'vue'
+import { reactive, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { VueImageZoomer } from 'vue-image-zoomer'
 import 'vue-image-zoomer/dist/style.css';
 import axios from 'axios'
@@ -14,17 +14,22 @@ const slug = route.params.slug
 const product = reactive({})
 const product_title_original = ref('')
 const relatedProducts = ref([])
-const selectedColor = ref('')
-const selectedSize = ref('')
-onBeforeMount(() => {
-    axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
+const quantity = ref(1)
+const currentPhoto = ref(0)
+const galleries = ref('')
+const currentUrl = window.location.origin + window.location.pathname;
+const tabItem = ref('description')
+
+watch(() => route.params.slug, fetchData, { immediate: true })
+async function fetchData(data){
+  axios.get(`${basic.serverUrl}/api/single-product/${data}`)
         .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             product_title_original.value = res.data.data.title
             product.id = res.data.data.id
             product.title = res.data.data.title
-            product.slug = res.data.data.slug
             product.sku = res.data.data.sku
+            product.slug = res.data.data.slug
             product.price = res.data.data.price
             product.reduced_price = res.data.data.reduced_price            
             product.short_description = res.data.data.short_description
@@ -36,6 +41,7 @@ onBeforeMount(() => {
             product.photo = res.data.data.photo
             product.galleries = res.data.data.galleries
             product.categories = res.data.data.categories
+            currentPhoto.value = product.galleries[0].id
             if(product.product_type == 'variant') {
                 product.selectedColor = product.variants[0].color_id
                 product.selectedSize = product.variants[0].size_id
@@ -49,8 +55,13 @@ onBeforeMount(() => {
                 //console.log(product.variants)
                 product.quantity = product.variants[0].quantity
             }
+            document.title = product.title
+            document.querySelector("meta[property='og:image']").setAttribute("content", product.photo);
+            document.querySelector("meta[property='og:title']").setAttribute("content", product.title);
         });
+}
 
+onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
         .then(res => {
             relatedProducts.value = res.data.data
@@ -72,6 +83,14 @@ function selectColor(color) {
         product.quantity = selectedVariant.quantity
         product.variant_id = selectedVariant.id
         //console.log(product)
+        axios.get(`${basic.serverUrl}/api/product-variant-gallery/${product.id}/${color}`)
+        .then(res => {
+          if(res.data.data.length > 0) {
+            currentPhoto.value = res.data.data[0].id
+            product.galleries = res.data.data
+          }          
+          //console.log(res.data.data)
+        });
     };
 }
 
@@ -85,6 +104,15 @@ function selectSize(size) {
         product.reduced_price = selectedVariant.reduced_price
         product.quantity = selectedVariant.quantity
         product.variant_id = selectedVariant.id
+    }
+}
+
+function increaseQuantity() {
+    quantity.value++
+}
+function decreaseQuantity() {
+    if(quantity.value > 1) {
+        quantity.value--
     }
 }
 
@@ -105,11 +133,13 @@ function selectSize(size) {
     <!-- product-detail -->
     <div class="container grid grid-cols-2 gap-6">
         <div>
-            <vue-image-zoomer :regular="product.photo" zoom-amount="5" touch-zoom-pos="[2, 2]" />
+            <template v-for="photo in product.galleries" :key="'full'+photo.id">
+                <vue-image-zoomer v-if="currentPhoto == photo.id" :regular="photo.photo" />
+            </template>            
             <!-- <img :src="product.photo" alt="product" class="w-full"> -->
             <div class="grid grid-cols-5 gap-4 mt-4">
                 <!-- <img src="../assets/images/products/product2.jpg" alt="product2" class="w-full cursor-pointer border border-primary"> -->
-                <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo" alt="product2" class="w-full cursor-pointer border">
+                <img @click="currentPhoto = photo.id" v-for="photo in product.galleries" :key="photo.id" :src="photo.photo" alt="product2" class="w-full cursor-pointer border">
             </div>
         </div>
 
@@ -130,7 +160,6 @@ function selectSize(size) {
                     <span>Availability: </span>
                     <span class="text-green-600">{{ product.quantity > 0 ? 'In Stock' : 'Out of Stock' }}</span>
                 </p>
-                {{ product.variant_id }}
                 <!-- <p class="space-x-2">
                     <span class="text-gray-800 font-semibold">Brand: </span>
                     <span class="text-gray-600">Apex</span>
@@ -138,11 +167,11 @@ function selectSize(size) {
                 <p class="space-x-2">
                     <span class="text-gray-800 font-semibold">Category: </span>
                     <span class="text-gray-600">Sofa</span>
-                </p>
+                </p> -->
                 <p class="space-x-2">
                     <span class="text-gray-800 font-semibold">SKU: </span>
-                    <span class="text-gray-600">BE45VGRT</span>
-                </p> -->
+                    <span class="text-gray-600">{{ product.sku }}</span>
+                </p>
             </div>
             <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
                 <template v-if="product.reduced_price != null">
@@ -178,18 +207,18 @@ function selectSize(size) {
 
                 </div>
             </div>
-<!-- 
+
             <div class="mt-4">
                 <h3 class="text-sm text-gray-800 uppercase mb-1">Quantity</h3>
                 <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
-                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
-                    <div class="h-8 w-8 text-base flex items-center justify-center">4</div>
-                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none" @click="decreaseQuantity()">-</div>
+                    <div class="h-8 w-8 text-base flex items-center justify-center">{{ quantity }}</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none" @click="increaseQuantity()">+</div>
                 </div>
-            </div> -->
+            </div>
 
             <div class="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
-                <a href="#" @click="cart.addItem(product)"
+                <a href="#" @click="cart.addItem(product, quantity)"
                     class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
                     <i class="fa-solid fa-bag-shopping"></i> Add to cart
                 </a>
@@ -202,17 +231,17 @@ function selectSize(size) {
             </div>
 
             <div class="flex gap-3 mt-4">
-                <a href="#"
+                <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + currentUrl"
                     class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                    <i class="fa-brands fa-facebook-f"></i>
+                    <font-awesome-icon :icon="['fab', 'facebook']" />
                 </a>
-                <a href="#"
+                <a :href="'https://twitter.com/intent/tweet?url=' + currentUrl "
                     class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                    <i class="fa-brands fa-twitter"></i>
+                    <font-awesome-icon :icon="['fab', 'x-twitter']" />
                 </a>
-                <a href="#"
+                <a :href="'https://twitter.com/intent/tweet?url=' + currentUrl "
                     class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                    <i class="fa-brands fa-instagram"></i>
+                    <font-awesome-icon :icon="['fab', 'whatsapp']" />
                 </a>
             </div>
         </div>
@@ -222,8 +251,7 @@ function selectSize(size) {
     <!-- description -->
     <div class="container pb-16">
         <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">Product details</h3>
-        <div class="w-3/5 pt-6">
-            {{ product.description }}
+        <div class="w-3/5 pt-6" v-html="product.description">
         </div>
     </div>
     <!-- ./description -->

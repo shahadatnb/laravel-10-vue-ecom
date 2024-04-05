@@ -124,15 +124,11 @@ class CustomerController extends Controller
 
     public function login(CustomerLoginRequest $request) {
         $validated = $request->validated();
-
         $customer = Customer::where('email', $request->email)->first();
         if (! $customer || ! Hash::check($request->password, $customer->password)) {
             return response(['error' => 1, 'message' => 'invalid credentials'], 401);
         }
-
-        if (config('hydra.delete_previous_access_tokens_on_login', false)) {
-            $customer->tokens()->delete();
-        }
+        $customer->tokens()->delete();
 
         //$roles = $customer->roles->pluck('slug')->all();
 

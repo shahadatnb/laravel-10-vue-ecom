@@ -3,8 +3,8 @@ import { ref } from "vue";
 import { cart } from "../store/cart";
 import { wishlist } from "../store/wishlist";
 import { basicStore } from "../store/basic";
-import SearchResult from './homepage/SearchResult.vue'
 const basic = basicStore;
+import SearchResult from './homepage/SearchResult.vue'
 const MobielMenuItem = ref(false);
 const SearchBox = ref(false);
 function mobileMenuToggle() {

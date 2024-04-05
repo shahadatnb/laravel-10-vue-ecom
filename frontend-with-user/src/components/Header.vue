@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import { cart } from "../store/cart";
 import { wishlist } from "../store/wishlist";
 </script>

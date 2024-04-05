@@ -11,6 +11,7 @@ import Checkout from "../components/Checkout.vue";
 import Account from "../components/dashboard/Account.vue";
 import Profile from "../components/dashboard/Profile.vue";
 import Wishlist from "../components/dashboard/Wishlist.vue";
+import Orders from "../components/dashboard/Orders.vue";
 
 const routes = [
     {
@@ -39,6 +40,12 @@ const routes = [
             title: 'Checkout'
         }
     },    
+    {
+        path: '/dashboard/orders', component: Orders, name: 'orders', meta: {
+            requiresAuth: true,
+            title: 'Orders'
+        }
+    }, 
     {
         path: '/dashboard/account', component: Account, name: 'account', meta: {
             requiresAuth: true,

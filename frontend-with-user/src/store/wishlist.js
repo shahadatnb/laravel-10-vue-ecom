@@ -1,6 +1,7 @@
 import { reactive, computed } from 'vue'
 import { authStore } from './authStore'
 import { basicStore } from './basic'
+import { toast } from 'vue3-toastify';
 import router from '../router/router'
 const basic = basicStore
 const wishlist = reactive({
@@ -54,12 +55,24 @@ const wishlist = reactive({
         if (!this.isWishListed(product)) {
             //add item to wishlist
             this.items.push(product.id)
+            toast("Wishlist added", {
+                "theme": "auto",
+                "type": "info",
+                "autoClose": 1000,
+                "dangerouslyHTMLString": true
+              })
         } else {
             //remove item from wishlist
             this.items = this.items.filter(id => id != product.id)
             apiUrl = `${basic.serverUrl}/api/wishlist/${product.id}` //DELETE
             method = 'DELETE'
             payload = {}
+            toast("Wishlist removed", {
+                "theme": "auto",
+                "type": "info",
+                "autoClose": 1000,
+                "dangerouslyHTMLString": true
+              })
         }
 
         try {

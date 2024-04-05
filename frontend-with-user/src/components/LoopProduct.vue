@@ -52,6 +52,6 @@ import {cart} from '../store/cart'
             to cart</a>
         <router-link v-if="product.product_type === 'variant'" :to="{ name: 'product-single', params: { slug: product.slug }}"
             class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">
-            Select options</router-link>
+            Details</router-link>
     </div>
 </template>

@@ -11,6 +11,7 @@ const address = ref(user.address)
 const email = ref(user.email)
 const city = ref(user.city)
 const country = ref(user.country)
+const postalCode = ref(user.postalCode)
 </script>
 <template>
     <!-- breadcrumb -->
@@ -69,17 +70,17 @@ const country = ref(user.country)
                             :class="order.errorMessage.address ? 'border-red-500' : ''">
                             <span v-if="order.errorMessage.address" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.address[0] }}</span>
                 </div>
-                <div>
+                <div>{{ city.value }}
                     <label for="city" class="text-gray-600">City</label>
                     <input type="text" name="city" id="city" v-model="city" class="input-box"
                             :class="order.errorMessage.city ? 'border-red-500' : ''">
                             <span v-if="order.errorMessage.city" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.city[0] }}</span>
                 </div>
-                <div>
-                    <label for="country" class="text-gray-600">Country/Region</label>
-                    <input type="text" name="country" id="country" v-model="country" class="input-box"
-                            :class="order.errorMessage.country ? 'border-red-500' : ''">
-                            <span v-if="order.errorMessage.country" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.country[0] }}</span>
+                <div>                    
+                    <label for="postalCode" class="text-gray-600">Postal Code</label>
+                    <input type="text" name="postalCode" id="postalCode" v-model="postalCode" class="input-box"
+                            :class="order.errorMessage.postalCode ? 'border-red-500' : ''">
+                            <span v-if="order.errorMessage.postalCode" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.postalCode[0] }}</span>
                 </div>
             </div>
 
@@ -122,7 +123,7 @@ const country = ref(user.country)
                         class="text-primary">terms & conditions</a></label>
             </div>
 
-            <a href="#" @click="order.placeOrder(name, phone, email, address, city, country)"
+            <a href="#" @click="order.placeOrder(name, phone, email, address, city, postalCode)"
                 class="block w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
                 order</a>
         </div>

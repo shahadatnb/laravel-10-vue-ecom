@@ -20,7 +20,7 @@ const cartStore = cart;
     <!-- wrapper -->
     <div class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
         <div class="col-span-8 border border-gray-200 p-4 rounded">
-            <h3 class="text-lg font-medium capitalize mb-4">Checkout</h3>
+            <h3 class="text-lg font-medium capitalize mb-4">Cart</h3>
             <div class="space-y-4">
                 <div v-for="item in cart.items" :key="item.id" class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                     <img :src="item.product.photo" alt="product-image" class="w-full rounded-lg sm:w-40" />
@@ -66,8 +66,8 @@ const cartStore = cart;
             </div>
             <div class="flex justify-between">
             <a href="#" @click="cart.emptyCart()"
-                class="block w-1/3 py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
-                order</a>
+                class="block w-1/3 py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">
+                Empty cart</a>
             <router-link to="/checkout"
                 class="block w-1/3 py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">
                 Checkout</router-link>
