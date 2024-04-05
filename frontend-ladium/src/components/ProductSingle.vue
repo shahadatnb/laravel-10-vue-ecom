@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onBeforeMount, onMounted, ref } from 'vue'
+import { reactive, onBeforeMount, onMounted, ref, watch } from 'vue'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
 import InnerImageZoom from 'vue-inner-image-zoom';
 import axios from 'axios'
@@ -10,7 +10,7 @@ import { cart } from '../store/cart';
 const basic = basicStore;
 import { useRoute } from 'vue-router';
 const route = useRoute()
-const slug = route.params.slug
+const slug = ref(route.params.slug)
 const product = reactive({})
 const product_title_original = ref('')
 const relatedProducts = ref([])
@@ -19,8 +19,11 @@ const currentPhoto = ref(0)
 const galleries = ref('')
 const currentUrl = window.location.origin + window.location.pathname;
 const tabItem = ref('description')
-onBeforeMount(() => {
-    axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
+
+watch(() => route.params.slug, fetchData, { immediate: true })
+
+async function fetchData(data){
+  axios.get(`${basic.serverUrl}/api/single-product/${data}`)
         .then(res => {
             //console.log(res.data)
             product_title_original.value = res.data.data.title
@@ -57,7 +60,9 @@ onBeforeMount(() => {
             document.querySelector("meta[property='og:image']").setAttribute("content", product.photo);
             document.querySelector("meta[property='og:title']").setAttribute("content", product.title);
         });
+}
 
+onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
         .then(res => {
             relatedProducts.value = res.data.data
@@ -468,6 +473,13 @@ function decreaseQuantity() {
           <div v-show="tabItem=='description'" id="description" v-html="product.description">
           </div>
           <div v-show="tabItem=='short_description'" id="short_description" class="d-none" v-html="product.short_description">
+          </div>
+
+          <div class="py-2">
+              <h3 class="text-3xl text-primary pb-2">Recommended Products</h3>
+              <div class="grid grid-cols-2 xl:grid-cols-5 gap-3 gap-y-[32px]">
+                  <LoopProduct v-for="product in relatedProducts" :key="product.id" :product="product"  />
+              </div>
           </div>
         </div>
       </section>

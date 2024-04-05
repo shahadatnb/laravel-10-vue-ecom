@@ -1,12 +1,12 @@
 <script setup>
 import LoopProduct from './LoopProduct.vue';
-import {onBeforeMount,ref, reactive, computed} from "vue";
+import {onBeforeMount,ref, reactive, computed, watch} from "vue";
 import { basicStore } from "../store/basic";
 const basic = basicStore;
 import axios from "axios";
 import { useRoute } from 'vue-router';
 const route = useRoute()
-const slug = route.params.slug
+const slug = ref(route.params.slug)
 const products = ref([])
 const categories = ref([])
 const colors = ref([])
@@ -17,13 +17,16 @@ const selectedSizes = ref([])
 const minPrice = ref(0)
 const maxPrice = ref(2000)
 
-//selectedCategory.value = slug
-//console.log(slug)
-const testProducts = reactive({
-    product: [],
-    categories: [],
-})
+watch(() => route.params.slug, fetchData, { immediate: true })
 
+
+async function fetchData(data) {
+    axios.get(`${basic.serverUrl}/api/latest-products?category_slug=${data}`)//
+      .then(res => {
+          products.value = res.data.data
+      });
+      slug.value = data
+}
 
 function fetchProducts(){
   setTimeout(function() {
@@ -36,17 +39,9 @@ function fetchProducts(){
 }
 
 onBeforeMount(()=>{
-    axios.get(`${basic.serverUrl}/api/latest-products?category_slug=${slug}`)//
-        .then(res => {
-            products.value = res.data.data
-            testProducts.data = res.data.data
-        });
-
     axios.get(`${basic.serverUrl}/api/categories`)
         .then(res => {
             categories.value = res.data.data
-            
-            console.log(categories)
         });
 
     axios.get(`${basic.serverUrl}/api/sizes`)

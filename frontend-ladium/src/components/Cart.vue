@@ -18,9 +18,10 @@ const cartStore = cart;
     <!-- ./breadcrumb -->
 
     <!-- wrapper -->
-    <div class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
-        <div class="col-span-8 border border-gray-200 p-4 rounded">
-            <h3 class="text-lg font-medium capitalize mb-4">Checkout</h3>
+    <div class="container">
+        <div class="flex flex-col lg:flex-row gap-10 mb-10">
+        <div class="w-full lg:w-[66%] border border-gray-200 p-4 rounded">
+            <h3 class="text-lg font-medium capitalize mb-4">Cart</h3>
             <div class="space-y-4">
                 <div v-for="item in cart.items" :key="item.id" class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                     <img :src="item.product.photo" alt="product-image" class="w-full rounded-lg sm:w-40" />
@@ -47,7 +48,7 @@ const cartStore = cart;
             </div>
         </div>
 
-        <div class="col-span-4 border border-gray-200 p-4 rounded">
+        <div class="w-full lg:w-[34%] border border-gray-200 p-4 rounded">
             <h4 class="text-gray-800 text-lg mb-4 font-medium uppercase">order summary</h4>
             
             <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
@@ -74,6 +75,7 @@ const cartStore = cart;
             </div>
         </div>
     </div>
+</div>
 </template>
 <style>
 

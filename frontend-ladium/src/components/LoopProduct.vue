@@ -33,7 +33,7 @@ import {cart} from '../store/cart'
     </div>
     <div>
         <router-link :to="{ name: 'product-single', params: { slug: product.slug }}" class="py-[.625rem] mb-4">
-        SEAMLESS HIGH WAIST SPORTS LEGGINGS -BLUE
+        {{ product.title }}
         </router-link>
         <div class="flex justify-between">
             <div>

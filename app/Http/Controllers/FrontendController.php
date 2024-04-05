@@ -42,6 +42,11 @@ class FrontendController extends Controller
         return view('frontend.products.shop',compact('products'));
     }
 
+    public function searchProducts(Request $request){
+        $products = Product::latest()->where('status',1)->where('title','like','%'.$request->searchText.'%')->take(10)->get();
+        return new ProductCollection($products); 
+    }
+
     public function search(Request $request){
         $search = $request->search;
         $products = Product::latest()->where('status',1)->where('title','like','%'.$search.'%')->paginate(18);
@@ -136,15 +141,7 @@ class FrontendController extends Controller
     }
 
     public function latestProducts(Request $request){
-        $products = Product::latest()->where('status',1);
-        if($request->has('take')){
-            $products = $products->take($request->take);
-            if($request->has('skip')){
-                $products = $products->skip($request->skip);
-            }
-        }else{
-            //$products = $products->take(8);
-        }
+        $products = Product::latest()->where('status',1);       
 
         if($request->has('search')){
             $products = $products->where('title','like','%'.$request->search.'%');
@@ -189,7 +186,16 @@ class FrontendController extends Controller
             $products = $products->where('featured',1);
         }
 
-        $products = $products->paginate(24);
+        if($request->has('take')){
+            $products = $products->take($request->take);
+            if($request->has('skip')){
+                $products = $products->skip($request->skip);
+            }
+            $products = $products->get();
+        }else{
+            $products = $products->paginate(24);
+        }
+        
         //return response()->json($products);
         return new ProductCollection($products);
     }
