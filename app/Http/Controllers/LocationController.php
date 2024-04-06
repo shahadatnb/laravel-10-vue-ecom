@@ -18,4 +18,10 @@ class LocationController extends Controller
             return \Response::make($state->get(['id', 'name']));
         }        
     }
+
+    public function getLocation(Request $request){
+        $country = LocationCountry::where('sortname',$request->loc)->first();
+        $state = LocationState::where('country_id',$country->id)->pluck('name','id');
+        return response()->json($state);
+    }
 }

@@ -24,7 +24,7 @@ const auth = authStore.user.user
         <!-- ./sidebar -->
 
         <!-- info -->
-        <div class="col-span-9 grid grid-cols-3 gap-4">
+        <div class="col-span-12 lg:col-span-9 grid grid-cols-1 lg:grid-cols-3 gap-4">
 
             <div class="shadow rounded bg-white px-4 pt-6 pb-8">
                 <div class="flex items-center justify-between mb-4">

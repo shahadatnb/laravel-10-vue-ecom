@@ -2,7 +2,7 @@
 import { authStore } from "../../store/authStore";
 </script>
 <template>
-    <div class="col-span-3">
+    <div class="col-span-12 lg:col-span-3">
         <div class="px-4 py-3 shadow flex items-center gap-4">
             <div class="flex-shrink-0">
                 <img src="#" alt="profile"
@@ -64,7 +64,7 @@ import { authStore } from "../../store/authStore";
             </div>
 
         -->
-            <div class="space-y-1 pl-8 pt-4">
+            <div class="pt-2 pl-8">
                 <RouterLink to="/dashboard/orders" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-heart"></i>
@@ -72,7 +72,7 @@ import { authStore } from "../../store/authStore";
                     My orders
                 </RouterLink>
             </div>
-            <div class="space-y-1 pl-8 pt-4">
+            <div class="pt-2 pl-8">
                 <RouterLink to="/dashboard/account" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-heart"></i>
@@ -80,7 +80,7 @@ import { authStore } from "../../store/authStore";
                     My account
                 </RouterLink>
             </div>
-            <div class="space-y-1 pl-8 pt-4">
+            <div class="pt-2 pl-8">
                 <RouterLink to="/dashboard/profile" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-heart"></i>
@@ -88,7 +88,7 @@ import { authStore } from "../../store/authStore";
                     My profile
                 </RouterLink>
             </div>
-            <div class="space-y-1 pl-8 pt-4">
+            <div class="pt-2 pl-8">
                 <RouterLink to="/dashboard/wishlist" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-heart"></i>
@@ -97,7 +97,7 @@ import { authStore } from "../../store/authStore";
                 </RouterLink>
             </div>
 
-            <div class="space-y-1 pl-8 pt-4">
+            <div class="pt-2 pl-8">
                 <a @click="authStore.logout" href="#" class="relative hover:text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-solid fa-right-from-bracket"></i>

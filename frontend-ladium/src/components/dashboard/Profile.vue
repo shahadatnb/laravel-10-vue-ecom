@@ -30,7 +30,7 @@ const date_of_birth = ref(auth.date_of_birth)
         <!-- ./sidebar -->
 
         <!-- info -->
-        <div class="col-span-9 shadow rounded px-6 pt-5 pb-7">
+        <div class="col-span-12 lg:col-span-9 shadow rounded px-6 pt-5 pb-7">
             <h4 class="text-lg font-medium capitalize mb-4">
                 Profile information
             </h4>

@@ -9,6 +9,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\LocationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -78,3 +79,4 @@ Route::get('/product-variant-gallery/{product_id}/{color_id}', [FrontendControll
 Route::get('/categories', [FrontendController::class, 'getCategories']);//->middleware('cors');
 Route::get('/sizes', [SizeController::class, 'getSizes']);//->middleware('cors');
 Route::get('/colors', [ColorController::class, 'getColors']);//->middleware('cors');
+Route::get('/getLocation', [LocationController::class, 'getLocation']);//->middleware('cors');

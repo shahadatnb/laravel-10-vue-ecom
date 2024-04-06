@@ -17,7 +17,7 @@ onBeforeMount(()=>{
 })
 
 function dateFormat(date) {
-    return moment(date).format('Do MMMM YYYY, h:mm a');
+    return moment(date).format('DD MMMM YY');
 }
 </script>
 <template>
@@ -41,9 +41,9 @@ function dateFormat(date) {
         <!-- ./sidebar -->
 
         <!-- info -->
-        <div class="col-span-9 grid grid-cols-1 gap-4">
+        <div class="col-span-12 lg:col-span-9 grid grid-cols-1 gap-4">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-					<table class="min-w-full leading-normal">
+					<table class="min-w-full leading-normal responsive">
 						<thead>
 							<tr>
 								<th

@@ -89,6 +89,8 @@ class ShippingRoleController extends Controller
 
     public function destroy(ShippingRole $shippingRole)
     {
-        //
+        $shippingRole->delete();
+        session()->flash('success','Successfully Deleta');
+        return redirect()->route('shippingRole.index');
     }
 }

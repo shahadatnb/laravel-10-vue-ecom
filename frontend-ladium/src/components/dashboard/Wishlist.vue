@@ -2,6 +2,7 @@
 import Sidebar from './Sidebar.vue';
 import { authStore } from '../../store/authStore';
 import { cart } from '../../store/cart';
+import { wishlist } from '../../store/wishlist';
 import { ref,onBeforeMount } from 'vue';
 import axios from "axios";
 import { basicStore } from "../../store/basic";
@@ -35,26 +36,25 @@ onBeforeMount(()=>{
         <!-- ./sidebar -->
 
         <!-- wishlist -->
-        <div class="col-span-9 space-y-4">
-            <div v-for="item in wishlistItems" :key="item.id" class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
+        <div class="col-span-12 lg:col-span-9 space-y-4">
+            <div v-for="item in wishlistItems" :key="item.id" class="flex items-center justify-between border gap-6 p-2 border-gray-200 rounded">
                 <div class="w-28">
                     <img :src="item.photo" alt="product 6" class="w-full">
                 </div>
                 <div class="w-1/3">
-                    <h2 class="text-gray-800 text-xl font-medium uppercase">
+                    <p class="text-gray-800">
                         <router-link :to="{ name: 'product-single', params: { slug: item.slug }}">
                         {{ item.title }}
                         </router-link>
-                    </h2>
+                    </p>
                     <!-- <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p> -->
                 </div>
-                <div class="text-primary text-lg font-semibold">{{ item.price }}</div>
+                <div class="text-primary font-semibold">{{ item.price }}</div>
                 <a href="#" @click="cart.addItem(item)"
-                    class="px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
-                    to cart</a>
+                    class="px-2 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition font-roboto">Cart</a>
 
-                <div class="text-gray-600 cursor-pointer hover:text-primary">
-                    <i class="fa-solid fa-trash"></i>
+                <div @click="wishlist.toggleWishlist(item)" class="text-gray-600 cursor-pointer hover:text-red-500">
+                    <!-- <font-awesome-icon :icon="['fas', 'trash']" /> -->
                 </div>
             </div>
             

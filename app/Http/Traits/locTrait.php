@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Traits;
 
-use App\LocationCountry;
-use App\LocationState;
-use App\LocationCity;
+use App\Models\LocationCountry;
+use App\Models\LocationState;
+use App\Models\LocationCity;
 
 trait locTrait {
 

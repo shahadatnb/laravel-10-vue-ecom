@@ -1,8 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onBeforeMount } from "vue";
 import { cart } from "../store/cart";
 import { authStore } from "../store/authStore";
 import { order } from "../store/order";
+import axios from "axios";
+import { basicStore } from "../store/basic";
+const basic = basicStore;
 const cartStore = cart;
 const user = authStore.user.user
 const name = ref(user.name)
@@ -11,6 +14,14 @@ const address = ref(user.address)
 const email = ref(user.email)
 const city = ref(user.city)
 const postalCode = ref(user.postalCode)
+const locations = ref()
+onBeforeMount(()=>{
+    axios.get(`${basic.serverUrl}/api/getLocation?loc=bd`)
+        .then(res => {
+            locations.value = res.data
+            console.log(res.data)
+        });
+})
 </script>
 <template>
     <!-- breadcrumb -->
@@ -95,14 +106,18 @@ const postalCode = ref(user.postalCode)
                     <span v-if="order.errorMessage.address" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.address[0] }}</span>
                 </div>
                 <div class="w-full md:w-[48%]">
-                        <input
+                        <select @chenge="getDeliveryCost" name="city" v-model="city" class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white">
+                            <option value="">Select City</option>
+                            <option v-for="(loc, index) in locations" :key="index" :value="loc">{{ loc }}</option>
+                        </select>
+                        <!-- <input
                         class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white"
                         required=""
                         placeholder="City"
                         name="city"
                         type="text"
                         v-model="city"
-                        />
+                        /> -->
                         <span v-if="order.errorMessage.city" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.city[0] }}</span>
                     </div>
                     <div class="w-full md:w-[48%]">
@@ -136,7 +151,7 @@ const postalCode = ref(user.postalCode)
                     <p class="text-gray-600">
                         x{{ item.quantity }}
                     </p>
-                    <p class="text-gray-800 font-medium">৳{{ item.product.price * item.quantity }}</p>
+                    <p class="text-gray-800 font-medium">৳{{ (item.product.reduced_price ?? item.product.price) * item.quantity }}</p>
                 </div>                
             </div>
 

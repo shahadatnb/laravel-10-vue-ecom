@@ -12,6 +12,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ShippingRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
