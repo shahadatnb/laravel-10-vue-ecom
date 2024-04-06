@@ -160,23 +160,23 @@ function shippingAmount(city) {
                     <p class="text-gray-600">
                         x{{ item.quantity }}
                     </p>
-                    <p class="text-gray-800 font-medium">৳{{ (item.product.reduced_price ?? item.product.price) * item.quantity }}</p>
+                    <p class="text-gray-800 font-medium">৳ {{ (item.product.reduced_price ?? item.product.price) * item.quantity }}</p>
                 </div>                
             </div>
 
             <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>Subtotal</p>
-                <p>৳{{ cart.totalPrice }}</p>
+                <p>৳ {{ cart.totalPrice }}</p>
             </div>
 
             <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>Shipping</p>
-                <p>{{ order.shipping_amount }}</p>
+                <p>৳ {{ order.shipping_amount }}</p>
             </div>
 
             <div class="flex justify-between text-gray-800 font-medium py-3 uppercas">
                 <p class="font-semibold">Total</p>
-                <p>৳{{ cart.totalPrice}}</p>
+                <p>৳ {{ (cart.totalPrice*1) + (order.shipping_amount*1)}}</p>
             </div>
 
             <div class="flex items-center mb-4 mt-2">
