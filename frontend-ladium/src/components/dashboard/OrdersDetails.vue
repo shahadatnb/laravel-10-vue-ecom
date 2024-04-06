@@ -6,10 +6,13 @@ import { ref,onBeforeMount } from 'vue';
 import axios from "axios";
 import moment from 'moment';
 const auth = authStore.user.user
+import { useRoute } from 'vue-router';
+const route = useRoute()
+const order_id = route.params.id
 const getOrders = ref([]);
 onBeforeMount(()=>{
     const token = authStore.getUserToken()
-    axios.get(`${basicStore.serverUrl}/api/orders`, { headers: {"Authorization" : `Bearer ${token}`} })
+    axios.get(`${basicStore.serverUrl}/api/order/${order_id}`, { headers: {"Authorization" : `Bearer ${token}`} })
     .then(res => {
         getOrders.value = res.data
         console.log(getOrders.value)
@@ -48,51 +51,55 @@ function dateFormat(date) {
 							<tr>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Order ID
+									Name
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Qty
+								</th>
+								<th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Price
+								</th>
+								<th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-right">
 									Amount
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Order Date
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Status
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Detail
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="order in getOrders" :key="order.id">
+							<tr v-for="item in getOrders.items" :key="item.id">
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">{{ order.id }}</p>
+									<p class="text-gray-900 whitespace-no-wrap">{{ item.product.title }}</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-										৳ {{ order.amount }}
+										{{ item.qty_ordered }}
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-                                        {{ dateFormat(order.created_at) }}
+										৳ {{ item.price }}
 									</p>
 								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
 									<p class="text-gray-900 whitespace-no-wrap">
-                                        {{ order.status.name }}
+										৳ {{ item.total }}
 									</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<RouterLink :to="`/dashboard/order/${order.id}`" class="text-primary hover:text-primary font-medium">Detail</RouterLink>
 								</td>
 							</tr>
-							
+                            <tr>
+                                <td class="px-5" colspan="3">Total</td>
+                                <td class="px-5 text-right">{{ getOrders.sub_total }}</td>
+                            </tr>
+							<tr>
+                                <td class="px-5" colspan="3">Shipping Fee</td>
+                                <td class="px-5 text-right">{{ getOrders.shipping_amount }}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5" colspan="3">Total</td>
+                                <td class="px-5 text-right">{{ getOrders.amount }}</td>
+                            </tr>
 						</tbody>
 					</table>
 				</div>

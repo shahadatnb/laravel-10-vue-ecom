@@ -39,6 +39,7 @@
           <thead>
             <tr>
               <th>SL</th>
+              <th>Image</th>
               <th>Item</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -52,6 +53,7 @@
             @foreach ($order->items as $item)
             <tr>
               <td>{{ $sl++ }}</td>
+              <td><img width="50" class="img-thumb" src="{{ asset( 'storage/'.$item->product->photo) }}" alt="#"></td>
               <td>{{ $item->product->title }} {{ $item->variant? $item->variant->size? ' - '.$item->variant->size->name:'':''}} {{ $item->variant? $item->variant->color? ' - '.$item->variant->color->name:'':''}}</td>
               <td>{{ $item->price }}</td>
               <td>{{ $item->qty_ordered }}</td>
@@ -61,19 +63,19 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="4" class="text-right">Sub Total</td>
+              <td colspan="5" class="text-right">Sub Total</td>
               <td>{{$order->sub_total}}</td>
             </tr>
             <tr>
-              <td colspan="4" class="text-right">Shipping Amount</td>
+              <td colspan="5" class="text-right">Shipping Amount</td>
               <td>{{$order->shipping_amount}}</td>
             </tr>
             <tr>
-              <td colspan="4" class="text-right">Total</td>
+              <td colspan="5" class="text-right">Total</td>
               <td>{{$order->amount}}</td>
             </tr>
             <tr>
-              <td colspan="5">In Words: {{CustomHelper::numberTowords($order->amount)}}</td>
+              <td colspan="6">In Words: {{CustomHelper::numberTowords($order->amount)}}</td>
             </tr>
         </tfoot>
         </table>

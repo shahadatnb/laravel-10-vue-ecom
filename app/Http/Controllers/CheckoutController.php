@@ -110,6 +110,7 @@ class CheckoutController extends Controller
     public function checkout(CheckoutRequest $request)
     {
         $validated = $request->validated();
+        //dd($request->all()); exit;
         $customer = auth()->user();
         $data = new Order;
 
@@ -125,7 +126,7 @@ class CheckoutController extends Controller
         $data->zip_code = $request->postalCode;            
         //$data->shipping_method = $request->shipping_method; //ShippingRole::find($request->shipping_method)->title;
         $data->sub_total = $request->totalPrice;
-        $data->shipping_amount = 0; // $request->shipping_amount;
+        $data->shipping_amount = $request->shipping_amount;
         $data->amount = $data->sub_total+$data->shipping_amount;
         $data->status_id = 1;
         //$data->payment_method = $request->payment_method;

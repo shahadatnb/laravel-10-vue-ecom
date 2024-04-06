@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ShippingRoleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -49,7 +50,7 @@ Route::get(
 )->middleware('auth:sanctum');
 
 Route::get(
-    '/orders/{id}',
+    '/order/{id}',
     [OrderController::class, 'getOrderDetails']
 )->middleware('auth:sanctum');
 
@@ -80,3 +81,4 @@ Route::get('/categories', [FrontendController::class, 'getCategories']);//->midd
 Route::get('/sizes', [SizeController::class, 'getSizes']);//->middleware('cors');
 Route::get('/colors', [ColorController::class, 'getColors']);//->middleware('cors');
 Route::get('/getLocation', [LocationController::class, 'getLocation']);//->middleware('cors');
+Route::get('/shippingAmount', [ShippingRoleController::class, 'shippingAmount']);//->middleware('cors');

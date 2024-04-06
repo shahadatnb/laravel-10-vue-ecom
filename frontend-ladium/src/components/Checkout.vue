@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, watch } from "vue";
 import { cart } from "../store/cart";
 import { authStore } from "../store/authStore";
 import { order } from "../store/order";
@@ -22,6 +22,15 @@ onBeforeMount(()=>{
             console.log(res.data)
         });
 })
+
+watch(() => city.value, shippingAmount, { immediate: true })
+
+function shippingAmount(city) {
+    axios.get(`${basic.serverUrl}/api/shippingAmount?state=${city}`)
+        .then(res => {
+            order.shipping_amount = res.data
+        })
+}
 </script>
 <template>
     <!-- breadcrumb -->
@@ -106,7 +115,7 @@ onBeforeMount(()=>{
                     <span v-if="order.errorMessage.address" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.address[0] }}</span>
                 </div>
                 <div class="w-full md:w-[48%]">
-                        <select @chenge="getDeliveryCost" name="city" v-model="city" class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white">
+                        <select name="city" v-model="city" class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white">
                             <option value="">Select City</option>
                             <option v-for="(loc, index) in locations" :key="index" :value="loc">{{ loc }}</option>
                         </select>
@@ -160,10 +169,10 @@ onBeforeMount(()=>{
                 <p>৳{{ cart.totalPrice }}</p>
             </div>
 
-            <!-- <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>Shipping</p>
-                <p>Free</p>
-            </div> -->
+                <p>{{ order.shipping_amount }}</p>
+            </div>
 
             <div class="flex justify-between text-gray-800 font-medium py-3 uppercas">
                 <p class="font-semibold">Total</p>

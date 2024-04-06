@@ -46,7 +46,7 @@
           <thead>
             <tr>
               <th>SL</th>
-              {{-- <th>Image</th> --}}
+              <th>Image</th>
               <th>Item</th>
               <th>Quantity</th>
               <th>Price</th>
@@ -60,7 +60,7 @@
             @foreach ($order->items as $item)
             <tr>
               <td>{{ $sl++ }}</td>
-              {{-- <td><img width="50" class="img-thumb" src="{{ asset( 'storage/'.$item->product->photo) }}" alt="#"></td> --}}
+              <td><img width="50" class="img-thumb" src="{{ asset( 'storage/'.$item->product->photo) }}" alt="#"></td>
               <td>{{ $item->product->title }}</td>
               <td>{{ $item->qty_ordered }}</td>
               <td>{{ $item->price }}</td>

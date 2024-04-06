@@ -13,6 +13,7 @@ import Account from "../components/dashboard/Account.vue";
 import Profile from "../components/dashboard/Profile.vue";
 import Wishlist from "../components/dashboard/Wishlist.vue";
 import Orders from "../components/dashboard/Orders.vue";
+import OrdersDetails from "../components/dashboard/OrdersDetails.vue";
 
 const routes = [
     {
@@ -48,6 +49,12 @@ const routes = [
         path: '/dashboard/orders', component: Orders, name: 'orders', meta: {
             requiresAuth: true,
             title: 'Orders'
+        }
+    },   
+    {
+        path: '/dashboard/order/:id', component: OrdersDetails, name: 'order_details', meta: {
+            requiresAuth: true,
+            title: 'Orders Details'
         }
     },    
     {

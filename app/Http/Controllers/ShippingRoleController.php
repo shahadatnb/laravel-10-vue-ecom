@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ShippingRole;
 use Illuminate\Http\Request;
 use App\Http\Traits\locTrait;
+use App\Models\LocationCity;
+use App\Models\LocationState;
 
 class ShippingRoleController extends Controller
 {
@@ -92,5 +94,15 @@ class ShippingRoleController extends Controller
         $shippingRole->delete();
         session()->flash('success','Successfully Deleta');
         return redirect()->route('shippingRole.index');
+    }
+
+    public function shippingAmount(Request $request)
+    {
+        $location = LocationState::where('name', $request->state)->first();
+        $shippingRole = ShippingRole::where('location_id',$location->id)->where('condition','Equal')->first();
+        if(!$shippingRole){
+            $shippingRole = ShippingRole::where('location_id','!=',$location->id)->where('condition','Not Equal')->first();
+        }
+        return response()->json($shippingRole->amount);
     }
 }

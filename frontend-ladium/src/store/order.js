@@ -6,7 +6,7 @@ import { cart } from './cart'
 const basic = basicStore
 const order = reactive({
     orders: [],
-    deleveryCost: 0,
+    shipping_amount: 0,
     errorMessage: {},
     async fetchOrders() {
         const apiUrl = `${basic.serverUrl}/api/orders`
@@ -71,6 +71,7 @@ const order = reactive({
             city,
             postalCode,
             totalPrice: cart.totalPrice,
+            shipping_amount: order.shipping_amount,
             products: products
         }
 

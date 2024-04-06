@@ -292,6 +292,7 @@ class OrderController extends Controller
     }
 
     function getOrderDetails($id, Request $request){
+        /*
         $order = Order::findOrFail($id);
         $order->items->map(function($product){
             unset($product->description);
@@ -306,6 +307,10 @@ class OrderController extends Controller
             return $product;
         });
         return $order;
+        */
+
+        $order = Order::where('id',$id)->with('items.product')->first();
+        return response()->json($order);
     }
 
 }
