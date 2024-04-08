@@ -77,9 +77,23 @@
         </div>
         @if (request()->routeIs('*.edit'))
       <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-4">
           <div class="input-group">
             {{ Form::select('product',$products,null,['class'=>'form-control select2', 'id'=>'product_id','placeholder'=>'Product']) }}
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+          <div class="input-group">
+            {{ Form::select('size_id',$sizes,null,['class'=>'form-control', 'id'=>'size', 'placeholder'=>'Size']) }}
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+          <div class="input-group">
+            {{ Form::select('color_id',$colors,null,['class'=>'form-control', 'id'=>'color', 'placeholder'=>'Color']) }}
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-2">
+          <div class="input-group">
 						{{ Form::number('qty',1,['class'=>'form-control', 'id'=>'qty', 'placeholder'=>'Qty']) }}
             <button id="product_add" class="btn btn-success input-group-addon" type="button">Add</button>
           </div>
@@ -104,9 +118,9 @@
           <tbody id="itemList">
             @if (request()->routeIs('*.edit'))
             @foreach ($order->items as $item)
-            <tr data-id="{{ $item->id }}">
+            <tr data-id="{{ $item->id }}" data-variant="{{ $item->product_stock_id }}">
               <td>{{ $sl++ }}</td>
-              <td>{{ $item->product->title }}</td>
+              <td>{{ $item->product->title }} {{ $item->variant? $item->variant->size? ' - '.$item->variant->size->name:'':''}} {{ $item->variant? $item->variant->color? ' - '.$item->variant->color->name:'':''}}</td>
               <td>{{ $item->price }}</td>
               <td><input class="form-control quantity update-cart" min="1" value="{{ $item->qty_ordered }}" type="number"></td>
               <td class="total">{{ $item->total }}</td>
@@ -187,17 +201,46 @@
       calcAmount();
     } );
 
+    $("#product_id").change(function(){
+      let product_id = $("#product_id").find(':selected').val();
+      $.ajax({
+            url: '{{ route('productInfo') }}',
+            method: "get",
+            data: {
+                _token: '{{ csrf_token() }}', 
+                product_id: product_id,
+            },
+            success: function (response) {
+              console.log(response);
+              if(response.product.product_type == 'variant'){
+                $("#size").attr('disabled',false);
+                $("#color").attr('disabled',false);
+                $("#size").val('');
+                $("#color").val('');
+              }else{
+                $("#size").attr('disabled',true);
+                $("#color").attr('disabled',true);
+              }
+
+            }
+        });
+    });
+
     $("#product_add").click(function(){
       let product_id = $("#product_id").find(':selected').val();
       let qty = $("#qty").val();
       let order_id = $("#order_id").val();
-
+      let size_id = $("#size").val(); //  $("#size").find(':selected').val();
+      let color_id = $("#color").val(); // $("#color").find(':selected').val();
+      //console.log(product_id,qty,order_id,size_id,color_id);
       $.ajax({
             url: '{{ route('order.itemAdd') }}',
             method: "post",
             data: {
                 _token: '{{ csrf_token() }}', 
                 product_id: product_id,
+                size_id: size_id,
+                color_id: color_id,
                 order_id: order_id,
                 qty: qty
             },
@@ -210,7 +253,7 @@
       calcAmount();
     });
 
-    $(".update-cart").change(function (e) {
+    $("#itemList").on('click', '.update-cart', function (e) {
         e.preventDefault();
         var ele = $(this);
         ele.parents("tr").find(".total").val();

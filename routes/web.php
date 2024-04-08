@@ -13,6 +13,8 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ShippingRoleController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,12 +51,16 @@ Route::group(['middleware'=>'auth'], function(){
 
 });
 
+Route::get('location/getStates', [CheckoutController::class, 'getStates'])->name('getStates');
+Route::get('shipingAmount', [CheckoutController::class, 'shipingAmount'])->name('shipingAmount');
+Route::get('/productInfo', [ProductController::class, 'productInfo'])->name('productInfo');
+
 Route::group(['middleware' => ['auth','roles'],'roles'=>['Manager','Admin','SuperAdmin','Salesman']], function(){
     Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');   
     Route::post('/qtyUpdate', [OrderController::class, 'qtyUpdate'])->name('order.qty.update');   
     Route::get('/itemRemove/{id}', [OrderController::class, 'itemRemove'])->name('order.itemRemove');   
     Route::post('/itemAdd', [OrderController::class, 'itemAdd'])->name('order.itemAdd');
-    Route::get('/productInfo', [ProductController::class, 'productInfo'])->name('productInfo');
+    Route::post('/statusUpdate/{id}', [OrderController::class, 'statusUpdate'])->name('order.statusUpdate');
     Route::resource('order', OrderController::class);
 
     Route::resource('customers',CustomerController::class);
@@ -180,7 +186,6 @@ Route::get('cart', [CheckoutController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [CheckoutController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [CheckoutController::class, 'cartUpdate'])->name('update.cart');
 Route::delete('remove-from-cart', [CheckoutController::class, 'remove'])->name('remove.from.cart');
-Route::get('shipingAmount', [CheckoutController::class, 'shipingAmount'])->name('shipingAmount');
 
 Route::get('/home', function(){ return redirect()->route('dashboard'); });
 
@@ -200,7 +205,6 @@ Route::group(['middleware' => ['auth:customer']], function () {
     Route::post('checkoutPost', [CheckoutController::class, 'checkoutPost'])->name('checkoutPost');
     Route::post('orderCancel', [OrderController::class, 'orderCancel'])->name('orderCancel');
     Route::get('checkoutSuccess', [CheckoutController::class, 'checkoutSuccess'])->name('checkoutSuccess');
-    Route::get('location/getStates', [CheckoutController::class, 'getStates'])->name('getStates');
 
     Route::get('/stripe/pay/{id}', [StripePaymentController::class, 'stripe'])->name('pay.stripe');
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');

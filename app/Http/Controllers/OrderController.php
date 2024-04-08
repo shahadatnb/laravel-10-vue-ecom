@@ -11,6 +11,9 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Size;
+use App\Models\ProductStock;
+use App\Models\Color;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CustomerRegister;
 use Session;
@@ -162,16 +165,27 @@ class OrderController extends Controller
         //$shipping_methods = ShippingRole::pluck('title','id')->toArray();
         $countries=$this->countryArray();
         $states = $this->stateArray(config('settings.defaultCountry','BD'));
+        $sizes = Size::pluck('name','id')->toArray();
+        $colors = Color::pluck('name','id')->toArray();
         $products = Product::where('status',1)->pluck('title','id')->toArray();
-        return view('admin.order.edit', compact('order','products','states','countries'));
+        return view('admin.order.edit', compact('order','products','states','countries','sizes','colors'));
     }
 
     public function itemAdd(Request $request){        
         $product = Product::find($request->product_id);
+        if($product->product_type == 'variant'){
+            //dd($request->all());
+            $variant = ProductStock::where('product_id',$request->product_id)->where('color_id',$request->color_id)->where('size_id',$request->size_id)->first();
+            if($variant){
+                $variant_id = $variant->id;
+            }
+        }else{
+          $variant_id = $product->variant_id;  
+        }
         $item = new OrderItem;
         $item->order_id = $request->order_id;
         $item->product_id = $product->id;
-        $item->product_id = $product->id;
+        $item->product_stock_id = $variant_id;
         $item->qty_ordered = $request->qty;
         $item->price = ($product->reduced_price > 0)?$product->reduced_price:$product->price;
         $item->total = $request->qty*$item->price;
@@ -183,7 +197,14 @@ class OrderController extends Controller
         $order->shipping_amount = $shipping_amount;
         $order->amount = $order->items->sum('total') + $shipping_amount;
         $order->save();
-        return \Response::make(['product'=>$product]);
+        return \Response::make(['item'=>$item]);
+    }
+
+    public function statusUpdate(Request $request, $id){
+        $order = Order::find($id);
+        $order->status_id = $request->status_id;
+        $order->save();
+        return redirect()->back();
     }
       
     public function itemRemove($id)

@@ -101,10 +101,10 @@
         <p>Refund Date: {{ prettyDate($order->returned_date) }}</p>
         {!! $order->returned_note !!}
         @endif
-        {{-- {!! Form::model($order,['route'=>['order.update',$order->id],'method'=>'PUT','enctype'=>'multipart/form-data']) !!}
-          {{ Form::select('status',CustomHelper::order_status(),null,['class'=>'form-control select2','placeholder'=>'Order Status']) }} 
+        {!! Form::model($order,['route'=>['order.statusUpdate',$order->id],'method'=>'POST']) !!}
+          {{ Form::select('status_id',CustomHelper::order_status(),null,['class'=>'form-control select2','placeholder'=>'Order Status']) }} 
           {{ Form::submit('Save',array('class'=>'btn btn-success')) }}
-        {!! Form::close() !!} --}}
+        {!! Form::close() !!}
       </div>
     </div>
   </div>
