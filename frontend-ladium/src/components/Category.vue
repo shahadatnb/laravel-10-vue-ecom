@@ -16,24 +16,29 @@ const selectedColors = ref([])
 const selectedSizes = ref([])
 const minPrice = ref(0)
 const maxPrice = ref(2000)
+const loading = ref(false)
 
 watch(() => route.params.slug, fetchData, { immediate: true })
 
 
 async function fetchData(data) {
+  loading.value = true
     axios.get(`${basic.serverUrl}/api/latest-products?category_slug=${data}`)//
       .then(res => {
           products.value = res.data.data
+          loading.value = false
       });
       slug.value = data
 }
 
 function fetchProducts(){
   setTimeout(function() {
+    loading.value = true
     //your code to be executed after 1 second
     axios.get(`${basic.serverUrl}/api/latest-products?colors=${selectedColors.value}&sizes=${selectedSizes.value}&min=${minPrice.value}&max=${maxPrice.value}&categories=${selectedCategory.value}`)
         .then(res => {
             products.value = res.data.data
+            loading.value = false
         });
   }, 100);
 }
@@ -225,4 +230,19 @@ onBeforeMount(()=>{
           </div>
         </div>
       </section>
+
+      <div v-show="loading" class="fixed bottom-0 left-0 w-full bg-black opacity-50 flex justify-center items-center h-screen">
+          <div class="relative inline-flex">
+              <!-- <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
+              <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+              <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div> -->
+              <!-- <div class="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600" /> -->
+              <div class='flex space-x-2 justify-center items-center h-screen dark:invert'>
+                <span class='sr-only'>Loading...</span>
+                  <div class='h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                <div class='h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                <div class='h-8 w-8 bg-white rounded-full animate-bounce'></div>
+              </div>
+          </div>
+      </div>
 </template>

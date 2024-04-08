@@ -25,21 +25,31 @@ const cart = reactive({
         return cart.totalPrice + cart.shippingCost*1
     }),
     addItem(product, quantity=1){
-        if(this.items[product.variant_id]){
+        if(product.quantity >= quantity){
+            if(this.items[product.variant_id]){
             this.items[product.variant_id].quantity++
-        }else{
-            this.items[product.variant_id] = {
-                product,
-                quantity: quantity
+            }else{
+                this.items[product.variant_id] = {
+                    product,
+                    quantity: quantity
+                }
             }
+            toast("Cart added", {
+                "theme": "auto",
+                "type": "success",
+                "autoClose": 1000,
+                "dangerouslyHTMLString": true
+            })
+            this.saveCartInLocalStorage()
+        }else{
+            toast("Out of stock! Stock:"+ product.quantity, {
+                "theme": "auto",
+                "type": "error",
+                "autoClose": 1000,
+                "dangerouslyHTMLString": true
+            })
         }
-        toast("Cart added", {
-            "theme": "auto",
-            "type": "success",
-            "autoClose": 1000,
-            "dangerouslyHTMLString": true
-          })
-        this.saveCartInLocalStorage()
+        
     },
     increaseQuantity(item){
         //console.log(product)

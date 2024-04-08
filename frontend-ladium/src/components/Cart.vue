@@ -33,7 +33,7 @@ const cartStore = cart;
                         <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                         <div class="flex items-center border-gray-100">
                             <span @click="cart.decreaseQuantity(item)" class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
-                            <input class="h-8 w-8 border bg-white text-center text-xs outline-none" type="text" v-model="item.quantity" min="1" />
+                            <input class="h-8 w-12 border bg-white text-center text-xs outline-none" type="text" v-model="item.quantity" min="1" />
                             <span @click="cart.increaseQuantity(item)" class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
                         </div>
                         <div class="flex items-center space-x-4">

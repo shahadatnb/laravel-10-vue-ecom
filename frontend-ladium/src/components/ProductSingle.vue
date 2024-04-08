@@ -2,6 +2,8 @@
 import { reactive, onBeforeMount, onMounted, ref, watch } from 'vue'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
 import InnerImageZoom from 'vue-inner-image-zoom';
+//import { VueImageZoomer } from 'vue-image-zoomer'
+//import 'vue-image-zoomer/dist/style.css';
 import axios from 'axios'
 import LoopProduct from './LoopProduct.vue';
 import { basicStore } from "../store/basic.js";
@@ -19,10 +21,11 @@ const currentPhoto = ref(0)
 const galleries = ref('')
 const currentUrl = window.location.origin + window.location.pathname;
 const tabItem = ref('description')
-
+const loading = ref(false)
 watch(() => route.params.slug, fetchData, { immediate: true })
 
 async function fetchData(data){
+  loading.value = true
   axios.get(`${basic.serverUrl}/api/single-product/${data}`)
         .then(res => {
             //console.log(res.data)
@@ -59,6 +62,7 @@ async function fetchData(data){
             document.title = product.title
             document.querySelector("meta[property='og:image']").setAttribute("content", product.photo);
             document.querySelector("meta[property='og:title']").setAttribute("content", product.title);
+            loading.value = false
         });
 }
 
@@ -120,7 +124,7 @@ function decreaseQuantity() {
 </script>
 
 <template>
-<section class="bg-[#f6f6f6]">
+  <section class="bg-[#f6f6f6]">
         <div class="max-w-[1320px] mx-auto pt-5 pb-10">
           <div class="px-10 xl:px-0">
             <ul class="py-4 flex gap-2 flex-wrap">
@@ -149,6 +153,9 @@ function decreaseQuantity() {
                   <div class="position-relative">
                     <template v-for="photo in product.galleries" :key="'full'+photo.id">
                       <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo" :zoomSrc="photo.photoOriginal" zoomType="hover" />
+                      
+                        <!-- <vue-image-zoomer v-if="currentPhoto == photo.id" :regular="photo.photo" :zoom="photo.photoOriginal" /> -->
+                      
                       <!-- :zoomSrc="photo.photoOriginal" -->
                     </template>
                   </div>
@@ -180,7 +187,7 @@ function decreaseQuantity() {
                     <div class="size-selector" v-for="(size, index) in product.sizes" :key="index">
                         <input type="radio" name="size" :id="'size-'+index" class="hidden">
                         <label :for="'size-'+index" v-on:click="selectSize(index)"
-                            class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">{{ size }}</label>
+                            class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600" :class="{ 'text-white bg-primary': product.selectedSize == index }">{{ size }}</label>
                     </div> 
                 </div>
                 <div class="flex items-center gap-2" v-if="product.colors != ''">
@@ -188,7 +195,7 @@ function decreaseQuantity() {
                   <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
                         <input type="radio" name="color" :id="'color-'+index" class="hidden">
                         <label :for="'color-'+index" v-on:click="selectColor(index)"
-                            class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
+                            class="border-2 rounded-sm h-6 w-6  cursor-pointer shadow-sm block" :class="{ 'border-green-600': product.selectedColor == index }"
                             :style="{ backgroundColor: color }"></label>
                     </div>
                 </div>
@@ -483,4 +490,18 @@ function decreaseQuantity() {
           </div>
         </div>
       </section>
+      <div v-show="loading" class="fixed bottom-0 left-0 w-full bg-black opacity-50 flex justify-center items-center h-screen">
+          <div class="relative inline-flex">
+              <!-- <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
+              <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+              <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div> -->
+              <!-- <div class="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600" /> -->
+              <div class='flex space-x-2 justify-center items-center h-screen dark:invert'>
+                <span class='sr-only'>Loading...</span>
+                  <div class='h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                <div class='h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                <div class='h-8 w-8 bg-white rounded-full animate-bounce'></div>
+              </div>
+          </div>
+      </div>
 </template>

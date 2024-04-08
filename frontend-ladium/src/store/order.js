@@ -7,6 +7,7 @@ const basic = basicStore
 const order = reactive({
     orders: [],
     shipping_amount: 0,
+    loading:false,
     errorMessage: {},
     async fetchOrders() {
         const apiUrl = `${basic.serverUrl}/api/orders`
@@ -49,10 +50,10 @@ const order = reactive({
         }
     },
     async placeOrder(name, phone, email, address, city, postalCode) {
-
+        this.loading = true
         const apiUrl = `${basic.serverUrl}/api/checkout`
         const token = authStore.getUserToken()
-        if (!token) {
+        if (!token) {            
             return
         }
 
@@ -88,8 +89,10 @@ const order = reactive({
             if(data.success==true){
                 this.errorMessage = {}
                 cart.emptyCart()
+                this.loading = false
                 router.push('/dashboard/orders')
             }else{
+                this.loading = false
                 this.errorMessage = data.data
             }
             
