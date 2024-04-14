@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\locTrait;
 use App\Models\WishList;
 use App\Models\Product;
+use App\Models\ProductStock;
 use App\Models\Order;
 use App\Models\OrderItem;
 use CustomHelper;
@@ -146,8 +147,8 @@ class CheckoutController extends Controller
 
         foreach($request->products as $product){
             OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['product_id'],'product_stock_id'=>$product['variant_id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
-            $productItem = Product::find($product['product_id']);
-            $productItem->decrement('quantity',$product['quantity']); 
+            $productStock = ProductStock::find($product['variant_id']);
+            $productStock->decrement('quantity',$product['quantity']);
         }
         
         return response()->json([

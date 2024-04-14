@@ -1,5 +1,6 @@
 import { ref, reactive } from 'vue'
 import { basicStore } from './basic'
+import { toast } from 'vue3-toastify';
 const basic = basicStore
 import router from '../router/router'
 const authStore = reactive({
@@ -81,6 +82,12 @@ const authStore = reactive({
                 if (res.error == 0) {
                     //console.log(res)
                     authStore.userProfile = res.user
+                    toast("Profile updated", {
+                        "theme": "auto",
+                        "type": "success",
+                        "autoClose": 1000,
+                        "dangerouslyHTMLString": true
+                    })
                     localStorage.setItem('userProfile', JSON.stringify(res.user))
                 }
             })

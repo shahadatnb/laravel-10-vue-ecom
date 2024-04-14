@@ -7,13 +7,13 @@ import axios from "axios";
 import { basicStore } from "../store/basic";
 const basic = basicStore;
 const cartStore = cart;
-const user = authStore.user.user
-const name = ref(user.name)
-const phone = ref(user.phone)
-const address = ref(user.address)
-const email = ref(user.email)
-const city = ref(user.city)
-const postalCode = ref(user.postalCode)
+const userProfile = authStore.userProfile
+const name = ref(userProfile.name)
+const phone = ref(userProfile.phone)
+const address = ref(userProfile.address)
+const email = ref(userProfile.email)
+const city = ref(userProfile.city)
+const postalCode = ref(userProfile.postalCode)
 const locations = ref()
 onBeforeMount(()=>{
     axios.get(`${basic.serverUrl}/api/getLocation?loc=bd`)

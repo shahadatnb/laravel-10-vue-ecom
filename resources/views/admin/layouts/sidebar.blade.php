@@ -133,6 +133,9 @@
               <li class="nav-item"><a href="{{ route('color.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> Color</a>
               </li>
+              <li class="nav-item"><a href="{{ route('locationState.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i> Location State</a>
+              </li>
               <li class="nav-item"><a href="{{ route('userRole') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> User Role</a>
               </li>
