@@ -15,7 +15,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ShippingRoleController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\locationStateController;
+use App\Http\Controllers\LocationStateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -110,7 +110,7 @@ Route::group(['middleware'=> ['auth','roles'],'roles'=>['Admin','SuperAdmin']], 
     Route::resource('color',ColorController::class);
     Route::resource('size',SizeController::class);
 
-    Route::resource('locationState',locationStateController::class);
+    Route::resource('locationState',LocationStateController::class);
 
     // User Role ###################
     Route::post('admin-assign', [ RoleController::class, 'postAssignRole'])->name('admin-assign');
