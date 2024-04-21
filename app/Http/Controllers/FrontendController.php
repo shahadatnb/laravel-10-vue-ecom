@@ -195,7 +195,6 @@ class FrontendController extends Controller
         }else{
             $products = $products->paginate(24);
         }
-        
         //return response()->json($products);
         return new ProductCollection($products);
     }

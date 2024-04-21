@@ -127,7 +127,11 @@ class ProductController extends Controller
         $product->reduced_price = $request->reduced_price;
         $product->discount_percentage = $request->discount_percentage;
         $product->short_description = $request->short_description;
-        $product->description = $request->description;
+        if (!empty($request->description)){
+            $description = $this->summernoteImage($request->description);
+            $product->body=$description;
+        }
+        //$product->description = $request->description;
         $product->featured = $request->featured??0;
         $product->free_shipping = $request->free_shipping??0;
         $product->product_type = $request->product_type;
@@ -172,6 +176,32 @@ class ProductController extends Controller
         }
         session()->flash('success','Product Successfully Save');
         return redirect()->back();
+    }
+
+    
+    protected function summernoteImage($description){
+        // $description = '<head><meta http-equiv=\"Content-Type\" 
+        // content=\"text/html; charset=utf-8\">
+        // </head><body>' . $description . '</body>';
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        //$dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHtml(mb_convert_encoding($description, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+        foreach($images as $k => $img){
+            //dd(strpos($img->getAttribute('src'),'base64'));
+            if(strpos($img->getAttribute('src'),'base64') != false) {
+                $data = $img->getAttribute('src');
+                list($type, $data) = explode(';', $data);
+                list(, $data)      = explode(',', $data);
+                $data = base64_decode($data);
+                $filename = time().$k.'.png';
+                Storage::put('public/post_file/'.$filename,$data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', asset('storage/post_file/'.$filename));
+            }
+        }
+        return $description = $dom->saveHTML();
     }
 
     public function destroy($id)

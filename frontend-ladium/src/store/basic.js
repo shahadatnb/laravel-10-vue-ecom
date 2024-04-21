@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
 import axios from 'axios'
 const basicStore = reactive({
-    serverUrl: 'https://backend.ladiumbd.com', //'https://ecom.asiancoder.com', //'http://127.0.0.1:8000'
+    serverUrl: 'http://127.0.0.1:8000', //'https://ecom.asiancoder.com', //'https://backend.ladiumbd.com'
     settings: [],
     init() {
         axios.get(`${basicStore.serverUrl}/api/config`)
