@@ -129,7 +129,7 @@ class ProductController extends Controller
         $product->short_description = $request->short_description;
         if (!empty($request->description)){
             $description = $this->summernoteImage($request->description);
-            $product->body=$description;
+            $product->description=$description;
         }
         //$product->description = $request->description;
         $product->featured = $request->featured??0;
