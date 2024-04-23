@@ -171,7 +171,7 @@ function decreaseQuantity() {
 </div>
 </section>
 
-    <section class="bg-[#f6f6f6]">
+    <section class="bg-[rgb(242, 248, 253)]">
         <div class="max-w-[1320px] mx-auto pt-5 pb-10">
             <!-- <div class="px-10 xl:px-0">
                 <ul class="py-4 flex gap-2 flex-wrap">
@@ -193,7 +193,7 @@ function decreaseQuantity() {
             <div
                 class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0"
             >
-                <div class="w-[100%] lg:w-[50%]">
+                <div class="w-[100%] lg:w-[60%]">
                     <div class="flex lg:gap-5 justify-between">
                         <div class="w-[30%] lg:w-[20%]">
                             <div class="flex flex-col gap-3">
@@ -229,7 +229,7 @@ function decreaseQuantity() {
                     </div>
                 </div>
 
-                <div class="w-[100%] lg:w-[50%]">
+                <div class="w-[100%] lg:w-[40%]">
                     <!-- <div class="flex gap-12">
                 <h4 class="text-[#0d6efd] underline">Review 0</h4>
                 <p>Sold 0</p>
@@ -239,7 +239,7 @@ function decreaseQuantity() {
                             {{ product.title }}
                         </h2>
                         <p class="mb-2 text-primary">SKU: {{ product.sku }}</p>
-                        <p class="text-primary text-xl mb-4">
+                        <p class="text-primary text-2xl font-semibold mb-4">
                             Price:
                             <template v-if="product.reduced_price != null">
                                 ৳ {{ product.reduced_price }}
@@ -254,7 +254,7 @@ function decreaseQuantity() {
                             class="flex flex-col gap-2"
                             v-if="product.colors != ''"
                         >
-                            <h4>Color:</h4>
+                        <h4 class="mr-2">Color:</h4>
                             <div
                                 class="color-selector"
                                 v-for="(color, index) in product.colors"
@@ -283,7 +283,7 @@ function decreaseQuantity() {
                             class="flex flex-col gap-3 flex-wrap my-4"
                             v-if="product.sizes != ''"
                         >
-                            <h4 class="mr-2 font-medium">Size:</h4>
+                            <h4 class="mr-2">Size:</h4>
                             <div class="flex gap-2 flex-wrap">
                                 <div
                                     class="size-selector"
@@ -433,9 +433,9 @@ function decreaseQuantity() {
                 </ul>
             </div>
         </div>
-    </section>
+    <!-- </section>
 
-    <section class="bg-[#f6f6f6]">
+    <section class="bg-[#f6f6f6]"> -->
         <div class="max-w-[1320px] mx-auto px-5 xl:px-0 pb-10">
             <div class="py-5 md:py-14 border-t border-b-[#212529bf]">
                 <div
@@ -643,7 +643,7 @@ function decreaseQuantity() {
                 v-html="product.short_description"
             ></div>
 
-            <div class="py-2">
+            <!-- <div class="py-2">
                 <h3 class="text-3xl text-primary pb-2">Recommended Products</h3>
                 <div class="grid grid-cols-2 xl:grid-cols-5 gap-3 gap-y-[32px]">
                     <LoopProduct
@@ -652,7 +652,23 @@ function decreaseQuantity() {
                         :product="product"
                     />
                 </div>
+            </div> -->
+        </div>
+    </section>
+
+    <section class="bg-[#e2e8eb] py-12 product__section">
+        <div class="container-fluid mx-auto px-5">
+            <div>
+                <h3 class="text-primary text-4xl lg:text-4xl text-center pb-10 border-b border-b-[#d2c7c7] before:content-[''] before:absolute before:-bottom-[.1875rem] before:left-1/2 before:transform before:-translate-x-1/2 before:w-[15%] before:h-[.375rem] before:bg-primary before:z-10 relative before:!bg-[#d6d1d1]">Recommended Products</h3>
             </div>
+                <div class="grid grid-cols-2 xl:grid-cols-5 gap-3 mt-10 gap-y-[32px]">
+                    <LoopProduct
+                        v-for="product in relatedProducts"
+                        :key="product.id"
+                        :product="product"
+                    />
+                </div>
+            
         </div>
     </section>
     <div
