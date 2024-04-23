@@ -149,7 +149,7 @@ function decreaseQuantity() {
 
 <template>
 
-    <section class="bg-zinc-300 border-solid border-y-rose-300">
+    <section class="bg-[#e2e8eb] border-solid border-y-rose-300">
         <div class="max-w-[1320px] mx-auto py-3">
             <div class="px-10 xl:px-0">
                 <ul class="flex gap-2 flex-wrap">
