@@ -17,10 +17,28 @@ use Image;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::orderBy('id','desc')->paginate(25);
-        return view('admin.products.index')->withProducts($products);
+        $data = [
+            'title' => '',
+            'cat_id' => '',
+        ];
+
+        $products = Product::orderBy('id','desc');
+        if (!empty($request->title)){
+            $products = $products->where('title','like','%'.$request->title.'%');
+            $data['title'] = $request->title;
+        }
+        if (!empty($request->cat_id)){
+            $products = $products->whereHas('categories', function($q) use ($request){
+                $q->where('category_id', $request->cat_id);
+            });
+            $data['cat_id'] = $request->cat_id;
+        }
+
+        $products = $products->paginate(25);
+        $categories = ProCat::where('status',1)->pluck('title','id');
+        return view('admin.products.index',compact('products','data','categories'));
     }
 
 

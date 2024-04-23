@@ -188,32 +188,21 @@ function decreaseQuantity() {
                     </li>
                 </ul>
             </div> -->
-            <div class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0">
-                <div class="w-[100%] lg:w-[60%]">
-                    <div class="flex lg:gap-5 justify-between">
-                        <div class="w-[30%] lg:w-[20%]">
-                            <div class="flex flex-col gap-3">
-                                <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo"
-                                    @click="currentPhoto = photo.id" alt="product2"
-                                    class="thumbnail w-full cursor-pointer border" />
-                            </div>
-                        </div>
-                        <div class="w-[65%] lg:w-[80%]">
-                            <div class="position-relative">
-                                <template v-for="photo in product.galleries" :key="'full' + photo.id">
-                                    <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo"
-                                        :zoomSrc="photo.photoOriginal" zoomType="hover" />
-
-                                    <!-- <vue-image-zoomer v-if="currentPhoto == photo.id" :regular="photo.photo" :zoom="photo.photoOriginal" /> -->
-
-                                    <!-- :zoomSrc="photo.photoOriginal" -->
-                                </template>
-                            </div>
-                        </div>
-                    </div>
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0">              
+                <div class="w-[100%] lg:w-[45%]">
+                  
+                  <template v-for="photo in product.galleries" :key="'full' + photo.id">
+                      <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo" :zoomSrc="photo.photoOriginal" zoomType="hover" :hasSpacer="true" :fullscreenOnMobile="true" :zoomPreload="true" />
+                      <!-- <inner-image-zoom v-if="currentPhoto == photo.id" zoomScale="2" :src="photo.photo" :zoomSrc="photo.photo" zoomType="hover" :hasSpacer="true" :fullscreenOnMobile="true" /> -->
+                  </template>
+                  <div class="flex flex-row gap-2">
+                      <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo"
+                          @click="currentPhoto = photo.id" alt="product2"
+                          class="thumbnail w-[70px] lg:w-[100px] cursor-pointer border" />
+                  </div>
                 </div>
 
-                <div class="w-[100%] lg:w-[40%]">
+                <div class="w-[100%] lg:w-[55%]">
                     <!-- <div class="flex gap-12">
                 <h4 class="text-[#0d6efd] underline">Review 0</h4>
                 <p>Sold 0</p>

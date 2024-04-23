@@ -12,9 +12,23 @@
       <!-- Default card -->
       <div class="card">
         <div class="card-header with-border">
-          <h3 class="card-title">Product List</h3>
-          <div class="card-tools">
-            <a href="{{ route('product.products.create')}}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> New Product</a>
+          <div class="row">
+            <div class="col-md-10">
+              {!! Form::model($data, ['route' => 'product.products.index', 'method' => 'GET','class'=>'row']) !!}
+              <div class="form-group col-md-5">
+                {{ Form::text('title',null,['class'=>'form-control','placeholder'=>'Product title']) }}
+              </div>
+              <div class="form-group col-md-5">
+                {{ Form::select('cat_id',$categories,null,['class'=>'form-control select2','placeholder'=>'Select Category']) }}
+              </div>
+              <div class="form-group col-md-2">
+                {{ Form::submit('Search', ['class'=>'btn btn-primary btn-block']) }}
+              </div>
+              {!! Form::close() !!}
+            </div>
+            <div class="col-md-2">
+              <a href="{{ route('product.products.create')}}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> New Product</a>
+            </div>
           </div>
         </div>
         <div class="card-body">
