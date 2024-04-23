@@ -149,18 +149,16 @@ function decreaseQuantity() {
 
 <template>
 
-<section class="bg-zinc-300 border-solid border-y-rose-300">
+    <section class="bg-zinc-300 border-solid border-y-rose-300">
         <div class="max-w-[1320px] mx-auto py-3">
-    <div class="px-10 xl:px-0">
+            <div class="px-10 xl:px-0">
                 <ul class="flex gap-2 flex-wrap">
                     <li class="text-[#0d6efd]">
                         <router-link to="/" class="text-primary no-underline ms-3">
                             <font-awesome-icon class="me-3" icon="fa-solid fa-house" /> Home
                         </router-link>
                         <span class="text-sm text-gray-400 ms-3">
-                            <font-awesome-icon
-                                icon="fa-solid fa-chevron-right"
-                            />
+                            <font-awesome-icon icon="fa-solid fa-chevron-right" />
                         </span>
                     </li>
                     <li class="text-[#212529bf]">
@@ -168,8 +166,8 @@ function decreaseQuantity() {
                     </li>
                 </ul>
             </div>
-</div>
-</section>
+        </div>
+    </section>
 
     <section class="bg-[rgb(242, 248, 253)]">
         <div class="max-w-[1320px] mx-auto pt-5 pb-10">
@@ -190,35 +188,21 @@ function decreaseQuantity() {
                     </li>
                 </ul>
             </div> -->
-            <div
-                class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0"
-            >
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0">
                 <div class="w-[100%] lg:w-[60%]">
                     <div class="flex lg:gap-5 justify-between">
                         <div class="w-[30%] lg:w-[20%]">
                             <div class="flex flex-col gap-3">
-                                <img
-                                    v-for="photo in product.galleries"
-                                    :key="photo.id"
-                                    :src="photo.photo"
-                                    @click="currentPhoto = photo.id"
-                                    alt="product2"
-                                    class="thumbnail w-full cursor-pointer border"
-                                />
+                                <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo"
+                                    @click="currentPhoto = photo.id" alt="product2"
+                                    class="thumbnail w-full cursor-pointer border" />
                             </div>
                         </div>
                         <div class="w-[65%] lg:w-[80%]">
                             <div class="position-relative">
-                                <template
-                                    v-for="photo in product.galleries"
-                                    :key="'full' + photo.id"
-                                >
-                                    <inner-image-zoom
-                                        v-if="currentPhoto == photo.id"
-                                        :src="photo.photo"
-                                        :zoomSrc="photo.photoOriginal"
-                                        zoomType="hover"
-                                    />
+                                <template v-for="photo in product.galleries" :key="'full' + photo.id">
+                                    <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo"
+                                        :zoomSrc="photo.photoOriginal" zoomType="hover" />
 
                                     <!-- <vue-image-zoomer v-if="currentPhoto == photo.id" :regular="photo.photo" :zoom="photo.photoOriginal" /> -->
 
@@ -243,104 +227,52 @@ function decreaseQuantity() {
                             Price:
                             <template v-if="product.reduced_price != null">
                                 ৳ {{ product.reduced_price }}
-                                <span class="text-gray-400 line-through"
-                                    >৳ {{ product.price }}</span
-                                >
+                                <span class="text-gray-400 line-through">৳ {{ product.price }}</span>
                             </template>
                             <template v-else> ৳ {{ product.price }} </template>
                         </p>
 
-                        <div
-                            class="flex flex-col gap-2"
-                            v-if="product.colors != ''"
-                        >
-                        <h4 class="mr-2">Color:</h4>
-                            <div
-                                class="color-selector"
-                                v-for="(color, index) in product.colors"
-                                :key="index"
-                            >
-                                <input
-                                    type="radio"
-                                    name="color"
-                                    :id="'color-' + index"
-                                    class="hidden"
-                                />
-                                <label
-                                    :for="'color-' + index"
-                                    v-on:click="selectColor(index)"
-                                    class="border-2 rounded-sm h-8 w-20 cursor-pointer shadow-sm block"
-                                    :class="{
+                        <div class="flex flex-col gap-2" v-if="product.colors != ''">
+                            <h4 class="mr-2">Color:</h4>
+                            <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
+                                <input type="radio" name="color" :id="'color-' + index" class="hidden" />
+                                <label :for="'color-' + index" v-on:click="selectColor(index)"
+                                    class="border-2 rounded-sm h-8 w-20 cursor-pointer shadow-sm block" :class="{
                                         'border-green-600':
                                             product.selectedColor == index,
-                                    }"
-                                    :style="{ backgroundColor: color }"
-                                ></label>
-                                
+                                    }" :style="{ backgroundColor: color }"></label>
+
                             </div>
                         </div>
-                        <div
-                            class="flex flex-col gap-3 flex-wrap my-4"
-                            v-if="product.sizes != ''"
-                        >
+                        <div class="flex flex-col gap-3 flex-wrap my-4" v-if="product.sizes != ''">
                             <h4 class="mr-2">Size:</h4>
                             <div class="flex gap-2 flex-wrap">
-                                <div
-                                    class="size-selector"
-                                    v-for="(size, index) in product.sizes"
-                                    :key="index"
-                                >
-                                    <input
-                                        type="radio"
-                                        name="size"
-                                        :id="'size-' + index"
-                                        class="hidden"
-                                    />
-                                    <label
-                                        :for="'size-' + index"
-                                        v-on:click="selectSize(index)"
+                                <div class="size-selector" v-for="(size, index) in product.sizes" :key="index">
+                                    <input type="radio" name="size" :id="'size-' + index" class="hidden" />
+                                    <label :for="'size-' + index" v-on:click="selectSize(index)"
                                         class="text-xs border border-gray-200 rounded-sm flex items-center justify-center cursor-pointer shadow-sm text-gray-600 px-6 py-[10px]"
                                         :class="{
                                             'text-white bg-primary':
                                                 product.selectedSize == index,
-                                        }"
-                                        >{{ size }}</label
-                                    >
+                                        }">{{ size }}</label>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="my-6 text-primary flex justify-between gap-2 flex-wrap"
-                        >
+                        <div class="my-6 text-primary flex justify-between gap-2 flex-wrap">
                             <form class="w-full">
-                                <div
-                                    class="flex items-center md:max-w-[261px] border border-[#5a53538f] rounded-md"
-                                >
-                                    <button
-                                        @click="decreaseQuantity()"
-                                        type="button"
-                                        id="decrement-button"
+                                <div class="flex items-center md:max-w-[261px] border border-[#5a53538f] rounded-md">
+                                    <button @click="decreaseQuantity()" type="button" id="decrement-button"
                                         data-input-counter-decrement="quantity-input"
-                                        class="w-[25%] flex items-center justify-center py-2"
-                                    >
+                                        class="w-[25%] flex items-center justify-center py-2">
                                         -
                                     </button>
-                                    <input
-                                        type="text"
-                                        id="quantity-input"
-                                        data-input-counter
+                                    <input type="text" id="quantity-input" data-input-counter
                                         aria-describedby="helper-text-explanation"
                                         class="bg-white border-x-0 border-gray-300 lg:h-14 text-center text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
-                                        v-model="quantity"
-                                        required
-                                    />
-                                    <button
-                                        @click="increaseQuantity()"
-                                        type="button"
-                                        id="increment-button"
+                                        v-model="quantity" required />
+                                    <button @click="increaseQuantity()" type="button" id="increment-button"
                                         data-input-counter-increment="quantity-input"
-                                        class="w-[25%] flex items-center justify-center py-2"
-                                    >
+                                        class="w-[25%] flex items-center justify-center py-2">
                                         +
                                     </button>
                                 </div>
@@ -354,10 +286,8 @@ function decreaseQuantity() {
                             </p>
                         </div>
                         <div class="flex gap-5 mt-10 flex-wrap">
-                            <button
-                                @click="cart.addItem(product, quantity)"
-                                class="border border-black font-semibold rounded-lg capitalize text-black bg-white px-5 py-1 lg:px-8 lg:py-3"
-                            >
+                            <button @click="cart.addItem(product, quantity)"
+                                class="border border-black font-semibold rounded-lg capitalize text-black bg-white px-5 py-1 lg:px-8 lg:py-3">
                                 Add To Cart
                             </button>
                             <!-- <button
@@ -366,29 +296,17 @@ function decreaseQuantity() {
                     Buy it Now
                   </button> -->
                             <button
-                                class="border border-black font-semibold rounded-lg capitalize text-[#0d6efd] bg-white px-5 py-1 lg:px-8 lg:py-3"
-                            >
-                                <a
-                                    href="#"
-                                    @click="wishlist.toggleWishlist(product)"
-                                    class="text-gray-600 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition"
-                                >
-                                    <font-awesome-icon
-                                        v-if="wishlist.isWishListed(product)"
-                                        :icon="['fas', 'heart']"
-                                    />
-                                    <font-awesome-icon
-                                        v-else
-                                        :icon="['far', 'heart']"
-                                    />
+                                class="border border-black font-semibold rounded-lg capitalize text-[#0d6efd] bg-white px-5 py-1 lg:px-8 lg:py-3">
+                                <a href="#" @click="wishlist.toggleWishlist(product)"
+                                    class="text-gray-600 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition">
+                                    <font-awesome-icon v-if="wishlist.isWishListed(product)" :icon="['fas', 'heart']" />
+                                    <font-awesome-icon v-else :icon="['far', 'heart']" />
                                     Wishlist
                                 </a>
                             </button>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex gap-2 p-5 md:py-20 flex-wrap px-10 xl:px-0">
+
+                        <div class="flex my-5 p-3 gap-2 flex-wrap">
                 <h5 class="uppercase text-[#de5531]">share:</h5>
                 <ul class="flex text-[#008bd1] gap-3 text-xl flex-wrap">
                     <li>
@@ -432,25 +350,21 @@ function decreaseQuantity() {
               </li> -->
                 </ul>
             </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    <!-- </section>
+        <!-- </section>
 
     <section class="bg-[#f6f6f6]"> -->
         <div class="max-w-[1320px] mx-auto px-5 xl:px-0 pb-10">
-            <div class="py-5 md:py-14 border-t border-b-[#212529bf]">
-                <div
-                    class="uppercase md:text-3xl px-4 py-2 font-bold flex gap-0 justify-center flex-wrap"
-                >
-                    <h4
-                        @click="tabItem = 'description'"
-                        class="text-primary cursor-pointer border-2 p-2"
-                    >
+            <div class="py-5 md:py-6 border-t border-b-[#212529bf]">
+                <div class="uppercase md:text-3xl px-4 py-2 font-bold flex gap-0 justify-center flex-wrap">
+                    <h4 @click="tabItem = 'description'" class="text-primary cursor-pointer border-2 p-2">
                         Description
                     </h4>
-                    <h4
-                        @click="tabItem = 'short_description'"
-                        class="text-primary cursor-pointer border-2 p-2"
-                    >
+                    <h4 @click="tabItem = 'short_description'" class="text-primary cursor-pointer border-2 p-2">
                         Size
                     </h4>
                     <!-- <p class="text-[#0d6efd]">reviews (0)</p> -->
@@ -631,17 +545,9 @@ function decreaseQuantity() {
               </div>
             </div>
           </div> -->
-            <div
-                v-show="tabItem == 'description'"
-                id="description"
-                v-html="product.description"
-            ></div>
-            <div
-                v-show="tabItem == 'short_description'"
-                id="short_description"
-                class="d-none"
-                v-html="product.short_description"
-            ></div>
+            <div v-show="tabItem == 'description'" id="description" v-html="product.description"></div>
+            <div v-show="tabItem == 'short_description'" id="short_description" class="d-none"
+                v-html="product.short_description"></div>
 
             <!-- <div class="py-2">
                 <h3 class="text-3xl text-primary pb-2">Recommended Products</h3>
@@ -659,37 +565,27 @@ function decreaseQuantity() {
     <section class="bg-[#e2e8eb] py-12 product__section">
         <div class="container-fluid mx-auto px-5">
             <div>
-                <h3 class="text-primary text-4xl lg:text-4xl text-center pb-10 border-b border-b-[#d2c7c7] before:content-[''] before:absolute before:-bottom-[.1875rem] before:left-1/2 before:transform before:-translate-x-1/2 before:w-[15%] before:h-[.375rem] before:bg-primary before:z-10 relative before:!bg-[#d6d1d1]">Recommended Products</h3>
+                <h3
+                    class="text-primary text-4xl lg:text-4xl text-center pb-10 border-b border-b-[#d2c7c7] before:content-[''] before:absolute before:-bottom-[.1875rem] before:left-1/2 before:transform before:-translate-x-1/2 before:w-[15%] before:h-[.375rem] before:bg-primary before:z-10 relative before:!bg-[#d6d1d1]">
+                    Recommended Products</h3>
             </div>
-                <div class="grid grid-cols-2 xl:grid-cols-5 gap-3 mt-10 gap-y-[32px]">
-                    <LoopProduct
-                        v-for="product in relatedProducts"
-                        :key="product.id"
-                        :product="product"
-                    />
-                </div>
-            
+            <div class="grid grid-cols-2 xl:grid-cols-5 gap-3 mt-10 gap-y-[32px]">
+                <LoopProduct v-for="product in relatedProducts" :key="product.id" :product="product" />
+            </div>
+
         </div>
     </section>
-    <div
-        v-show="loading"
-        class="fixed bottom-0 left-0 w-full bg-black opacity-50 flex justify-center items-center h-screen"
-    >
+    <div v-show="loading"
+        class="fixed bottom-0 left-0 w-full bg-black opacity-50 flex justify-center items-center h-screen">
         <div class="relative inline-flex">
             <!-- <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
               <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
               <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div> -->
             <!-- <div class="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600" /> -->
-            <div
-                class="flex space-x-2 justify-center items-center h-screen dark:invert"
-            >
+            <div class="flex space-x-2 justify-center items-center h-screen dark:invert">
                 <span class="sr-only">Loading...</span>
-                <div
-                    class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"
-                ></div>
-                <div
-                    class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"
-                ></div>
+                <div class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div class="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                 <div class="h-8 w-8 bg-white rounded-full animate-bounce"></div>
             </div>
         </div>
