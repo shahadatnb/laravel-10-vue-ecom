@@ -148,9 +148,32 @@ function decreaseQuantity() {
 </script>
 
 <template>
+
+<section class="bg-zinc-300 border-solid border-y-rose-300">
+        <div class="max-w-[1320px] mx-auto py-3">
+    <div class="px-10 xl:px-0">
+                <ul class="flex gap-2 flex-wrap">
+                    <li class="text-[#0d6efd]">
+                        <router-link to="/" class="text-primary no-underline ms-3">
+                            <font-awesome-icon class="me-3" icon="fa-solid fa-house" /> Home
+                        </router-link>
+                        <span class="text-sm text-gray-400 ms-3">
+                            <font-awesome-icon
+                                icon="fa-solid fa-chevron-right"
+                            />
+                        </span>
+                    </li>
+                    <li class="text-[#212529bf]">
+                        {{ product.title }}
+                    </li>
+                </ul>
+            </div>
+</div>
+</section>
+
     <section class="bg-[#f6f6f6]">
         <div class="max-w-[1320px] mx-auto pt-5 pb-10">
-            <div class="px-10 xl:px-0">
+            <!-- <div class="px-10 xl:px-0">
                 <ul class="py-4 flex gap-2 flex-wrap">
                     <li class="text-[#0d6efd] underline">
                         <router-link to="/" class="text-primary text-base">
@@ -166,7 +189,7 @@ function decreaseQuantity() {
                         {{ product.title }}
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <div
                 class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0"
             >
@@ -231,7 +254,7 @@ function decreaseQuantity() {
                             class="flex flex-col gap-2"
                             v-if="product.colors != ''"
                         >
-                            <h4>color:</h4>
+                            <h4>Color:</h4>
                             <div
                                 class="color-selector"
                                 v-for="(color, index) in product.colors"
@@ -253,6 +276,7 @@ function decreaseQuantity() {
                                     }"
                                     :style="{ backgroundColor: color }"
                                 ></label>
+                                
                             </div>
                         </div>
                         <div
@@ -260,7 +284,7 @@ function decreaseQuantity() {
                             v-if="product.sizes != ''"
                         >
                             <h4 class="mr-2 font-medium">Size:</h4>
-                            <div class="flex gap-2">
+                            <div class="flex gap-2 flex-wrap">
                                 <div
                                     class="size-selector"
                                     v-for="(size, index) in product.sizes"
@@ -285,10 +309,12 @@ function decreaseQuantity() {
                                 </div>
                             </div>
                         </div>
-                        <div class="my-6 text-primary flex justify-between">
+                        <div
+                            class="my-6 text-primary flex justify-between gap-2 flex-wrap"
+                        >
                             <form class="w-full">
                                 <div
-                                    class="flex items-center max-w-[261px] border border-[#5a53538f] rounded-md"
+                                    class="flex items-center md:max-w-[261px] border border-[#5a53538f] rounded-md"
                                 >
                                     <button
                                         @click="decreaseQuantity()"
@@ -304,7 +330,7 @@ function decreaseQuantity() {
                                         id="quantity-input"
                                         data-input-counter
                                         aria-describedby="helper-text-explanation"
-                                        class="bg-white border-x-0 border-gray-300 h-14 text-center text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
+                                        class="bg-white border-x-0 border-gray-300 lg:h-14 text-center text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
                                         v-model="quantity"
                                         required
                                     />
@@ -345,7 +371,7 @@ function decreaseQuantity() {
                                 <a
                                     href="#"
                                     @click="wishlist.toggleWishlist(product)"
-                                    class="text-gray-600 px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition"
+                                    class="text-gray-600 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition"
                                 >
                                     <font-awesome-icon
                                         v-if="wishlist.isWishListed(product)"
