@@ -355,16 +355,14 @@ function decreaseQuantity() {
             </div>
 
         </div>
-        <!-- </section>
-
-    <section class="bg-[#f6f6f6]"> -->
+       
         <div class="max-w-[1320px] mx-auto px-5 xl:px-0 pb-10">
             <div class="py-5 md:py-6 border-t border-b-[#212529bf]">
-                <div class="uppercase md:text-3xl px-4 py-2 font-bold flex gap-0 justify-center flex-wrap">
-                    <h4 @click="tabItem = 'description'" class="text-primary cursor-pointer border-2 p-2">
+                <div class="uppercase md:text-3xl px-4 py-2 font-bold flex gap-3 justify-center flex-wrap">
+                    <h4 @click="tabItem = 'description'" class="text-primary cursor-pointer border px-5 py-2">
                         Description
                     </h4>
-                    <h4 @click="tabItem = 'short_description'" class="text-primary cursor-pointer border-2 p-2">
+                    <h4 @click="tabItem = 'short_description'" class="text-primary cursor-pointer border px-5 py-2">
                         Size
                     </h4>
                     <!-- <p class="text-[#0d6efd]">reviews (0)</p> -->
