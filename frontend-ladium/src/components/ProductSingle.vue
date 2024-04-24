@@ -188,32 +188,21 @@ function decreaseQuantity() {
                     </li>
                 </ul>
             </div> -->
-            <div class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0">
-                <div class="w-[100%] lg:w-[60%]">
-                    <div class="flex lg:gap-5 justify-between">
-                        <div class="w-[30%] lg:w-[20%]">
-                            <div class="flex flex-col gap-3">
-                                <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo"
-                                    @click="currentPhoto = photo.id" alt="product2"
-                                    class="thumbnail w-full cursor-pointer border" />
-                            </div>
-                        </div>
-                        <div class="w-[85%] lg:w-[100%]">
-                            <div class="position-relative">
-                                <template v-for="photo in product.galleries" :key="'full' + photo.id">
-                                    <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo"
-                                        :zoomSrc="photo.photoOriginal" zoomType="hover" />
-
-                                    <!-- <vue-image-zoomer v-if="currentPhoto == photo.id" :regular="photo.photo" :zoom="photo.photoOriginal" /> -->
-
-                                    <!-- :zoomSrc="photo.photoOriginal" -->
-                                </template>
-                            </div>
-                        </div>
-                    </div>
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-5 px-10 xl:px-0">              
+                <div class="w-[100%] lg:w-[50%]">
+                  
+                  <template v-for="photo in product.galleries" :key="'full' + photo.id">
+                      <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo" :zoomSrc="photo.photoOriginal" zoomType="hover" :hasSpacer="true" :fullscreenOnMobile="true" :zoomPreload="true" />
+                      <!-- <inner-image-zoom v-if="currentPhoto == photo.id" zoomScale="2" :src="photo.photo" :zoomSrc="photo.photo" zoomType="hover" :hasSpacer="true" :fullscreenOnMobile="true" /> -->
+                  </template>
+                  <div class="flex flex-row gap-2">
+                      <img v-for="photo in product.galleries" :key="photo.id" :src="photo.photo"
+                          @click="currentPhoto = photo.id" alt="product2"
+                          class="thumbnail w-[70px] lg:w-[100px] cursor-pointer border" />
+                  </div>
                 </div>
 
-                <div class="w-[100%] lg:w-[40%]">
+                <div class="w-[100%] lg:w-[45%]">
                     <!-- <div class="flex gap-12">
                 <h4 class="text-[#0d6efd] underline">Review 0</h4>
                 <p>Sold 0</p>
@@ -224,7 +213,7 @@ function decreaseQuantity() {
                         </h2>
                         <p class="mb-2 text-primary">SKU: {{ product.sku }}</p>
                         <p class="text-primary text-2xl font-semibold mb-4">
-                            Price:
+                            <!-- Price: -->
                             <template v-if="product.reduced_price != null">
                                 ৳ {{ product.reduced_price }}
                                 <span class="text-gray-400 line-through">৳ {{ product.price }}</span>
@@ -233,24 +222,33 @@ function decreaseQuantity() {
                         </p>
 
                         <div class="flex flex-col gap-2" v-if="product.colors != ''">
-                            <h4 class="mr-2">Color:</h4>
+                            <h4 class="mr-2">Color: Black</h4>
+                            <div class="flex flex-col gap-2">
+                              <div class="flex flex-row gap-2">
+                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                            </div>
+                            
                             <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
                                 <input type="radio" name="color" :id="'color-' + index" class="hidden" />
                                 <label :for="'color-' + index" v-on:click="selectColor(index)"
-                                    class="border-2 rounded-sm h-8 w-20 cursor-pointer shadow-sm block" :class="{
+                                    class="border-0 rounded-0 h-6 w-14 cursor-pointer shadow-sm block" :class="{
                                         'border-green-600':
                                             product.selectedColor == index,
                                     }" :style="{ backgroundColor: color }"></label>
 
                             </div>
+                          </div>
                         </div>
                         <div class="flex flex-col gap-3 flex-wrap my-4" v-if="product.sizes != ''">
-                            <h4 class="mr-2">Size:</h4>
+                            <h4 class="mr-2">Size: XL</h4>
                             <div class="flex gap-2 flex-wrap">
                                 <div class="size-selector" v-for="(size, index) in product.sizes" :key="index">
                                     <input type="radio" name="size" :id="'size-' + index" class="hidden" />
                                     <label :for="'size-' + index" v-on:click="selectSize(index)"
-                                        class="text-xs border border-gray-200 rounded-sm flex items-center justify-center cursor-pointer shadow-sm text-gray-600 px-6 py-[10px]"
+                                        class="text-xs md:text-md md:text-md border border-gray-200 rounded-sm flex items-center justify-center cursor-pointer shadow-sm text-gray-600 px-3 md:px-6 md:py-4 py-[6px]"
                                         :class="{
                                             'text-white bg-primary':
                                                 product.selectedSize == index,
@@ -258,8 +256,8 @@ function decreaseQuantity() {
                                 </div>
                             </div>
                         </div>
-                        <div class="my-6 text-primary flex justify-between gap-2 flex-wrap">
-                            <form class="w-full">
+                        <div class="my-6 text-primary flex justify-start items-center gap-2 flex-wrap">
+                            <form class="w-[50%]">
                                 <div class="flex items-center md:max-w-[261px] border border-[#5a53538f] rounded-md">
                                     <button @click="decreaseQuantity()" type="button" id="decrement-button"
                                         data-input-counter-decrement="quantity-input"
@@ -285,9 +283,9 @@ function decreaseQuantity() {
                                 }}
                             </p>
                         </div>
-                        <div class="flex gap-5 mt-10 flex-wrap">
+                        <div class="flex gap-5 my-3 flex-wrap">
                             <button @click="cart.addItem(product, quantity)"
-                                class="border border-black font-semibold rounded-lg capitalize text-black bg-white px-5 py-1 lg:px-8 lg:py-3">
+                                class="w-full border border-black rounded-xl uppercase text-white bg-black px-5 py-1 lg:px-8 lg:py-3">
                                 Add To Cart
                             </button>
                             <!-- <button
@@ -296,7 +294,7 @@ function decreaseQuantity() {
                     Buy it Now
                   </button> -->
                             <button
-                                class="border border-black font-semibold rounded-lg capitalize text-[#0d6efd] bg-white px-5 py-1 lg:px-8 lg:py-3">
+                                class="w-full text-[#0d6efd]">
                                 <a href="#" @click="wishlist.toggleWishlist(product)"
                                     class="text-gray-600 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition">
                                     <font-awesome-icon v-if="wishlist.isWishListed(product)" :icon="['fas', 'heart']" />
@@ -306,7 +304,7 @@ function decreaseQuantity() {
                             </button>
                         </div>
 
-                        <div class="flex my-5 p-3 gap-2 flex-wrap">
+                        <div class="flex my-3 p-3 gap-2 flex-wrap">
                 <h5 class="uppercase text-[#de5531]">share:</h5>
                 <ul class="flex text-[#008bd1] gap-3 text-xl flex-wrap">
                     <li>
