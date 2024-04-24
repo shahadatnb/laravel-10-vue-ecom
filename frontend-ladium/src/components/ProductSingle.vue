@@ -198,7 +198,7 @@ function decreaseQuantity() {
                                     class="thumbnail w-full cursor-pointer border" />
                             </div>
                         </div>
-                        <div class="w-[65%] lg:w-[80%]">
+                        <div class="w-[85%] lg:w-[100%]">
                             <div class="position-relative">
                                 <template v-for="photo in product.galleries" :key="'full' + photo.id">
                                     <inner-image-zoom v-if="currentPhoto == photo.id" :src="photo.photo"
