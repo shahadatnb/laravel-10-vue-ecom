@@ -29,9 +29,8 @@ onBeforeMount(()=>{
         <div class="container-fluid mx-auto px-5">
           <div>
             <h3
-              class="text-primary text-4xl lg:text-4xl text-center pb-10 border-b border-b-[#d2c7c7] before:content-[''] before:absolute before:-bottom-[.1875rem] before:left-1/2 before:transform before:-translate-x-1/2 before:w-[15%] before:h-[.375rem] before:bg-primary before:z-10 relative before:!bg-[#d6d1d1]"
-            >
-              NEW ARRIVALS
+              class="text-primary text-2xl lg:text-4xl text-center lg:pb-10 pb-2 border-b border-b-[#d2c7c7] before:content-[''] before:absolute before:-bottom-[.1875rem] before:left-1/2 before:transform before:-translate-x-1/2 before:w-[15%] before:h-[.375rem] before:bg-primary before:z-10 relative before:!bg-[#d6d1d1]"
+            >NEW <span class="font-semibold">ARRIVALS</span>
             </h3>
           </div>
           <div class="grid grid-cols-2 xl:grid-cols-6 gap-3 mt-10 gap-y-[32px]">            
@@ -45,9 +44,8 @@ onBeforeMount(()=>{
         <div class="container-fluid mx-auto px-5">
           <div>
             <h3
-              class="text-primary text-4xl lg:text-4xl text-center pb-10 border-b border-b-[#d2c7c7] before:content-[''] before:absolute before:-bottom-[.1875rem] before:left-1/2 before:transform before:-translate-x-1/2 before:w-[15%] before:h-[.375rem] before:bg-primary before:z-10 relative before:!bg-[#d6d1d1]"
-            >
-              FEATURED PRODUCTS
+              class="text-primary text-2xl lg:text-4xl text-center lg:pb-10 pb-2 border-b border-b-[#d2c7c7] before:content-[''] before:absolute before:-bottom-[.1875rem] before:left-1/2 before:transform before:-translate-x-1/2 before:w-[15%] before:h-[.375rem] before:bg-primary before:z-10 relative before:!bg-[#d6d1d1]"
+            >FEATURED <span class="font-semibold">PRODUCTS</span>
             </h3>
           </div>
         <div class="grid grid-cols-2 xl:grid-cols-6 gap-3 mt-10 gap-y-[32px]">

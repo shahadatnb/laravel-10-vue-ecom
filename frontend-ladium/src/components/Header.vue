@@ -28,7 +28,7 @@ function searchToggle() {
             >
                 <!-- logo -->
                 <div class="col-span-1 xl:col-span-2">
-                    <div class="w-[5.625rem] md:w-full">
+                    <div class="w-[9rem] md:w-full">
                         <router-link to="/">
                             <img
                                 class="w-full h-full"
@@ -50,7 +50,7 @@ function searchToggle() {
                             v-for="menu in basic.settings.menus.main"
                             :key="menu.id"
                         >
-                            <router-link :to="menu.menu_url" class="font-semibold">{{
+                            <router-link :to="menu.menu_url" class="text-md">{{
                                 menu.lebel
                             }}</router-link>
                         </li>

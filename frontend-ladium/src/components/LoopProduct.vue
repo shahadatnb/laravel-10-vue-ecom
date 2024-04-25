@@ -10,7 +10,7 @@ import {cart} from '../store/cart'
     
     <div class="relative group">
         <router-link :to="{ name: 'product-single', params: { slug: product.slug }}">
-            <img class="w-full h-full" :src="product.photo" :alt="product.title" />
+            <img class="w-full h-full rounded-lg" :src="product.photo" :alt="product.title" />
         </router-link>
         <div class="group-hover:block hidden absolute left-0 top-[75%] w-full "        >
             <div class="flex flex-wrap justify-center gap-2">
@@ -31,11 +31,11 @@ import {cart} from '../store/cart'
             </div>
         </div>
     </div>
-    <div class="py-4">
+    <div class="pt-4">
         <router-link :to="{ name: 'product-single', params: { slug: product.slug }}" class="py-[.625rem] mb-4">
-        <h2 class="text-sm text-nowrap font-semibold text-center">{{ product.title }}</h2>
+        <h2 class="text-sm md:text-md uppercase font-semibold text-center">{{ product.title }}</h2>
         </router-link>
-        <div class="flex py-3 justify-evenly">
+        <div class="flex pt-3 justify-evenly">
             <div class="text-md font-semibold">
                 <template v-if="product.reduced_price != null">
                     <span>৳{{ product.reduced_price }}</span>
@@ -49,7 +49,7 @@ import {cart} from '../store/cart'
             <a v-if="product.product_type === 'simple'" href="#" @click="cart.addItem(product)"
             class="block text-black">Buy Now</a>
             <router-link v-if="product.product_type === 'variant'" :to="{ name: 'product-single', params: { slug: product.slug }}"
-            class="block text-black">Details</router-link>
+            class="uppercase text-black">Details</router-link>
         </div>
         </div>
     </div>
