@@ -34,15 +34,15 @@ const date_of_birth = ref(auth.date_of_birth)
             <h4 class="text-lg font-medium capitalize mb-4">
                 Profile information
             </h4>
-            <div>
+            <div class="">
                 <!-- <div class="grid grid-cols-2 gap-4"> -->
                     <div class="w-full flex justify-start items-center gap-2 my-2">
-                        <label class="w-50" for="first">Full Name:</label>
-                        <input type="text" name="first" id="first" v-model="name" class="input-box w-50">
+                        <label class="w-28" for="first">Full Name:</label>
+                        <input type="text" name="first" id="first" v-model="name" class="input-box">
                     </div>
                     <div class="w-full flex justify-start items-center gap-2 my-2">
-                        <label class="w-50" for="last">Address:</label>
-                        <input type="text" name="last" id="last" v-model="address" class="input-box w-50">
+                        <label class="w-28" for="last">Address:</label>
+                        <textarea type="text" name="last" id="last" v-model="address" class="input-box h-32"></textarea>
                     </div>
                 <!-- </div> -->
                 <!--
@@ -62,12 +62,12 @@ const date_of_birth = ref(auth.date_of_birth)
             -->
                 <!-- <div class="grid grid-cols-2 gap-4"> -->
                     <div class="w-full flex justify-start items-center gap-2 my-2">
-                        <label class="w-50" for="email">Email Address:</label>
-                        <input type="email" name="email" id="email" v-model="email" class="input-box w-50">
+                        <label class="w-28" for="email">Email Address:</label>
+                        <input type="email" name="email" id="email" v-model="email" class="input-box">
                     </div>
                     <div class="w-full flex justify-start items-center gap-2 my-2">
-                        <label class="w-50" for="phone">Phone Number:</label>
-                        <input type="text" name="phone" id="phone" v-model="phone" class="input-box w-50">
+                        <label class="w-28" for="phone">Phone Number:</label>
+                        <input type="text" name="phone" id="phone" v-model="phone" class="input-box">
                     </div>
                 <!-- </div> -->
             </div>

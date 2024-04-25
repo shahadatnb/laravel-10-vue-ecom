@@ -24,7 +24,7 @@ const cartStore = cart;
             <h3 class="text-lg font-medium capitalize mb-4">Cart</h3>
             <div class="space-y-4">
                 <div v-for="item in cart.items" :key="item.id" class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-                    <img :src="item.product.photo" alt="product-image" class="w-full rounded-lg sm:w-40" />
+                    <img :src="item.product.photo" alt="product-image" class="w-full rounded-lg sm:w-20" />
                     <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                         <div class="mt-5 sm:mt-0">
                         <h2 class="text-lg font-bold text-gray-900">{{ item.product.title }}</h2>

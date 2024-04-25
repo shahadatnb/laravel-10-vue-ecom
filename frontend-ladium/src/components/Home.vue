@@ -34,7 +34,7 @@ onBeforeMount(()=>{
               NEW ARRIVALS
             </h3>
           </div>
-          <div class="grid grid-cols-2 xl:grid-cols-5 gap-3 mt-10 gap-y-[32px]">            
+          <div class="grid grid-cols-2 xl:grid-cols-6 gap-3 mt-10 gap-y-[32px]">            
             <LoopProduct v-for="product in newArarival" :key="product.id" :product="product"  />
           </div>
         </div>
@@ -50,7 +50,7 @@ onBeforeMount(()=>{
               FEATURED PRODUCTS
             </h3>
           </div>
-        <div class="grid grid-cols-2 xl:grid-cols-5 gap-3 mt-10 gap-y-[32px]">
+        <div class="grid grid-cols-2 xl:grid-cols-6 gap-3 mt-10 gap-y-[32px]">
             <LoopProduct v-for="product in recomendedProducts" :key="product.id" :product="product"  />
         </div>
         </div>

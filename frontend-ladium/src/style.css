@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Bogle';
+  src: url('fonts/Bogle-Regular.woff2') format('woff2'),
+      url('fonts/Bogle-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
-  font-family: "Kanit", sans-serif;
+  /* font-family: "Kanit", sans-serif; */
+  font-family: 'Bogle';
 }
 .sidebar {
   transition: transform 0.3s ease;

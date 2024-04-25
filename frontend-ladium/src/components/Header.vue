@@ -50,7 +50,7 @@ function searchToggle() {
                             v-for="menu in basic.settings.menus.main"
                             :key="menu.id"
                         >
-                            <router-link :to="menu.menu_url">{{
+                            <router-link :to="menu.menu_url" class="font-semibold">{{
                                 menu.lebel
                             }}</router-link>
                         </li>
@@ -154,7 +154,7 @@ function searchToggle() {
                 :key="menu.id"
                 class="menu-item hover:bg-[#ddd]"
             >
-                <router-link :to="menu.menu_url" class="w-full block p-2">{{
+                <router-link :to="menu.menu_url" class="w-full text-xl block p-2">{{
                     menu.lebel
                 }}</router-link>
             </li>
