@@ -143,6 +143,8 @@ Route::group(['middleware'=> ['auth','roles'],'roles'=>['Admin','SuperAdmin']], 
 
     Route::resource('taxonomy',TaxonomyController::class);
 	Route::get('taxonomy/hide{id}',[TaxonomyController::class,'hide'])->name('taxonomy.hide');
+
+	Route::get('product_image_resize',[StockController::class,'product_image_resize']);
     Route::get('/ac_config_store', function()
     {
         \Artisan::call('storage:link');

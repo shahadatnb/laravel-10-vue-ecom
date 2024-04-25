@@ -222,14 +222,14 @@ function decreaseQuantity() {
                         </p>
 
                         <div class="flex flex-col gap-2" v-if="product.colors != ''">
-                            <h4 class="mr-2">Color: Black</h4>
+                            <h4 class="mr-2">Color:</h4>
                             <div class="flex flex-col gap-2">
-                              <div class="flex flex-row gap-2">
-                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
-                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
-                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
-                              <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
-                            </div>
+                              <!-- <div class="flex flex-row gap-2">
+                                <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                                <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                                <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                                <img src="https://backend.ladiumbd.com/storage/products/1713508314.jpg" alt="product2" class="thumbnail h-14 w-14 cursor-pointer border rounded-md border-gray-200 p-1">
+                              </div> -->
                             
                             <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
                                 <input type="radio" name="color" :id="'color-' + index" class="hidden" />
@@ -243,7 +243,7 @@ function decreaseQuantity() {
                           </div>
                         </div>
                         <div class="flex flex-col gap-3 flex-wrap my-4" v-if="product.sizes != ''">
-                            <h4 class="mr-2">Size: XL</h4>
+                            <h4 class="mr-2">Size:</h4>
                             <div class="flex gap-2 flex-wrap">
                                 <div class="size-selector" v-for="(size, index) in product.sizes" :key="index">
                                     <input type="radio" name="size" :id="'size-' + index" class="hidden" />
@@ -277,7 +277,7 @@ function decreaseQuantity() {
                             </form>
                             <p class="w-[25%] font-bold text-primary">
                                 {{
-                                    product.quantity > 0
+                                    (product.quantity > 0 && product.quantity >= quantity)
                                         ? "In Stock"
                                         : "Out of Stock"
                                 }}

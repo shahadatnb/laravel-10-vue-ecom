@@ -49,6 +49,9 @@ function dateFormat(date) {
 					<table class="min-w-full leading-normal responsive">
 						<thead>
 							<tr>
+                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Photo
+                                </th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Name
@@ -69,6 +72,9 @@ function dateFormat(date) {
 						</thead>
 						<tbody>
 							<tr v-for="item in getOrders.items" :key="item.id">
+                                <td class="px-5 py-1 border-b border-gray-200 bg-white text-sm">
+                                    <img :src=" basicStore.serverUrl + '/storage/' + item.product.photo" alt="" class="w-20 h-20 object-cover">
+                                </td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">{{ item.product.title }}</p>
 								</td>
@@ -89,15 +95,15 @@ function dateFormat(date) {
 								</td>
 							</tr>
                             <tr>
-                                <td class="px-5" colspan="3">Total</td>
+                                <td class="px-5" colspan="4">Total</td>
                                 <td class="px-5 text-right">{{ getOrders.sub_total }}</td>
                             </tr>
 							<tr>
-                                <td class="px-5" colspan="3">Shipping Fee</td>
+                                <td class="px-5" colspan="4">Shipping Fee</td>
                                 <td class="px-5 text-right">{{ getOrders.shipping_amount }}</td>
                             </tr>
                             <tr>
-                                <td class="px-5" colspan="3">Total</td>
+                                <td class="px-5" colspan="4">Total</td>
                                 <td class="px-5 text-right">{{ getOrders.amount }}</td>
                             </tr>
 						</tbody>

@@ -256,9 +256,9 @@ class ProductController extends Controller
             $constraint->aspectRatio();
         })->encode('jpg',80);
 
-        $imgOriginal  = Image::make($request->image)->resize(1000, 1000, function ($constraint) {
+        $imgOriginal  = Image::make($request->image)->resize(900, 900, function ($constraint) {
             $constraint->aspectRatio();
-        })->encode('jpg',100);
+        })->encode('jpg',90);
         $file_name = 'products/'.time() .'.jpg';
         $file_name_original = 'productsOriginal/'.time() .'.jpg';
         Storage::disk('public')->put($file_name, $imgFile);

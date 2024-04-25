@@ -26,6 +26,19 @@ class StockController extends Controller
         return view('admin.products.variant.index', compact('productStocks', 'data'));
     }
 
+    public function product_image_resize(Request $request)
+    {
+       $images = Attachment::whereNotNull('imageOriginal')->get();
+       //dd($images);
+       foreach ($images as $image) {
+            $file = Storage::disk('public')->get($image->imageOriginal);
+           $imgFile  = Image::make($file)->resize(900, 900, function ($constraint) {
+               $constraint->aspectRatio();
+           })->encode('jpg',90);
+           Storage::disk('public')->put($image->imageOriginal, $imgFile);
+       }
+    }
+
     public function galleryStore(Request $request)
     {
         $this->validate($request, array(
@@ -33,9 +46,9 @@ class StockController extends Controller
             'color_id'=>'required',
             'image'=>'required|image|max:3072',
         ));
-        $imgOriginal  = Image::make($request->image)->resize(1000, 1000, function ($constraint) {
+        $imgOriginal  = Image::make($request->image)->resize(900, 900, function ($constraint) {
             $constraint->aspectRatio();
-        })->encode('jpg',100);
+        })->encode('jpg',90);
 
         $imgFile  = Image::make($request->image)->resize(500, 500, function ($constraint) {
             $constraint->aspectRatio();
