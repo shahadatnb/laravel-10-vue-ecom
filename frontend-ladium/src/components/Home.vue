@@ -10,12 +10,12 @@ import axios from "axios";
 const newArarival = ref([])
 const recomendedProducts = ref([])
 onBeforeMount(()=>{
-    axios.get(`${basic.serverUrl}/api/latest-products?take=10`)
+    axios.get(`${basic.serverUrl}/api/latest-products?take=12`)
         .then(res => {
             newArarival.value = res.data.data
         });
 
-    axios.get(`${basic.serverUrl}/api/latest-products?featured=1&take=10`)
+    axios.get(`${basic.serverUrl}/api/latest-products?featured=1&take=12`)
         .then(res => {
             recomendedProducts.value = res.data.data
         });
