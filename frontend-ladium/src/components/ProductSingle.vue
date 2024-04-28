@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onBeforeMount, onMounted, ref, watch } from "vue";
+import { reactive, onBeforeMount, ref, watch } from "vue";
 import "vue-inner-image-zoom/lib/vue-inner-image-zoom.css";
 import InnerImageZoom from "vue-inner-image-zoom";
 //import { VueImageZoomer } from 'vue-image-zoomer'
@@ -22,6 +22,9 @@ const galleries = ref("");
 const currentUrl = window.location.origin + window.location.pathname;
 const tabItem = ref("description");
 const loading = ref(false);
+const selectedColor = ref('');
+const selectedSize = ref('');
+
 watch(() => route.params.slug, fetchData, { immediate: true });
 
 async function fetchData(data) {
@@ -74,13 +77,9 @@ async function fetchData(data) {
 }
 
 onBeforeMount(() => {
-  axios.get(`${basic.serverUrl}/api/latest-products?take=8`).then((res) => {
+  axios.get(`${basic.serverUrl}/api/latest-products?take=6`).then((res) => {
     relatedProducts.value = res.data.data;
   });
-});
-
-onMounted(() => {
-  window.scrollTo(0, 0);
 });
 
 function selectColor(color) {
@@ -97,6 +96,7 @@ function selectColor(color) {
       selectedVariant.color +
       " - " +
       selectedVariant.size;
+    selectedColor.value = selectedVariant.color;
     product.price = selectedVariant.price;
     product.reduced_price = selectedVariant.reduced_price;
     product.quantity = selectedVariant.quantity;
@@ -130,6 +130,7 @@ function selectSize(size) {
       selectedVariant.color +
       " - " +
       selectedVariant.size;
+    selectedSize.value = selectedVariant.size;
     product.price = selectedVariant.price;
     product.reduced_price = selectedVariant.reduced_price;
     product.quantity = selectedVariant.quantity;
@@ -201,7 +202,7 @@ function decreaseQuantity() {
             </p>
 
             <div class="flex flex-col gap-2" v-if="product.colors != ''">
-              <h4 class="mr-2">Color: <b>Name</b></h4>
+              <h4 class="mr-2">Color: <b>{{ selectedColor }}</b></h4>
               <div class="flex flex-col gap-2">
                 <div class="color-selector" v-for="(color, index) in product.colors" :key="index">
                   <input type="radio" name="color" :id="'color-' + index" class="hidden" />
@@ -215,7 +216,7 @@ function decreaseQuantity() {
               </div>
             </div>
             <div class="flex flex-col gap-3 flex-wrap my-4" v-if="product.sizes != ''">
-              <h4 class="mr-2">Size: <b>Size</b></h4>
+              <h4 class="mr-2">Size: <b>{{ selectedSize }}</b></h4>
               <div class="flex gap-2 flex-wrap">
                 <div class="size-selector" v-for="(size, index) in product.sizes" :key="index">
                   <input type="radio" name="size" :id="'size-' + index" class="hidden" />

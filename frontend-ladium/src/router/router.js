@@ -90,7 +90,15 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        // always scroll to top
+        //return { top: 0 }
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+      }
 });
 
 const DEFAULT_TITLE = 'Ecommerce';
