@@ -37,6 +37,7 @@ onBeforeMount(()=>{
             <LoopProduct v-for="product in newArarival" :key="product.id" :product="product"  />
           </div>
         </div>
+        <div class="viewAllButton text-center pt-10"><a href="#" class="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-auto">View All</a></div>
       </section>
     <!-- ./new arrival -->
 
