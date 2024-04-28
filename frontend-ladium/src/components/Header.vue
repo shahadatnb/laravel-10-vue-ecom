@@ -24,11 +24,11 @@ function searchToggle() {
     <header class="bg-[#f5f5f5] py-3 sticky top-0 left-0 z-50 px-5 md:px-0">
         <div class="container-fluid mx-auto px-5">
             <div
-                class="flex sm:flex-none sm:grid sm:grid-cols-3 xl:grid-cols-12 items-center xl:gap-20 gap-5 justify-between relative"
+                class="flex sm:flex-none sm:grid sm:grid-cols-3 xl:grid-cols-12 items-center xl:gap-10 gap-5 justify-between relative"
             >
                 <!-- logo -->
                 <div class="col-span-1 xl:col-span-2">
-                    <div class="w-[9rem] md:w-full">
+                    <div class="w-[9rem] md:w-3/4">
                         <router-link to="/">
                             <img
                                 class="w-full h-full"
@@ -40,7 +40,7 @@ function searchToggle() {
                 </div>
                 <!-- desktop nav -->
                 <nav
-                    class="hidden xl:block col-span-6 text-primary font-medium text-sm"
+                    class="hidden xl:block col-span-7 text-primary font-medium text-sm md:justify-self-center"
                 >
                     <ul
                         class="flex gap-5 justify-end"
@@ -50,14 +50,14 @@ function searchToggle() {
                             v-for="menu in basic.settings.menus.main"
                             :key="menu.id"
                         >
-                            <router-link :to="menu.menu_url" class="text-md">{{
+                            <router-link :to="menu.menu_url" class="md:text-xs text-md uppercase">{{
                                 menu.lebel
                             }}</router-link>
                         </li>
                     </ul>
                 </nav>
                 <div
-                    class="col-span-2 xl:col-span-4 flex items-center gap-5 justify-end"
+                    class="col-span-2 xl:col-span-3 flex items-center gap-5 justify-end"
                 >
                     <!-- search -->
                     <div class="hidden">
