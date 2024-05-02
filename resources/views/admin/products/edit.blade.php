@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 @section('title','Product Edit')
 @section('css')
-  <link href="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.css" rel="stylesheet">
   <style>
     img{max-width: 100%}
     #image_row label {position: absolute;}
@@ -206,7 +206,7 @@
     </section>
  @endsection
     @section('js')
-    <script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.js"></script>
       <script>
           $('.textarea').summernote();
 
