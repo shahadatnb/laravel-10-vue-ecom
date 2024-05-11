@@ -30,7 +30,17 @@ const cart = reactive({
             this.items[product.variant_id].quantity++
             }else{
                 this.items[product.variant_id] = {
-                    product,
+                    product: {
+                        'id':product.id,
+                        'title':product.title,
+                        'sku':product.sku,
+                        'slug':product.slug,
+                        'price':product.price,
+                        'reduced_price':product.reduced_price,
+                        'product_type':product.product_type,
+                        'photo':product.photo,
+                        'variant_id':product.variant_id,
+                    },
                     quantity: quantity
                 }
             }
