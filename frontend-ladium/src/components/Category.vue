@@ -17,6 +17,7 @@ const selectedSizes = ref([])
 const minPrice = ref(0)
 const maxPrice = ref(2000)
 const loading = ref(false)
+const filter =ref('hidden')
 
 watch(() => route.params.slug, fetchData, { immediate: true })
 
@@ -60,6 +61,11 @@ onBeforeMount(()=>{
             colors.value = res.data
         });
 })
+
+function filterToggle(){
+  filter.value == '' ? filter.value = 'hidden' : filter.value = ''
+}
+
 </script>
 <template>
     <section class="bg-[#f2f2f2] py-2">
@@ -77,11 +83,9 @@ onBeforeMount(()=>{
               </div>
               <div>
                 <li class="lg:hidden">
-                  <div class="flex menu__toggle items-center">
+                  <div @click="filterToggle" class="flex menu__toggle items-center">
                     <span class="mr-2">filter</span>
-                    <span class="text-2xl"
-                      ><i class="fa-solid fa-filter"></i
-                    ></span>
+                    <span class="text-2xl"><font-awesome-icon :icon="['fas', 'filter']" /></span>
                   </div>
                 </li>
               </div>
@@ -93,7 +97,7 @@ onBeforeMount(()=>{
         <div class="container-fluid mx-auto">
           <div class="flex flex-col lg:flex-row">
             <div class="w-full lg:w-[30%] xl:w-[17%] px-5 py-[10px]">
-              <div class="hidden lg:block menu">
+              <div :class="filter + ' lg:block menu'">
                       <!--
               <h3 class="mb-2">Price Range</h3>
                 <div class="flex justify-between range-slider">
