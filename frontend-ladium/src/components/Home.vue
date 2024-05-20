@@ -20,6 +20,23 @@ onBeforeMount(()=>{
             recomendedProducts.value = res.data.data
         });
 })
+
+function loadMoreRecomended() {
+  let skip = recomendedProducts.value.length;
+    axios.get(`${basic.serverUrl}/api/latest-products?featured=1&take=12&skip=${skip}`)
+        .then(res => {
+          recomendedProducts.value = [...recomendedProducts.value, ...res.data.data]
+    })
+}
+
+function loadMoreNew() {
+  let skip = newArarival.value.length;
+    axios.get(`${basic.serverUrl}/api/latest-products?take=12&skip=${skip}`)
+        .then(res => {
+          newArarival.value = [...newArarival.value, ...res.data.data]
+    })
+}
+
 </script>
 <template>
     
@@ -37,7 +54,9 @@ onBeforeMount(()=>{
             <LoopProduct v-for="product in newArarival" :key="product.id" :product="product"  />
           </div>
         </div>
-        <div class="viewAllButton text-center pt-10"><a href="#" class="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-auto">View All</a></div>
+        <div  v-if="recomendedProducts.length>0" class="viewAllButton text-center pt-10">
+          <button type="button" class="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-auto"  @click="loadMoreNew()">Load More</button>
+        </div>
       </section>
     <!-- ./new arrival -->
 
@@ -54,7 +73,9 @@ onBeforeMount(()=>{
         </div>
         
         </div>
-        <div class="viewAllButton text-center pt-10"><a href="#" class="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-auto">View All</a></div>
+        <div  v-if="recomendedProducts.length>0" class="viewAllButton text-center pt-10">
+          <button type="button" class="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm mx-auto"  @click="loadMoreRecomended()">Load More</button>
+        </div>
     </section>
     <!-- ./product -->
 
