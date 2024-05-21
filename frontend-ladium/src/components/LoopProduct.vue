@@ -39,10 +39,10 @@ import {cart} from '../store/cart'
             <div class="text-md font-semibold">
                 <template v-if="product.reduced_price != null">
                     <span>৳{{ product.reduced_price }}</span>
-                    <span class="text-gray-400 line-through">৳{{ product.price }}</span>
+                    <span class="text-gray-400 line-through mx-2 text-sm">৳{{ product.price }}</span>
                 </template>
                 <template v-else>
-                    <span>৳{{ product.price }}</span>
+                    <span class="text-md">৳{{ product.price }}</span>
                 </template>
             </div>
             <div class="text-md font-semibold">
