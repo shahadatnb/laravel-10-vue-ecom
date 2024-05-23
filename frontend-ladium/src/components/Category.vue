@@ -96,7 +96,7 @@ function filterToggle(){
       <section class="pb-10 md:py-[30px] bg-[#f6f6f6]">
         <div class="container-fluid mx-auto">
           <div class="flex flex-col lg:flex-row">
-            <div class="w-full lg:w-[30%] xl:w-[17%] px-5 py-[10px]">
+            <div class="w-full lg:w-[25%] xl:w-[17%] px-5 pb-[10px]">
               <div :class="filter + ' lg:block menu'">
                       <!--
               <h3 class="mb-2">Price Range</h3>
@@ -220,9 +220,9 @@ function filterToggle(){
                 </div>
               </div>
             </div>
-            <div class="w-full lg:w-[70%] xl:w-[73%]">
+            <div class="w-full lg:w-[75%] xl:w-[83%]">
               <div
-                class="grid grid-cols-2 xl:grid-cols-5 gap-3 mt-10 gap-y-[32px]"
+                class="grid grid-cols-2 xl:grid-cols-5 gap-3 gap-y-[32px]"
               >
                 <loop-product
                   v-for="product in products"

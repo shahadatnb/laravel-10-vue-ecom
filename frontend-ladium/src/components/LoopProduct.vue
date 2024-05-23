@@ -39,7 +39,7 @@ import {cart} from '../store/cart'
             <div class="text-md font-semibold">
                 <template v-if="product.reduced_price != null">
                     <span>৳{{ product.reduced_price }}</span>
-                    <span class="text-gray-400 line-through mx-2 text-sm">৳{{ product.price }}</span>
+                    <span class="text-gray-400 line-through ms-2 text-sm">৳{{ product.price }}</span>
                 </template>
                 <template v-else>
                     <span class="text-md">৳{{ product.price }}</span>
@@ -49,7 +49,7 @@ import {cart} from '../store/cart'
             <a v-if="product.product_type === 'simple'" href="#" @click="cart.addItem(product)"
             class="block text-black">Buy Now</a>
             <router-link v-if="product.product_type === 'variant'" :to="{ name: 'product-single', params: { slug: product.slug }}"
-            class="uppercase text-black">Details</router-link>
+            class="uppercase text-black text-sm">Details</router-link>
         </div>
         </div>
     </div>
