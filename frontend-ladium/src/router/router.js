@@ -101,7 +101,7 @@ const router = createRouter({
       }
 });
 
-const DEFAULT_TITLE = 'Ecommerce';
+const DEFAULT_TITLE = 'Ladium BD';
 router.afterEach((to, from) => {
     const title = to.meta.title;
     document.title = title ?? DEFAULT_TITLE;
