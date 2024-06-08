@@ -24,7 +24,7 @@ watch(() => route.params.slug, fetchData, { immediate: true })
 
 async function fetchData(data) {
   loading.value = true
-    axios.get(`${basic.serverUrl}/api/latest-products?category_slug=${data}&take=100`)//
+    axios.get(`${basic.serverUrl}/api/latest-products?category_slug=${data}&take=10000`)//
       .then(res => {
           products.value = res.data.data
           loading.value = false
@@ -36,7 +36,7 @@ function fetchProducts(){
   setTimeout(function() {
     loading.value = true
     //your code to be executed after 1 second
-    axios.get(`${basic.serverUrl}/api/latest-products?colors=${selectedColors.value}&sizes=${selectedSizes.value}&min=${minPrice.value}&max=${maxPrice.value}&categories=${selectedCategory.value}&take=100`)
+    axios.get(`${basic.serverUrl}/api/latest-products?colors=${selectedColors.value}&sizes=${selectedSizes.value}&min=${minPrice.value}&max=${maxPrice.value}&categories=${selectedCategory.value}&take=10000`)
         .then(res => {
             products.value = res.data.data
             loading.value = false

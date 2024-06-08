@@ -44,7 +44,7 @@
                     <td>{{$customer->address}} {{$customer->address2}}  {{$customer->city}},
                     {{$customer->ostate? $customer->ostate->name:''}}, {{$customer->postcode}}, {{$customer->country}}
                     </td>
-                    <td>{{ prettyDate($customer->created_at)}}</td>
+                    <td>{{ CustomHelper::prettyDate($customer->created_at)}}</td>
                     <td>
                         <div class="btn-group">
                             <a href="{{route('customers.show',$customer->id)}}" class="btn btn-info btn-sm"> <i class="fa fa-eye"></i></a>
