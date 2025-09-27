@@ -330,7 +330,7 @@ class OrderController extends Controller
         return $order;
         */
 
-        $order = Order::where('id',$id)->with('items.product')->first();
+        $order = Order::where('id',$id)->with('items.product','status')->first();
         return response()->json($order);
     }
 

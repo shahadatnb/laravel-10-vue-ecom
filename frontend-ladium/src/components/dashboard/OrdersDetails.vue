@@ -46,6 +46,7 @@ function dateFormat(date) {
         <!-- info -->
         <div class="col-span-12 lg:col-span-9 grid grid-cols-1 gap-4">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                <h2 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Order Details</h2>
 					<table class="min-w-full leading-normal responsive">
 						<thead>
 							<tr>
@@ -110,20 +111,23 @@ function dateFormat(date) {
 					</table>
 				</div>
             
-<!-- 
+
             <div class="shadow rounded bg-white px-4 pt-6 pb-8">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-medium text-gray-800 text-lg">Shipping address</h3>
-                    <a href="#" class="text-primary">Edit</a>
+                    <!-- <a href="#" class="text-primary">Edit</a> -->
                 </div>
                 <div class="space-y-1">
-                    <h4 class="text-gray-700 font-medium">John Doe</h4>
-                    <p class="text-gray-800">Medan, North Sumatera</p>
-                    <p class="text-gray-800">20371</p>
-                    <p class="text-gray-800">0811 8877 988</p>
+                    <h4 class="text-gray-700 font-medium">{{ getOrders.name }}</h4>
+                    <p class="text-gray-800">{{ getOrders.address }}</p>
+                    <p class="text-gray-800">{{ getOrders.city }}</p>
+                    <p class="text-gray-800">{{ getOrders.phone }}</p>
                 </div>
             </div>
-
+            <div class="shadow rounded bg-white px-4 pt-6 pb-8">
+                <h2>Order Status : {{ getOrders.status.name }}</h2>
+            </div>
+<!-- 
             <div class="shadow rounded bg-white px-4 pt-6 pb-8">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-medium text-gray-800 text-lg">Billing address</h3>

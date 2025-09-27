@@ -15,6 +15,8 @@ const email = ref(userProfile.email)
 const city = ref(userProfile.city)
 const postalCode = ref(userProfile.postalCode)
 const locations = ref()
+const closePopup = () => { order.showPopup = false; };
+
 onBeforeMount(()=>{
     axios.get(`${basic.serverUrl}/api/getLocation?loc=bd`)
         .then(res => {
@@ -52,8 +54,7 @@ function shippingAmount(city) {
         <div class="flex flex-col lg:flex-row">
             <div class="w-full lg:w-[66%] p-5 lg:px-[50px] py-10 rounded">
             <h3 class="text-lg font-medium capitalize mb-4">Shipping Address</h3>
-            <div class="space-y-4 flex gap-5 flex-wrap justify-between">
-
+            <div class="space-y-4 flex gap-5 flex-wrap justify-between">                
                 <!-- <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="first-name" class="text-gray-600">First Name <span
@@ -66,7 +67,7 @@ function shippingAmount(city) {
                         <input type="text" name="last-name" id="last-name" class="input-box">
                     </div>
                 </div> -->
-                <div class="w-full md:w-[100%]">
+                <div class="w-full md:w-[100%]">                    
                     <input
                     class="w-full border-[#dee2e6] px-[15px] py-[10px] text-[#212529] border rounded-md bg-white"
                     required=""
@@ -151,6 +152,7 @@ function shippingAmount(city) {
         </div>
         <div class="w-full lg:w-[33%] border-l-[#dee2e6] border-l pl-6 py-10 rounded" >
             <h4 class="text-gray-800 text-lg mb-4 font-medium uppercase">order summary</h4>
+            <!-- <span v-if="order.errorMessage.products" class="flex border-red-500 items-center font-large tracking-wide text-red-600 text-xs mb-5">{{ order.errorMessage.products[0] }}</span> -->
             <div class="space-y-2">
                 <div v-for="item in cart.items" :key="item.id" class="flex justify-between">
                     <div>
@@ -193,6 +195,23 @@ function shippingAmount(city) {
 
     </div>
     </div>
+
+
+    <div v-if="order.showPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" > 
+        <div class="bg-white rounded-2xl shadow-lg w-96 p-6 text-center"> <!-- Success Icon --> 
+            <div class="flex justify-center mb-4"> 
+                <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" > 
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /> </svg> 
+            </div> <!-- Message --> 
+            <h2 class="text-xl font-semibold text-gray-800 mb-2"> Order Placed Successfully! </h2> 
+            <p class="text-gray-600 mb-4"> Your order <span class="font-bold">#</span> has been confirmed. </p> <!-- Buttons --> 
+            <div class="flex gap-3 justify-center"> 
+                <button @click="order.viewOrderDetails" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition" > View Details </button> 
+                <button @click="closePopup" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition" > Close </button> 
+            </div> 
+        </div> 
+    </div>
+
     <!-- ./wrapper -->
     <div v-show="order.loading" class="fixed bottom-0 left-0 w-full bg-black opacity-50 flex justify-center items-center h-screen">
           <div class="relative inline-flex">

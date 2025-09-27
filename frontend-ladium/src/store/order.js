@@ -2,12 +2,16 @@ import { reactive } from 'vue'
 import router from '../router/router'
 import { authStore } from './authStore'
 import { basicStore } from './basic'
+import { toast } from 'vue3-toastify';
 import { cart } from './cart'
 const basic = basicStore
+// const showPopup = ref(false);
 const order = reactive({
     orders: [],
     shipping_amount: 0,
     loading:false,
+    showPopup: false,
+    orderId: 0,
     errorMessage: {},
     async fetchOrders() {
         const apiUrl = `${basic.serverUrl}/api/orders`
@@ -70,7 +74,7 @@ const order = reactive({
             email,
             address,
             city,
-            postalCode,
+            zip_code: postalCode,
             totalPrice: cart.totalPrice,
             shipping_amount: order.shipping_amount,
             products: products
@@ -90,15 +94,35 @@ const order = reactive({
                 this.errorMessage = {}
                 cart.emptyCart()
                 this.loading = false
-                router.push('/dashboard/orders')
+                // toast("Order placed successfully", {
+                //     "theme": "auto",
+                //     "type": "success",
+                //     "autoClose": 1000,
+                //     "dangerouslyHTMLString": true
+                // })
+                //router.push('/dashboard/orders')
+                this.orderId = data.order.id
+                this.showPopup = true
             }else{
-                this.loading = false
+                this.loading = false                
                 this.errorMessage = data.data
+                if(data.data.products){
+                    toast(data.data.products[0], {
+                        "theme": "auto",
+                        "type": "error",
+                        "autoClose": 1000,
+                        "dangerouslyHTMLString": true
+                    })
+                }
             }
             
         } catch (error) {
             console.error('Error placing order:', error);
         }
+    },
+    viewOrderDetails(){ 
+        this.showPopup = false;
+        router.push('/dashboard/order/'+this.orderId)
     }
 })
 

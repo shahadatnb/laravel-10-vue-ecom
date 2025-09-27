@@ -85,7 +85,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          {{ $products->links() }}
+          {{ $products->appends($_GET)->links() }}
         </div>
         <!-- /.card-footer-->
       </div>

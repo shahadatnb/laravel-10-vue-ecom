@@ -36,6 +36,13 @@ class CheckoutRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'products.required' => 'Please add to cart at least one product',
+        ];
+    }
+
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
