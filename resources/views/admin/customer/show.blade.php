@@ -35,7 +35,7 @@
             @foreach ($customer->orders as $order)
                 <tr>
                     <td>{{$order->id}}</td>
-                    <td>{{ prettyDate($order->created_at)}}</td>
+                    <td>{{ date('d M Y', strtotime($order->created_at))}}</td>
                     <td>{{$order->amount}}</td>
                 </tr>
             @endforeach

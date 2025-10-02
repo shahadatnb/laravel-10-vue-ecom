@@ -11,6 +11,7 @@ use App\Http\Traits\locTrait;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Auth\CustomerLoginRequest;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class CustomerController extends Controller
 {  use locTrait;
@@ -108,10 +109,11 @@ class CustomerController extends Controller
 
     public function registerApi(CustomerRegisterRequest $request){
         $validated = $request->validated();
-
+        //dd($request->all());
         $customer = Customer::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 
@@ -137,13 +139,15 @@ class CustomerController extends Controller
         return response(['error' => 0, 'token' => $plainTextToken, 'user'=>$customer],  200);
     }
 
-    public function updateProfileApi(Request $request){
+    public function updateProfileApi(ProfileUpdateRequest $request){
+        $validated = $request->validated();
         $customer = $request->user();
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
         $customer->date_of_birth = $request->date_of_birth;
+        $customer->zip_code = $request->zip_code;
         $customer->save();        
         return response(['error' => 0, 'user'=>$customer],  200);
     }

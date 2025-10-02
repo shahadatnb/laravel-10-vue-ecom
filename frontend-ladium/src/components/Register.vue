@@ -35,6 +35,14 @@ const tramsAgreement = ref('')
                             <span v-if="authStore.errorMessage.email" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ authStore.errorMessage.email[0] }}</span>
                     </div>
                     <div>
+                        <label for="phone" class="text-gray-600 mb-2 block">Phone</label>
+                        <input type="text" name="phone" id="phone" v-model="phone"
+                            :class="authStore.errorMessage.phone ? 'border-red-500' : ''"
+                            class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                            placeholder="01700000000">
+                            <span v-if="authStore.errorMessage.phone" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ authStore.errorMessage.phone[0] }}</span>
+                    </div>
+                    <div>
                         <label for="password" class="text-gray-600 mb-2 block">Password</label>
                         <input type="password" name="password" id="password" v-model="password"
                             :class="authStore.errorMessage.password ? 'border-red-500' : ''"
@@ -58,7 +66,7 @@ const tramsAgreement = ref('')
                     </div>
                 </div>
                 <div class="mt-4">
-                    <button type="button" @click="auth.register(name, email, password, password_confirmation)"
+                    <button type="button" @click="auth.register(name, email, phone, password, password_confirmation)"
                         class="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">create
                         account</button>
                 </div>

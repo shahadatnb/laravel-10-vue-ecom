@@ -41,13 +41,13 @@ const authStore = reactive({
     getUserToken(){
         return authStore.user.token
     },
-    async register(name, email, password, password_confirmation){
+    async register(name, email, phone, password, password_confirmation){
         const register = fetch(`${basic.serverUrl}/api/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, email, password, password_confirmation })
+            body: JSON.stringify({ name, email, phone, password, password_confirmation })
         })
         try{
             const res = await register
@@ -65,7 +65,8 @@ const authStore = reactive({
         
     },
 
-    updateProfile(name, email, phone,address,date_of_birth) {
+    updateProfile(name, email, phone,address,zip_code,date_of_birth) {
+        authStore.errorMessage = {}
         const token = authStore.getUserToken()
         if(!token){
             return
@@ -76,7 +77,7 @@ const authStore = reactive({
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, name, date_of_birth, phone , address})
+            body: JSON.stringify({ email, name, date_of_birth, phone , address, zip_code})
         }).then(res => res.json())
             .then(res => {
                 if (res.error == 0) {
@@ -89,6 +90,14 @@ const authStore = reactive({
                         "dangerouslyHTMLString": true
                     })
                     localStorage.setItem('userProfile', JSON.stringify(res.user))
+                }else{
+                    authStore.errorMessage = res.data
+                    toast(res.message, {
+                        "theme": "auto",
+                        "type": "danger",
+                        "autoClose": 1000,
+                        "dangerouslyHTMLString": true
+                    })
                 }
             })
 

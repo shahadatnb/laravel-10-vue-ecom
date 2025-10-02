@@ -12,7 +12,7 @@ onBeforeMount(()=>{
     axios.get(`${basicStore.serverUrl}/api/orders`, { headers: {"Authorization" : `Bearer ${token}`} })
     .then(res => {
         getOrders.value = res.data
-        console.log(getOrders.value)
+        //console.log(getOrders.value)
     });
 })
 
@@ -42,7 +42,48 @@ function dateFormat(date) {
 
         <!-- info -->
         <div class="col-span-12 lg:col-span-9 grid grid-cols-1 gap-4">
-            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+
+            <div class="overflow-x-auto">
+                <!-- Desktop Table -->
+                <table class="hidden md:table min-w-full border border-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                    <th class="px-4 py-2 text-left border">Order ID</th>
+                    <th class="px-4 py-2 text-left border">Amount</th>
+                    <th class="px-4 py-2 text-left border">Order Date</th>
+                    <th class="px-4 py-2 text-left border">Status</th>
+                    <th class="px-4 py-2 text-left border">Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="order in getOrders" :key="order.id"
+                    class="hover:bg-gray-50" >
+                    <td class="px-4 py-2 border">{{ order.id }}</td>
+                    <td class="px-4 py-2 border">৳ {{ order.amount }}</td>
+                    <td class="px-4 py-2 border">{{ dateFormat(order.created_at) }}</td>
+                    <td class="px-4 py-2 border">{{ order.status.name }}</td>
+                    <td class="px-4 py-2 border"><RouterLink :to="`/dashboard/order/${order.id}`" class="px-4 py-1 rounded-lg bg-blue-600 text-white font-medium shadow-md hover:bg-red-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200">Detail</RouterLink></td>
+                    </tr>
+                </tbody>
+                </table>
+
+                <!-- Mobile Card View -->
+                <div class="md:hidden space-y-4">
+                <div 
+                    v-for="order in getOrders" :key="order.id"
+                    class="border rounded-lg p-4 shadow-sm"
+                >
+                    <p><span class="font-semibold">Order ID:</span> {{ order.id }}</p>
+                    <p><span class="font-semibold">Amount:</span> ৳ {{ order.amount }}</p>
+                    <p><span class="font-semibold">Order Date:</span> {{ dateFormat(order.created_at) }}</p>
+                    <p><span class="font-semibold">Status:</span> {{ order.status.name }}</p>
+                    <p><span class="font-semibold">Detail:</span> <RouterLink :to="`/dashboard/order/${order.id}`" class="px-4 py-1 rounded-lg bg-blue-600 text-white font-medium shadow-md hover:bg-red-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200">Detail</RouterLink></p>
+                </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
 					<table class="min-w-full leading-normal responsive">
 						<thead>
 							<tr>
@@ -95,7 +136,7 @@ function dateFormat(date) {
 							
 						</tbody>
 					</table>
-				</div>
+				</div> -->
             
 <!-- 
             <div class="shadow rounded bg-white px-4 pt-6 pb-8">

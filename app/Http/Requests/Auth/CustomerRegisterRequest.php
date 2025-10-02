@@ -28,6 +28,7 @@ class CustomerRegisterRequest extends FormRequest
         return [
             'name'=>'required|max:50',
             'email'=>['email', 'max:255', Rule::unique(Customer::class)],
+            'phone'=>['required', 'digits:11', Rule::unique(Customer::class)],
             'password'=>'required|max:16|min:6|confirmed',
         ];
     }

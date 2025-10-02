@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         $dashboard = array();
         $order = Order::whereDate('created_at',date('Y-m-d'))->get(); //->where('status_id',2)
-        $order_this_mounth = Order::whereMonth('created_at',date('Y-m'))->get();
+        $order_this_mounth = Order::whereMonth('created_at',date('m'))->whereYear('created_at',date('Y'))->get();
         //dd(date('Y-m'));
         //$product_count = Product::where('status',1)->count();
         return view('admin.pages.dashboard',compact('dashboard','order','order_this_mounth'));
