@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 29, 2024 at 03:19 PM
+-- Generation Time: Oct 13, 2025 at 02:24 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -32,6 +32,7 @@ CREATE TABLE `attachments` (
   `product_id` int UNSIGNED DEFAULT NULL,
   `color_id` bigint DEFAULT NULL,
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imageOriginal` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,33 +41,35 @@ CREATE TABLE `attachments` (
 -- Dumping data for table `attachments`
 --
 
-INSERT INTO `attachments` (`id`, `product_id`, `color_id`, `image`, `created_at`, `updated_at`) VALUES
-(12, 10, NULL, 'products/1698206904.jpg', '2023-10-24 22:08:24', '2023-10-24 22:08:24'),
-(13, 10, NULL, 'products/1698206907.jpg', '2023-10-24 22:08:28', '2023-10-24 22:08:28'),
-(14, 10, NULL, 'products/1698206912.jpg', '2023-10-24 22:08:32', '2023-10-24 22:08:32'),
-(15, 10, NULL, 'products/1698206916.jpg', '2023-10-24 22:08:36', '2023-10-24 22:08:36'),
-(16, 10, NULL, 'products/1698206920.jpg', '2023-10-24 22:08:40', '2023-10-24 22:08:40'),
-(17, 9, NULL, 'products/1698206998.jpg', '2023-10-24 22:09:58', '2023-10-24 22:09:58'),
-(18, 9, NULL, 'products/1698207002.jpg', '2023-10-24 22:10:02', '2023-10-24 22:10:02'),
-(19, 9, NULL, 'products/1698207006.jpg', '2023-10-24 22:10:06', '2023-10-24 22:10:06'),
-(20, 9, NULL, 'products/1698207010.jpg', '2023-10-24 22:10:10', '2023-10-24 22:10:10'),
-(21, 8, NULL, 'products/1698207056.jpg', '2023-10-24 22:10:56', '2023-10-24 22:10:56'),
-(22, 8, NULL, 'products/1698207060.jpg', '2023-10-24 22:11:00', '2023-10-24 22:11:00'),
-(23, 8, NULL, 'products/1698207065.jpg', '2023-10-24 22:11:05', '2023-10-24 22:11:05'),
-(24, 8, NULL, 'products/1698207069.jpg', '2023-10-24 22:11:09', '2023-10-24 22:11:09'),
-(29, 11, 1, 'products/1711430718.jpg', '2024-03-25 23:25:18', '2024-03-25 23:25:18'),
-(30, 11, 1, 'products/1711430746.jpg', '2024-03-25 23:25:47', '2024-03-25 23:25:47'),
-(31, 11, NULL, 'products/1711431328.jpg', '2024-03-25 23:35:28', '2024-03-25 23:35:28'),
-(32, 11, 2, 'products/1711433207.jpg', '2024-03-26 00:06:47', '2024-03-26 00:06:47'),
-(33, 11, 2, 'products/1711433211.jpg', '2024-03-26 00:06:51', '2024-03-26 00:06:51'),
-(34, 11, 3, 'products/1711433238.jpg', '2024-03-26 00:07:18', '2024-03-26 00:07:18'),
-(35, 11, 3, 'products/1711433242.jpg', '2024-03-26 00:07:22', '2024-03-26 00:07:22'),
-(36, 12, NULL, 'products/1711436862.jpg', '2024-03-26 01:07:42', '2024-03-26 01:07:42'),
-(37, 12, NULL, 'products/1711436870.jpg', '2024-03-26 01:07:50', '2024-03-26 01:07:50'),
-(38, 12, 1, 'products/1711436946.jpg', '2024-03-26 01:09:06', '2024-03-26 01:09:06'),
-(39, 12, 1, 'products/1711436952.jpg', '2024-03-26 01:09:12', '2024-03-26 01:09:12'),
-(40, 12, 2, 'products/1711445625.jpg', '2024-03-26 03:33:45', '2024-03-26 03:33:45'),
-(41, 12, 2, 'products/1711445631.jpg', '2024-03-26 03:33:51', '2024-03-26 03:33:51');
+INSERT INTO `attachments` (`id`, `product_id`, `color_id`, `image`, `imageOriginal`, `created_at`, `updated_at`) VALUES
+(12, 10, NULL, 'products/1698206904.jpg', NULL, '2023-10-24 22:08:24', '2023-10-24 22:08:24'),
+(13, 10, NULL, 'products/1698206907.jpg', NULL, '2023-10-24 22:08:28', '2023-10-24 22:08:28'),
+(14, 10, NULL, 'products/1698206912.jpg', NULL, '2023-10-24 22:08:32', '2023-10-24 22:08:32'),
+(15, 10, NULL, 'products/1698206916.jpg', NULL, '2023-10-24 22:08:36', '2023-10-24 22:08:36'),
+(16, 10, NULL, 'products/1698206920.jpg', NULL, '2023-10-24 22:08:40', '2023-10-24 22:08:40'),
+(17, 9, NULL, 'products/1698206998.jpg', NULL, '2023-10-24 22:09:58', '2023-10-24 22:09:58'),
+(18, 9, NULL, 'products/1698207002.jpg', NULL, '2023-10-24 22:10:02', '2023-10-24 22:10:02'),
+(19, 9, NULL, 'products/1698207006.jpg', NULL, '2023-10-24 22:10:06', '2023-10-24 22:10:06'),
+(20, 9, NULL, 'products/1698207010.jpg', NULL, '2023-10-24 22:10:10', '2023-10-24 22:10:10'),
+(21, 8, NULL, 'products/1698207056.jpg', NULL, '2023-10-24 22:10:56', '2023-10-24 22:10:56'),
+(22, 8, NULL, 'products/1698207060.jpg', NULL, '2023-10-24 22:11:00', '2023-10-24 22:11:00'),
+(23, 8, NULL, 'products/1698207065.jpg', NULL, '2023-10-24 22:11:05', '2023-10-24 22:11:05'),
+(24, 8, NULL, 'products/1698207069.jpg', NULL, '2023-10-24 22:11:09', '2023-10-24 22:11:09'),
+(29, 11, 1, 'products/1711430718.jpg', NULL, '2024-03-25 23:25:18', '2024-03-25 23:25:18'),
+(30, 11, 1, 'products/1711430746.jpg', NULL, '2024-03-25 23:25:47', '2024-03-25 23:25:47'),
+(31, 11, NULL, 'products/1711431328.jpg', NULL, '2024-03-25 23:35:28', '2024-03-25 23:35:28'),
+(32, 11, 2, 'products/1711433207.jpg', NULL, '2024-03-26 00:06:47', '2024-03-26 00:06:47'),
+(33, 11, 2, 'products/1711433211.jpg', NULL, '2024-03-26 00:06:51', '2024-03-26 00:06:51'),
+(34, 11, 3, 'products/1711433238.jpg', NULL, '2024-03-26 00:07:18', '2024-03-26 00:07:18'),
+(35, 11, 3, 'products/1711433242.jpg', NULL, '2024-03-26 00:07:22', '2024-03-26 00:07:22'),
+(36, 12, NULL, 'products/1711436862.jpg', NULL, '2024-03-26 01:07:42', '2024-03-26 01:07:42'),
+(37, 12, NULL, 'products/1711436870.jpg', NULL, '2024-03-26 01:07:50', '2024-03-26 01:07:50'),
+(38, 12, 1, 'products/1711436946.jpg', NULL, '2024-03-26 01:09:06', '2024-03-26 01:09:06'),
+(39, 12, 1, 'products/1711436952.jpg', NULL, '2024-03-26 01:09:12', '2024-03-26 01:09:12'),
+(40, 12, 2, 'products/1711445625.jpg', NULL, '2024-03-26 03:33:45', '2024-03-26 03:33:45'),
+(41, 12, 2, 'products/1711445631.jpg', NULL, '2024-03-26 03:33:51', '2024-03-26 03:33:51'),
+(43, 11, NULL, 'products/1712161843.jpg', 'productsOriginal/1712161843.jpg', '2024-04-03 10:30:43', '2024-04-03 10:30:43'),
+(44, 11, NULL, 'products/1712161849.jpg', 'productsOriginal/1712161849.jpg', '2024-04-03 10:30:49', '2024-04-03 10:30:49');
 
 -- --------------------------------------------------------
 
@@ -126,7 +129,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `gender`, `date_of_birth`, `email`, `username`, `status`, `password`, `otp`, `subscribed_to_news_letter`, `notes`, `remember_token`, `address`, `address2`, `country`, `state`, `city`, `zip_code`, `phone`, `created_at`, `updated_at`) VALUES
-(2, 'Shahadat', NULL, NULL, 'shahadat@asiancoder.com', '01757839516', 1, '$2y$10$78JIaZ6EfY6mrKb0aKF45u.NTEp/6eW5ytD1W6Ug8161j2bdx1lGG', NULL, 0, NULL, NULL, 'Kharkhari', 'Paba', 'AE', 3798, 'Rajshahi', 6204, '01757839516', '2021-10-18 10:53:32', '2023-09-12 07:21:26'),
+(2, 'Shahadat', NULL, NULL, 'shahadat@asiancoder.com', '01757839516', 1, '$2y$10$78JIaZ6EfY6mrKb0aKF45u.NTEp/6eW5ytD1W6Ug8161j2bdx1lGG', NULL, 0, NULL, NULL, 'Kharkhari', 'Paba', 'AE', 3798, 'Rajshahi', NULL, '01757839516', '2021-10-18 10:53:32', '2025-09-26 19:58:18'),
 (4, 'Shahadat', NULL, NULL, 'shahadat12@asiancoder.com', NULL, 1, '$2y$10$EKOro.DEF.5O2CcziEeZjen9UcLAdQpBx8dL.Ol6JPBetfXeePVfK', NULL, 0, NULL, NULL, 'asdf', NULL, NULL, NULL, NULL, NULL, '01757839516', '2021-10-22 02:34:24', '2021-10-22 02:34:24'),
 (5, 'HI', NULL, NULL, 'GHJGH@FGH.GG', NULL, 1, '$2y$10$I6V6x5lDC3CtLPYbcUszJeTXooFgU47zz3BKIYQGMCzgCMNNkSkOa', NULL, 0, NULL, NULL, 'HJKLJKL', NULL, NULL, NULL, NULL, NULL, '01757839516', '2021-11-12 17:03:57', '2021-11-12 17:03:57'),
 (6, 'Ritu', NULL, NULL, 'ritu@gmail.com', NULL, 1, '$2y$10$e.GWjEczoXsb9fJQaZ2Gbe0ADh0jWvmElg7V0mOAb69TVf63HcJmu', NULL, 0, NULL, NULL, 'Rajshahi', NULL, NULL, NULL, NULL, NULL, '01745072008', '2022-04-21 06:07:50', '2022-04-21 06:07:50'),
@@ -135,7 +138,9 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `date_of_birth`, `email`, `user
 (10, 'Ikbal Hosen', NULL, NULL, 'ikbal@asiancoder.com', NULL, 1, '$2y$10$GtXKO4AVbqWnOOyf./ZzKunB3t6i3XPwvzioJPAJoCuIxxLuj4r.S', NULL, 0, NULL, NULL, 'sdgsdfgfd\r\ndsfgsdfg\r\nsdfgsdfg', NULL, NULL, NULL, NULL, NULL, '01912624881', '2023-04-26 06:30:24', '2023-04-26 06:30:24'),
 (11, 'Steel Almira', NULL, NULL, 'shahadat1111@asiancoder.com', NULL, 1, '$2y$10$1EttKFlxSfwOElzSh1g1veksu11pj6cAkcw3KyFyl.8xumBNYCGNi', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '01757839516', '2023-04-28 03:50:03', '2023-04-28 03:50:03'),
 (12, 'Shahadat Hosain', NULL, NULL, 'shahadat444@asiancoder.com', '01701063566', 1, '$2y$10$XSgKqCtllQi2bCcGuHkZrOT64oIbczLYbBggm1Xf/9LCtsFhdpWwi', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '01701063566', '2023-08-21 03:19:33', '2023-08-21 03:19:33'),
-(13, 'Bulbul Hosain', NULL, NULL, 'bulbul@asiancoder.com', NULL, 1, '$2y$10$XSgKqCtllQi2bCcGuHkZrOT64oIbczLYbBggm1Xf/9LCtsFhdpWwi', NULL, 0, NULL, NULL, 'Rajshahi', NULL, 'Bangladesh', NULL, 'Rajshahi', NULL, '01757839516', '2023-10-24 23:55:42', '2023-10-25 05:11:45');
+(13, 'Bulbul Hosain', NULL, NULL, 'bulbul@asiancoder.com', NULL, 1, '$2y$10$XSgKqCtllQi2bCcGuHkZrOT64oIbczLYbBggm1Xf/9LCtsFhdpWwi', NULL, 0, NULL, NULL, 'Rajshahi', NULL, 'Bangladesh', NULL, 'Rajshahi', NULL, '01757839516', '2023-10-24 23:55:42', '2023-10-25 05:11:45'),
+(14, 'Bulbul', NULL, NULL, 'bulbul1@asiancoder.com', NULL, 1, '$2y$10$vMXqqxVSbE1IBbFrMPcUVeGxnuncAXmn3UVX5GL8TUSlCxJvdBXS.', NULL, 0, NULL, NULL, 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', NULL, '01779090308', '2024-04-04 10:00:31', '2024-04-14 10:52:27'),
+(15, 'Shahadat Hosain', NULL, NULL, 'shahadatnb@gmail.com', NULL, 1, '$2y$10$dpfTq7FmuWdi64Y7H/tN3.Dlvzk9ZcTrfaQKtaB3bwWh/6eMqINEW', NULL, 0, NULL, NULL, 'Nawdapara, Rajshahi', NULL, NULL, NULL, NULL, 6248, '01912624882', '2025-10-01 02:02:06', '2025-10-01 02:28:45');
 
 -- --------------------------------------------------------
 
@@ -52584,8 +52589,8 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `lebel`, `menu_url`, `menu_class`, `m
 (1, 1, 'Home', '/', 'fa fa-home', NULL, NULL, 0, 0, 'home'),
 (3, 1, 'Electronics', 'category/electronics', NULL, NULL, 2, 2, 0, 'others'),
 (4, 1, 'Nut', 'category/nut', NULL, NULL, 2, 1, 0, 'others'),
-(5, 1, 'Cart', '/cart', NULL, NULL, NULL, 1, 0, 'others'),
-(7, 1, 'About', 'page/about-us', NULL, NULL, NULL, 3, 0, 'others'),
+(5, 1, 'Cart', '/cart', NULL, NULL, NULL, 4, 0, 'others'),
+(7, 1, 'About', '/page/about-us', NULL, NULL, NULL, 6, 0, 'others'),
 (9, 2, 'facebook', 'https://facebook.com', 'fa-facebook-f', NULL, NULL, 0, 0, 'extrenal'),
 (10, 2, 'twitter', 'https://twitter.com', 'fa-twitter', NULL, NULL, 2, 0, 'extrenal'),
 (11, 2, 'linkedin', 'https://www.linkedin.com', 'fa-linkedin-in', NULL, NULL, 1, 0, 'extrenal'),
@@ -52602,9 +52607,11 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `lebel`, `menu_url`, `menu_class`, `m
 (27, 7, '14-Day Return', '#', 'fa fa-sync-alt', NULL, NULL, 2, 0, 'others'),
 (28, 7, '24/7 Support', '#', 'fa fa-comments', NULL, NULL, 3, 0, 'others'),
 (29, 5, 'Electronics', 'category/electronics', NULL, NULL, NULL, 0, 0, 'others'),
-(30, 1, 'Checkout', '/checkout', NULL, NULL, NULL, 2, 0, 'others'),
-(31, 1, 'Contact', '/contact', NULL, NULL, NULL, 0, 0, 'others'),
-(32, 5, 'Automotive & Motorbike', 'category/automotive-motorbike', 'fa fa-shopping-bag', NULL, NULL, 0, 0, 'others');
+(30, 1, 'Checkout', '/checkout', NULL, NULL, NULL, 5, 0, 'others'),
+(31, 1, 'Contact', '/page/contact', NULL, NULL, NULL, 3, 0, 'others'),
+(32, 5, 'Automotive & Motorbike', 'category/automotive-motorbike', 'fa fa-shopping-bag', NULL, NULL, 0, 0, 'others'),
+(33, 1, 'Health Beauty', '/category/health-beauty', NULL, NULL, NULL, 2, 0, 'others'),
+(34, 1, 'Sports Outdoors', '/category/sports-outdoors', NULL, NULL, NULL, 1, 0, 'others');
 
 -- --------------------------------------------------------
 
@@ -52746,7 +52753,28 @@ INSERT INTO `orders` (`id`, `customer_id`, `sub_total`, `discount_amount`, `ship
 (83, NULL, '1784', '0', 'ঢাকার বাহিরে', '120', 0, '1904', 'ghjghj', NULL, 'fgh', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-22 00:38:16', '2023-10-22 00:38:16'),
 (84, NULL, '1784', '0', 'ঢাকার ভিতরে', '60', 0, '1844', 'dfghdg', NULL, 'dfgh', NULL, NULL, NULL, NULL, NULL, '01757829516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-22 00:38:58', '2023-10-22 00:38:58'),
 (85, NULL, '1784', '0', 'ঢাকার বাহিরে', '120', 0, '1904', 'Shahadat Hosain', NULL, 'Rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-22 00:40:04', '2023-10-22 00:40:04'),
-(86, 13, '3980', '0', NULL, '0', 0, '3980', 'Bulbul1 Hosain', 'bulbul@asiancoder.com', 'Rajshahi', NULL, 'Bangladesh', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-25 03:52:53', '2023-10-25 03:52:53');
+(86, 13, '3980', '0', NULL, '0', 0, '3980', 'Bulbul1 Hosain', 'bulbul@asiancoder.com', 'Rajshahi', NULL, 'Bangladesh', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-25 03:52:53', '2023-10-25 03:52:53'),
+(87, 2, '2000', '0', NULL, '0', 0, '2000', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, 'AE', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-30 20:45:07', '2024-03-30 20:45:07'),
+(88, 2, '8020', '0', NULL, '0', 0, '8020', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, 'AE', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-02 11:46:38', '2024-04-02 11:46:38'),
+(89, 2, '8020', '0', NULL, '0', 0, '8020', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, 'AE', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-02 11:46:58', '2024-04-02 11:46:58'),
+(90, 2, '8020', '0', NULL, '0', 0, '8020', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, 'AE', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-02 11:49:25', '2024-04-02 11:49:25'),
+(91, 2, '8020', '0', NULL, '0', 0, '8020', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, 'AE', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-02 11:50:57', '2024-04-02 11:50:57'),
+(92, 2, '8020', '0', NULL, '0', 0, '8020', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, 'AE', NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-02 11:51:28', '2024-04-02 11:51:28'),
+(93, 2, '1350', '0', NULL, '0', 0, '1350', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-03 11:35:01', '2024-04-03 11:35:01'),
+(94, 14, '380', '0', NULL, '0', 0, '380', 'Bulbul Ahmed', 'bulbul1@asiancoder.com', 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', 6204, '01779090308', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-04 10:11:17', '2024-04-04 10:11:17'),
+(95, 14, '2000', '0', NULL, '0', 0, '2000', 'Bulbul Ahmed', 'bulbul1@asiancoder.com', 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', 6248, '01779090308', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-05 12:30:47', '2024-04-05 12:30:47'),
+(96, 14, '40000', '0', NULL, NULL, 0, '40000', 'Bulbul Ahmed', 'bulbul1@asiancoder.com', 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', 6248, '01779090308', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-06 10:17:38', '2024-04-06 10:17:38'),
+(97, 14, '2000', '0', NULL, NULL, 0, '2000', 'Bulbul Ahmed', 'bulbul1@asiancoder.com', 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', NULL, '01779090308', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-06 10:19:47', '2024-04-06 10:19:47'),
+(98, 14, '40000', '0', NULL, '100', 0, '40100', 'Bulbul Ahmed', 'bulbul1@asiancoder.com', 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', NULL, '01779090308', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-06 10:28:37', '2024-04-06 10:28:37'),
+(99, 14, '2000', '0', NULL, '100', 0, '2100', 'Bulbul', 'bulbul1@asiancoder.com', 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', 6204, '01779090308', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-14 10:48:39', '2024-04-14 10:48:39'),
+(100, 14, '2000', '0', NULL, '100', 0, '2100', 'Bulbul', 'bulbul1@asiancoder.com', 'Kechuatail', NULL, NULL, NULL, 'Rajshahi', NULL, '01779090308', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-14 10:52:27', '2024-04-14 10:52:27'),
+(101, 2, '380', '0', NULL, '100', 0, '480', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', 6248, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 03:03:22', '2025-09-26 03:03:22'),
+(102, 2, '40000', '0', NULL, '100', 0, '40100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', 6248, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 19:36:34', '2025-09-26 19:36:34'),
+(103, 2, '40000', '0', NULL, '100', 0, '40100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 19:58:18', '2025-09-26 19:58:18'),
+(104, 2, '40000', '0', NULL, '100', 0, '40100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 20:16:26', '2025-09-26 20:16:26'),
+(105, 2, '2000', '0', NULL, '100', 0, '2100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 20:17:36', '2025-09-26 20:17:36'),
+(106, 2, '40000', '0', NULL, '100', 0, '40100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 20:21:29', '2025-09-26 20:21:29'),
+(107, 2, '2000', '0', NULL, '100', 0, '2100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-27 10:28:36', '2025-09-27 10:28:36');
 
 -- --------------------------------------------------------
 
@@ -52758,6 +52786,7 @@ CREATE TABLE `order_items` (
   `id` bigint UNSIGNED NOT NULL,
   `order_id` bigint UNSIGNED DEFAULT NULL,
   `product_id` int UNSIGNED DEFAULT NULL,
+  `product_stock_id` bigint UNSIGNED DEFAULT NULL,
   `qty_ordered` mediumint UNSIGNED DEFAULT '0',
   `price` decimal(12,2) NOT NULL DEFAULT '0.00',
   `total` decimal(12,2) NOT NULL DEFAULT '0.00',
@@ -52769,56 +52798,74 @@ CREATE TABLE `order_items` (
 -- Dumping data for table `order_items`
 --
 
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `qty_ordered`, `price`, `total`, `created_at`, `updated_at`) VALUES
-(25, 26, 8, 1, '400.00', '400.00', '2023-05-06 06:05:02', '2023-05-06 06:05:02'),
-(27, 28, 9, 2, '18.00', '36.00', '2023-05-06 08:27:57', '2023-05-06 08:27:57'),
-(28, 28, 8, 2, '400.00', '800.00', '2023-05-06 08:27:57', '2023-05-16 15:47:05'),
-(30, 30, 8, 1, '400.00', '400.00', '2023-05-17 12:50:10', '2023-05-17 12:50:10'),
-(31, 31, 9, 2, '18.00', '36.00', '2023-05-17 12:56:43', '2023-05-17 12:56:43'),
-(32, 32, 8, 1, '400.00', '400.00', '2023-05-17 12:58:04', '2023-05-17 12:58:04'),
-(33, 33, 9, 1, '18.00', '18.00', '2023-05-17 13:00:36', '2023-05-17 13:00:36'),
-(34, 34, 8, 1, '400.00', '400.00', '2023-05-17 13:03:00', '2023-05-17 13:03:00'),
-(35, 35, 8, 1, '400.00', '400.00', '2023-05-17 13:07:45', '2023-05-17 13:07:45'),
-(36, 36, 8, 1, '400.00', '400.00', '2023-06-01 12:06:15', '2023-06-01 12:06:15'),
-(37, 37, 8, 1, '400.00', '400.00', '2023-06-01 12:06:43', '2023-06-01 12:06:43'),
-(38, 38, 8, 1, '400.00', '400.00', '2023-06-01 12:10:17', '2023-06-01 12:10:17'),
-(39, 39, 8, 1, '400.00', '400.00', '2023-06-01 12:10:50', '2023-06-01 12:10:50'),
-(40, 40, 8, 1, '400.00', '400.00', '2023-06-01 12:11:46', '2023-06-01 12:11:46'),
-(41, 41, 8, 1, '400.00', '400.00', '2023-06-01 12:12:16', '2023-06-01 12:12:16'),
-(42, 42, 8, 1, '400.00', '400.00', '2023-06-01 12:14:25', '2023-06-01 12:14:25'),
-(43, 43, 8, 1, '400.00', '400.00', '2023-06-01 12:15:13', '2023-06-01 12:15:13'),
-(44, 44, 8, 1, '400.00', '400.00', '2023-06-01 12:17:36', '2023-06-01 12:17:36'),
-(45, 45, 8, 1, '400.00', '400.00', '2023-06-01 12:18:38', '2023-06-01 12:18:38'),
-(54, 47, 8, 1, '400.00', '400.00', '2023-06-01 17:20:18', '2023-06-01 17:20:18'),
-(55, 47, 9, 1, '18.00', '18.00', '2023-06-01 17:20:24', '2023-06-01 17:20:24'),
-(56, 48, 8, 2, '400.00', '800.00', '2023-06-04 07:30:42', '2023-06-04 07:30:42'),
-(58, 50, 8, 1, '400.00', '400.00', '2023-06-13 07:02:16', '2023-06-13 07:02:16'),
-(59, 51, 8, 1, '400.00', '400.00', '2023-06-13 07:13:45', '2023-06-13 07:13:45'),
-(60, 52, 8, 1, '400.00', '400.00', '2023-06-13 07:14:22', '2023-06-13 07:14:22'),
-(61, 53, 8, 2, '400.00', '800.00', '2023-08-26 10:53:05', '2023-08-26 10:53:05'),
-(62, 54, 9, 1, '18.00', '18.00', '2023-08-26 10:58:33', '2023-08-26 10:58:33'),
-(66, 55, 8, 1, '400.00', '400.00', '2023-09-04 16:49:51', '2023-09-04 16:49:51'),
-(69, 57, 9, 1, '18.00', '18.00', '2023-09-12 06:06:59', '2023-09-12 06:06:59'),
-(70, 58, 10, 1, '500.00', '500.00', '2023-09-12 07:17:18', '2023-09-12 07:17:18'),
-(71, 59, 10, 2, '500.00', '1000.00', '2023-09-12 07:21:26', '2023-09-12 07:21:26'),
-(72, 60, 8, 1, '400.00', '400.00', '2023-09-12 07:23:42', '2023-09-12 07:23:42'),
-(73, 61, 9, 1, '18.00', '18.00', '2023-09-12 07:27:25', '2023-09-12 07:27:25'),
-(74, 62, 9, 1, '18.00', '18.00', '2023-09-12 07:32:18', '2023-09-12 07:32:18'),
-(75, 63, 10, 1, '500.00', '500.00', '2023-09-12 07:52:49', '2023-09-12 07:52:49'),
-(76, 82, 8, 1, '380.00', '380.00', '2023-10-21 21:20:59', '2023-10-21 21:20:59'),
-(77, 82, 9, 3, '18.00', '54.00', '2023-10-21 21:20:59', '2023-10-21 21:20:59'),
-(78, 82, 10, 3, '450.00', '1350.00', '2023-10-21 21:20:59', '2023-10-21 21:20:59'),
-(79, 83, 8, 1, '380.00', '380.00', '2023-10-22 00:38:16', '2023-10-22 00:38:16'),
-(80, 83, 9, 3, '18.00', '54.00', '2023-10-22 00:38:16', '2023-10-22 00:38:16'),
-(81, 83, 10, 3, '450.00', '1350.00', '2023-10-22 00:38:16', '2023-10-22 00:38:16'),
-(82, 84, 8, 1, '380.00', '380.00', '2023-10-22 00:38:58', '2023-10-22 00:38:58'),
-(83, 84, 9, 3, '18.00', '54.00', '2023-10-22 00:38:58', '2023-10-22 00:38:58'),
-(84, 84, 10, 3, '450.00', '1350.00', '2023-10-22 00:38:58', '2023-10-22 00:38:58'),
-(85, 85, 8, 1, '380.00', '380.00', '2023-10-22 00:40:05', '2023-10-22 00:40:05'),
-(86, 85, 9, 3, '18.00', '54.00', '2023-10-22 00:40:05', '2023-10-22 00:40:05'),
-(87, 85, 10, 3, '450.00', '1350.00', '2023-10-22 00:40:05', '2023-10-22 00:40:05'),
-(88, 86, 8, 1, '400.00', '400.00', '2023-10-25 03:52:53', '2023-10-25 03:52:53'),
-(89, 86, 11, 2, '2000.00', '4000.00', '2023-10-25 03:52:53', '2023-10-25 03:52:53');
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_stock_id`, `qty_ordered`, `price`, `total`, `created_at`, `updated_at`) VALUES
+(25, 26, 8, NULL, 1, '400.00', '400.00', '2023-05-06 06:05:02', '2023-05-06 06:05:02'),
+(27, 28, 9, NULL, 2, '18.00', '36.00', '2023-05-06 08:27:57', '2023-05-06 08:27:57'),
+(28, 28, 8, NULL, 2, '400.00', '800.00', '2023-05-06 08:27:57', '2023-05-16 15:47:05'),
+(30, 30, 8, NULL, 1, '400.00', '400.00', '2023-05-17 12:50:10', '2023-05-17 12:50:10'),
+(31, 31, 9, NULL, 2, '18.00', '36.00', '2023-05-17 12:56:43', '2023-05-17 12:56:43'),
+(32, 32, 8, NULL, 1, '400.00', '400.00', '2023-05-17 12:58:04', '2023-05-17 12:58:04'),
+(33, 33, 9, NULL, 1, '18.00', '18.00', '2023-05-17 13:00:36', '2023-05-17 13:00:36'),
+(34, 34, 8, NULL, 1, '400.00', '400.00', '2023-05-17 13:03:00', '2023-05-17 13:03:00'),
+(35, 35, 8, NULL, 1, '400.00', '400.00', '2023-05-17 13:07:45', '2023-05-17 13:07:45'),
+(36, 36, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:06:15', '2023-06-01 12:06:15'),
+(37, 37, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:06:43', '2023-06-01 12:06:43'),
+(38, 38, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:10:17', '2023-06-01 12:10:17'),
+(39, 39, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:10:50', '2023-06-01 12:10:50'),
+(40, 40, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:11:46', '2023-06-01 12:11:46'),
+(41, 41, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:12:16', '2023-06-01 12:12:16'),
+(42, 42, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:14:25', '2023-06-01 12:14:25'),
+(43, 43, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:15:13', '2023-06-01 12:15:13'),
+(44, 44, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:17:36', '2023-06-01 12:17:36'),
+(45, 45, 8, NULL, 1, '400.00', '400.00', '2023-06-01 12:18:38', '2023-06-01 12:18:38'),
+(54, 47, 8, NULL, 1, '400.00', '400.00', '2023-06-01 17:20:18', '2023-06-01 17:20:18'),
+(55, 47, 9, NULL, 1, '18.00', '18.00', '2023-06-01 17:20:24', '2023-06-01 17:20:24'),
+(56, 48, 8, NULL, 2, '400.00', '800.00', '2023-06-04 07:30:42', '2023-06-04 07:30:42'),
+(58, 50, 8, NULL, 1, '400.00', '400.00', '2023-06-13 07:02:16', '2023-06-13 07:02:16'),
+(59, 51, 8, NULL, 1, '400.00', '400.00', '2023-06-13 07:13:45', '2023-06-13 07:13:45'),
+(60, 52, 8, NULL, 1, '400.00', '400.00', '2023-06-13 07:14:22', '2023-06-13 07:14:22'),
+(61, 53, 8, NULL, 2, '400.00', '800.00', '2023-08-26 10:53:05', '2023-08-26 10:53:05'),
+(62, 54, 9, NULL, 1, '18.00', '18.00', '2023-08-26 10:58:33', '2023-08-26 10:58:33'),
+(66, 55, 8, NULL, 1, '400.00', '400.00', '2023-09-04 16:49:51', '2023-09-04 16:49:51'),
+(69, 57, 9, NULL, 1, '18.00', '18.00', '2023-09-12 06:06:59', '2023-09-12 06:06:59'),
+(70, 58, 10, NULL, 1, '500.00', '500.00', '2023-09-12 07:17:18', '2023-09-12 07:17:18'),
+(71, 59, 10, NULL, 2, '500.00', '1000.00', '2023-09-12 07:21:26', '2023-09-12 07:21:26'),
+(72, 60, 8, NULL, 1, '400.00', '400.00', '2023-09-12 07:23:42', '2023-09-12 07:23:42'),
+(73, 61, 9, NULL, 1, '18.00', '18.00', '2023-09-12 07:27:25', '2023-09-12 07:27:25'),
+(74, 62, 9, NULL, 1, '18.00', '18.00', '2023-09-12 07:32:18', '2023-09-12 07:32:18'),
+(75, 63, 10, NULL, 1, '500.00', '500.00', '2023-09-12 07:52:49', '2023-09-12 07:52:49'),
+(76, 82, 8, NULL, 1, '380.00', '380.00', '2023-10-21 21:20:59', '2023-10-21 21:20:59'),
+(77, 82, 9, NULL, 3, '18.00', '54.00', '2023-10-21 21:20:59', '2023-10-21 21:20:59'),
+(78, 82, 10, NULL, 3, '450.00', '1350.00', '2023-10-21 21:20:59', '2023-10-21 21:20:59'),
+(79, 83, 8, NULL, 1, '380.00', '380.00', '2023-10-22 00:38:16', '2023-10-22 00:38:16'),
+(80, 83, 9, NULL, 3, '18.00', '54.00', '2023-10-22 00:38:16', '2023-10-22 00:38:16'),
+(81, 83, 10, NULL, 3, '450.00', '1350.00', '2023-10-22 00:38:16', '2023-10-22 00:38:16'),
+(82, 84, 8, NULL, 1, '380.00', '380.00', '2023-10-22 00:38:58', '2023-10-22 00:38:58'),
+(83, 84, 9, NULL, 3, '18.00', '54.00', '2023-10-22 00:38:58', '2023-10-22 00:38:58'),
+(84, 84, 10, NULL, 3, '450.00', '1350.00', '2023-10-22 00:38:58', '2023-10-22 00:38:58'),
+(85, 85, 8, NULL, 1, '380.00', '380.00', '2023-10-22 00:40:05', '2023-10-22 00:40:05'),
+(86, 85, 9, NULL, 3, '18.00', '54.00', '2023-10-22 00:40:05', '2023-10-22 00:40:05'),
+(87, 85, 10, NULL, 3, '450.00', '1350.00', '2023-10-22 00:40:05', '2023-10-22 00:40:05'),
+(88, 86, 8, NULL, 1, '400.00', '400.00', '2023-10-25 03:52:53', '2023-10-25 03:52:53'),
+(89, 86, 11, NULL, 2, '2000.00', '4000.00', '2023-10-25 03:52:53', '2023-10-25 03:52:53'),
+(90, 87, 12, NULL, 1, '2500.00', '2500.00', '2024-03-30 20:45:07', '2024-03-30 20:45:07'),
+(91, 92, 12, 47, 4, '2000.00', '8000.00', '2024-04-02 11:51:28', '2024-04-02 11:51:28'),
+(92, 92, 9, 48, 1, '20.00', '20.00', '2024-04-02 11:51:28', '2024-04-02 11:51:28'),
+(93, 93, 11, 35, 2, '450.00', '900.00', '2024-04-03 11:35:01', '2024-04-03 11:35:01'),
+(94, 93, 11, 35, 1, '450.00', '450.00', '2024-04-03 11:35:01', '2024-04-03 11:35:01'),
+(95, 94, 8, 49, 1, '380.00', '380.00', '2024-04-04 10:11:17', '2024-04-04 10:11:17'),
+(96, 95, 12, 39, 1, '2000.00', '2000.00', '2024-04-05 12:30:47', '2024-04-05 12:30:47'),
+(97, 96, 11, 29, 1, '40000.00', '40000.00', '2024-04-06 10:17:38', '2024-04-06 10:17:38'),
+(98, 97, 12, 39, 1, '2000.00', '2000.00', '2024-04-06 10:19:47', '2024-04-06 10:19:47'),
+(99, 98, 11, 29, 1, '40000.00', '40000.00', '2024-04-06 10:28:39', '2024-04-06 10:28:39'),
+(100, 99, 12, 42, 1, '2000.00', '2000.00', '2024-04-14 10:48:39', '2024-04-14 10:48:39'),
+(101, 100, 12, 42, 1, '2000.00', '2000.00', '2024-04-14 10:52:27', '2024-04-14 10:52:27'),
+(102, 102, 11, 29, 1, '40000.00', '40000.00', '2025-09-26 19:36:34', '2025-09-26 19:36:34'),
+(103, 103, 11, 29, 1, '40000.00', '40000.00', '2025-09-26 19:58:19', '2025-09-26 19:58:19'),
+(104, 104, 11, 29, 1, '40000.00', '40000.00', '2025-09-26 20:16:26', '2025-09-26 20:16:26'),
+(105, 105, 12, 39, 1, '2000.00', '2000.00', '2025-09-26 20:17:36', '2025-09-26 20:17:36'),
+(106, 106, 11, 29, 1, '40000.00', '40000.00', '2025-09-26 20:21:29', '2025-09-26 20:21:29'),
+(107, 107, 12, 39, 1, '2000.00', '2000.00', '2025-09-27 10:28:36', '2025-09-27 10:28:36');
 
 -- --------------------------------------------------------
 
@@ -52940,15 +52987,15 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\Customer', 2, 'authToken', '2cf73544ccf76e931ba2b146886817a4ccfa4bbe87f90137bdf3a0f06dcd3df8', '[\"*\"]', NULL, NULL, '2023-10-14 03:55:18', '2023-10-14 03:55:18'),
-(2, 'App\\Models\\Customer', 2, 'authToken', 'a7e7a6bf7cffcd20e11f5ac103c32bdeadd9b2ffdf0fab6ee17dc0a32d6eca23', '[\"*\"]', NULL, NULL, '2023-10-21 22:15:01', '2023-10-21 22:15:01'),
-(3, 'App\\Models\\Customer', 2, 'authToken', '90ec96edd6fca202284b4fc75b29654c039ba5ad75eb8da3fe25ce056269eccf', '[\"*\"]', NULL, NULL, '2023-10-24 22:30:29', '2023-10-24 22:30:29'),
 (4, 'App\\Models\\Customer', 13, 'authToken', 'db6df04ee29ef28ca01f247bfa5e272e00b36374bb3a9e1fef46e5c476b155e0', '[\"*\"]', NULL, NULL, '2023-10-24 23:55:43', '2023-10-24 23:55:43'),
 (5, 'App\\Models\\Customer', 13, 'authToken', '171cc2427917e8f0c3c7348dd1508342ce5009c9fe5610445b29bfe840c4174f', '[\"*\"]', '2023-10-25 03:52:53', NULL, '2023-10-25 00:57:34', '2023-10-25 03:52:53'),
 (6, 'App\\Models\\Customer', 13, 'authToken', 'f13fb2f3797098ca531c9e4e4106878152007d6d5a55839c2179ed1be64f1454', '[\"*\"]', '2023-10-25 04:55:57', NULL, '2023-10-25 04:29:14', '2023-10-25 04:55:57'),
 (7, 'App\\Models\\Customer', 13, 'authToken', 'aa669f34506669c62f97fec74eccb9c2865f875cac2376dd87ac7543bc208cde', '[\"*\"]', '2023-10-25 05:06:14', NULL, '2023-10-25 04:59:32', '2023-10-25 05:06:14'),
 (8, 'App\\Models\\Customer', 13, 'authToken', 'ecda4cd6b5060c6d41e0b21265c420c70337130bd56ea4a41ba876454984cdeb', '[\"*\"]', '2023-10-25 05:07:50', NULL, '2023-10-25 05:07:43', '2023-10-25 05:07:50'),
-(9, 'App\\Models\\Customer', 13, 'authToken', 'e31a21e5f99a7275a9621cc759dfe4fe96f80ac4d4bd21ba1cf433b6733c2a0a', '[\"*\"]', '2023-10-26 01:34:50', NULL, '2023-10-25 05:11:27', '2023-10-26 01:34:50');
+(9, 'App\\Models\\Customer', 13, 'authToken', 'e31a21e5f99a7275a9621cc759dfe4fe96f80ac4d4bd21ba1cf433b6733c2a0a', '[\"*\"]', '2023-10-26 01:34:50', NULL, '2023-10-25 05:11:27', '2023-10-26 01:34:50'),
+(13, 'App\\Models\\Customer', 14, 'authToken', '4720735d574e4b34ca603cd2b6ee56ec9c37fcd654e3c16b583f3275cfc63dbf', '[\"*\"]', '2024-04-25 04:28:21', NULL, '2024-04-14 10:39:57', '2024-04-25 04:28:21'),
+(15, 'App\\Models\\Customer', 2, 'authToken', '0d7b479619f321bb6e658161026e069ea5ad971111e00959dc7a7f0099f2b733', '[\"*\"]', '2025-10-01 01:29:44', NULL, '2025-09-26 03:02:52', '2025-10-01 01:29:44'),
+(16, 'App\\Models\\Customer', 15, 'authToken', '64823a53e44780f9a0fc21b58a4d146c99b8e5e12a820eb486bb577238ede69f', '[\"*\"]', '2025-10-01 02:30:27', NULL, '2025-10-01 02:02:06', '2025-10-01 02:30:27');
 
 -- --------------------------------------------------------
 
@@ -52975,7 +53022,9 @@ INSERT INTO `postmetas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
 (32, 29, 'line2', '20% Less'),
 (33, 29, 'link', 'http://localhost/laravel/laravel-7-shop/page/about-us'),
 (34, 32, 'line2', 'TT'),
-(35, 32, 'link', 'http://localhost:5173/product/ems-portable-body-massager');
+(35, 32, 'link', 'http://localhost:5173/product/ems-portable-body-massager'),
+(36, 33, 'profession', 'CEO, Canada Company'),
+(37, 33, 'ratting', NULL);
 
 -- --------------------------------------------------------
 
@@ -53019,7 +53068,8 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `body`, `image`, `post_type`, `pageT
 (29, 'Geet Offer', 'geet-offer', '<p> Lorem ipsum dolor sit amet consectetur elit <p></p></p>\n', 'post_file/1697519748.jpg', 'offer', NULL, NULL, 1, 1, '2023-08-16 12:27:52', '2023-10-16 23:16:21'),
 (30, 'Single Product', 'single-product', NULL, 'post_file/1697351627.jpg', 'slide', NULL, NULL, 1, 1, '2023-09-02 11:49:47', '2023-10-15 00:33:47'),
 (31, 'Slide 2', 'slide-2', NULL, 'post_file/1697351725.jpg', 'slide', NULL, NULL, 1, 1, '2023-10-15 00:35:25', '2023-10-15 00:35:25'),
-(32, 'Lorem ipsum dolor sit amet consectetur elit', 'lorem-ipsum-dolor-sit-amet-consectetur-elit', '<p> Lorem ipsum dolor sit amet consectetur elit <p></p></p>\n', 'post_file/1697519856.jpg', 'offer', NULL, NULL, 1, 1, '2023-10-16 23:17:36', '2023-10-16 23:17:36');
+(32, 'Lorem ipsum dolor sit amet consectetur elit', 'lorem-ipsum-dolor-sit-amet-consectetur-elit', '<p> Lorem ipsum dolor sit amet consectetur elit <p></p></p>\n', 'post_file/1697519856.jpg', 'offer', NULL, NULL, 1, 1, '2023-10-16 23:17:36', '2023-10-16 23:17:36'),
+(33, 'Tomas jhono', 'tomas-jhono', '<p>Some representative placeholder content for the first slide content for \r\nthe.Some representative placeholder content for the first slide content \r\nfor the.Some representative placeholder content for the first slide \r\ncontent for the.Some representative placeholder content for the first \r\nslide content for the. </p>\n', 'post_file/1711852002.png', 'review', NULL, NULL, 1, 1, '2024-03-30 20:26:42', '2024-03-30 20:26:42');
 
 -- --------------------------------------------------------
 
@@ -53058,6 +53108,7 @@ INSERT INTO `post_tax` (`id`, `post_id`, `tax_id`) VALUES
 CREATE TABLE `products` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `sku` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `product_type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
@@ -53073,6 +53124,7 @@ CREATE TABLE `products` (
   `status` tinyint UNSIGNED NOT NULL DEFAULT '1',
   `user_id` int UNSIGNED NOT NULL,
   `photo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `variant_id` bigint DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -53081,12 +53133,12 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `title`, `slug`, `product_type`, `price`, `weight`, `reduced_price`, `discount_percentage`, `brand_id`, `featured`, `free_shipping`, `short_description`, `description`, `quantity`, `status`, `user_id`, `photo`, `created_at`, `updated_at`) VALUES
-(8, 'BED KING SIZE', 'big-image', 'simple', '400.00', '0.750', '380.00', NULL, NULL, 0, 1, 'hgh', '<p>ghujk<br></p>', 492, 1, 1, 'products/1698207071.jpg', '2021-10-12 16:12:56', '2023-10-25 03:52:53'),
-(9, 'GUYER CHAIR', 'mango', 'simple', '20.00', NULL, '18.00', NULL, NULL, 1, 0, 'Rajshahi Mango', '<p>Rajshahi Mango<br></p>', 5000, 1, 1, 'products/1698207014.jpg', '2023-04-28 03:35:28', '2023-10-24 22:10:14'),
-(10, 'EMS Portable Body Massager', 'ems-portable-body-massager', 'simple', '500.00', NULL, '450.00', NULL, NULL, 1, 0, 'sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf', '<p>sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf</p><p><img style=\"width: 500px;\" src=\"//localhost/laravel/laravel-7-shop/public/storage/products/1694197542.jpg\"><br></p>', -16, 1, 1, 'products/1698206873.jpg', '2023-09-08 17:38:06', '2024-03-26 00:52:23'),
-(11, 'COUPLE SOFA', 'couple-sofa', 'variant', '50000.00', NULL, '40000.00', '20.00', NULL, 0, 0, NULL, '<p>sdf<br></p>', 498, 1, 1, 'products/1698207464.jpg', '2023-10-24 22:16:15', '2024-03-25 11:47:06'),
-(12, 'Tangale Shari', 'tangale-shari', 'variant', '2500.00', NULL, '2000.00', NULL, NULL, 1, 0, NULL, '<p>dsfgdf<br></p>', 0, 1, 1, 'products/1711436904.jpg', '2024-03-26 01:06:39', '2024-03-28 22:38:39');
+INSERT INTO `products` (`id`, `title`, `sku`, `slug`, `product_type`, `price`, `weight`, `reduced_price`, `discount_percentage`, `brand_id`, `featured`, `free_shipping`, `short_description`, `description`, `quantity`, `status`, `user_id`, `photo`, `variant_id`, `created_at`, `updated_at`) VALUES
+(8, 'BED KING SIZE', NULL, 'big-image', 'simple', '400.00', '0.750', '380.00', NULL, NULL, 0, 1, 'hgh', '<p>ghujk<br></p>', 491, 1, 1, 'products/1698207071.jpg', 49, '2021-10-12 16:12:56', '2024-04-04 10:11:17'),
+(9, 'GUYER CHAIR', NULL, 'mango', 'simple', '20.00', NULL, NULL, NULL, NULL, 1, 0, 'Rajshahi Mango', '<p>Rajshahi Mango<br></p>', 4999, 1, 1, 'products/1698207014.jpg', 48, '2023-04-28 03:35:28', '2024-04-02 11:51:28'),
+(10, 'EMS Portable Body Massager', NULL, 'ems-portable-body-massager', 'simple', '500.00', NULL, '450.00', NULL, NULL, 1, 0, 'sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf', '<p>sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf</p><p><img style=\"width: 500px;\" src=\"//localhost/laravel/laravel-7-shop/public/storage/products/1694197542.jpg\"><br></p>', -16, 1, 1, 'products/1698206873.jpg', 38, '2023-09-08 17:38:06', '2024-03-29 11:36:07'),
+(11, 'COUPLE SOFA', NULL, 'couple-sofa', 'variant', '50000.00', NULL, '40000.00', '20.00', NULL, 0, 0, NULL, '<p>sdf<br></p>', 493, 1, 1, 'products/1712161862.jpg', NULL, '2023-10-24 22:16:15', '2024-04-06 10:28:39'),
+(12, 'Tangale Shari', 'TS5', 'tangale-shari', 'variant', '2500.00', NULL, '2000.00', NULL, NULL, 1, 0, NULL, '<p>dsfgdf<br></p>', 93, 1, 1, 'products/1712291381.jpg', NULL, '2024-03-26 01:06:39', '2024-04-14 10:48:39');
 
 -- --------------------------------------------------------
 
@@ -53126,7 +53178,10 @@ INSERT INTO `product_category` (`id`, `product_id`, `category_id`, `created_at`,
 (20, 11, 19, NULL, NULL),
 (21, 11, 20, NULL, NULL),
 (22, 11, 21, NULL, NULL),
-(23, 12, 17, NULL, NULL);
+(23, 12, 17, NULL, NULL),
+(24, 12, 16, NULL, NULL),
+(25, 12, 18, NULL, NULL),
+(26, 12, 19, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -53214,25 +53269,27 @@ CREATE TABLE `product_stocks` (
 --
 
 INSERT INTO `product_stocks` (`id`, `product_id`, `color_id`, `size_id`, `price`, `reduced_price`, `quantity`, `created_at`, `updated_at`) VALUES
-(29, 11, 1, 1, '100.00', '80.00', 100, '2024-03-25 11:49:55', '2024-03-25 23:31:05'),
-(30, 11, 1, 2, NULL, NULL, 0, '2024-03-25 11:49:55', '2024-03-25 11:49:55'),
-(31, 11, 1, 3, NULL, NULL, 0, '2024-03-25 11:49:55', '2024-03-25 11:49:55'),
+(29, 11, 1, 1, '100.00', '80.00', 96, '2024-03-25 11:49:55', '2025-09-26 20:21:29'),
+(30, 11, 1, 2, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
+(31, 11, 1, 3, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
 (32, 11, 2, 1, '200.00', '150.00', 100, '2024-03-25 11:49:55', '2024-03-26 00:07:03'),
-(33, 11, 2, 2, NULL, NULL, 0, '2024-03-25 11:49:55', '2024-03-25 11:49:55'),
-(34, 11, 2, 3, NULL, NULL, 0, '2024-03-25 11:49:55', '2024-03-25 11:49:55'),
+(33, 11, 2, 2, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
+(34, 11, 2, 3, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
 (35, 11, 3, 1, '500.00', '450.00', 300, '2024-03-25 11:49:55', '2024-03-26 00:07:54'),
-(36, 11, 3, 2, NULL, NULL, 0, '2024-03-25 11:49:55', '2024-03-25 11:49:55'),
-(37, 11, 3, 3, NULL, NULL, 0, '2024-03-25 11:49:55', '2024-03-25 11:49:55'),
+(36, 11, 3, 2, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
+(37, 11, 3, 3, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
 (38, 10, NULL, NULL, '500.00', '450.00', -16, '2024-03-26 00:52:23', '2024-03-26 00:52:23'),
-(39, 12, 1, 1, '2500.00', '2000.00', 50, '2024-03-26 01:08:23', '2024-03-26 01:08:57'),
+(39, 12, 1, 1, '2500.00', '2000.00', 48, '2024-03-26 01:08:23', '2025-09-27 10:28:36'),
 (40, 12, 1, 2, '2500.00', '2000.00', 25, '2024-03-26 01:08:23', '2024-03-26 03:41:11'),
 (41, 12, 1, 3, '2500.00', '2000.00', 60, '2024-03-26 01:08:23', '2024-03-26 03:41:16'),
-(42, 12, 2, 1, '2500.00', '2000.00', 10, '2024-03-26 01:08:23', '2024-03-26 03:41:19'),
+(42, 12, 2, 1, '2500.00', '2000.00', 9, '2024-03-26 01:08:23', '2024-04-14 10:52:27'),
 (43, 12, 2, 2, '2500.00', '2000.00', 0, '2024-03-26 01:08:23', '2024-03-26 01:08:23'),
 (44, 12, 2, 3, '2500.00', '2000.00', 0, '2024-03-26 01:08:23', '2024-03-26 01:08:23'),
 (45, 12, 3, 1, '2500.00', '2000.00', 0, '2024-03-26 01:08:23', '2024-03-26 01:08:23'),
 (46, 12, 3, 2, '2500.00', '2000.00', 0, '2024-03-26 01:08:23', '2024-03-26 01:08:23'),
-(47, 12, 3, 3, '2500.00', '2000.00', 200, '2024-03-26 01:08:23', '2024-03-26 01:14:18');
+(47, 12, 3, 3, '2500.00', '2000.00', 200, '2024-03-26 01:08:23', '2024-03-26 01:14:18'),
+(48, 9, NULL, NULL, '20.00', NULL, 5000, '2024-03-29 11:18:07', '2024-04-02 11:28:33'),
+(49, 8, NULL, NULL, '400.00', '380.00', 492, '2024-03-29 11:18:10', '2024-03-29 11:18:10');
 
 -- --------------------------------------------------------
 
@@ -53245,6 +53302,7 @@ CREATE TABLE `pro_cats` (
   `title` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `slug` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
+  `parent_id` int UNSIGNED DEFAULT NULL,
   `photo` varchar(180) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `status` tinyint(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -53255,15 +53313,15 @@ CREATE TABLE `pro_cats` (
 -- Dumping data for table `pro_cats`
 --
 
-INSERT INTO `pro_cats` (`id`, `title`, `slug`, `description`, `photo`, `status`, `created_at`, `updated_at`) VALUES
-(14, 'Nut', 'nut', NULL, 'productCat/14.jpg', 0, '2021-09-26 16:59:44', '2023-10-24 22:11:52'),
-(15, 'Electronics', 'electronics', NULL, 'productCat/15.jpg', 1, '2021-10-06 07:07:44', '2023-10-24 22:12:20'),
-(16, 'Health & Beauty', 'health-beauty', NULL, 'productCat/16.jpg', 1, '2023-09-04 18:05:37', '2023-10-24 22:12:33'),
-(17, 'Home & Lifestyle', 'home-lifestyle', NULL, 'productCat/17.jpg', 1, '2023-09-04 18:05:49', '2023-10-24 22:12:52'),
-(18, 'Sports & Outdoors', 'sports-outdoors', NULL, 'productCat/18.jpg', 1, '2023-09-04 18:05:59', '2023-10-24 22:13:05'),
-(19, 'Automotive & Motorbike', 'automotive-motorbike', NULL, 'productCat/19.jpg', 1, '2023-09-04 18:06:09', '2023-10-24 22:13:19'),
-(20, 'Jewellery', 'jewellery', NULL, 'productCat/20.jpg', 1, '2023-09-04 18:06:27', '2023-10-24 22:13:30'),
-(21, 'Groceries', 'groceries', NULL, 'productCat/21.jpg', 1, '2023-09-04 18:06:44', '2023-10-24 22:13:42');
+INSERT INTO `pro_cats` (`id`, `title`, `slug`, `description`, `parent_id`, `photo`, `status`, `created_at`, `updated_at`) VALUES
+(14, 'Nut', 'nut', NULL, NULL, 'productCat/14.jpg', 0, '2021-09-26 16:59:44', '2023-10-24 22:11:52'),
+(15, 'Electronics', 'electronics', NULL, NULL, 'productCat/15.jpg', 1, '2021-10-06 07:07:44', '2023-10-24 22:12:20'),
+(16, 'Health & Beauty', 'health-beauty', NULL, NULL, 'productCat/16.jpg', 1, '2023-09-04 18:05:37', '2023-10-24 22:12:33'),
+(17, 'Home & Lifestyle', 'home-lifestyle', NULL, NULL, 'productCat/17.jpg', 1, '2023-09-04 18:05:49', '2023-10-24 22:12:52'),
+(18, 'Sports & Outdoors', 'sports-outdoors', NULL, NULL, 'productCat/18.jpg', 1, '2023-09-04 18:05:59', '2023-10-24 22:13:05'),
+(19, 'Automotive & Motorbike', 'automotive-motorbike', NULL, NULL, 'productCat/19.jpg', 1, '2023-09-04 18:06:09', '2023-10-24 22:13:19'),
+(20, 'Jewellery', 'jewellery', NULL, NULL, 'productCat/20.jpg', 1, '2023-09-04 18:06:27', '2023-10-24 22:13:30'),
+(21, 'Groceries', 'groceries', NULL, NULL, 'productCat/21.jpg', 1, '2023-09-04 18:06:44', '2023-10-24 22:13:42');
 
 -- --------------------------------------------------------
 
@@ -53355,9 +53413,8 @@ CREATE TABLE `shipping_roles` (
 --
 
 INSERT INTO `shipping_roles` (`id`, `title`, `location_id`, `condition`, `amount`, `unit`, `minimuUnit`, `incrementPerUnit`, `created_at`, `updated_at`) VALUES
-(1, 'Abu Zabi', 3796, 'Equal', '80.00', '1.00', '1.00', '0.00', '2021-10-15 16:54:51', '2023-08-21 04:14:40'),
-(2, 'à¦¢à¦¾à¦•à¦¾à¦° à¦¬à¦¾à¦¹à¦¿à¦°à§‡', 348, 'Not Equal', '100.00', '1.00', '1.00', '0.00', '2021-10-15 16:57:47', '2023-05-06 05:29:30'),
-(3, 'Ajman', 3797, 'Equal', '120.00', '0.00', '1.00', '1.00', '2023-08-21 04:38:22', '2023-08-21 04:38:22');
+(1, 'ঢাকার ভিতরে', 348, 'Equal', '80.00', '1.00', '1.00', '0.00', '2021-10-15 16:54:51', '2024-04-06 09:05:14'),
+(2, 'ঢাকার বাহিরে', 348, 'Not Equal', '100.00', '1.00', '1.00', '0.00', '2021-10-15 16:57:47', '2024-04-06 09:04:48');
 
 -- --------------------------------------------------------
 
@@ -53485,7 +53542,10 @@ CREATE TABLE `wish_lists` (
 INSERT INTO `wish_lists` (`id`, `product_id`, `customer_id`, `created_at`, `updated_at`) VALUES
 (1, 9, 2, '2023-09-05 01:07:00', '2023-09-05 01:07:00'),
 (2, 8, 2, '2023-09-05 01:22:14', '2023-09-05 01:22:14'),
-(3, 9, 13, '2023-10-26 01:34:45', '2023-10-26 01:34:45');
+(3, 9, 13, '2023-10-26 01:34:45', '2023-10-26 01:34:45'),
+(8, 12, 2, '2024-04-03 10:28:31', '2024-04-03 10:28:31'),
+(9, 11, 2, '2024-04-03 10:33:07', '2024-04-03 10:33:07'),
+(11, 11, 14, '2024-04-23 10:07:29', '2024-04-23 10:07:29');
 
 --
 -- Indexes for dumped tables
@@ -53739,7 +53799,7 @@ ALTER TABLE `wish_lists`
 -- AUTO_INCREMENT for table `attachments`
 --
 ALTER TABLE `attachments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `colors`
@@ -53751,7 +53811,7 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -53775,7 +53835,7 @@ ALTER TABLE `location_countries`
 -- AUTO_INCREMENT for table `location_states`
 --
 ALTER TABLE `location_states`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4122;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4123;
 
 --
 -- AUTO_INCREMENT for table `menus`
@@ -53787,7 +53847,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -53799,13 +53859,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `order_statuses`
@@ -53823,19 +53883,19 @@ ALTER TABLE `packages`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `postmetas`
 --
 ALTER TABLE `postmetas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `post_tax`
@@ -53853,7 +53913,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `product_reviews`
@@ -53865,7 +53925,7 @@ ALTER TABLE `product_reviews`
 -- AUTO_INCREMENT for table `product_stocks`
 --
 ALTER TABLE `product_stocks`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `pro_cats`
@@ -53919,7 +53979,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `wish_lists`
 --
 ALTER TABLE `wish_lists`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
