@@ -1,6 +1,6 @@
 <template>
   <!-- Main Slider Start -->
-  <div class="header">
+  <!-- <div class="header">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
@@ -21,7 +21,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+<Slider></Slider>
   <!-- Main Slider End -->
 
   <!-- Brand Start -->
@@ -86,7 +87,7 @@
   <!-- sexaul wellness end-->
 
   <!-- Review Start -->
-   <Review></Review>
+   <!-- <Review></Review> -->
   <!-- Review End -->
 <!--    <div>-->
 <!--        <button @click="notify">Notify !</button>-->
@@ -108,6 +109,7 @@ const basic = basicStore;
 const slides = ref([])
 
 //lebels.value = basic.settings.menus.lebel
+/*
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/posts?post_type=offer&take=2`)
       .then(res => {
@@ -115,7 +117,7 @@ onBeforeMount(() => {
           slides.value = res.data.data
       });
 })
-
+*/
 onMounted(()=>{
 $(function () {
     "use strict";

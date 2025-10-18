@@ -97,9 +97,9 @@
           <div class="footer-widget">
             <h2>Get in Touch</h2>
             <div class="contact-info">
-              <p><i class="fa fa-map-marker"></i>123 E Store, Los Angeles, USA</p>
-              <p><i class="fa fa-envelope"></i>email@example.com</p>
-              <p><i class="fa fa-phone"></i>+123-456-7890</p>
+              <p><i class="fa fa-map-marker"></i>{{ basic.settings.siteAddress }}</p>
+              <p><i class="fa fa-envelope"></i>{{ basic.settings.siteEmail }}</p>
+              <p><i class="fa fa-phone"></i>{{ basic.settings.sitePhone }}</p>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@
         </div>
       </div>
 
-      <div class="row payment align-items-center">
+      <!-- <div class="row payment align-items-center">
         <div class="col-md-6">
           <div class="payment-method">
             <h2>We Accept:</h2>
@@ -157,7 +157,7 @@
             <img src="./assets/img/ssl.svg" alt="Payment Security" />
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- Footer End -->
@@ -167,7 +167,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 copyright">
-          <p>Design & Developed by &copy; <a href="#">Cyber Soft BD</a></p>
+          <p>Design & Developed by &copy; <a href="https://asiancoder.com">Asian Coder</a></p>
         </div>
 
         <div class="col-md-6 template-by">

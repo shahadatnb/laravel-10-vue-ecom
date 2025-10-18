@@ -7,30 +7,35 @@
 </template>
 
 <script setup>
-import {ref, onBeforeMount, onUpdated } from "vue";
+import {ref, onBeforeMount, onUpdated, nextTick } from "vue";
 import { basicStore } from "../../store/basic";
 const basic = basicStore;
 import axios from "axios";
+const sliderRef = ref('.header-slider'); // Ref to the slider element
 const slides = ref({})
 onBeforeMount(() => {
     axios.get(`${basic.serverUrl}/api/posts?post_type=slide`)
-        .then(res => {
-            //console.log(res.data)
-            slides.value = res.data.data
-        });
+    .then(res => {
+        //console.log(res.data)
+        slides.value = res.data.data
+    });
 })
 
 onUpdated(()=>{
-    $(function () {
-        // Header slider
-        $('.header-slider').slick({
-            autoplay: true,
-            dots: true,
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1
+    //nextTick(() => {
+        //if ($(sliderRef.value).length > 0) {
+        $(function () {
+            // Header slider
+            $(sliderRef.value).slick({
+                autoplay: true,
+                dots: true,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
         });
-    });
+       // }
+    //})
 })
 </script>
 

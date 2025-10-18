@@ -14,7 +14,7 @@ class ProductResourceLoop extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
@@ -30,5 +30,10 @@ class ProductResourceLoop extends JsonResource
             'photo' => asset('storage/'.$this->photo),
             'categories' => $this->categories->pluck('title'),
         ];
+        if($this->product_type == 'simple'){
+            $data['variant_id'] = $this->variants[0]->id;
+            $data['quantity'] = $this->variants[0]->quantity;
+        }
+        return $data;
     }
 }

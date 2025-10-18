@@ -32,7 +32,7 @@
                                                 <p>{{ item.product.title }}</p>
                                             </div>
                                         </td>
-                                        <td>{{ item.product.reduced_price }}</td>
+                                        <td>{{ item.product.price }}</td>
                                         <td>
                                             <div class="qty">
                                                 <button @click="cart.decreaseQuantity(item)" class="btn-minus"><i class="fa fa-minus"></i></button>
@@ -40,7 +40,7 @@
                                                 <button @click="cart.increaseQuantity(item)" class="btn-plus"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </td>
-                                        <td>{{ item.product.reduced_price * item.quantity }}</td>
+                                        <td>{{ item.product.price * item.quantity }}</td>
                                         <td><button @click="cart.removeItem(item.product)"><i class="fa fa-trash"></i></button></td>
                                     </tr>
                                     

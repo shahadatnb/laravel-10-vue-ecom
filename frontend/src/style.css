@@ -1,6 +1,4 @@
 @import './assets/css/style.css';
-@import './assets/lib/slick/slick.css';
-@import './assets/lib/slick/slick-theme.css';
 
 .btn:hover, .btn:active, .btn:focus {
 	color: #fff;

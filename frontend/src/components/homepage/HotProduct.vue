@@ -5,7 +5,7 @@
                 <h1>New Hot Products</h1>
             </div>
             <div class="row align-items-center product-slider product-slider-4">
-                <div class="col-lg-6" v-for="product in products" :key="product.id">
+                <div class="col" v-for="product in products" :key="product.id">
                 <Product :product="product"></Product>
                 </div>
             </div>
@@ -14,11 +14,12 @@
 </template>
 
 <script setup>
-import {onBeforeMount, ref, onMounted, onUpdated} from "vue";
+import {onBeforeMount, ref, nextTick , onUpdated} from "vue";
 import { basicStore } from "../../store/basic";
 const basic = basicStore;
 import Product from "./Product.vue";
 import axios from "axios";
+const sliderRef = ref('.product-slider-4'); // Ref to the slider element
 const products = ref([])
 onBeforeMount(()=>{
     axios.get(`${basic.serverUrl}/api/latest-products?featured=1`)
@@ -27,9 +28,11 @@ onBeforeMount(()=>{
         });
 })
 onUpdated(() => {
+    //nextTick(() => {
+    //if ($(sliderRef.value).length > 0) {
     $(function () {
         // Product Slider 4 Column
-        $('.product-slider-4').slick({
+        $(sliderRef.value).slick({
             autoplay: true,
             infinite: true,
             dots: false,
@@ -63,7 +66,8 @@ onUpdated(() => {
             ]
         });
     })
-
+   // }
+    //})
 });
 </script>
 

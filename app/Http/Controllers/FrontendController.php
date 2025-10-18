@@ -141,8 +141,8 @@ class FrontendController extends Controller
     }
 
     public function latestProducts(Request $request){
-        $products = Product::latest()->where('status',1);       
-
+        $products = Product::latest()->where('status',1)->with('variants');       
+        //dd($products->get());
         if($request->has('search')){
             $products = $products->where('title','like','%'.$request->search.'%');
         }

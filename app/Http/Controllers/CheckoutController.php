@@ -302,8 +302,9 @@ class CheckoutController extends Controller
             //return $request->products[0]['price'];//cart[9]['product']['reduced_price'];
             foreach($request->products as $product){
                 OrderItem::create(['order_id'=>$data->id,'product_id'=>$product['product_id'],'qty_ordered'=>$product['quantity'],'price'=>$product['price'],'total'=>$product['price'] * $product['quantity']]);
-                $productItem = Product::find($product['product_id']);
-                $productItem->decrement('quantity',$product['quantity']); 
+                //$productItem = Product::find($product['product_id']);
+                $productStock = ProductStock::find($product['variant_id']);
+                $productStock->decrement('quantity',$product['quantity']); 
             }
             
             return response()->json([

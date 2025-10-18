@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-
+import { nextTick } from 'vue'
 //import Login from '../components/Login.vue';
 //import Register from '../components/Register.vue';/
 import Home from '../components/Home.vue';
@@ -53,12 +53,20 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        // always scroll to top
+        //return { top: 0 }
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+      }
 });
 
 const DEFAULT_TITLE = 'Ecommerce';
 router.afterEach((to, from) => {
-    Vue.nextTick(() => {
+    nextTick(() => {
         document.title = to.meta.title || DEFAULT_TITLE;
     });
 });
