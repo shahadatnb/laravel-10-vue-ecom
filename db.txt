@@ -9,4 +9,4 @@ ALTER TABLE `pro_cats` ADD `parent_id` INT UNSIGNED NULL DEFAULT NULL AFTER `des
 ALTER TABLE `order_items` ADD `product_stock_id` BIGINT UNSIGNED NULL DEFAULT NULL AFTER `product_id`; 
 ALTER TABLE `attachments` ADD `imageOriginal` VARCHAR(250) NULL DEFAULT NULL AFTER `image`; 
 
-ALTER TABLE `exam_result_tabulations` ADD `merge` TINYINT UNSIGNED NULL DEFAULT NULL AFTER `grade_point`; 
+INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, `field`, `status`, `created_at`, `updated_at`) VALUES (NULL, '1', 'messenger', 'Facebook messenger', '', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', '1', NULL, NULL), (NULL, '1', 'facebook', 'Facebook Link', '', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', '1', NULL, NULL), (NULL, '1', 'youtube', 'Youtube', '', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', '1', NULL, NULL); 

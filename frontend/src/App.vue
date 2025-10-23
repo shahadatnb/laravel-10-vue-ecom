@@ -109,11 +109,10 @@
             <h2>Follow Us</h2>
             <div class="contact-info">
               <div class="social">
-                <a href=""><i class="fab fa-twitter"></i></a>
-                <a href=""><i class="fab fa-facebook-f"></i></a>
-                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
-                <a href=""><i class="fab fa-youtube"></i></a>
+                <a :href="basic.settings.facebook"><i class="fab fa-facebook-f"></i></a>
+                <!-- <a href=""><i class="fab fa-linkedin-in"></i></a> -->
+                <!-- <a href=""><i class="fab fa-instagram"></i></a> -->
+                <a :href="basic.settings.youtube"><i class="fab fa-youtube"></i></a>
               </div>
             </div>
           </div>

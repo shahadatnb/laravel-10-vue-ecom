@@ -66,7 +66,7 @@
                                    </div>
 
                                    <div class="p-size" v-if="product.sizes != ''">
-                                       <h4>Size:</h4>
+                                       <h4>Weight:</h4>
                                        <div v-for="(size, index) in product.sizes" :key="index" class="btn-group btn-group-sm">
                                            <button v-on:click="selectSize(index)" type="button" class="btn">{{ size }}</button>
                                        </div>
@@ -75,9 +75,9 @@
                                     <div class="action">
                                         <!-- <a class="btn" @click="cart.addItem(product)" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a> -->
                                         <button class="btn btn-block" @click="cart.addItem(product, quantity)" type="button"><i class="fa fa-shopping-bag"></i> Add to Cut</button>
-                                        <p class="btn btn-warning btn-block"><i class="fa fa-shopping-cart"></i> ক্যাশ অন ডেলিভারি তে অর্ডার করুন</p>
-                                        <a href="#" class="btn btn-warning btn-block"><i class="fab fa-facebook-messenger"></i> Chat with us</a>
-                                        <a href="http://wa.me/+8801342487354" target="_blank" class="btn btn-success btn-block"><i class="fab fa-whatsapp"></i> WhatsApp us</a>
+                                        <button class="btn btn-warning btn-block" @click="cart.addItem(product, quantity,1)"><i class="fa fa-shopping-cart"></i> ক্যাশ অন ডেলিভারি তে অর্ডার করুন</button>
+                                        <a :href="basic.settings.messenger" target="_blank" class="btn btn-warning btn-block"><i class="fab fa-facebook-messenger"></i> Chat with us</a>
+                                        <a :href="whatapp" target="_blank" class="btn btn-success btn-block"><i class="fab fa-whatsapp"></i> WhatsApp us</a>
                                     </div>
                                 </div>
                                 <div class="row product-detail-bottom">
@@ -121,6 +121,7 @@ const product_title_original = ref("");
 const selectedSize = ref('');
 const sliderRef = ref('.product-slider-single'); // Ref to the slider element
 const sliderRefNav = ref('.product-slider-single-nav'); // Ref to the slider element
+const whatapp = "https://wa.me/" + basic.settings.sitePhone
 
 const product = reactive({})
 onBeforeMount(() => {

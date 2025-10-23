@@ -24,7 +24,7 @@ const cart = reactive({
     grandTotal:computed(()=>{
         return cart.totalPrice + cart.shippingCost*1
     }),
-    addItem(product, quantity=1){
+    addItem(product, quantity=1, buy=0){
         console.log(product.variants)
         if(product.variant_id == null || product.variant_id == undefined || product.variant_id == ''){
             router.push('/product/'+product.slug)
@@ -48,6 +48,9 @@ const cart = reactive({
                     },
                     quantity: quantity
                 }
+            }
+            if(buy == 1){
+                router.push('/checkout')
             }
             toast("Cart added", {
                 "theme": "auto",
