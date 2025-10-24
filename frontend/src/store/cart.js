@@ -149,7 +149,7 @@ const cart = reactive({
         }else if(shipping_method == 'ঢাকার ভিতরে'){
             this.shippingCost = basic.settings.shipping_inside_dhaka
         }else{
-            this.shippingCost = 0
+            this.shippingCost = basic.settings.shipping_outside__dhaka
         }
         //console.log(this.shippingCost)
         this.saveCartInLocalStorage()
