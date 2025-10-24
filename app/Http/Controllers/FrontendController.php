@@ -141,7 +141,7 @@ class FrontendController extends Controller
     }
 
     public function latestProducts(Request $request){
-        $products = Product::latest()->where('status',1)->with('variants');       
+        $products = Product::where('status',1)->with('variants');
         //dd($products->get());
         if($request->has('search')){
             $products = $products->where('title','like','%'.$request->search.'%');
@@ -184,6 +184,16 @@ class FrontendController extends Controller
 
         if($request->has('featured')){
             $products = $products->where('featured',1);
+        }
+
+        if($request->has('orderBy') && $request->has('orderType')){
+            if($request->orderType == 'random'){
+                $products = $products->inRandomOrder();
+            }else{
+                $products = $products->orderBy($request->orderBy,$request->orderType);
+            }
+        }else{
+            $products = $products->latest();
         }
 
         if($request->has('take')){

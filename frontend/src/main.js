@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import router from './router/router.js'
 import $ from 'jquery';
 window.$ = window.jQuery = $;
+import 'bootstrap';
 import 'slick-carousel'; // This makes the .slick() method available on jQuery objects
 import 'jquery.easing'; // This imports the easing functions
 import Vue3Toasity from 'vue3-toastify';

@@ -52,6 +52,9 @@ const cart = reactive({
             if(buy == 1){
                 router.push('/checkout')
             }
+            $(function () {
+                $('#checkoutModal').modal('show')
+            });
             toast("Cart added", {
                 "theme": "auto",
                 "type": "success",
@@ -106,6 +109,7 @@ const cart = reactive({
         router.push('/checkout')
     },
     async placeOrder(name, phone, address, shipping_method){
+        basic.loading = true
         const products = Object.values(this.items).map(item => ({
             product_id: item.product.id,
             quantity: item.quantity,
@@ -123,11 +127,12 @@ const cart = reactive({
             const data = await response.json()
             //console.log(response)
             if(data.success===true){
+                basic.loading = false
                 this.errorMessage = {}
                 this.emptyCart()
-                // $(function () {
-                //     $('#checkoutModal').modal('show')
-                // });
+                $(function () {
+                    $('#checkoutModal').modal('show')
+                });
                 toast("অর্ডার সফল হয়েছে", {
                     "theme": "auto",
                     "type": "info",

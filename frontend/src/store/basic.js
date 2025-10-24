@@ -6,10 +6,12 @@ const basicStore = reactive({
     //serverUrl: 'http://localhost/laravel/laravel-10-vue-ecom/public',
     baseUrl: 'https://rajshahibazar.com',
     settings: [],
+    loading: true,
     init() {
         axios.get(`${basicStore.serverUrl}/api/config`)
         .then(res => {
             basicStore.settings = res.data
+            basicStore.loading = false
         });
     }
 })

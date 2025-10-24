@@ -25,7 +25,7 @@
                                         <img v-for="gallery in product.galleries" :key="gallery.id + '1'" :src="gallery.photo" alt="Product Image">
 <!--                                    </template>-->
                                 </div>
-                                <div v-if="product.galleries.length > 0" class="product-slider-single-nav normal-slider">
+                                <div v-if="product.galleries && product.galleries.length > 0" class="product-slider-single-nav normal-slider">
                                     <div class="slider-nav-img"><img :src="product.photo" alt="Product Image"></div>
 <!--                                    <template v-for="gallery in product.galleries" :key="gallery.id">-->
                                     <div v-for="gallery in product.galleries" :key="gallery.id" class="slider-nav-img">
@@ -103,18 +103,31 @@
             </div>
         </div>
     </div>
+    <div class="featured-product product">
+        <div class="container-fluid">
+            <div class="section-header">
+                <h1>Related Products</h1>
+            </div>
+            <div class="row align-items-center">
+                <div v-for="product in products" :key="product.id" class="col-lg-3">
+                    <Product :product="product"></Product>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
 import { reactive, onBeforeMount, onUpdated, ref } from 'vue'
+import Product from "./homepage/Product.vue";
 import { cart } from "../store/cart";
 import axios from 'axios'
 import { basicStore } from "../store/basic.js";
 const basic = basicStore;
 import { useRoute } from 'vue-router';
 const route = useRoute()
+const products = ref([])
 const slug = route.params.slug
-const loading = ref(false)
 const quantity = ref(1);
 const selectedColor = ref('');
 const product_title_original = ref("");
@@ -125,6 +138,7 @@ const whatapp = "https://wa.me/" + basic.settings.sitePhone
 
 const product = reactive({})
 onBeforeMount(() => {
+    basic.loading = true
     axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
         .then(res => {
             //console.log(res.data)
@@ -168,7 +182,12 @@ onBeforeMount(() => {
             document
             .querySelector("meta[property='og:title']")
             .setAttribute("content", product.title);
-            loading.value = false;
+            basic.loading = false;
+        });
+
+     axios.get(`${basic.serverUrl}/api/latest-products?take=8&orderBy=id&orderType=random`)
+        .then(res => {
+            products.value = res.data.data
         });
 })
 
@@ -228,29 +247,30 @@ function decreaseQuantity() {
 
 onUpdated(()=>{
     $(function () {
-        // Product Detail Slider
-
-        $(sliderRef.value).slick({
-            infinite: true,
-            autoplay: true,
-            dots: false,
-            fade: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            asNavFor: '.product-slider-single-nav'
-        })
-
-        $(sliderRefNav.value).slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: false,
-            centerMode: true,
-            focusOnSelect: true,
-            asNavFor: '.product-slider-single'
-        });
-    })
-
+        if(product.galleries && product.galleries.length > 0){ 
+            // Product Detail Slider
+            $(sliderRef.value).slick({
+                infinite: true,
+                autoplay: true,
+                dots: false,
+                fade: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                asNavFor: '.product-slider-single-nav'
+            })
+        
+            // Product Detail Slider Nav
+            $(sliderRefNav.value).slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: false,
+                centerMode: true,
+                focusOnSelect: true,
+                asNavFor: '.product-slider-single'
+            });
+        }
+    });
 
 })
 

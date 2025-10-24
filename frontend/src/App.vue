@@ -180,6 +180,13 @@
 
   <!-- Back to Top -->
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<div v-if="basic.loading" id="loadingOverlay" class="overlay">
+  <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
 </template>
 <script setup>
 import { basicStore } from "./store/basic";
