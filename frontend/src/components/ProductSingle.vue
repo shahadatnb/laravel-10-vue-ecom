@@ -118,7 +118,7 @@
 </template>
 
 <script setup>
-import { reactive, onBeforeMount, onUpdated, ref } from 'vue'
+import { reactive, watch, onUpdated, ref } from 'vue'
 import Product from "./homepage/Product.vue";
 import { cart } from "../store/cart";
 import axios from 'axios'
@@ -135,11 +135,12 @@ const selectedSize = ref('');
 const sliderRef = ref('.product-slider-single'); // Ref to the slider element
 const sliderRefNav = ref('.product-slider-single-nav'); // Ref to the slider element
 const whatapp = "https://wa.me/" + basic.settings.sitePhone
-
 const product = reactive({})
-onBeforeMount(() => {
+watch(() => route.params.slug, fetchData, { immediate: true });
+
+async function fetchData(data) {
     basic.loading = true
-    axios.get(`${basic.serverUrl}/api/single-product/${slug}`)
+    axios.get(`${basic.serverUrl}/api/single-product/${data}`)
         .then(res => {
             //console.log(res.data)
             product_title_original.value = res.data.data.title;
@@ -189,7 +190,7 @@ onBeforeMount(() => {
         .then(res => {
             products.value = res.data.data
         });
-})
+}
 
 function selectColor(color) {
   product.selectedColor = color;
