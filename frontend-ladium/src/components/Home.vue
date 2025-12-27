@@ -3,23 +3,46 @@ import Banner from './homepage/Banner.vue'
 //import Testimonial from './homepage/Testimonial.vue'
 import Categories from './homepage/Categories.vue'
 import LoopProduct from './LoopProduct.vue';
-import {onBeforeMount,ref} from "vue";
+import {onMounted,ref} from "vue";
 import { basicStore } from "../store/basic";
 const basic = basicStore;
 import axios from "axios";
 const newArarival = ref([])
 const recomendedProducts = ref([])
-onBeforeMount(()=>{
-    axios.get(`${basic.serverUrl}/api/latest-products?take=12`)
-        .then(res => {
-            newArarival.value = res.data.data
-        });
 
-    axios.get(`${basic.serverUrl}/api/latest-products?featured=1&take=12`)
-        .then(res => {
-            recomendedProducts.value = res.data.data
-        });
-})
+onMounted(async () => {
+  try {
+    // দুটি API কল একসাথে শেষ হওয়ার জন্য অপেক্ষা করবে
+    await Promise.all([
+      axios.get(`${basic.serverUrl}/api/latest-products?take=12`).then(res => {
+        newArarival.value = res.data.data;
+      }),
+      axios.get(`${basic.serverUrl}/api/latest-products?featured=1&take=12`).then(res => {
+        recomendedProducts.value = res.data.data;
+      })
+    ]);
+
+    // ডেটা লোড নিশ্চিত হওয়ার পর ফাংশন কল
+    pushToDataLayer();
+    
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
+});
+
+const pushToDataLayer = () => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "view_item_list",
+    ecommerce: {
+      items: newArarival.value.map(item => ({
+        item_id: item.id,
+        item_name: item.title,
+        price: item.price,
+      }))
+    }
+  });
+};
 
 function loadMoreRecomended() {
   let skip = recomendedProducts.value.length;

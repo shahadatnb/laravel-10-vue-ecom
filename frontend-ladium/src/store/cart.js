@@ -43,6 +43,7 @@ const cart = reactive({
                     },
                     quantity: quantity
                 }
+                cart.dataLayerAddToCart(product, quantity)
             }
             toast("Cart added", {
                 "theme": "auto",
@@ -81,6 +82,7 @@ const cart = reactive({
             "dangerouslyHTMLString": true
           })
         this.saveCartInLocalStorage()
+        cart.dataLayerRemoveFromCart(product)
     },
     emptyCart(){
         this.items = {}
@@ -95,7 +97,55 @@ const cart = reactive({
         this.shippingCost = localStorage.getItem('shippingCost')
     },
     checkout(){
+        cart.dataLayerBeginCheckout()
         router.push('/checkout')
+    },
+    dataLayerAddToCart(product, quantity=1){
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            event: "add_to_cart",
+            ecommerce: {
+                items: [{
+                    item_id: product.id,
+                    item_name: product.title,
+                    price: product.price,
+                    quantity: quantity
+                }]
+            }
+        });
+    },
+    dataLayerRemoveFromCart(product){
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            event: "remove_from_cart",
+            ecommerce: {
+                items: [{
+                    item_id: product.id,
+                    item_name: product.title,
+                    price: product.price,
+                    quantity: 1
+                }]
+            }
+        });
+    },
+    dataLayerViewCart(){
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            event: "view_cart"
+        });
+    },
+    dataLayerBeginCheckout(){
+        window.dataLayer.push({
+            'event': 'begin_checkout',
+            value: cart.totalPrice,
+            currency: "BDT",
+            items: cart.items.map(item => ({
+                item_id: item.product.id,
+                item_name: item.product.title,
+                price: item.product.price,
+                quantity: item.quantity
+            }))
+        });
     },
 
 })

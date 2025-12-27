@@ -17,7 +17,7 @@ const cart = reactive({
     totalPrice:computed(()=>{
         let total = 0
         for(let id in cart.items){
-            total += cart.items[id].product.reduced_price * cart.items[id].quantity
+            total += cart.items[id].product.price * cart.items[id].quantity
         }
         return parseFloat(total.toFixed(2))
     }),
@@ -52,9 +52,7 @@ const cart = reactive({
             if(buy == 1){
                 router.push('/checkout')
             }
-            $(function () {
-                $('#checkoutModal').modal('show')
-            });
+
             toast("Cart added", {
                 "theme": "auto",
                 "type": "success",

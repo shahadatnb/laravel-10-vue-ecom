@@ -63,6 +63,7 @@ const order = reactive({
 
         const products = Object.values(cart.items).map(item => ({
             product_id: item.product.id,
+            title: item.product.title,
             quantity: item.quantity,
             variant_id: item.product.variant_id,
             price: item.product.reduced_price ?? item.product.price 
@@ -92,6 +93,7 @@ const order = reactive({
             let data = await response.json()
             if(data.success==true){
                 this.errorMessage = {}
+                this.dataLayerPurchaseEvent(data.order,products)
                 cart.emptyCart()
                 this.loading = false
                 // toast("Order placed successfully", {
@@ -102,6 +104,7 @@ const order = reactive({
                 // })
                 //router.push('/dashboard/orders')
                 this.orderId = data.order.id
+
                 this.showPopup = true
             }else{
                 this.loading = false                
@@ -123,7 +126,27 @@ const order = reactive({
     viewOrderDetails(){ 
         this.showPopup = false;
         router.push('/dashboard/order/'+this.orderId)
+    },
+    dataLayerPurchaseEvent(order,products){
+        dataLayer.push({
+            event: "purchase",
+            ecommerce: {
+                transaction_id: order.id,
+                value: order.sub_total,
+                tax: 0,
+                shipping: order.shipping_amount,
+                currency: "BDT",
+                items: products.map(product => ({
+                    item_name: product.title,
+                    item_id: product.product_id,
+                    price: product.price,
+                    quantity: product.quantity
+                }))
+            }
+        });
+        //console.log(dataLayer)
     }
+    
 })
 
 export { order }

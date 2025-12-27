@@ -72,8 +72,25 @@ async function fetchData(data) {
     document
       .querySelector("meta[property='og:title']")
       .setAttribute("content", product.title);
+
+    pushToDataLayer();
     loading.value = false;
   });
+}
+
+const pushToDataLayer = () => {
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+      event: "view_item",
+      ecommerce: {
+          items: [{
+              item_id: product.id,
+              item_name: product.title,
+              price: product.price,
+          }]
+      }
+  });
+  console.log("DataLayer Updated:", window.dataLayer);
 }
 
 onBeforeMount(() => {
