@@ -74,6 +74,7 @@ const cart = reactive({
         }
     },
     removeItem(product){
+        cart.dataLayerRemoveFromCart(product, this.items[product.variant_id].quantity)
         delete this.items[product.variant_id]
         toast("Cart removed", {
             "theme": "auto",
@@ -82,7 +83,6 @@ const cart = reactive({
             "dangerouslyHTMLString": true
           })
         this.saveCartInLocalStorage()
-        cart.dataLayerRemoveFromCart(product)
     },
     emptyCart(){
         this.items = {}
@@ -97,7 +97,6 @@ const cart = reactive({
         this.shippingCost = localStorage.getItem('shippingCost')
     },
     checkout(){
-        cart.dataLayerBeginCheckout()
         router.push('/checkout')
     },
     dataLayerAddToCart(product, quantity=1){
@@ -114,7 +113,7 @@ const cart = reactive({
             }
         });
     },
-    dataLayerRemoveFromCart(product){
+    dataLayerRemoveFromCart(product, quantity=1){
         window.dataLayer = window.dataLayer || [];
         dataLayer.push({
             event: "remove_from_cart",
@@ -123,7 +122,7 @@ const cart = reactive({
                     item_id: product.id,
                     item_name: product.title,
                     price: product.price,
-                    quantity: 1
+                    quantity: quantity
                 }]
             }
         });
@@ -133,20 +132,7 @@ const cart = reactive({
         dataLayer.push({
             event: "view_cart"
         });
-    },
-    dataLayerBeginCheckout(){
-        window.dataLayer.push({
-            'event': 'begin_checkout',
-            value: cart.totalPrice,
-            currency: "BDT",
-            items: cart.items.map(item => ({
-                item_id: item.product.id,
-                item_name: item.product.title,
-                price: item.product.price,
-                quantity: item.quantity
-            }))
-        });
-    },
+    },    
 
 })
     

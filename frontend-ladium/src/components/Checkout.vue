@@ -23,6 +23,8 @@ onBeforeMount(()=>{
             locations.value = res.data
             //console.log(res.data)
         });
+        
+    dataLayerBeginCheckout()
 })
 
 watch(() => city.value, shippingAmount, { immediate: true })
@@ -32,6 +34,25 @@ function shippingAmount(city) {
         .then(res => {
             order.shipping_amount = res.data
         })
+}
+
+function dataLayerBeginCheckout(){
+    const items = []
+    Object.keys(cart.items).forEach(key => {
+        items.push(cart.items[key]);
+    });      
+    window.dataLayer.push({
+        'event': 'begin_checkout',
+        value: cart.totalPrice,
+        currency: "BDT",
+        items: items.map(item => ({
+            item_id: item.product.id,
+            item_name: item.product.title,
+            price: item.product.price,
+            quantity: item.quantity
+        }))
+    });
+    
 }
 </script>
 <template>
