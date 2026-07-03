@@ -31,13 +31,13 @@ trait PostTrait {
                 array('name'=>'link','title'=>'Link','fildType'=>'text','required'=>true),
             )
         ),
-        // 'photogallery' => array(
-        //     'title'     => 'Photo gallery',
-        //     'postType'  => 'photogallery',
-        //     'icon'      => 'fa-image',
-        //     'taxonomy'  => true,
-        //     'support'   => array('title','image'),
-        // ),        
+        'feature' => array(
+            'title'     => 'Feature',
+            'postType'  => 'feature',
+            'icon'      => 'fa-image',
+            'taxonomy'  => false,
+            'support'   => array('title','image','body'),
+        ),        
         'offer' => array(
             'title'     => 'Offer',
             'postType'  => 'offer',

@@ -14,6 +14,7 @@ use App\Models\ProductStock;
 use Storage;
 use Str;
 use Image;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -126,8 +127,21 @@ class ProductController extends Controller
             'title'=>'required|max:255',
             'sku'=>'nullable|max:80|unique:products,sku,'.$id,
             'product_type'=>'required',
-            'colors'=>'required_if:product_type,==,variant',
-            'sizes'=>'required_if:product_type,==,variant',
+            //'colors'=>'required_if:product_type,==,variant',
+            //'sizes'=>'required_if:product_type,==,variant',
+            // product_type যদি variant হয় এবং sizes ফাকা থাকে, তবে colors বাধ্যতামূলক
+            'colors' => [
+                Rule::requiredIf(function () use ($request) {
+                    return $request->product_type === 'variant' && empty($request->sizes);
+                })
+            ],
+            
+            // product_type যদি variant হয় এবং colors ফাকা থাকে, তবে sizes বাধ্যতামূলক
+            'sizes' => [
+                Rule::requiredIf(function () use ($request) {
+                    return $request->product_type === 'variant' && empty($request->colors);
+                })
+            ],    
             'price'=>'numeric|required',
             'weight'=>'numeric|nullable',
             'categories'=>'required',
@@ -158,6 +172,30 @@ class ProductController extends Controller
 
         $product->categories()->sync($request->categories);
         if($product->product_type=='variant'){
+            $product->sizes()->sync($request->sizes ?? []);
+            $product->colors()->sync($request->colors ?? []);
+
+            // যদি শুধু কালার থাকে (সাইজ নেই)
+            if (!empty($request->colors) && empty($request->sizes)) {
+                foreach ($request->colors as $color) {
+                    $this->saveProductStock($product->id, $color, null, $request);
+                }
+            }
+            // যদি শুধু সাইজ থাকে (কালার নেই)
+            elseif (empty($request->colors) && !empty($request->sizes)) {
+                foreach ($request->sizes as $size) {
+                    $this->saveProductStock($product->id, null, $size, $request);
+                }
+            }
+            // যদি দুটিই থাকে (আগের মতো nested loop)
+            elseif (!empty($request->colors) && !empty($request->sizes)) {
+                foreach ($request->colors as $color) {
+                    foreach ($request->sizes as $size) {
+                        $this->saveProductStock($product->id, $color, $size, $request);
+                    }
+                }
+            }
+            /*
             $product->sizes()->sync($request->sizes);
             $product->colors()->sync($request->colors);
             foreach($request->colors as $color){
@@ -170,6 +208,7 @@ class ProductController extends Controller
                   }
                 }
             }
+            */
         }else{
             $stock = ProductStock::firstOrCreate(['product_id'=>$product->id]);
             $stock->quantity = $request->quantity;
@@ -194,6 +233,21 @@ class ProductController extends Controller
         }
         session()->flash('success','Product Successfully Save');
         return redirect()->back();
+    }
+
+    // কোড ডুপ্লিকেশন এড়াতে একটি হেল্পার মেথড (একই কন্ট্রোলারের নিচে রাখতে পারেন)
+    private function saveProductStock($productId, $colorId, $sizeId, $request) {
+        $stock = ProductStock::firstOrCreate([
+            'product_id' => $productId,
+            'color_id'   => $colorId,
+            'size_id'    => $sizeId
+        ]);
+
+        if ($stock->price == '') {
+            $stock->price = $request->price;
+            $stock->reduced_price = $request->reduced_price;
+            $stock->save();
+        }
     }
 
     

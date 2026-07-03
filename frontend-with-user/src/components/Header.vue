@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from "vue";
 import { cart } from "../store/cart";
+import { basicStore } from "../store/basic";
 import { wishlist } from "../store/wishlist";
 </script>
 <template>
     <header class="py-4 shadow-sm bg-white">
         <div class="container flex items-center justify-between">
-            <router-link to="/">
-                <img src="../assets/images/logo.svg" alt="Logo" class="w-32">
+            <router-link to="/" >
+              <img :src="basicStore.serverUrl + '/upload/site_file/' + basicStore.settings.siteLogo" alt="Logo">
             </router-link>
 
             <div class="w-full max-w-xl relative flex">

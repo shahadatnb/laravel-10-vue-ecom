@@ -130,7 +130,7 @@ class CheckoutController extends Controller
         $data->shipping_amount = $request->shipping_amount;
         $data->amount = $data->sub_total+$data->shipping_amount;
         $data->status_id = 1;
-        //$data->payment_method = $request->payment_method;
+        $data->payment_method = $request->payment_method;
         $data->customer_id = $customer->id;        
         $data->save();
 
@@ -202,10 +202,9 @@ class CheckoutController extends Controller
             $data->email = $request->email;
             $data->phone = $request->phone;
             $data->city = $request->city;
-            $data->state = $request->state;
             $data->country = $request->country;
             $data->zip_code = $request->zip_code;            
-            //$data->shipping_method = $request->shipping_method; //ShippingRole::find($request->shipping_method)->title;
+            $data->shipping_method = $request->shipping_method; //ShippingRole::find($request->shipping_method)->title;
             $data->sub_total = $sub_total;
             $data->shipping_amount = $request->shipping_amount;//session()->get('shipingAmount');
             $data->amount = $sub_total+$request->shipping_amount; //session()->get('shipingAmount');//$request->amount;

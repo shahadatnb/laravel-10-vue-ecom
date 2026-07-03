@@ -85,7 +85,7 @@ class PostController extends Controller
             'body'=>'nullable',
         ];
         if($othersFileUpload==true){
-            $data['image'] = ['nullable','mimes:jpg,jpeg,png,pdf,doc,docx,ppt,ppts,xls,xlsx','max:5000'];
+            $data['image'] = ['nullable','mimes:jpg,jpeg,png,pdf,doc,docx,ppt,ppts,xls,xlsx,svg','max:5000'];
         }else{
             $data['image'] = ['nullable','mimes:jpg,jpeg,png','max:5000'];
         }

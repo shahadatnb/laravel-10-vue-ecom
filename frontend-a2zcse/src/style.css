@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+      --primary: #000; /* এখানেই color change করলেই সব বদলাবে */
+    }
+
+    /* optional helper classes */
+    .text-primary { color: var(--primary); }
+    .bg-primary { background-color: var(--primary); }
+    .border-primary { border-color: var(--primary); }
+
+    .logo img{
+        width: 200px;
+    }
+.logo-footer{
+    width: 200px;
+}

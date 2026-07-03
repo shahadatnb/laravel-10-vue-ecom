@@ -175,11 +175,11 @@ function decreaseQuantity() {
             </div>
             <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
                 <template v-if="product.reduced_price != null">
-                    <p class="text-xl text-primary font-semibold">$ {{ product.reduced_price }}</p>
-                    <p class="text-sm text-gray-400 line-through">$ {{ product.price }}</p>
+                    <p class="text-xl text-primary font-semibold">{{ basicStore.settings.currencyCode }} {{ product.reduced_price }}</p>
+                    <p class="text-sm text-gray-400 line-through">{{ basicStore.settings.currencyCode }} {{ product.price }}</p>
                 </template>
                 <template v-else>
-                    <p class="text-xl text-primary font-semibold">$ {{ product.price }}</p>
+                    <p class="text-xl text-primary font-semibold">{{ basicStore.settings.currencyCode }} {{ product.price }}</p>
                 </template>
             </div>
 
@@ -229,7 +229,7 @@ function decreaseQuantity() {
                     Wishlist
                 </a>
             </div>
-
+            
             <div class="flex gap-3 mt-4">
                 <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + currentUrl"
                     class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
@@ -250,7 +250,7 @@ function decreaseQuantity() {
 
     <!-- description -->
     <div class="container pb-16">
-        <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">Product details</h3>
+        <h3 class="border-b border-gray-200 font-roboto text-gray-800 mt-10 pb-3 font-large">Product details</h3>
         <div class="w-3/5 pt-6" v-html="product.description">
         </div>
     </div>

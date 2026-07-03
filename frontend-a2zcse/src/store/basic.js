@@ -1,20 +1,23 @@
-import { reactive } from 'vue'
+import { ref, reactive, onBeforeMount } from 'vue'
 import axios from 'axios'
 const basicStore = reactive({
-    //serverUrl: 'http://127.0.0.1:8000',
-    //serverUrl: 'http://localhost/laravel/laravel-10-vue-ecom/public',
-    serverUrl: 'https://backend.digitalprinting24.com',
     //serverUrl: 'https://ecom.asiancoder.com',
-    //serverUrl: 'http://laravel-10-vue-ecom.test',
+    //serverUrl: 'https://backend.rajshahibazar.com',
+    serverUrl: 'http://localhost/laravel/laravel-10-vue-ecom/public',
+    //baseUrl: 'https://rajshahibazar.com',
     settings: [],
+    loading: true,
     init() {
         axios.get(`${basicStore.serverUrl}/api/config`)
         .then(res => {
             basicStore.settings = res.data
+            basicStore.loading = false
         });
     }
 })
+
 basicStore.init()
+
 export {
     basicStore
 }

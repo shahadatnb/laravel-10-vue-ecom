@@ -1,6 +1,7 @@
 <script setup>
 import { wishlist } from '../store/wishlist';
 const props  = defineProps(['product']);
+import { basicStore } from "../store/basic";
 import {cart} from '../store/cart'
 </script>
 
@@ -29,11 +30,11 @@ import {cart} from '../store/cart'
             </router-link>
             <div class="flex items-baseline mb-1 space-x-2">
                 <template v-if="product.reduced_price != null">
-                    <p class="text-xl text-primary font-semibold">$ {{ product.reduced_price }}</p>
-                    <p class="text-sm text-gray-400 line-through">$ {{ product.price }}</p>
+                    <p class="text-xl text-primary font-semibold">{{ basicStore.settings.currencyCode }} {{ product.reduced_price }}</p>
+                    <p class="text-sm text-gray-400 line-through">{{ basicStore.settings.currencyCode }} {{ product.price }}</p>
                 </template>
                 <template v-else>
-                    <p class="text-xl text-primary font-semibold">$ {{ product.price }}</p>
+                    <p class="text-xl text-primary font-semibold">{{ basicStore.settings.currencyCode }} {{ product.price }}</p>
                 </template>
             </div>
             <div class="flex items-center">

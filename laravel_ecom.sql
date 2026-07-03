@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 13, 2025 at 02:24 PM
+-- Generation Time: Feb 08, 2026 at 02:17 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -42,19 +42,10 @@ CREATE TABLE `attachments` (
 --
 
 INSERT INTO `attachments` (`id`, `product_id`, `color_id`, `image`, `imageOriginal`, `created_at`, `updated_at`) VALUES
-(12, 10, NULL, 'products/1698206904.jpg', NULL, '2023-10-24 22:08:24', '2023-10-24 22:08:24'),
-(13, 10, NULL, 'products/1698206907.jpg', NULL, '2023-10-24 22:08:28', '2023-10-24 22:08:28'),
-(14, 10, NULL, 'products/1698206912.jpg', NULL, '2023-10-24 22:08:32', '2023-10-24 22:08:32'),
-(15, 10, NULL, 'products/1698206916.jpg', NULL, '2023-10-24 22:08:36', '2023-10-24 22:08:36'),
-(16, 10, NULL, 'products/1698206920.jpg', NULL, '2023-10-24 22:08:40', '2023-10-24 22:08:40'),
 (17, 9, NULL, 'products/1698206998.jpg', NULL, '2023-10-24 22:09:58', '2023-10-24 22:09:58'),
 (18, 9, NULL, 'products/1698207002.jpg', NULL, '2023-10-24 22:10:02', '2023-10-24 22:10:02'),
 (19, 9, NULL, 'products/1698207006.jpg', NULL, '2023-10-24 22:10:06', '2023-10-24 22:10:06'),
 (20, 9, NULL, 'products/1698207010.jpg', NULL, '2023-10-24 22:10:10', '2023-10-24 22:10:10'),
-(21, 8, NULL, 'products/1698207056.jpg', NULL, '2023-10-24 22:10:56', '2023-10-24 22:10:56'),
-(22, 8, NULL, 'products/1698207060.jpg', NULL, '2023-10-24 22:11:00', '2023-10-24 22:11:00'),
-(23, 8, NULL, 'products/1698207065.jpg', NULL, '2023-10-24 22:11:05', '2023-10-24 22:11:05'),
-(24, 8, NULL, 'products/1698207069.jpg', NULL, '2023-10-24 22:11:09', '2023-10-24 22:11:09'),
 (29, 11, 1, 'products/1711430718.jpg', NULL, '2024-03-25 23:25:18', '2024-03-25 23:25:18'),
 (30, 11, 1, 'products/1711430746.jpg', NULL, '2024-03-25 23:25:47', '2024-03-25 23:25:47'),
 (31, 11, NULL, 'products/1711431328.jpg', NULL, '2024-03-25 23:35:28', '2024-03-25 23:35:28'),
@@ -69,7 +60,9 @@ INSERT INTO `attachments` (`id`, `product_id`, `color_id`, `image`, `imageOrigin
 (40, 12, 2, 'products/1711445625.jpg', NULL, '2024-03-26 03:33:45', '2024-03-26 03:33:45'),
 (41, 12, 2, 'products/1711445631.jpg', NULL, '2024-03-26 03:33:51', '2024-03-26 03:33:51'),
 (43, 11, NULL, 'products/1712161843.jpg', 'productsOriginal/1712161843.jpg', '2024-04-03 10:30:43', '2024-04-03 10:30:43'),
-(44, 11, NULL, 'products/1712161849.jpg', 'productsOriginal/1712161849.jpg', '2024-04-03 10:30:49', '2024-04-03 10:30:49');
+(44, 11, NULL, 'products/1712161849.jpg', 'productsOriginal/1712161849.jpg', '2024-04-03 10:30:49', '2024-04-03 10:30:49'),
+(45, 10, NULL, 'products/1760681915.jpg', 'productsOriginal/1760681915.jpg', '2025-10-17 00:18:35', '2025-10-17 00:18:35'),
+(46, 10, NULL, 'products/1760681921.jpg', 'productsOriginal/1760681921.jpg', '2025-10-17 00:18:41', '2025-10-17 00:18:41');
 
 -- --------------------------------------------------------
 
@@ -52608,7 +52601,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `lebel`, `menu_url`, `menu_class`, `m
 (28, 7, '24/7 Support', '#', 'fa fa-comments', NULL, NULL, 3, 0, 'others'),
 (29, 5, 'Electronics', 'category/electronics', NULL, NULL, NULL, 0, 0, 'others'),
 (30, 1, 'Checkout', '/checkout', NULL, NULL, NULL, 5, 0, 'others'),
-(31, 1, 'Contact', '/page/contact', NULL, NULL, NULL, 3, 0, 'others'),
+(31, 1, 'Contact', '/page/contact-us', NULL, NULL, NULL, 3, 0, 'others'),
 (32, 5, 'Automotive & Motorbike', 'category/automotive-motorbike', 'fa fa-shopping-bag', NULL, NULL, 0, 0, 'others'),
 (33, 1, 'Health Beauty', '/category/health-beauty', NULL, NULL, NULL, 2, 0, 'others'),
 (34, 1, 'Sports Outdoors', '/category/sports-outdoors', NULL, NULL, NULL, 1, 0, 'others');
@@ -52774,7 +52767,14 @@ INSERT INTO `orders` (`id`, `customer_id`, `sub_total`, `discount_amount`, `ship
 (104, 2, '40000', '0', NULL, '100', 0, '40100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 20:16:26', '2025-09-26 20:16:26'),
 (105, 2, '2000', '0', NULL, '100', 0, '2100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 20:17:36', '2025-09-26 20:17:36'),
 (106, 2, '40000', '0', NULL, '100', 0, '40100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-26 20:21:29', '2025-09-26 20:21:29'),
-(107, 2, '2000', '0', NULL, '100', 0, '2100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-27 10:28:36', '2025-09-27 10:28:36');
+(107, 2, '2000', '0', NULL, '100', 0, '2100', 'Shahadat', 'shahadat@asiancoder.com', 'Kharkhari', NULL, NULL, NULL, 'Rajshahi', NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-27 10:28:36', '2025-09-27 10:28:36'),
+(108, NULL, '40450', '0', 'ঢাকার ভিতরে', '60', 0, '40510', 'Shahadat', NULL, 'rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-15 06:42:59', '2025-10-15 06:42:59'),
+(109, NULL, '830', '0', 'ঢাকার বাহিরে', '120', 0, '950', 'Salima', NULL, 'rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-17 02:29:50', '2025-10-17 02:29:50'),
+(110, NULL, '830', '0', 'ঢাকার বাহিরে', '120', 0, '950', 'Salima', NULL, 'rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-17 02:29:59', '2025-10-17 02:29:59'),
+(111, NULL, '40380', '0', 'ঢাকার ভিতরে', '60', 0, '40440', 'Salima', NULL, 'Rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-17 02:36:22', '2025-10-17 02:36:22'),
+(112, NULL, '380', '0', 'ঢাকার বাহিরে', '120', 0, '500', 'Shahadat', NULL, 'Rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-17 02:43:24', '2025-10-17 02:43:24'),
+(113, NULL, '380', '0', 'ঢাকার বাহিরে', '120', 0, '500', 'Shahadat', NULL, 'Rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-17 02:43:36', '2025-10-17 02:43:36'),
+(114, NULL, '380', '0', 'ঢাকার বাহিরে', '120', 0, '500', 'Shahadat', NULL, 'Rajshahi', NULL, NULL, NULL, NULL, NULL, '01757839516', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-17 02:45:22', '2025-10-17 02:45:22');
 
 -- --------------------------------------------------------
 
@@ -52865,7 +52865,16 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_stock_id`, `
 (104, 104, 11, 29, 1, '40000.00', '40000.00', '2025-09-26 20:16:26', '2025-09-26 20:16:26'),
 (105, 105, 12, 39, 1, '2000.00', '2000.00', '2025-09-26 20:17:36', '2025-09-26 20:17:36'),
 (106, 106, 11, 29, 1, '40000.00', '40000.00', '2025-09-26 20:21:29', '2025-09-26 20:21:29'),
-(107, 107, 12, 39, 1, '2000.00', '2000.00', '2025-09-27 10:28:36', '2025-09-27 10:28:36');
+(107, 107, 12, 39, 1, '2000.00', '2000.00', '2025-09-27 10:28:36', '2025-09-27 10:28:36'),
+(108, 108, 10, NULL, 1, '450.00', '450.00', '2025-10-15 06:42:59', '2025-10-15 06:42:59'),
+(109, 108, 11, NULL, 1, '40000.00', '40000.00', '2025-10-15 06:42:59', '2025-10-15 06:42:59'),
+(110, 109, 10, NULL, 1, '450.00', '450.00', '2025-10-17 02:29:50', '2025-10-17 02:29:50'),
+(111, 110, 10, NULL, 1, '450.00', '450.00', '2025-10-17 02:29:59', '2025-10-17 02:29:59'),
+(112, 111, 11, NULL, 1, '40000.00', '40000.00', '2025-10-17 02:36:22', '2025-10-17 02:36:22'),
+(113, 111, 8, NULL, 1, '380.00', '380.00', '2025-10-17 02:36:22', '2025-10-17 02:36:22'),
+(114, 112, 8, NULL, 1, '380.00', '380.00', '2025-10-17 02:43:24', '2025-10-17 02:43:24'),
+(115, 113, 8, NULL, 1, '380.00', '380.00', '2025-10-17 02:43:36', '2025-10-17 02:43:36'),
+(116, 114, 8, NULL, 1, '380.00', '380.00', '2025-10-17 02:45:22', '2025-10-17 02:45:22');
 
 -- --------------------------------------------------------
 
@@ -53018,13 +53027,13 @@ INSERT INTO `postmetas` (`id`, `post_id`, `meta_key`, `meta_value`) VALUES
 (22, 27, 'price', '8300'),
 (23, 27, 'reduced_price', '100'),
 (28, 30, 'link', 'http://localhost/laravel/laravel-7-shop/page/about-us'),
-(29, 31, 'link', '#'),
 (32, 29, 'line2', '20% Less'),
 (33, 29, 'link', 'http://localhost/laravel/laravel-7-shop/page/about-us'),
 (34, 32, 'line2', 'TT'),
 (35, 32, 'link', 'http://localhost:5173/product/ems-portable-body-massager'),
 (36, 33, 'profession', 'CEO, Canada Company'),
-(37, 33, 'ratting', NULL);
+(37, 33, 'ratting', NULL),
+(38, 31, 'link', '#');
 
 -- --------------------------------------------------------
 
@@ -53066,10 +53075,13 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `body`, `image`, `post_type`, `pageT
 (27, 'test', 'test2', '<p><span style=\"color: rgb(112, 112, 112); font-family: Raleway, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</span></p><p><span style=\"color: rgb(112, 112, 112); font-family: Raleway, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</span></p><p><span style=\"color: rgb(112, 112, 112); font-family: Raleway, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</span></p><p><span style=\"color: rgb(112, 112, 112); font-family: Raleway, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</span><span style=\"color: rgb(112, 112, 112); font-family: Raleway, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\"><br></span><span style=\"color: rgb(112, 112, 112); font-family: Raleway, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\"></span></p>', '1614101924_ict.jpg', 'services', NULL, 0, 1, 1, '2021-02-23 03:41:13', '2021-02-23 17:38:44'),
 (28, 'Message form Founder', 'message', '<p><span style=\"color: rgb(0, 0, 0); font-family: \" source sans pro blinkmacsystemfont ui roboto neue arial sans-serif color emoji symbol font-size: font-style: normal font-variant-ligatures: font-variant-caps: font-weight: letter-spacing: orphans: text-align: left text-indent: text-transform: none white-space: widows: word-spacing: background-color: rgb text-decoration-thickness: initial text-decoration-style: text-decoration-color: display: inline float:>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>\n', '1618142911_3.jpg', 'page', NULL, NULL, 1, 1, '2021-04-11 12:08:31', '2023-09-05 01:54:29'),
 (29, 'Geet Offer', 'geet-offer', '<p> Lorem ipsum dolor sit amet consectetur elit <p></p></p>\n', 'post_file/1697519748.jpg', 'offer', NULL, NULL, 1, 1, '2023-08-16 12:27:52', '2023-10-16 23:16:21'),
-(30, 'Single Product', 'single-product', NULL, 'post_file/1697351627.jpg', 'slide', NULL, NULL, 1, 1, '2023-09-02 11:49:47', '2023-10-15 00:33:47'),
-(31, 'Slide 2', 'slide-2', NULL, 'post_file/1697351725.jpg', 'slide', NULL, NULL, 1, 1, '2023-10-15 00:35:25', '2023-10-15 00:35:25'),
+(31, 'Slide 2', 'slide-2', NULL, 'post_file/1770428175.jpg', 'slide', NULL, NULL, 1, 1, '2023-10-15 00:35:25', '2026-02-06 19:36:15'),
 (32, 'Lorem ipsum dolor sit amet consectetur elit', 'lorem-ipsum-dolor-sit-amet-consectetur-elit', '<p> Lorem ipsum dolor sit amet consectetur elit <p></p></p>\n', 'post_file/1697519856.jpg', 'offer', NULL, NULL, 1, 1, '2023-10-16 23:17:36', '2023-10-16 23:17:36'),
-(33, 'Tomas jhono', 'tomas-jhono', '<p>Some representative placeholder content for the first slide content for \r\nthe.Some representative placeholder content for the first slide content \r\nfor the.Some representative placeholder content for the first slide \r\ncontent for the.Some representative placeholder content for the first \r\nslide content for the. </p>\n', 'post_file/1711852002.png', 'review', NULL, NULL, 1, 1, '2024-03-30 20:26:42', '2024-03-30 20:26:42');
+(33, 'Tomas jhono', 'tomas-jhono', '<p>Some representative placeholder content for the first slide content for \r\nthe.Some representative placeholder content for the first slide content \r\nfor the.Some representative placeholder content for the first slide \r\ncontent for the.Some representative placeholder content for the first \r\nslide content for the. </p>\n', 'post_file/1711852002.png', 'review', NULL, NULL, 1, 1, '2024-03-30 20:26:42', '2024-03-30 20:26:42'),
+(34, 'Free Shipping', 'free-shipping', '<p>Order over $200</p>\n', 'post_file/1770428938.svg', 'feature', NULL, NULL, 1, 1, '2026-02-06 19:48:58', '2026-02-06 19:48:58'),
+(35, 'Money Rturns', 'money-rturns', '<p>30 days money returs</p>\n', 'post_file/1770429039.svg', 'feature', NULL, NULL, 1, 1, '2026-02-06 19:50:39', '2026-02-06 19:50:39'),
+(36, '24/7 Support', '247-support', '<p>Customer support</p>\n', 'post_file/1770429079.svg', 'feature', NULL, NULL, 1, 1, '2026-02-06 19:51:19', '2026-02-06 19:51:19'),
+(37, 'Contact Us', 'contact-us', '<p>Test</p>\n', NULL, 'page', NULL, NULL, 1, 1, '2026-02-06 19:59:01', '2026-02-06 19:59:01');
 
 -- --------------------------------------------------------
 
@@ -53134,10 +53146,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `sku`, `slug`, `product_type`, `price`, `weight`, `reduced_price`, `discount_percentage`, `brand_id`, `featured`, `free_shipping`, `short_description`, `description`, `quantity`, `status`, `user_id`, `photo`, `variant_id`, `created_at`, `updated_at`) VALUES
-(8, 'BED KING SIZE', NULL, 'big-image', 'simple', '400.00', '0.750', '380.00', NULL, NULL, 0, 1, 'hgh', '<p>ghujk<br></p>', 491, 1, 1, 'products/1698207071.jpg', 49, '2021-10-12 16:12:56', '2024-04-04 10:11:17'),
+(8, 'BED KING SIZE', NULL, 'big-image', 'simple', '400.00', '0.750', '380.00', NULL, NULL, 1, 1, 'hgh', '<p>ghujk<br></p>\n', 490, 1, 1, 'products/1761286410.jpg', 49, '2021-10-12 16:12:56', '2025-10-24 00:13:30'),
 (9, 'GUYER CHAIR', NULL, 'mango', 'simple', '20.00', NULL, NULL, NULL, NULL, 1, 0, 'Rajshahi Mango', '<p>Rajshahi Mango<br></p>', 4999, 1, 1, 'products/1698207014.jpg', 48, '2023-04-28 03:35:28', '2024-04-02 11:51:28'),
-(10, 'EMS Portable Body Massager', NULL, 'ems-portable-body-massager', 'simple', '500.00', NULL, '450.00', NULL, NULL, 1, 0, 'sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf', '<p>sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf</p><p><img style=\"width: 500px;\" src=\"//localhost/laravel/laravel-7-shop/public/storage/products/1694197542.jpg\"><br></p>', -16, 1, 1, 'products/1698206873.jpg', 38, '2023-09-08 17:38:06', '2024-03-29 11:36:07'),
-(11, 'COUPLE SOFA', NULL, 'couple-sofa', 'variant', '50000.00', NULL, '40000.00', '20.00', NULL, 0, 0, NULL, '<p>sdf<br></p>', 493, 1, 1, 'products/1712161862.jpg', NULL, '2023-10-24 22:16:15', '2024-04-06 10:28:39'),
+(10, 'EMS Portable Body Massager', NULL, 'ems-portable-body-massager', 'simple', '500.00', NULL, '450.00', NULL, NULL, 1, 0, 'sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf', '<p>sdgfh sdf gsdf sdfg sdfg sdfg sdfg sdfg sdfg sdf<p><img style=\"width: 500px;\" src=\"//localhost/laravel/laravel-7-shop/public/storage/products/1694197542.jpg\"><br></p></p>\n', -19, 1, 1, 'products/1760682003.jpg', 38, '2023-09-08 17:38:06', '2025-10-17 02:29:59'),
+(11, 'COUPLE SOFA', NULL, 'couple-sofa', 'variant', '50000.00', NULL, '40000.00', '20.00', NULL, 1, 0, NULL, '<p>sdf<br></p>\n', 491, 1, 1, 'products/1712161862.jpg', NULL, '2023-10-24 22:16:15', '2025-10-17 02:36:22'),
 (12, 'Tangale Shari', 'TS5', 'tangale-shari', 'variant', '2500.00', NULL, '2000.00', NULL, NULL, 1, 0, NULL, '<p>dsfgdf<br></p>', 93, 1, 1, 'products/1712291381.jpg', NULL, '2024-03-26 01:06:39', '2024-04-14 10:48:39');
 
 -- --------------------------------------------------------
@@ -53160,7 +53172,6 @@ CREATE TABLE `product_category` (
 
 INSERT INTO `product_category` (`id`, `product_id`, `category_id`, `created_at`, `updated_at`) VALUES
 (1, 8, 15, NULL, NULL),
-(2, 8, 14, NULL, NULL),
 (6, 9, 15, NULL, NULL),
 (7, 10, 15, NULL, NULL),
 (8, 10, 16, NULL, NULL),
@@ -53278,7 +53289,7 @@ INSERT INTO `product_stocks` (`id`, `product_id`, `color_id`, `size_id`, `price`
 (35, 11, 3, 1, '500.00', '450.00', 300, '2024-03-25 11:49:55', '2024-03-26 00:07:54'),
 (36, 11, 3, 2, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
 (37, 11, 3, 3, '50000.00', '40000.00', 0, '2024-03-25 11:49:55', '2024-04-03 10:31:02'),
-(38, 10, NULL, NULL, '500.00', '450.00', -16, '2024-03-26 00:52:23', '2024-03-26 00:52:23'),
+(38, 10, NULL, NULL, '500.00', '450.00', 1983, '2024-03-26 00:52:23', '2025-10-17 00:31:34'),
 (39, 12, 1, 1, '2500.00', '2000.00', 48, '2024-03-26 01:08:23', '2025-09-27 10:28:36'),
 (40, 12, 1, 2, '2500.00', '2000.00', 25, '2024-03-26 01:08:23', '2024-03-26 03:41:11'),
 (41, 12, 1, 3, '2500.00', '2000.00', 60, '2024-03-26 01:08:23', '2024-03-26 03:41:16'),
@@ -53289,7 +53300,7 @@ INSERT INTO `product_stocks` (`id`, `product_id`, `color_id`, `size_id`, `price`
 (46, 12, 3, 2, '2500.00', '2000.00', 0, '2024-03-26 01:08:23', '2024-03-26 01:08:23'),
 (47, 12, 3, 3, '2500.00', '2000.00', 200, '2024-03-26 01:08:23', '2024-03-26 01:14:18'),
 (48, 9, NULL, NULL, '20.00', NULL, 5000, '2024-03-29 11:18:07', '2024-04-02 11:28:33'),
-(49, 8, NULL, NULL, '400.00', '380.00', 492, '2024-03-29 11:18:10', '2024-03-29 11:18:10');
+(49, 8, NULL, NULL, '400.00', '380.00', 490, '2024-03-29 11:18:10', '2025-10-17 02:45:22');
 
 -- --------------------------------------------------------
 
@@ -53387,7 +53398,10 @@ INSERT INTO `settings` (`id`, `sl`, `name`, `description`, `value`, `category`, 
 (20, 11, 'headerjs', 'Header JavaScript', NULL, 'basic', '{\"required\":\"0\",\"label\":\"Value\",\"type\":\"textarea\"}', 1, NULL, '2023-08-16 09:55:09'),
 (21, 1, 'defaultCountry', 'Default Country', 'AE', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', 1, NULL, NULL),
 (22, 1, 'shipping_inside_dhaka', 'ঢাকার ভিতরে', '60', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', 1, NULL, '2023-10-21 03:38:54'),
-(23, 1, 'shipping_outside__dhaka', 'ঢাকার বাহিরে', '120', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', 1, NULL, '2023-10-21 03:39:28');
+(23, 1, 'shipping_outside__dhaka', 'ঢাকার বাহিরে', '120', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', 1, NULL, '2023-10-21 03:39:28'),
+(24, 1, 'messenger', 'Facebook messenger', '', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', 1, NULL, NULL),
+(25, 1, 'facebook', 'Facebook Link', '', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', 1, NULL, NULL),
+(26, 1, 'youtube', 'Youtube', '', 'basic', '{\"required\":\"1\",\"label\":\"Value\",\"type\":\"text\"}', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -53799,7 +53813,7 @@ ALTER TABLE `wish_lists`
 -- AUTO_INCREMENT for table `attachments`
 --
 ALTER TABLE `attachments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `colors`
@@ -53859,13 +53873,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `order_statuses`
@@ -53889,13 +53903,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `postmetas`
 --
 ALTER TABLE `postmetas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `post_tax`
@@ -53943,7 +53957,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `shipping_roles`

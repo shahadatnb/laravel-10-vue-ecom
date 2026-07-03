@@ -5,6 +5,7 @@ import Register from '../components/Register.vue';
 import Home from '../components/Home.vue';
 import ProductSingle from "../components/ProductSingle.vue";
 import Category from "../components/Category.vue";
+import Page from "../components/Page.vue";
 import Shop from "../components/Shop.vue";
 import Cart from "../components/Cart.vue";
 import Checkout from "../components/Checkout.vue";
@@ -16,6 +17,9 @@ import Orders from "../components/dashboard/Orders.vue";
 const routes = [
     {
         path: '/', component: Home, name: 'home'
+    },
+    {
+        path: '/page/:slug', component: Page, name: 'page', meta: { title: 'Page' }
     },
     {
         path: '/product/:slug', component: ProductSingle, name: 'product-single', meta: { title: 'Product' }
@@ -82,7 +86,7 @@ const router = createRouter({
     routes
 });
 
-const DEFAULT_TITLE = 'Ecommerce';
+const DEFAULT_TITLE = 'Digital Printing';
 router.afterEach((to, from) => {
     const title = to.meta.title;
     document.title = title ?? DEFAULT_TITLE;
