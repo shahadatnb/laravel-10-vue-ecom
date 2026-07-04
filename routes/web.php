@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TaxonomyController;
 use App\Http\Controllers\PostController;
@@ -78,11 +79,8 @@ Route::prefix('/product')->as('product.')->group(function() {
 		Route::post('/gallery.delete', [ProductController::class, 'product_gallery_delete'])->name('gallery.delete');
 		Route::get('/productHide/{id}', [ProductController::class, 'productHide'])->name('productHide');
         
-		Route::get('/productsCat', [ProductController::class, 'productsCat'])->name('productsCat');
-		Route::post('/catCreate', [ProductController::class, 'catCreate'])->name('catCreate');
-		Route::get('/catHide/{id}', [ProductController::class, 'catHide'])->name('catHide');
-		Route::get('/catEdit/{id}', [ProductController::class, 'catEdit'])->name('cat.edit');
-		Route::post('/catEdit/{id}', [ProductController::class, 'catEditPost'])->name('cat.edit');
+		Route::resource('category', CategoryController::class);
+		Route::get('/catHide/{id}', [CategoryController::class, 'catHide'])->name('category.hide');
 
         Route::get('/stock', [StockController::class, 'index'])->name('stock.index');
         Route::post('/stock/update', [StockController::class, 'stockUpdate'])->name('stock.update');

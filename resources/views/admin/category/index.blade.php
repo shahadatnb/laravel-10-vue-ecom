@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title','Product')
+@section('title','Product Category')
 @section('stylesheet')
   <style>
     form.delete {
@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-md-6">
               @include('admin.layouts._message')
-            {!! Form::open(['route'=>'product.catCreate','method'=>'POST', 'files' => true ]) !!}
+            {!! Form::open(['route'=>'product.category.store','method'=>'POST', 'files' => true ]) !!}
             <div class="form-group">
               {{ Form::label('title','Category title') }}
               {{ Form::text('title',null,['class'=>'form-control','placeholder'=>'Category title']) }}
@@ -49,19 +49,21 @@
               <td>{{ $product->title }}</td>              
               <td>{{ $product->slug }}</td>              
               <td>
-                <a class="btn btn-success btn-xs" href="{{ route('product.cat.edit',$product->id) }}"><i class="fa fa-edit"></i>  Edit</a>
+              <div class="btn-group">
+                <a class="btn btn-success btn-xs" href="{{ route('product.category.edit',$product->id) }}"><i class="fa fa-edit"></i>  Edit</a>
                 
                   @if($product->status==0)
-                    <a class="btn btn-primary btn-xs" href="{{ route('product.catHide',$product->id) }}">Show</a>
+                    <a class="btn btn-primary btn-xs" href="{{ route('product.category.hide',$product->id) }}">Show</a>
                   @else
-                    <a class="btn btn-danger btn-xs" href="{{ route('product.catHide',$product->id) }}">Hide</a>
+                    <a class="btn btn-danger btn-xs" href="{{ route('product.category.hide',$product->id) }}">Hide</a>
                   @endif
-                {{-- 
-                <form class="delete" action="{{ route('products.destroy',$product->id) }}" method="post">
-                  {{ csrf_field() }}
-                  {{ method_field('DELETE') }}
-                  <button type="submit" class="btn btn-danger btn-xs" href='{{ $product->id }}' onclick="return confirm('Are You Sure To Delete This Item?')"><i class="fa fa-trash"></i></button>
-              </form> --}}
+                
+                  <form class="delete" action="{{ route('product.category.destroy',$product->id) }}" method="post">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-danger btn-xs" href='{{ $product->id }}' onclick="return confirm('Are You Sure To Delete This Item?')"><i class="fa fa-trash"></i></button>
+                  </form>
+                </div>
               </td>
             </tr>
             @endforeach

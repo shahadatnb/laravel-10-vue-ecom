@@ -2,8 +2,8 @@ import { ref, reactive, onBeforeMount } from 'vue'
 import axios from 'axios'
 const basicStore = reactive({
     //serverUrl: 'https://ecom.asiancoder.com',
-    //serverUrl: 'https://backend.rajshahibazar.com',
-    serverUrl: 'http://localhost/laravel/laravel-10-vue-ecom/public',
+    serverUrl: 'https://backend.a2zcse.com',
+    //serverUrl: 'http://localhost/laravel/laravel-10-vue-ecom/public',
     //baseUrl: 'https://rajshahibazar.com',
     settings: [],
     loading: true,

@@ -45,7 +45,7 @@
           </li>
           @endif --}}
           @if(Auth::user()->hasAnyRole(['Manager','Admin','SuperAdmin']))
-          <li class="nav-item has-treeview {{ (request()->routeIs('product.stock.*','product.orderStatus.*','product.productsCat','product.products.*')) ? 'menu-open' : '' }}">
+          <li class="nav-item has-treeview {{ (request()->routeIs('product.stock.*','product.orderStatus.*','category.*','product.products.*')) ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
@@ -60,7 +60,7 @@
               <li class="nav-item"><a href="{{ route('product.stock.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> Product Stock</a>
               </li>
-              <li class="nav-item"><a href="{{ route('product.productsCat') }}" class="nav-link">
+              <li class="nav-item"><a href="{{ route('product.category.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i> Category</a>
               </li>
               <li class="nav-item"><a href="{{ route('product.orderStatus.index') }}" class="nav-link">
